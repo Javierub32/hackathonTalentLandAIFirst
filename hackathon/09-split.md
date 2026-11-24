@@ -35,7 +35,7 @@ Heard: Driver, 2026-11-24. Nobody leaves early: the team keeps working from clas
 | lane:api | Javier | mid | 2 | (shared) |
 | lane:pitch | Andrea, Alfonso, Alba | weak, strong, strong | 5 | (shared) |
 
-Per person (Σ Weight / hours): Alfonso 8/7 · Paula 5/7 · Alba 3/7 · Javier 2/7 · Marina 3/7 · Andrea 3/7.
+Per person (Σ Weight / hours): Alfonso 9/7 · Paula 5/7 · Alba 2/7 · Javier 2/7 · Marina 3/7 · Andrea 3/7.
 
 ⚠ Marina and Andrea carry 3 against 4-5 for the others: they pick up help or Polish work first.
 ⚠ The pitch Lane should belong to the Presenter, who is not decided: slides go to Andrea for now; reassign #9 (slides) once the Presenter is named.
@@ -50,7 +50,7 @@ Frontier order: Spine pass (Wow moment first), then Depth pass.
 | #2 | Preparación: filtro y CV adaptado con IA · Spine | lane:llm | Alfonso | Spine | 3 (Seam with producer logic: scoring + LLM, Wow moment) | 02:05, 02:25 | none |
 | #3 | Lista de ofertas · Spine | lane:web | Marina | Spine | 2 (Real against the Ofertas Contract) | 01:50 | none |
 | #4 | Práctica de entrevista con voz · Spine | lane:web | Javier | Spine | 2 (Real against Entrevista + Voz Contracts) | 02:50 | none |
-| #5 | Entrevista: preguntas y feedback con IA · Spine | lane:llm | Alba | Spine | 3 (Seam with producer logic: LLM + STT) | 02:50 | none |
+| #5 | Entrevista: preguntas y feedback con IA · Spine | lane:llm | Alfonso | Spine | 3 (Seam with producer logic: LLM + STT) | 02:50 | none |
 | #6 | Candidaturas y revisión de la orientadora · Spine | lane:web | Paula | Spine | 2 (Real against the Candidaturas Contract) | 03:20 | none |
 | #7 | Publicar oferta (empresa) · Spine | lane:web | Marina | Spine | 1 (one folder, one form over the stub) | 03:35 | none |
 | #8 | Inicio: elegir vista (candidata, orientadora, empresa) · Spine | lane:web | Andrea | Spine | 1 (one folder, fixtures, no Seam) | 01:50, 03:20, 03:35 | none |
