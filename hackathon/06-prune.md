@@ -35,24 +35,26 @@ Flags in `features.json` are shared by id across Modules.
 | crud | web | on | Offers list and detail (Beat 01:50), "Publicar oferta" form (Beat 03:35), applications with approve state (Beat 03:20) |
 | settings | web | off | No Beat configures preferences |
 | showcase | web | on | Design Phase (next) uses the gallery; drop before the demo if unused |
-| chat | web | on | Beat 02:50: interview practice is a conversation with the model |
+| chat | web | on | Beat 02:50: interview practice is a conversation with the model, driven by voice (`voice` on); text stays as fallback |
 | upload | web | off | Mari Carmen's CV is seeded; no Beat uploads a file |
 | realtime | web | off | No Beat shows data changing live |
 | notifications | web | off | No Beat alerts the user |
 | map | web | off | Offers are shown as a list, no Beat uses a map |
 | qr | web | off | No Beat hands off to a phone or scans a code |
-| voice | web | off | Voice interview (#4) is roadmap only (Not building) |
+| voice | web | on | Beat 02:50: the interviewer asks out loud (browser TTS) and the candidate answers by voice; a text interview is not realistic and demos badly (heard: Driver, 2026-11-24). Static interviewer image on screen (Design). R14.1: speech suits basic digital skills |
 | auth | api | off | Same flag as web `auth`: no accounts or roles in the demo |
 | crud | api | on | Offers, applications and the candidate profile are stored records (Beats 01:50, 03:20, 03:35); copy `items` per resource |
 | upload | api | off | Same flag as web `upload` |
 | realtime | api | off | Same flag as web `realtime`; the llm chat uses its own socket `/api/llm/chat/ws` |
 | chat | llm | on | Beat 02:50 (streaming interview over `/api/llm/chat/ws`) |
 | rag | llm | off | Answers come from the offer and the CV passed in the prompt, not from a document corpus |
-| voice | llm | off | Same flag as web `voice` |
+| voice | llm | on | Beat 02:50: speech-to-text of the candidate's answers (`STT_PROVIDER=groq`, reuses `GROQ_API_KEY`); TTS `browser`, free. Transcription only: no voice-emotion analysis (R13, AI Act Art. 5(1)(f)) |
 | vision | data | off | `data` is pruned |
 | reports | data | off | `data` is pruned |
 
-Requires: `llm` requires `api` (kept). Feature `chat` needs `api` + `llm` (both kept).
+Requires: `llm` requires `api` (kept). Features `chat` and `voice` need `api` + `llm` (both kept).
+
+Note: `05-pitch.md` Not building lists "Voice interview (#4)". That item is the phone-call interview idea; spoken practice inside the 02:50 Beat is in scope (heard: Driver, 2026-11-24).
 
 ## Open questions
 
