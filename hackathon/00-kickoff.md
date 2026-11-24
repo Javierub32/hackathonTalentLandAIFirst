@@ -8,7 +8,7 @@ status: draft
 - [x] 2 Ask the languages
 - [x] 3 Build the Team roster
 - [x] 4 Invite the team
-- [ ] 5 Fill Event logistics
+- [x] 5 Fill Event logistics
 - [ ] 6 Close
 
 ## Languages
@@ -35,27 +35,27 @@ Every field holds a value, `unknown` or `n/a`, never blank.
 
 ### Constraints
 
-- Event start: <absolute date and time, timezone>
-- Submission deadline: <absolute date and time, timezone>
-- Hours left: <computed at <date and time>>
-- Demo time: <when>
-- Demo length: <minutes>
-- Demo mode: <live / recorded>
-- Submission format: <format>
-- Judges: <who>
-- Checkpoints: <organiser checkpoints>
-- Prize tracks / mandatory sponsor tech: <list>
+- Event start: 2026-11-24 ~09:30 CET (approx., not confirmed)
+- Submission deadline: 2026-11-25 10:00 CET (ASSUMED working deadline; organisers have not given it: final is tomorrow, confirm)
+- Hours left: ~22.5 h (computed at 2026-11-24 11:30 CET, against the assumed deadline)
+- Demo time: 2026-11-25 (pitch tomorrow; exact time unknown)
+- Demo length: unknown (assumed short, 3-5 min)
+- Demo mode: live (assumed; prototype demo expected)
+- Submission format: one zip uploaded to the event Google Drive with 4 deliverables: (1) canvas, (2) prototype + how AI is used, (3) marketing, (4) pitch script. Partial checkpoint: the canvas (organisers' paper template, filled by hand) is due soon, today
+- Judges: a jury, composition unknown
+- Checkpoints: canvas delivery today (time unknown); final pitch tomorrow
+- Prize tracks / mandatory sponsor tech: Challenge 03 SOCIAL (assigned by Kahoot, max 5 teams per challenge). Prizes 1st 1000 €, 2nd 700 €, 3rd 400 € (Amazon vouchers). No mandatory sponsor tech
 
 ### Resources
 
-- Credits: <provider, amount>
-- API keys: <`ENV_VAR_NAME` · provider>
-- Sponsor APIs: <list>
-- Datasets: <list>
-- Hardware: <list>
-- Mentors: <who, when>
+- Credits: n/a (none provided)
+- API keys: n/a (none provided; any team keys go to `.env`)
+- Sponsor APIs: n/a
+- Datasets: n/a
+- Hardware: n/a (only team laptops and phones)
+- Mentors: on the floor, ask any time: Jesús Pedrero, Elisabeth Amate, Coral Salguero, Margot Atenza, José Miguel Heredia, Álvaro Alcázar, Azahara Vera, Nacho Martín, Daniel Salobreña
 
 ### Venue network
 
-- Network: <event wifi / hotspot>
-- Devices see each other: <yes / no>
+- Network: public event wifi; some teammates use their own mobile data
+- Devices see each other: no (public wifi, likely client isolation): demo via a public URL or tunnel, not LAN
