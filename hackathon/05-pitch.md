@@ -1,5 +1,5 @@
 ---
-status: draft
+status: done
 ---
 
 # Pitch
@@ -10,8 +10,8 @@ status: draft
 - [x] 4 Identity and axes
 - [x] 5 Presenter and demo length
 - [x] 6 Wow moment and Demo script
-- [ ] 7 Not building and Coverage
-- [ ] 8 Close
+- [x] 7 Not building and Coverage
+- [x] 8 Close
 
 ## Votes
 
