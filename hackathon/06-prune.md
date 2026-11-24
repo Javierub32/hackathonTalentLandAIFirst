@@ -5,7 +5,7 @@ status: draft
 # Prune
 
 - [x] 1 Propose
-- [ ] 2 Confirm
+- [x] 2 Confirm
 - [ ] 3 Dry run
 - [ ] 4 Prune
 - [ ] 5 Close
@@ -58,7 +58,7 @@ Note: `05-pitch.md` Not building lists "Voice interview (#4)". That item is the 
 
 ## Open questions
 
-- Does R5 (marketing deliverable, Gate) need the web `landing` Feature as its ready-to-use asset? keep on / off (proposal: off; the marketing piece is a flyer or post in the zip).
+- Does R5 (marketing deliverable, Gate) need the web `landing` Feature as its ready-to-use asset? Driver: undecided (2026-11-24). Left off; it is only a flag, the code stays in `web/`: set `landing: true` in `features.json` if the marketing piece needs it.
 
 ## Pre-Prune SHA
 
