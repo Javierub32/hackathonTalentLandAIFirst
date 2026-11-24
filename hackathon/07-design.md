@@ -66,7 +66,7 @@ Preset: `sobrio` (new, `design/presets/sobrio.json`). Level: 4, built from the r
 ## Effects
 
 Preset effects (2-4): DrawnUnderline, ScrollProgressRule.
-Any other effect only for a Beat (`t`), at most one per screen: none..
+Any other effect only for a Beat (`t`), at most one per screen: none.
 
 ## Usage rules
 
