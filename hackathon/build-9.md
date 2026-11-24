@@ -26,3 +26,7 @@ status: draft
 ## Encuesta
 
 Antes del pitch: leer la hoja de respuestas, guardarla en un JSON o CSV fuera del repo y ejecutar el script. Solo se guardan agregados y frases anónimas; `citasElegidas` mantiene la selección y el orden.
+
+## Next
+
+Mañana: pulir detalles con Alfonso, actualizar la encuesta («actualiza la encuesta»: leer la hoja, `node pitch/scripts/encuesta.mjs <respuestas>`, revisar `citasElegidas` y `resaltar`), añadir capturas de la app a la diapo de reserva y comprobar que el 38 % → 85 % coincide con la demo. Luego `make check` y fusionar.
