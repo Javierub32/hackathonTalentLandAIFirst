@@ -4,13 +4,14 @@
  * Pure functions: no React, easy to reuse for another layout or a real uploaded PDF later.
  */
 
-export type CvChange = { requirement: string; text: string; source: string }
+/** `evidence`: the quote the filter found in the adapted CV for this requirement (from `report.requirements`). */
+export type CvChange = { requirement: string; text: string; source: string; evidence?: string }
 
 /** A sentence of the CV. `changes` holds indexes into `changes[]`; `isNew` is true when the original lacks it. */
 export type CvSpan = { text: string; isNew: boolean; changes: number[] }
 export type CvLine = { kind: "entry" | "bullet" | "text"; date?: string; spans: CvSpan[] }
 export type CvSection = { title: string; lines: CvLine[] }
-export type CvDoc = { name: string; headline: CvSpan[]; sections: CvSection[]; structured: boolean }
+export type CvDoc = { name: string; headline: CvSpan[][]; sections: CvSection[]; structured: boolean }
 
 const SECTION_TITLES = /^(PERFIL|EXPERIENCIA|EXPERIENCIA PROFESIONAL|ESTUDIOS|FORMACI[ÓO]N|IDIOMAS|HABILIDADES|COMPETENCIAS|OTROS DATOS)$/
 
@@ -28,10 +29,11 @@ function sentences(line: string) {
   return line.split(/(?<=[.!?…])\s+/).map((s) => s.trim()).filter(Boolean)
 }
 
-/** The adapted wording a change refers to: «X» pasa a «Y» → Y; otherwise its text without a trailing ellipsis. */
+/** The adapted wording a change refers to: the filter's evidence, «X» pasa a «Y» → Y, or its text without a trailing ellipsis. */
 function changeKeys(change: CvChange) {
   const moved = [...change.text.matchAll(/pasa a «([^»]+)»/g)].map((m) => m[1])
   const keys = moved.length > 0 ? moved : [change.text.replace(/[…]+$|\.\.\.$/, "")]
+  if (change.evidence) keys.push(...change.evidence.split(/\s*(?:…|\.\.\.)\s*/))
   return keys.map(normalize).filter((k) => k.length >= 6)
 }
 
@@ -79,7 +81,7 @@ export function parseCv(text: string, original?: string, changes: CvChange[] = [
 
   const [name = "", ...rest] = lines
   const firstTitle = rest.findIndex((l) => SECTION_TITLES.test(l))
-  const headline = rest.slice(0, firstTitle).flatMap((l) => toSpans(l, marker))
+  const headline = rest.slice(0, firstTitle).map((l) => toSpans(l, marker))
   const sections: CvSection[] = []
   for (const raw of rest.slice(firstTitle)) {
     if (SECTION_TITLES.test(raw)) sections.push({ title: raw, lines: [] })

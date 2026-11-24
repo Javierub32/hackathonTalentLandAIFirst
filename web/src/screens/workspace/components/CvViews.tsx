@@ -60,14 +60,12 @@ type CompareProps = { name: string; original: string; adapted: string; changes: 
 /** Before / after of the same A4 sheet: side by side on wide screens, a switch on phones. */
 export function CvCompare({ name, original, adapted, changes }: CompareProps) {
   const [side, setSide] = useState<"antes" | "despues">("despues")
-  const [active, setActive] = useState<number | null>(null)
+  const [active, setActive] = useState<number[]>([])
   const before = useMemo(() => parseCv(original), [original])
   const after = useMemo(() => parseCv(adapted, original, changes), [adapted, original, changes])
-  const explained = active === null ? null : changes[active]
-
-  const select = (change: number) => {
-    setActive(change)
-    document.getElementById(`cv-change-${change}`)?.scrollIntoView({ behavior: "smooth", block: "nearest" })
+  const select = (indexes: number[]) => {
+    setActive(indexes)
+    requestAnimationFrame(() => document.getElementById("cv-explained")?.scrollIntoView({ behavior: "smooth", block: "nearest" }))
   }
 
   return (
@@ -106,13 +104,13 @@ export function CvCompare({ name, original, adapted, changes }: CompareProps) {
         <p><span className="underline decoration-muted-foreground decoration-dotted decoration-2 underline-offset-4">Subrayado de puntos</span>: tu experiencia, dicha con otras palabras.</p>
       </div>
 
-      <div aria-live="polite" className={cn(explained && "rounded-lg border-2 border-primary bg-accent p-4 text-accent-foreground")}>
-        {explained && (
-          <>
-            <p className="font-semibold">Cambio {active! + 1} · Cubre: {explained.requirement}</p>
-            <p>Sale de: {explained.source}</p>
-          </>
-        )}
+      <div id="cv-explained" aria-live="polite" className={cn(active.length > 0 && "space-y-3 rounded-lg border-2 border-primary bg-accent p-4 text-accent-foreground")}>
+        {active.map((index) => (
+          <div key={index}>
+            <p className="font-semibold">Cambio {index + 1} · Cubre: {changes[index].requirement}</p>
+            <p>Sale de: {changes[index].source}</p>
+          </div>
+        ))}
       </div>
 
       {changes.length > 0 && (
@@ -123,7 +121,7 @@ export function CvCompare({ name, original, adapted, changes }: CompareProps) {
               <li
                 key={index}
                 id={`cv-change-${index}`}
-                className={cn("flex gap-3 rounded-lg border p-4", active === index && "border-2 border-primary")}
+                className={cn("flex gap-3 rounded-lg border p-4", active.includes(index) && "border-2 border-primary")}
               >
                 <span aria-hidden className="h-fit rounded-sm bg-primary px-2 font-semibold text-primary-foreground">{index + 1}</span>
                 <div>

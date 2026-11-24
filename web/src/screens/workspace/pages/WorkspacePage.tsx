@@ -133,7 +133,10 @@ function Preparation({ offerId }: { offerId: number }) {
             name={candidate.data?.name ?? "Pilar Romero"}
             original={candidate.data?.cv_text ?? ""}
             adapted={adapted.cv_text}
-            changes={adapted.changes}
+            changes={adapted.changes.map((change) => ({
+              ...change,
+              evidence: adapted.report.requirements.find((r) => r.found && r.text === change.requirement)?.evidence,
+            }))}
           />
           <div className="space-y-2 rounded-lg bg-accent p-4 text-accent-foreground">
             <h3 className="font-semibold">Nada inventado</h3>

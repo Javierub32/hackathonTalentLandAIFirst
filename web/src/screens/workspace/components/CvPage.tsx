@@ -3,9 +3,9 @@ import { cn } from "@/lib/utils"
 import type { CvDoc, CvSpan } from "./cvDocument"
 
 type Marks = {
-  /** Index of the change being explained, or null. */
-  active: number | null
-  onSelect: (change: number) => void
+  /** Indexes of the changes being explained. */
+  active: number[]
+  onSelect: (changes: number[]) => void
 }
 
 function titleCase(text: string) {
@@ -19,11 +19,11 @@ function sectionTitle(text: string) {
 function Span({ span, marks }: { span: CvSpan; marks?: Marks }) {
   if (marks && span.changes.length > 0) {
     const numbers = span.changes.map((c) => c + 1)
-    const active = span.changes.includes(marks.active ?? -1)
+    const active = span.changes.some((c) => marks.active.includes(c))
     return (
       <button
         type="button"
-        onClick={() => marks.onSelect(span.changes[0])}
+        onClick={() => marks.onSelect(span.changes)}
         aria-label={`${span.text} (cambio ${numbers.join(" y ")}: toca para ver de dónde sale)`}
         className={cn(
           "inline rounded-sm bg-accent px-0.5 text-left text-accent-foreground underline decoration-primary decoration-2 underline-offset-4",
@@ -62,7 +62,7 @@ export function CvPage({ doc, marks, className }: { doc: CvDoc; marks?: Marks; c
       {doc.name && (
         <header className="space-y-1 border-b-2 border-primary pb-3">
           <p className="cv-name font-display text-3xl font-semibold">{titleCase(doc.name)}</p>
-          {doc.headline.length > 0 && <p className="cv-body"><Spans spans={doc.headline} marks={marks} /></p>}
+          {doc.headline.map((spans, i) => <p key={i} className="cv-body"><Spans spans={spans} marks={marks} /></p>)}
         </header>
       )}
       {doc.sections.map((section, s) => (
