@@ -64,3 +64,4 @@ Stubs answer the demo offer (IMFE 2026/01198) with the scripted data; any other 
 ## Change log
 
 <!-- One line per change: date, Seam, what changed, by whom. -->
+- 2026-11-24 · Preparación · añade `label` (1–3 palabras) a cada requisito de `filter` y `adapt-cv` · @apr2004

@@ -87,10 +87,44 @@ RULES: list[Rule] = [
 
 STOPWORDS = {"experiencia", "conocimientos", "buenas", "nivel", "equivalente", "previa", "otros"}
 
+LABELS = {
+    "experiencia en perfumería": "Experiencia en perfumería",
+    "interés por la perfumería": "Interés en perfumería",
+    "atención al público y ventas": "Atención al público",
+    "comunicación": "Comunicación",
+    "orientación al cliente": "Orientación al cliente",
+    "proactividad": "Actitud proactiva",
+    "responsabilidad": "Responsabilidad",
+    "trabajo en equipo": "Trabajo en equipo",
+    "inglés alto": "Inglés alto",
+    "asesoramiento": "Asesoramiento",
+    "reposición y stock": "Reposición y stock",
+    "caja y cobros": "Caja y cobros",
+}
+
+LABEL_STOPWORDS = STOPWORDS | {"al", "en", "la", "el", "de", "y", "o", "por", "para", "con"}
+
 
 def rule_for(requirement: str) -> Rule | None:
     req = norm(requirement)
     return next((r for r in RULES if r.matches_requirement(req)), None)
+
+
+def label_for(requirement: str) -> str:
+    """Return a stable, readable label for the CV requirement chips."""
+    normalized = norm(requirement)
+    if re.search(r"\beso\b", normalized):
+        return "Graduado en ESO"
+    if re.search(r"\bbachiller", normalized):
+        return "Bachiller"
+    rule = rule_for(requirement)
+    if rule and rule.name in LABELS:
+        return LABELS[rule.name]
+
+    words = re.findall(r"[\wÀ-ÿ]+", requirement)
+    meaningful = [word for word in words if norm(word) not in LABEL_STOPWORDS]
+    short = " ".join((meaningful or words)[:3]).strip()
+    return short[:1].upper() + short[1:] if short else "Requisito"
 
 
 def _sentences(text: str) -> list[tuple[str, str]]:
@@ -124,7 +158,7 @@ def check(requirement: str, text: str) -> RequirementCheck:
     sentences = _sentences(text)
     rule = rule_for(requirement)
     evidence = rule.find(sentences) if rule else _fallback(requirement, sentences)
-    return RequirementCheck(text=requirement, found=bool(evidence), evidence=evidence)
+    return RequirementCheck(text=requirement, label=label_for(requirement), found=bool(evidence), evidence=evidence)
 
 
 def run_filter(requirements: list[str], text: str, *, offer_id: int, candidate_id: int) -> FilterReport:
