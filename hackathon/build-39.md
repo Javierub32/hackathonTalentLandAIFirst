@@ -10,7 +10,7 @@ owner: apr2004
 - [x] 1 Pick
 - [x] 2 Read
 - [x] 3 Implement
-- [ ] 4 Check
+- [x] 4 Check
 - [ ] 5 Review requests
 - [ ] 6 Merge
 - [ ] 7 Handoff
@@ -30,4 +30,4 @@ owner: apr2004
 
 ## Next
 
-Run the repository check; the local Python and Docker runners are unavailable, so record any remaining environment limitation before opening the draft PR.
+CI passed `make check` in PR #42. Local checks were blocked by unavailable Docker; review the PR and approve before merging.
