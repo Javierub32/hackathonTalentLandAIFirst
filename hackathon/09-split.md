@@ -8,7 +8,7 @@ status: draft
 - [x] 2 Draft the split
 - [x] 3 Review with the team
 - [x] 4 Scaffold commit
-- [ ] 5 Labels
+- [x] 5 Labels
 - [ ] 6 Create the issues
 - [ ] 7 Assign
 - [ ] 8 Merge and hand off
