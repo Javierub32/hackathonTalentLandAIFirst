@@ -7,7 +7,7 @@ status: draft
 - [x] 1 Announce and gather
 - [x] 2 Draft the split
 - [x] 3 Review with the team
-- [ ] 4 Scaffold commit
+- [x] 4 Scaffold commit
 - [ ] 5 Labels
 - [ ] 6 Create the issues
 - [ ] 7 Assign
