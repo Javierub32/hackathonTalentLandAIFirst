@@ -6,7 +6,7 @@ status: draft
 
 - [x] 1 Propose
 - [x] 2 Confirm
-- [ ] 3 Dry run
+- [x] 3 Dry run
 - [ ] 4 Prune
 - [ ] 5 Close
 
@@ -62,7 +62,7 @@ Note: `05-pitch.md` Not building lists "Voice interview (#4)". That item is the 
 
 ## Pre-Prune SHA
 
-<sha>
+7672670731fc48f69a5d661e1ede2fd8ea867355
 
 ## Check result
 
