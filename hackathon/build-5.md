@@ -20,7 +20,7 @@ owner: alraro
 - [x] `POST /api/interview/questions` genera 2 preguntas con Groq a partir de la oferta y el CV; una toca un requisito que no cubre
 - [x] `POST /api/interview/feedback` devuelve `good`, `improve` y `tip` sobre el contenido de la respuesta, nunca sobre voz, tono o emociones (R13, AI Act art. 5.1.f)
 - [ ] La transcripción funciona en español con una respuesta grabada
-- [ ] Si la IA falla, la oferta demo devuelve el stub
+- [x] Si la IA falla, la oferta demo devuelve el stub
 
 ## Files owned
 
@@ -30,4 +30,4 @@ owner: alraro
 - `web/src/mocks/voice.ts`
 - `hackathon/build-5.md` (this artifact)
 
-Next: check Spanish transcription with a recorded answer, then the stub fallback.
+Next: check Spanish transcription with a recorded answer.
