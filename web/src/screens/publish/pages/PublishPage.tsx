@@ -47,7 +47,10 @@ export default function PublishPage() {
       salary: read("salary"),
       requirements: read("requirements").split(/\r?\n/).map((line) => line.trim()).filter(Boolean),
       functions: [],
+      code: "",
       source: "Publicada por la empresa",
+      source_url: "",
+      hiring_aid: "",
     })
   }
 
