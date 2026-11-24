@@ -1,5 +1,5 @@
 ---
-status: draft
+status: done
 ---
 
 # Kickoff
@@ -9,7 +9,7 @@ status: draft
 - [x] 3 Build the Team roster
 - [x] 4 Invite the team
 - [x] 5 Fill Event logistics
-- [ ] 6 Close
+- [x] 6 Close
 
 ## Languages
 
