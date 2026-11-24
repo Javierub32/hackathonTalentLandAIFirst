@@ -1,7 +1,6 @@
 ---
 name: hackathon-polish
 description: Audit the integrated live product against the Demo script and Gates, then dispatch polish issues (Phase 12/13, Integrate & Polish). Run from the Polish checkpoint via `/hackathon`.
-disable-model-invocation: true
 ---
 
 # Hackathon polish (Integrate & Polish)

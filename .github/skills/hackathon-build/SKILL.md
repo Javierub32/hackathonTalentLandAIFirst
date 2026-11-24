@@ -1,7 +1,6 @@
 ---
 name: hackathon-build
 description: Build one assigned issue per fresh session, resumable from its draft PR (Phase 11/13, Build). Use when the Router reaches Build, when a teammate asks for their next issue, or when a build artifact is `draft`.
-disable-model-invocation: true
 ---
 
 # Hackathon build
