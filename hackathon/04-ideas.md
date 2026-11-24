@@ -1,5 +1,5 @@
 ---
-status: draft
+status: done
 ---
 
 # Ideas
@@ -8,8 +8,8 @@ status: draft
 - [x] 2 Widen the list
 - [x] 3 Kill-check
 - [x] 4 Score
-- [ ] 5 Review the ranking
-- [ ] 6 Close
+- [x] 5 Review the ranking
+- [x] 6 Close
 
 ## Heard
 
@@ -159,4 +159,6 @@ Total = weighted Rubric score (1 to 5, weights from `01-brief.md`) + Demo-abilit
 - #10: V: overwhelm is plausible, not sourced · I: AIApply already does it (⚠) · M: convenient, but 'spam applications' risk · C: IMFE fits · B: B2C competitors are cheap · R: scraping is fragile · P: agentic AI is strong tech · Demo: notifications are hard to show in a pitch
 
 ### Overrides
+
+- none (heard: Driver, 2026-11-24: "el ranking vale"; team leans to #1 as base, #2 noted as its demo spine)
 
