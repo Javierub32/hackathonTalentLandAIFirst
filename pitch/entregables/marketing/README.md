@@ -22,11 +22,13 @@ Entregable 3 del zip (R5). Habla a la persona usuaria (más de 45 años, en paro
 
 ## Mensaje
 
-- Lema: **«Tu experiencia, preparada para cada oferta.»**
-- Idea principal: tus años de experiencia valen; el problema es que el filtro no los ve. Nosotros hacemos que se vean.
-- Prueba: el ejemplo de Pilar, de 5 de 13 a 11 de 13 requisitos encontrados (el momento clave de la demo). Se presenta como ejemplo, sin prometer que se pasará el filtro.
-- Tranquilidad: nada inventado, tu orientador lo revisa contigo, gratis para ti.
+- Titular: **«Sabes hacer el trabajo. Que tu currículum también lo diga.»** Habla de lo que la persona ya tiene (años de oficio) y no de la tecnología.
+- Lema de marca (pitch y aplicación): «Tu experiencia, preparada para cada oferta.»
+- Prueba: un trozo del currículum de Pilar con las tareas de siempre marcadas a rotulador con las palabras de la oferta. Es el momento clave de la demo contado sin números ni gráficos; no promete que se pasará el filtro.
+- Tranquilidad: sin inventar nada, gratis para la persona.
 - Llamada a la acción: **«Pregunta por Al curro a tu orientador del IMFE.»**
+
+Diseño: cartel tipográfico de dos bloques (verde arriba, marfil abajo), sin iconos, tarjetas, gráficos ni adornos, para que parezca un cartel de servicio público y no una página web.
 
 Tono según `hackathon/07-design.md`: español llano, frases cortas, sin anglicismos («filtro automático», nunca «ATS»), letra grande, fondo marfil y verde oscuro, sin fotos de archivo ni logotipos oficiales.
 
@@ -43,4 +45,4 @@ Pendiente: la pregunta 6 de la encuesta (dónde buscan ofertas) confirmará qué
 
 ## Texto para acompañar la imagen en WhatsApp
 
-> ¿Tienes más de 45 años y buscas trabajo en Málaga? Al curro te ayuda a preparar tu currículum para cada oferta, solo con tu experiencia real, y a ensayar la entrevista. Es gratis. Pregunta por Al curro a tu orientador del IMFE.
+> ¿Tienes más de 45 años y buscas trabajo en Málaga? Sabes hacer el trabajo; que tu currículum también lo diga. Al curro te ayuda a contar tu experiencia real con las palabras de cada oferta y a ensayar la entrevista. Es gratis. Pregunta por Al curro a tu orientador del IMFE.
