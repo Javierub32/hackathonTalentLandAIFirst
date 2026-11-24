@@ -195,6 +195,13 @@ function Workspace({ offerId }: { offerId: number }) {
           {(data) => data && (
             <>
               <OfferDetails offer={data} />
+              <section aria-labelledby="workspace-interview" className={panelClass}>
+                <h2 id="workspace-interview" className={headingClass}>Prepara tu entrevista</h2>
+                <p>Practica las preguntas de esta oferta hablando o escribiendo. Puedes empezar sin adaptar antes tu currículum.</p>
+                <Button variant="outline" className={actionClass} asChild>
+                  <Link to={`/ofertas/${offerId}/entrevista`}>Practicar la entrevista</Link>
+                </Button>
+              </section>
               {API_MODE === "fixtures" && offerId !== 1 ? (
                 <p className={panelClass}>En el modo de demostración puedes adaptar el CV en la <Link className="font-semibold text-primary underline" to="/ofertas/1">oferta de perfumería</Link>.</p>
               ) : (
