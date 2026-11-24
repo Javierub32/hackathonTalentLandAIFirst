@@ -1,5 +1,5 @@
 ---
-status: draft
+status: done
 ---
 
 # Research
@@ -8,8 +8,8 @@ status: draft
 - [x] 2 Propose Research questions
 - [x] 3 Assign (skipped: solo research by the Driver's agent)
 - [x] 4 Research handoff (skipped: solo research, no issues to hand off)
-- [ ] 5 Synthesise
-- [ ] 6 Done
+- [x] 5 Synthesise
+- [x] 6 Done
 
 ## Already known
 
