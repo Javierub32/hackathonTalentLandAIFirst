@@ -26,6 +26,10 @@ paths:
   - backend/api/resources/chat
   - backend/api/resources/rag
   - backend/api/resources/transcribe
+  - backend/api/resources/prep
+  - backend/api/resources/interview
+  - web/src/screens/prep
+  - web/src/screens/interview
   - web/src/screens/chat
   - web/src/components/common/VoiceButton.tsx
   - web/src/mocks/chat.ts

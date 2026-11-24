@@ -1,0 +1,202 @@
+{
+  "filter": {
+    "offer_id": 1,
+    "candidate_id": 1,
+    "found": 5,
+    "total": 13,
+    "percent": 38,
+    "requirements": [
+      {
+        "text": "Experiencia en atención al público y ventas (12 meses)",
+        "found": true,
+        "evidence": "Dependienta en tienda de moda. Atendía a las clientas"
+      },
+      {
+        "text": "Experiencia previa en perfumería",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "text": "Conocimientos e interés por la perfumería y las fragancias",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "text": "Buenas habilidades comunicativas",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "text": "Orientación al cliente",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "text": "Actitud proactiva",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "text": "Responsabilidad",
+        "found": true,
+        "evidence": "Soy responsable y trabajadora."
+      },
+      {
+        "text": "Trabajo en equipo",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "text": "Inglés nivel alto",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "text": "Graduado en ESO o equivalente",
+        "found": true,
+        "evidence": "Graduado Escolar."
+      },
+      {
+        "text": "Asesoramiento al cliente en la elección de productos",
+        "found": false,
+        "evidence": ""
+      },
+      {
+        "text": "Reposición, control de stock y recepción de mercancía",
+        "found": true,
+        "evidence": "Caja y reponer."
+      },
+      {
+        "text": "Ventas, cobros y operaciones de caja",
+        "found": true,
+        "evidence": "cobraba en caja"
+      }
+    ]
+  },
+  "adapt_cv": {
+    "offer_id": 1,
+    "candidate_id": 1,
+    "cv_text": "PILAR ROMERO\nMálaga · Dependienta con más de 20 años de experiencia en atención al público y ventas\n\nPERFIL\nDependienta con 16 años de experiencia en atención al público, ventas y caja en comercio de moda y complementos. Orientada al cliente: asesoro en la elección de productos y resuelvo cambios y devoluciones con buena comunicación. Responsable, proactiva y acostumbrada al trabajo en equipo. Me interesan mucho la perfumería y las fragancias y sigo sus novedades.\n\nEXPERIENCIA\n2009-2025 · Dependienta y cajera · Tienda de moda y complementos, centro de Málaga\n- Atención al público y ventas: asesoramiento a las clientas en la elección de prendas y complementos.\n- Ventas, cobros y operaciones de caja con datáfono; cierre diario de caja.\n- Reposición, control de stock y recuento de inventario; recepción y revisión de la mercancía de los proveedores.\n- Trabajo en equipo: enseñaba el trabajo a las dependientas nuevas.\n- Gestión de cambios y devoluciones.\n2005-2009 · Administrativa · Distribuidora de alimentación, Polígono Guadalhorce\n- Facturas, albaranes y pedidos de las tiendas; atención telefónica a clientes y proveedores.\n2001-2005 · Cajera · Supermercado de barrio, Málaga\n- Cobros y operaciones de caja, reposición y atención al cliente.\n1995-2001 · Auxiliar administrativa · Gestoría, Málaga\n- Atención al público, archivo y trámites.\n\nFORMACIÓN\nGraduado Escolar (equivalente a la ESO), 1987\nCurso de ofimática básica, IMFE, 2025\n\nIDIOMAS\nEspañol nativo · Inglés básico (A2)",
+    "changes": [
+      {
+        "requirement": "Conocimientos e interés por la perfumería y las fragancias",
+        "text": "Me interesan mucho la perfumería y las fragancias y sigo sus novedades.",
+        "source": "Sus intereses: «Le gusta mucho la perfumería y las fragancias»"
+      },
+      {
+        "requirement": "Buenas habilidades comunicativas",
+        "text": "Resuelvo cambios y devoluciones con buena comunicación.",
+        "source": "Tienda de moda (2009-2025): gestionaba cambios y devoluciones"
+      },
+      {
+        "requirement": "Orientación al cliente",
+        "text": "Orientada al cliente: asesoro en la elección de productos.",
+        "source": "Tienda de moda (2009-2025): aconsejaba a las clientas"
+      },
+      {
+        "requirement": "Actitud proactiva",
+        "text": "Responsable, proactiva…",
+        "source": "Tienda de moda (2009-2025): enseñaba el trabajo a las nuevas"
+      },
+      {
+        "requirement": "Trabajo en equipo",
+        "text": "Trabajo en equipo: enseñaba el trabajo a las dependientas nuevas.",
+        "source": "Tienda de moda (2009-2025)"
+      },
+      {
+        "requirement": "Asesoramiento al cliente en la elección de productos",
+        "text": "Asesoramiento a las clientas en la elección de prendas y complementos.",
+        "source": "Tienda de moda (2009-2025)"
+      },
+      {
+        "requirement": "Experiencia en atención al público y ventas (12 meses)",
+        "text": "«Atendía a las clientas» pasa a «Atención al público y ventas», las palabras de la oferta.",
+        "source": "Tienda de moda (2009-2025)"
+      },
+      {
+        "requirement": "Reposición, control de stock y recepción de mercancía",
+        "text": "«Colocaba la ropa» pasa a «Reposición, control de stock y recepción de mercancía».",
+        "source": "Tienda de moda (2009-2025): reponía, hacía inventario y recibía pedidos"
+      }
+    ],
+    "report": {
+      "offer_id": 1,
+      "candidate_id": 1,
+      "found": 11,
+      "total": 13,
+      "percent": 85,
+      "requirements": [
+        {
+          "text": "Experiencia en atención al público y ventas (12 meses)",
+          "found": true,
+          "evidence": "Atención al público y ventas: asesoramiento a las clientas"
+        },
+        {
+          "text": "Experiencia previa en perfumería",
+          "found": false,
+          "evidence": ""
+        },
+        {
+          "text": "Conocimientos e interés por la perfumería y las fragancias",
+          "found": true,
+          "evidence": "Me interesan mucho la perfumería y las fragancias"
+        },
+        {
+          "text": "Buenas habilidades comunicativas",
+          "found": true,
+          "evidence": "resuelvo cambios y devoluciones con buena comunicación"
+        },
+        {
+          "text": "Orientación al cliente",
+          "found": true,
+          "evidence": "Orientada al cliente"
+        },
+        {
+          "text": "Actitud proactiva",
+          "found": true,
+          "evidence": "Responsable, proactiva"
+        },
+        {
+          "text": "Responsabilidad",
+          "found": true,
+          "evidence": "Responsable"
+        },
+        {
+          "text": "Trabajo en equipo",
+          "found": true,
+          "evidence": "Trabajo en equipo: enseñaba el trabajo a las dependientas nuevas"
+        },
+        {
+          "text": "Inglés nivel alto",
+          "found": false,
+          "evidence": ""
+        },
+        {
+          "text": "Graduado en ESO o equivalente",
+          "found": true,
+          "evidence": "Graduado Escolar (equivalente a la ESO)"
+        },
+        {
+          "text": "Asesoramiento al cliente en la elección de productos",
+          "found": true,
+          "evidence": "asesoro en la elección de productos"
+        },
+        {
+          "text": "Reposición, control de stock y recepción de mercancía",
+          "found": true,
+          "evidence": "Reposición, control de stock y recuento de inventario; recepción y revisión de la mercancía"
+        },
+        {
+          "text": "Ventas, cobros y operaciones de caja",
+          "found": true,
+          "evidence": "Ventas, cobros y operaciones de caja"
+        }
+      ]
+    },
+    "not_covered": [
+      "Experiencia previa en perfumería",
+      "Inglés nivel alto"
+    ],
+    "note": "Solo usa experiencia real de Pilar. No añadimos experiencia en perfumería ni inglés alto porque no los tiene: prepáralos para la entrevista."
+  }
+}

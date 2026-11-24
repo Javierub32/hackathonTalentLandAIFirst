@@ -9,7 +9,7 @@ import type { RequestHandler } from "msw"
 export const voiceHandlers: RequestHandler[] = [
   http.post("*/api/llm/transcribe", async () => {
     await delay(400)
-    return HttpResponse.json({ text: "Hello, this is a sample voice transcript." })
+    return HttpResponse.json({ text: "Le preguntaría para quién es, qué edad tiene y qué le gusta, si algo fresco o más dulce, y le daría a probar dos o tres en tiras. Lo hacía mucho en la tienda de moda con los complementos." })
   }),
   http.post("*/api/llm/speak", () => new HttpResponse(null, { status: 204 })),
 ]

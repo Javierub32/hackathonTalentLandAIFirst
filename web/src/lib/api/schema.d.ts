@@ -41,6 +41,76 @@ export interface paths {
         patch: operations["_example_update"];
         trace?: never;
     };
+    "/api/applications": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List */
+        get: operations["applications_list"];
+        put?: never;
+        /** Create */
+        post: operations["applications_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/applications/{application_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get */
+        get: operations["applications_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Update */
+        patch: operations["applications_update"];
+        trace?: never;
+    };
+    "/api/candidates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List */
+        get: operations["candidates_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/candidates/{candidate_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get */
+        get: operations["candidates_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/health": {
         parameters: {
             query?: never;
@@ -52,6 +122,40 @@ export interface paths {
         get: operations["health_health"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/interview/feedback": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Feedback */
+        post: operations["interview_feedback"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/interview/questions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Questions */
+        post: operations["interview_questions"];
         delete?: never;
         options?: never;
         head?: never;
@@ -155,14 +259,248 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/offers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List */
+        get: operations["offers_list"];
+        put?: never;
+        /** Create */
+        post: operations["offers_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/offers/{offer_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get */
+        get: operations["offers_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/prep/adapt-cv": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Adapt Cv */
+        post: operations["prep_adapt_cv"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/prep/filter": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Filter */
+        post: operations["prep_filter"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** AdaptedCv */
+        AdaptedCv: {
+            /** Candidate Id */
+            candidate_id: number;
+            /** Changes */
+            changes: components["schemas"]["CvChange"][];
+            /** Cv Text */
+            cv_text: string;
+            /**
+             * Not Covered
+             * @description Requirements left out because the candidate does not meet them
+             */
+            not_covered: string[];
+            /**
+             * Note
+             * @default
+             */
+            note: string;
+            /** Offer Id */
+            offer_id: number;
+            /** @description The filter run again on the adapted CV */
+            report: components["schemas"]["FilterReport"];
+        };
+        /**
+         * ApplicationCreate
+         * @description POST body.
+         */
+        ApplicationCreate: {
+            /** Candidate Id */
+            candidate_id: number;
+            /**
+             * Counsellor Name
+             * @default
+             */
+            counsellor_name: string;
+            /**
+             * Counsellor Note
+             * @default
+             */
+            counsellor_note: string;
+            /**
+             * Cv Text
+             * @description The CV sent with the application (usually the adapted one)
+             * @default
+             */
+            cv_text: string;
+            /** Offer Id */
+            offer_id: number;
+            /** @default borrador */
+            status: components["schemas"]["ApplicationStatus"];
+        };
+        /** ApplicationRead */
+        ApplicationRead: {
+            /** Candidate Id */
+            candidate_id: number;
+            /**
+             * Counsellor Name
+             * @default
+             */
+            counsellor_name: string;
+            /**
+             * Counsellor Note
+             * @default
+             */
+            counsellor_note: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Cv Text
+             * @description The CV sent with the application (usually the adapted one)
+             * @default
+             */
+            cv_text: string;
+            /** Id */
+            id: number;
+            /** Offer Id */
+            offer_id: number;
+            /** @default borrador */
+            status: components["schemas"]["ApplicationStatus"];
+        };
+        /**
+         * ApplicationStatus
+         * @enum {string}
+         */
+        ApplicationStatus: "borrador" | "revisada" | "enviada";
+        /**
+         * ApplicationUpdate
+         * @description PATCH body: the counsellor approves (`revisada`), then the candidate sends (`enviada`).
+         */
+        ApplicationUpdate: {
+            /** Counsellor Name */
+            counsellor_name?: string | null;
+            /** Counsellor Note */
+            counsellor_note?: string | null;
+            /** Cv Text */
+            cv_text?: string | null;
+            status?: components["schemas"]["ApplicationStatus"] | null;
+        };
         /** Body_transcribe_transcribe */
         Body_transcribe_transcribe: {
             /** File */
             file: string;
+        };
+        /**
+         * CandidateRead
+         * @description Response shape.
+         */
+        CandidateRead: {
+            /** Age */
+            age: number;
+            /**
+             * City
+             * @default
+             */
+            city: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Cv Text
+             * @description The CV as she wrote it
+             * @default
+             */
+            cv_text: string;
+            /**
+             * Education
+             * @default []
+             */
+            education: components["schemas"]["Education"][];
+            /**
+             * Experience
+             * @default []
+             */
+            experience: components["schemas"]["Job"][];
+            /** Id */
+            id: number;
+            /**
+             * Interests
+             * @description What she says she likes or knows; usable as real facts
+             * @default []
+             */
+            interests: string[];
+            /**
+             * Languages
+             * @default []
+             */
+            languages: string[];
+            /**
+             * Months Unemployed
+             * @default 0
+             */
+            months_unemployed: number;
+            /** Name */
+            name: string;
+            /**
+             * Skills
+             * @default []
+             */
+            skills: string[];
+            /**
+             * Summary
+             * @default
+             */
+            summary: string;
         };
         /** ChatCitation */
         ChatCitation: {
@@ -218,6 +556,24 @@ export interface components {
              */
             use_rag: boolean;
         };
+        /** CvChange */
+        CvChange: {
+            /**
+             * Requirement
+             * @description The offer requirement this change covers
+             */
+            requirement: string;
+            /**
+             * Source
+             * @description The real fact of the candidate it comes from
+             */
+            source: string;
+            /**
+             * Text
+             * @description What the new CV says
+             */
+            text: string;
+        };
         /** Delta */
         Delta: {
             /** Text */
@@ -240,6 +596,13 @@ export interface components {
              * @enum {string}
              */
             type: "done";
+        };
+        /** Education */
+        Education: {
+            /** Title */
+            title: string;
+            /** Year */
+            year?: number | null;
         };
         /**
          * ExampleCreate
@@ -294,10 +657,77 @@ export interface components {
             /** Title */
             title?: string | null;
         };
+        /** FeedbackRequest */
+        FeedbackRequest: {
+            /**
+             * Answer
+             * @description The transcribed answer
+             */
+            answer: string;
+            /** Offer Id */
+            offer_id: number;
+            /** Question */
+            question: string;
+        };
+        /** FilterReport */
+        FilterReport: {
+            /** Candidate Id */
+            candidate_id: number;
+            /** Found */
+            found: number;
+            /** Offer Id */
+            offer_id: number;
+            /**
+             * Percent
+             * @description round(100 * found / total)
+             */
+            percent: number;
+            /** Requirements */
+            requirements: components["schemas"]["RequirementCheck"][];
+            /** Total */
+            total: number;
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
+        };
+        /** InterviewFeedback */
+        InterviewFeedback: {
+            /** Good */
+            good: string[];
+            /** Improve */
+            improve: string[];
+            /** Offer Id */
+            offer_id: number;
+            /** Tip */
+            tip: string;
+        };
+        /** InterviewQuestion */
+        InterviewQuestion: {
+            /**
+             * Checks
+             * @description Which requirement of the offer the question checks
+             */
+            checks: string;
+            /** Id */
+            id: number;
+            /** Text */
+            text: string;
+        };
+        /** InterviewQuestions */
+        InterviewQuestions: {
+            /** Candidate Id */
+            candidate_id: number;
+            /**
+             * Intro
+             * @description What the interviewer says first
+             */
+            intro: string;
+            /** Offer Id */
+            offer_id: number;
+            /** Questions */
+            questions: components["schemas"]["InterviewQuestion"][];
         };
         /**
          * ItemCreate
@@ -378,6 +808,186 @@ export interface components {
             status?: components["schemas"]["ItemStatus"] | null;
             /** Title */
             title?: string | null;
+        };
+        /** Job */
+        Job: {
+            /** End Year */
+            end_year?: number | null;
+            /**
+             * Place
+             * @description Employer described, no real company name
+             */
+            place: string;
+            /** Role */
+            role: string;
+            /** Start Year */
+            start_year: number;
+            /**
+             * Tasks
+             * @default []
+             */
+            tasks: string[];
+        };
+        /**
+         * OfferCreate
+         * @description POST body: the company "Publicar oferta" form.
+         */
+        OfferCreate: {
+            /**
+             * Code
+             * @description Source offer code, e.g. IMFE 2026/01198; empty for company-posted offers
+             * @default
+             */
+            code: string;
+            /**
+             * Contract
+             * @default
+             */
+            contract: string;
+            /**
+             * Employer
+             * @description Employer as the source shows it: a description, no invented name
+             */
+            employer: string;
+            /** Functions */
+            functions?: string[];
+            /**
+             * Hiring Aid
+             * @description Hiring-aid note for the employer (Emplea-T); empty when none applies
+             * @default
+             */
+            hiring_aid: string;
+            /**
+             * Location
+             * @default
+             */
+            location: string;
+            /** Published On */
+            published_on?: string | null;
+            /** Requirements */
+            requirements?: string[];
+            /**
+             * Salary
+             * @default
+             */
+            salary: string;
+            /**
+             * Schedule
+             * @default
+             */
+            schedule: string;
+            /**
+             * Source
+             * @description Who published it, e.g. 'IMFE · Agencia Municipal de Colocación'
+             * @default
+             */
+            source: string;
+            /**
+             * Source Url
+             * @default
+             */
+            source_url: string;
+            /** Title */
+            title: string;
+        };
+        /**
+         * OfferRead
+         * @description Response shape.
+         */
+        OfferRead: {
+            /**
+             * Code
+             * @description Source offer code, e.g. IMFE 2026/01198; empty for company-posted offers
+             * @default
+             */
+            code: string;
+            /**
+             * Contract
+             * @default
+             */
+            contract: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Employer
+             * @description Employer as the source shows it: a description, no invented name
+             */
+            employer: string;
+            /** Functions */
+            functions?: string[];
+            /**
+             * Hiring Aid
+             * @description Hiring-aid note for the employer (Emplea-T); empty when none applies
+             * @default
+             */
+            hiring_aid: string;
+            /** Id */
+            id: number;
+            /**
+             * Location
+             * @default
+             */
+            location: string;
+            /** Published On */
+            published_on?: string | null;
+            /** Requirements */
+            requirements?: string[];
+            /**
+             * Salary
+             * @default
+             */
+            salary: string;
+            /**
+             * Schedule
+             * @default
+             */
+            schedule: string;
+            /**
+             * Source
+             * @description Who published it, e.g. 'IMFE · Agencia Municipal de Colocación'
+             * @default
+             */
+            source: string;
+            /**
+             * Source Url
+             * @default
+             */
+            source_url: string;
+            /** Title */
+            title: string;
+        };
+        /** PrepRequest */
+        PrepRequest: {
+            /** Candidate Id */
+            candidate_id: number;
+            /** Offer Id */
+            offer_id: number;
+        };
+        /** QuestionsRequest */
+        QuestionsRequest: {
+            /** Candidate Id */
+            candidate_id: number;
+            /** Offer Id */
+            offer_id: number;
+        };
+        /** RequirementCheck */
+        RequirementCheck: {
+            /**
+             * Evidence
+             * @description Words of the CV where the filter finds it; empty if not found
+             * @default
+             */
+            evidence: string;
+            /** Found */
+            found: boolean;
+            /**
+             * Text
+             * @description One requirement of the offer, in its own words
+             */
+            text: string;
         };
         /** SpeakRequest */
         SpeakRequest: {
@@ -567,6 +1177,188 @@ export interface operations {
             };
         };
     };
+    applications_list: {
+        parameters: {
+            query?: {
+                candidate_id?: number | null;
+                offer_id?: number | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApplicationRead"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    applications_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ApplicationCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApplicationRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    applications_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                application_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApplicationRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    applications_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                application_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ApplicationUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApplicationRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    candidates_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CandidateRead"][];
+                };
+            };
+        };
+    };
+    candidates_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                candidate_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CandidateRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     health_health: {
         parameters: {
             query?: never;
@@ -585,6 +1377,72 @@ export interface operations {
                     "application/json": {
                         [key: string]: string;
                     };
+                };
+            };
+        };
+    };
+    interview_feedback: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FeedbackRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InterviewFeedback"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    interview_questions: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["QuestionsRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InterviewQuestions"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };
@@ -835,6 +1693,156 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TranscribeResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    offers_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OfferRead"][];
+                };
+            };
+        };
+    };
+    offers_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["OfferCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OfferRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    offers_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                offer_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OfferRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    prep_adapt_cv: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PrepRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdaptedCv"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    prep_filter: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PrepRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FilterReport"];
                 };
             };
             /** @description Validation Error */

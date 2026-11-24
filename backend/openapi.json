@@ -1,6 +1,203 @@
 {
   "components": {
     "schemas": {
+      "AdaptedCv": {
+        "properties": {
+          "candidate_id": {
+            "title": "Candidate Id",
+            "type": "integer"
+          },
+          "changes": {
+            "items": {
+              "$ref": "#/components/schemas/CvChange"
+            },
+            "title": "Changes",
+            "type": "array"
+          },
+          "cv_text": {
+            "title": "Cv Text",
+            "type": "string"
+          },
+          "not_covered": {
+            "description": "Requirements left out because the candidate does not meet them",
+            "items": {
+              "type": "string"
+            },
+            "title": "Not Covered",
+            "type": "array"
+          },
+          "note": {
+            "default": "",
+            "title": "Note",
+            "type": "string"
+          },
+          "offer_id": {
+            "title": "Offer Id",
+            "type": "integer"
+          },
+          "report": {
+            "$ref": "#/components/schemas/FilterReport",
+            "description": "The filter run again on the adapted CV"
+          }
+        },
+        "required": [
+          "offer_id",
+          "candidate_id",
+          "cv_text",
+          "changes",
+          "report",
+          "not_covered"
+        ],
+        "title": "AdaptedCv",
+        "type": "object"
+      },
+      "ApplicationCreate": {
+        "description": "POST body.",
+        "properties": {
+          "candidate_id": {
+            "title": "Candidate Id",
+            "type": "integer"
+          },
+          "counsellor_name": {
+            "default": "",
+            "title": "Counsellor Name",
+            "type": "string"
+          },
+          "counsellor_note": {
+            "default": "",
+            "title": "Counsellor Note",
+            "type": "string"
+          },
+          "cv_text": {
+            "default": "",
+            "description": "The CV sent with the application (usually the adapted one)",
+            "title": "Cv Text",
+            "type": "string"
+          },
+          "offer_id": {
+            "title": "Offer Id",
+            "type": "integer"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ApplicationStatus",
+            "default": "borrador"
+          }
+        },
+        "required": [
+          "candidate_id",
+          "offer_id"
+        ],
+        "title": "ApplicationCreate",
+        "type": "object"
+      },
+      "ApplicationRead": {
+        "properties": {
+          "candidate_id": {
+            "title": "Candidate Id",
+            "type": "integer"
+          },
+          "counsellor_name": {
+            "default": "",
+            "title": "Counsellor Name",
+            "type": "string"
+          },
+          "counsellor_note": {
+            "default": "",
+            "title": "Counsellor Note",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "cv_text": {
+            "default": "",
+            "description": "The CV sent with the application (usually the adapted one)",
+            "title": "Cv Text",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "offer_id": {
+            "title": "Offer Id",
+            "type": "integer"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ApplicationStatus",
+            "default": "borrador"
+          }
+        },
+        "required": [
+          "candidate_id",
+          "offer_id",
+          "id",
+          "created_at"
+        ],
+        "title": "ApplicationRead",
+        "type": "object"
+      },
+      "ApplicationStatus": {
+        "enum": [
+          "borrador",
+          "revisada",
+          "enviada"
+        ],
+        "title": "ApplicationStatus",
+        "type": "string"
+      },
+      "ApplicationUpdate": {
+        "description": "PATCH body: the counsellor approves (`revisada`), then the candidate sends (`enviada`).",
+        "properties": {
+          "counsellor_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Counsellor Name"
+          },
+          "counsellor_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Counsellor Note"
+          },
+          "cv_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cv Text"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApplicationStatus"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "title": "ApplicationUpdate",
+        "type": "object"
+      },
       "Body_transcribe_transcribe": {
         "properties": {
           "file": {
@@ -13,6 +210,98 @@
           "file"
         ],
         "title": "Body_transcribe_transcribe",
+        "type": "object"
+      },
+      "CandidateRead": {
+        "description": "Response shape.",
+        "properties": {
+          "age": {
+            "title": "Age",
+            "type": "integer"
+          },
+          "city": {
+            "default": "",
+            "title": "City",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "cv_text": {
+            "default": "",
+            "description": "The CV as she wrote it",
+            "title": "Cv Text",
+            "type": "string"
+          },
+          "education": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Education"
+            },
+            "title": "Education",
+            "type": "array"
+          },
+          "experience": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Job"
+            },
+            "title": "Experience",
+            "type": "array"
+          },
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "interests": {
+            "default": [],
+            "description": "What she says she likes or knows; usable as real facts",
+            "items": {
+              "type": "string"
+            },
+            "title": "Interests",
+            "type": "array"
+          },
+          "languages": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Languages",
+            "type": "array"
+          },
+          "months_unemployed": {
+            "default": 0,
+            "title": "Months Unemployed",
+            "type": "integer"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "skills": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Skills",
+            "type": "array"
+          },
+          "summary": {
+            "default": "",
+            "title": "Summary",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "age",
+          "id",
+          "created_at"
+        ],
+        "title": "CandidateRead",
         "type": "object"
       },
       "ChatCitation": {
@@ -156,6 +445,32 @@
         "title": "ChatRequest",
         "type": "object"
       },
+      "CvChange": {
+        "properties": {
+          "requirement": {
+            "description": "The offer requirement this change covers",
+            "title": "Requirement",
+            "type": "string"
+          },
+          "source": {
+            "description": "The real fact of the candidate it comes from",
+            "title": "Source",
+            "type": "string"
+          },
+          "text": {
+            "description": "What the new CV says",
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "requirement",
+          "text",
+          "source"
+        ],
+        "title": "CvChange",
+        "type": "object"
+      },
       "Delta": {
         "properties": {
           "text": {
@@ -193,6 +508,30 @@
           }
         },
         "title": "Done",
+        "type": "object"
+      },
+      "Education": {
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Year"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "title": "Education",
         "type": "object"
       },
       "ExampleCreate": {
@@ -300,6 +639,73 @@
         "title": "ExampleUpdate",
         "type": "object"
       },
+      "FeedbackRequest": {
+        "properties": {
+          "answer": {
+            "description": "The transcribed answer",
+            "minLength": 1,
+            "title": "Answer",
+            "type": "string"
+          },
+          "offer_id": {
+            "title": "Offer Id",
+            "type": "integer"
+          },
+          "question": {
+            "title": "Question",
+            "type": "string"
+          }
+        },
+        "required": [
+          "offer_id",
+          "question",
+          "answer"
+        ],
+        "title": "FeedbackRequest",
+        "type": "object"
+      },
+      "FilterReport": {
+        "properties": {
+          "candidate_id": {
+            "title": "Candidate Id",
+            "type": "integer"
+          },
+          "found": {
+            "title": "Found",
+            "type": "integer"
+          },
+          "offer_id": {
+            "title": "Offer Id",
+            "type": "integer"
+          },
+          "percent": {
+            "description": "round(100 * found / total)",
+            "title": "Percent",
+            "type": "integer"
+          },
+          "requirements": {
+            "items": {
+              "$ref": "#/components/schemas/RequirementCheck"
+            },
+            "title": "Requirements",
+            "type": "array"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "offer_id",
+          "candidate_id",
+          "found",
+          "total",
+          "percent",
+          "requirements"
+        ],
+        "title": "FilterReport",
+        "type": "object"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -311,6 +717,96 @@
           }
         },
         "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "InterviewFeedback": {
+        "properties": {
+          "good": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Good",
+            "type": "array"
+          },
+          "improve": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Improve",
+            "type": "array"
+          },
+          "offer_id": {
+            "title": "Offer Id",
+            "type": "integer"
+          },
+          "tip": {
+            "title": "Tip",
+            "type": "string"
+          }
+        },
+        "required": [
+          "offer_id",
+          "good",
+          "improve",
+          "tip"
+        ],
+        "title": "InterviewFeedback",
+        "type": "object"
+      },
+      "InterviewQuestion": {
+        "properties": {
+          "checks": {
+            "description": "Which requirement of the offer the question checks",
+            "title": "Checks",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "checks"
+        ],
+        "title": "InterviewQuestion",
+        "type": "object"
+      },
+      "InterviewQuestions": {
+        "properties": {
+          "candidate_id": {
+            "title": "Candidate Id",
+            "type": "integer"
+          },
+          "intro": {
+            "description": "What the interviewer says first",
+            "title": "Intro",
+            "type": "string"
+          },
+          "offer_id": {
+            "title": "Offer Id",
+            "type": "integer"
+          },
+          "questions": {
+            "items": {
+              "$ref": "#/components/schemas/InterviewQuestion"
+            },
+            "title": "Questions",
+            "type": "array"
+          }
+        },
+        "required": [
+          "offer_id",
+          "candidate_id",
+          "intro",
+          "questions"
+        ],
+        "title": "InterviewQuestions",
         "type": "object"
       },
       "ItemCreate": {
@@ -533,6 +1029,299 @@
           }
         },
         "title": "ItemUpdate",
+        "type": "object"
+      },
+      "Job": {
+        "properties": {
+          "end_year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End Year"
+          },
+          "place": {
+            "description": "Employer described, no real company name",
+            "title": "Place",
+            "type": "string"
+          },
+          "role": {
+            "title": "Role",
+            "type": "string"
+          },
+          "start_year": {
+            "title": "Start Year",
+            "type": "integer"
+          },
+          "tasks": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Tasks",
+            "type": "array"
+          }
+        },
+        "required": [
+          "role",
+          "place",
+          "start_year"
+        ],
+        "title": "Job",
+        "type": "object"
+      },
+      "OfferCreate": {
+        "description": "POST body: the company \"Publicar oferta\" form.",
+        "properties": {
+          "code": {
+            "default": "",
+            "description": "Source offer code, e.g. IMFE 2026/01198; empty for company-posted offers",
+            "title": "Code",
+            "type": "string"
+          },
+          "contract": {
+            "default": "",
+            "title": "Contract",
+            "type": "string"
+          },
+          "employer": {
+            "description": "Employer as the source shows it: a description, no invented name",
+            "title": "Employer",
+            "type": "string"
+          },
+          "functions": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Functions",
+            "type": "array"
+          },
+          "hiring_aid": {
+            "default": "",
+            "description": "Hiring-aid note for the employer (Emplea-T); empty when none applies",
+            "title": "Hiring Aid",
+            "type": "string"
+          },
+          "location": {
+            "default": "",
+            "title": "Location",
+            "type": "string"
+          },
+          "published_on": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published On"
+          },
+          "requirements": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Requirements",
+            "type": "array"
+          },
+          "salary": {
+            "default": "",
+            "title": "Salary",
+            "type": "string"
+          },
+          "schedule": {
+            "default": "",
+            "title": "Schedule",
+            "type": "string"
+          },
+          "source": {
+            "default": "",
+            "description": "Who published it, e.g. 'IMFE \u00b7 Agencia Municipal de Colocaci\u00f3n'",
+            "title": "Source",
+            "type": "string"
+          },
+          "source_url": {
+            "default": "",
+            "title": "Source Url",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "employer"
+        ],
+        "title": "OfferCreate",
+        "type": "object"
+      },
+      "OfferRead": {
+        "description": "Response shape.",
+        "properties": {
+          "code": {
+            "default": "",
+            "description": "Source offer code, e.g. IMFE 2026/01198; empty for company-posted offers",
+            "title": "Code",
+            "type": "string"
+          },
+          "contract": {
+            "default": "",
+            "title": "Contract",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "employer": {
+            "description": "Employer as the source shows it: a description, no invented name",
+            "title": "Employer",
+            "type": "string"
+          },
+          "functions": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Functions",
+            "type": "array"
+          },
+          "hiring_aid": {
+            "default": "",
+            "description": "Hiring-aid note for the employer (Emplea-T); empty when none applies",
+            "title": "Hiring Aid",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "location": {
+            "default": "",
+            "title": "Location",
+            "type": "string"
+          },
+          "published_on": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published On"
+          },
+          "requirements": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Requirements",
+            "type": "array"
+          },
+          "salary": {
+            "default": "",
+            "title": "Salary",
+            "type": "string"
+          },
+          "schedule": {
+            "default": "",
+            "title": "Schedule",
+            "type": "string"
+          },
+          "source": {
+            "default": "",
+            "description": "Who published it, e.g. 'IMFE \u00b7 Agencia Municipal de Colocaci\u00f3n'",
+            "title": "Source",
+            "type": "string"
+          },
+          "source_url": {
+            "default": "",
+            "title": "Source Url",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "employer",
+          "id",
+          "created_at"
+        ],
+        "title": "OfferRead",
+        "type": "object"
+      },
+      "PrepRequest": {
+        "properties": {
+          "candidate_id": {
+            "title": "Candidate Id",
+            "type": "integer"
+          },
+          "offer_id": {
+            "title": "Offer Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "offer_id",
+          "candidate_id"
+        ],
+        "title": "PrepRequest",
+        "type": "object"
+      },
+      "QuestionsRequest": {
+        "properties": {
+          "candidate_id": {
+            "title": "Candidate Id",
+            "type": "integer"
+          },
+          "offer_id": {
+            "title": "Offer Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "offer_id",
+          "candidate_id"
+        ],
+        "title": "QuestionsRequest",
+        "type": "object"
+      },
+      "RequirementCheck": {
+        "properties": {
+          "evidence": {
+            "default": "",
+            "description": "Words of the CV where the filter finds it; empty if not found",
+            "title": "Evidence",
+            "type": "string"
+          },
+          "found": {
+            "title": "Found",
+            "type": "boolean"
+          },
+          "text": {
+            "description": "One requirement of the offer, in its own words",
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "found"
+        ],
+        "title": "RequirementCheck",
         "type": "object"
       },
       "SpeakRequest": {
@@ -820,6 +1609,273 @@
         ]
       }
     },
+    "/api/applications": {
+      "get": {
+        "operationId": "applications_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "candidate_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Candidate Id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offer_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Offer Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ApplicationRead"
+                  },
+                  "title": "Response Applications List",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List",
+        "tags": [
+          "applications"
+        ]
+      },
+      "post": {
+        "operationId": "applications_create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplicationCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationRead"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create",
+        "tags": [
+          "applications"
+        ]
+      }
+    },
+    "/api/applications/{application_id}": {
+      "get": {
+        "operationId": "applications_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "title": "Application Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationRead"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get",
+        "tags": [
+          "applications"
+        ]
+      },
+      "patch": {
+        "operationId": "applications_update",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "title": "Application Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplicationUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationRead"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Update",
+        "tags": [
+          "applications"
+        ]
+      }
+    },
+    "/api/candidates": {
+      "get": {
+        "operationId": "candidates_list",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/CandidateRead"
+                  },
+                  "title": "Response Candidates List",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List",
+        "tags": [
+          "candidates"
+        ]
+      }
+    },
+    "/api/candidates/{candidate_id}": {
+      "get": {
+        "operationId": "candidates_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "candidate_id",
+            "required": true,
+            "schema": {
+              "title": "Candidate Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CandidateRead"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get",
+        "tags": [
+          "candidates"
+        ]
+      }
+    },
     "/api/health": {
       "get": {
         "operationId": "health_health",
@@ -842,6 +1898,88 @@
         "summary": "Health",
         "tags": [
           "health"
+        ]
+      }
+    },
+    "/api/interview/feedback": {
+      "post": {
+        "operationId": "interview_feedback",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeedbackRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InterviewFeedback"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Feedback",
+        "tags": [
+          "interview"
+        ]
+      }
+    },
+    "/api/interview/questions": {
+      "post": {
+        "operationId": "interview_questions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuestionsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InterviewQuestions"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Questions",
+        "tags": [
+          "interview"
         ]
       }
     },
@@ -1251,6 +2389,194 @@
         "summary": "Transcribe",
         "tags": [
           "transcribe"
+        ]
+      }
+    },
+    "/api/offers": {
+      "get": {
+        "operationId": "offers_list",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/OfferRead"
+                  },
+                  "title": "Response Offers List",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List",
+        "tags": [
+          "offers"
+        ]
+      },
+      "post": {
+        "operationId": "offers_create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OfferCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfferRead"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create",
+        "tags": [
+          "offers"
+        ]
+      }
+    },
+    "/api/offers/{offer_id}": {
+      "get": {
+        "operationId": "offers_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "offer_id",
+            "required": true,
+            "schema": {
+              "title": "Offer Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfferRead"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get",
+        "tags": [
+          "offers"
+        ]
+      }
+    },
+    "/api/prep/adapt-cv": {
+      "post": {
+        "operationId": "prep_adapt_cv",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrepRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdaptedCv"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Adapt Cv",
+        "tags": [
+          "prep"
+        ]
+      }
+    },
+    "/api/prep/filter": {
+      "post": {
+        "operationId": "prep_filter",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrepRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FilterReport"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Filter",
+        "tags": [
+          "prep"
         ]
       }
     }

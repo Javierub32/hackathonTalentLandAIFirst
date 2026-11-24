@@ -1,0 +1,85 @@
+[
+  {
+    "name": "Pilar Romero",
+    "age": 53,
+    "city": "Málaga",
+    "months_unemployed": 18,
+    "summary": "Más de 20 años de experiencia en comercio y administración. Lleva 18 meses en paro desde que cerró la tienda donde trabajaba.",
+    "experience": [
+      {
+        "role": "Dependienta y cajera",
+        "place": "Tienda de moda y complementos en el centro de Málaga",
+        "start_year": 2009,
+        "end_year": 2025,
+        "tasks": [
+          "Atender a las clientas y aconsejarles en la elección de prendas y complementos",
+          "Cobro en caja, datáfono y cierre diario",
+          "Reponer y ordenar el género, recuento de inventario",
+          "Recibir y revisar los pedidos de los proveedores",
+          "Enseñar el trabajo a las dependientas nuevas",
+          "Gestionar cambios y devoluciones"
+        ]
+      },
+      {
+        "role": "Administrativa",
+        "place": "Distribuidora de alimentación en el Polígono Guadalhorce",
+        "start_year": 2005,
+        "end_year": 2009,
+        "tasks": [
+          "Facturas y albaranes",
+          "Atención telefónica a clientes y proveedores",
+          "Tomar pedidos de las tiendas",
+          "Archivo"
+        ]
+      },
+      {
+        "role": "Cajera",
+        "place": "Supermercado de barrio en Málaga",
+        "start_year": 2001,
+        "end_year": 2005,
+        "tasks": [
+          "Cobro en caja",
+          "Reposición de estanterías",
+          "Atención a los clientes"
+        ]
+      },
+      {
+        "role": "Auxiliar administrativa",
+        "place": "Gestoría en Málaga",
+        "start_year": 1995,
+        "end_year": 2001,
+        "tasks": [
+          "Atención al público",
+          "Archivo y mecanografía",
+          "Trámites sencillos"
+        ]
+      }
+    ],
+    "education": [
+      {
+        "title": "Graduado Escolar (equivalente a la ESO)",
+        "year": 1987
+      },
+      {
+        "title": "Curso de ofimática básica (IMFE)",
+        "year": 2025
+      }
+    ],
+    "languages": [
+      "Español: nativo",
+      "Inglés: básico (A2)"
+    ],
+    "skills": [
+      "Atención al cliente",
+      "Caja y datáfono",
+      "Reposición y control de inventario",
+      "Trato con proveedores",
+      "Ofimática básica (Word, correo electrónico)"
+    ],
+    "interests": [
+      "Le gusta mucho la perfumería y las fragancias: se informa de las novedades y aconseja a familia y amigas"
+    ],
+    "cv_text": "PILAR ROMERO\nMálaga\n\nEXPERIENCIA\n2009-2025 Dependienta en tienda de moda. Atendía a las clientas, cobraba en caja y colocaba la ropa.\n2005-2009 Administrativa en una distribuidora. Facturas y teléfono.\n2001-2005 Cajera en supermercado. Caja y reponer.\n1995-2001 Auxiliar en una gestoría.\n\nESTUDIOS\nGraduado Escolar.\n\nIDIOMAS\nInglés básico.\n\nSoy responsable y trabajadora.",
+    "created_at": "2026-11-24T09:00:00Z"
+  }
+]
