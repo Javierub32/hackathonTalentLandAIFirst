@@ -9,7 +9,7 @@ status: draft
 - [x] 3 Vote
 - [x] 4 Identity and axes
 - [x] 5 Presenter and demo length
-- [ ] 6 Wow moment and Demo script
+- [x] 6 Wow moment and Demo script
 - [ ] 7 Not building and Coverage
 - [ ] 8 Close
 
@@ -83,8 +83,26 @@ What the judges know walking in: the challenge (an AI that leaves nobody behind)
 Time split (R11.3): problem, validation and business 3:00; app 2:00.
 ## Not building
 
-- <what is out>
+- "Train for this offer" module (lessons, course content): part of the idea, but no Beat shows it; roadmap (Aquileo+ courses linked to the offer).
+- Recommendation engine that suggests offers to candidates: the candidate picks from the list in the demo.
+- Company accounts, login roles and offer moderation beyond one simple "Publicar oferta" form.
+- Integration with a real ATS, Empléate or IMFE systems; offers are seeded by hand from public listings.
+- Scraping or automatic offer feeds; auto-apply agent (#10).
+- Voice interview (#4), WhatsApp plan (#11), mentors (#9), reskilling route (#12): roadmap only.
+- Native mobile app (responsive web instead).
+- Real Emplea-T application paperwork for the employer (only the aid amount is shown).
+- Any face, voice-emotion or personality analysis (AI Act Art. 5(1)(f), R13).
+- Full counsellor back office: only an "approve before sending" state.
 
 ## Coverage
 
-- R<n>.<m>: <no Beat proves it; justification or warning>
+- R3.1, R3.2, R3.3: the canvas is a separate deliverable (paper + `hackathon/canvas.md`); Beat 04:05 shows only CLIENTES/INGRESOS.
+- R4.2: AI-use document goes in the zip (model, data, limits, cost); not a demo item.
+- R5.1, R5.2: marketing piece is a separate deliverable in the zip.
+- R6.1: this script with timings is the base of the written pitch script (Demo Phase).
+- R7.1: the zip upload is a submission task, not a Beat.
+- R11.1: canvas "por qué" lines live in `hackathon/canvas.md`. R11.2: covered by the devil's-advocate round above (no open objection). R11.3: covered by the time split (3:00 problem/validation/business vs 2:00 app).
+- R12.1, R12.2: public URL and backup video are build/demo tasks; ⚠ the video must be recorded before the pitch.
+- R13.1: GDPR/data statement goes in the AI-use document (R4.2).
+- R16.2: the idea does not reuse SheReady; nothing to declare. If any code or text from a previous project is reused, state it.
+- ⚠ R8.2, R15.1, R15.2: Beat 01:05 has placeholders; without today's survey (10+ people 45+) and one organisation contact, the Gate fails.
