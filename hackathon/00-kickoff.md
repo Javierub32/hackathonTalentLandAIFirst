@@ -7,7 +7,7 @@ status: draft
 - [x] 1 Set up the repo
 - [x] 2 Ask the languages
 - [x] 3 Build the Team roster
-- [ ] 4 Invite the team
+- [x] 4 Invite the team
 - [ ] 5 Fill Event logistics
 - [ ] 6 Close
 
