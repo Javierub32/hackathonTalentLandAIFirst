@@ -10,7 +10,7 @@ owner: Paaula21
 - [x] 1 Pick
 - [x] 2 Read
 - [x] 3 Implement
-- [ ] 4 Check
+- [x] 4 Check
 - [ ] 5 Review requests
 - [ ] 6 Merge
 - [ ] 7 Handoff
@@ -31,3 +31,5 @@ owner: Paaula21
 
 - Chromium con datos de demostración, a 375 y 1280 px: oferta y enlace al IMFE, 5 de 13 (38%) y 11 de 13 (85%), evidencia de los cambios, borrador existente sin duplicar y creación de borrador, enlaces a candidatura y entrevista.
 - El modo de demostración ofrece la adaptación para perfumería. El stub de Preparación devuelve los datos de esa oferta; en modo live se solicita el cálculo para la oferta abierta.
+- `make check` pasó desde una copia temporal del commit montable por Docker Desktop. Avisos no bloqueantes de Ruff en `backend/llm/render.py` y de la comprobación del generador del cliente web.
+- Vista para revisión: http://localhost:4173/ofertas/1.
