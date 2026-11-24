@@ -35,7 +35,7 @@ Heard: Driver, 2026-11-24. Nobody leaves early: the team keeps working from clas
 | lane:api | Javier | mid | 2 | (shared) |
 | lane:pitch | Andrea, Alfonso, Alba | weak, strong, strong | 5 | (shared) |
 
-Per person (Σ Weight / hours): Alfonso 6/7 · Paula 5/7 · Alba 3/7 · Javier 4/7 · Marina 3/7 · Andrea 3/7.
+Per person (Σ Weight / hours): Alfonso 8/7 · Paula 5/7 · Alba 3/7 · Javier 2/7 · Marina 3/7 · Andrea 3/7.
 
 ⚠ Marina and Andrea carry 3 against 4-5 for the others: they pick up help or Polish work first.
 ⚠ The pitch Lane should belong to the Presenter, who is not decided: slides go to Andrea for now; reassign #9 (slides) once the Presenter is named.
@@ -55,7 +55,7 @@ Frontier order: Spine pass (Wow moment first), then Depth pass.
 | #7 | Publicar oferta (empresa) · Spine | lane:web | Marina | Spine | 1 (one folder, one form over the stub) | 03:35 | none |
 | #8 | Inicio: elegir vista (candidata, orientadora, empresa) · Spine | lane:web | Andrea | Spine | 1 (one folder, fixtures, no Seam) | 01:50, 03:20, 03:35 | none |
 | #9 | Diapositivas del pitch · Spine | lane:pitch | Andrea | Spine | 2 (2+ files, content from 05-pitch and research) | 00:00-01:35, 03:50-04:45 | none |
-| #10 | API: ofertas, candidata y candidaturas reales · Depth | lane:api | Javier | Depth | 2 (Real producer of 3 Contracts) | 01:50, 03:20, 03:35 | none |
+| #10 | API: ofertas, candidata y candidaturas reales · Depth | lane:api | Alfonso | Depth | 2 (Real producer of 3 Contracts) | 01:50, 03:20, 03:35 | none |
 | #11 | Documento de uso de IA · Depth | lane:pitch | Alfonso | Depth | 1 (one file, no Seam) | R4.2, R13.1 | none |
 | #12 | Pieza de marketing · Depth | lane:pitch | Alba | Depth | 2 (asset + copy, 2+ files) | R5.1, R5.2 | none |
 
