@@ -1,6 +1,6 @@
 import type { ComponentType } from "react"
 import { createBrowserRouter, type RouteObject } from "react-router"
-import { Briefcase, FileCheck, Home, LayoutDashboard, List, MapPin, Palette, PlusCircle, Settings, type LucideIcon } from "lucide-react"
+import { Briefcase, LayoutDashboard, List, MapPin, Palette, Settings, type LucideIcon } from "lucide-react"
 import { MessageSquare } from "lucide-react" // module:llm
 import features from "@features"
 import { ErrorBoundary } from "@/components/common/ErrorBoundary"
@@ -23,12 +23,13 @@ export type ScreenRoute = {
 // module:web
 // One entry per screen. Later issues fill the pages under web/src/screens/<id>/pages/; they never edit this list.
 export const screenRoutes: ScreenRoute[] = [
-  { id: "home", path: "/", layout: "app", nav: { label: "Inicio", icon: Home }, lazy: () => import("@/screens/home/pages/HomePage") },
-  { id: "offers", path: "/ofertas", layout: "app", nav: { label: "Ofertas", icon: Briefcase }, lazy: () => import("@/screens/offers/pages/OffersPage") },
+  // Demo: the candidate's home is the offers list ("Hola, Pilar" + offers).
+  { id: "offers", path: "/", layout: "app", nav: { label: "Ofertas", icon: Briefcase }, lazy: () => import("@/screens/offers/pages/OffersPage") },
+  { id: "offers-alias", path: "/ofertas", layout: "app", lazy: () => import("@/screens/offers/pages/OffersPage") },
   { id: "workspace", path: "/ofertas/:id", layout: "app", lazy: () => import("@/screens/workspace/pages/WorkspacePage") },
   { id: "practice", path: "/ofertas/:id/entrevista", layout: "app", lazy: () => import("@/screens/practice/pages/PracticePage") },
-  { id: "applications", path: "/candidaturas", layout: "app", nav: { label: "Candidaturas", icon: FileCheck }, lazy: () => import("@/screens/applications/pages/ApplicationsPage") },
-  { id: "publish", path: "/publicar", layout: "app", nav: { label: "Publicar oferta", icon: PlusCircle }, lazy: () => import("@/screens/publish/pages/PublishPage") },
+  { id: "applications", path: "/candidaturas", layout: "app", lazy: () => import("@/screens/applications/pages/ApplicationsPage") },
+  { id: "publish", path: "/publicar", layout: "app", lazy: () => import("@/screens/publish/pages/PublishPage") },
   { id: "landing", path: "/welcome", featureId: "landing", layout: "marketing", lazy: () => import("@/screens/landing/pages/LandingPage") },
   { id: "login", path: "/login", featureId: "auth", layout: "marketing", lazy: () => import("@/screens/auth/pages/LoginPage") },
   { id: "signup", path: "/signup", featureId: "auth", layout: "marketing", lazy: () => import("@/screens/auth/pages/SignupPage") },
