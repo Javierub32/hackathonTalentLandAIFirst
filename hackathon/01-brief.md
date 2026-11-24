@@ -77,8 +77,9 @@ No official criteria or weights were published yet. Rows inferred from the chall
 | Criterion | Weight | Note |
 |---|---|---|
 | Real validation of the problem and the customer (evidence, data, contact with real users) | 25% | (inferred) from "mucha más importancia a la validación real de los casos" |
+| Marketing and pitch (go-to-market, pitch script, clarity, confidence) | 20% | (inferred) from deliverables 3 and 4; weight raised by the team (heard: Driver, 2026-11-24) |
+| Business model viability (canvas coherent: clientes, canales, costes, ingresos, aliados) | 15% | (inferred) from "más de negocio que tecnología" and the canvas deliverable |
 | Concrete, non-generic customer and segment (named institution, defined profile) | 15% | (inferred) from "nada genérico… un cliente concreto" |
-| Business model viability (canvas coherent: clientes, canales, costes, ingresos, aliados) | 20% | (inferred) from "más de negocio que tecnología" and the canvas deliverable |
-| Real social impact on a vulnerable group | 15% | (inferred) from challenge sheet: "resolver un problema social real", "Una IA que no deje a nadie atrás" |
-| Prototype and use of AI (Human + Artificial Intelligence working together) | 15% | (inferred) from deliverable 2 and "La Inteligencia Humana y la Inteligencia Artificial trabajando…" |
-| Marketing and pitch (go-to-market, script, clarity, confidence) | 10% | (inferred) from deliverables 3 and 4 |
+| Planning and roadmap (phases, milestones, how it scales after the hackathon) | 10% | (inferred) from "luego se hará roadmap y pitch"; added by the team (heard: Driver, 2026-11-24) |
+| Real social impact on a vulnerable group | 10% | (inferred) from challenge sheet: "resolver un problema social real", "Una IA que no deje a nadie atrás" |
+| Prototype and use of AI (Human + Artificial Intelligence working together) | 5% | (inferred) from deliverable 2; weight lowered by the team (heard: Driver, 2026-11-24) |
