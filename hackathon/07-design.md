@@ -1,5 +1,5 @@
 ---
-status: draft
+status: done
 ---
 
 # Design
@@ -9,8 +9,8 @@ status: draft
 - [x] 3 Compare live
 - [x] 4 Pick and tune
 - [x] 5 Check contrast
-- [ ] 6 Freeze
-- [ ] 7 Close
+- [x] 6 Freeze
+- [x] 7 Close
 
 ## Brief
 
