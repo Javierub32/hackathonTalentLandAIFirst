@@ -3,6 +3,8 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { Link, useParams } from "react-router"
 import { ArrowLeft, Volume2, RotateCcw, Camera, CameraOff, UserRound } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Etiqueta } from "@/components/brand/Etiqueta"
+import { Decoracion } from "@/components/brand/Decoracion"
 import { API_MODE, api } from "@/lib/api/client"
 import type { components } from "@/lib/api/schema"
 import { PracticeRecorder } from "../PracticeRecorder"
@@ -65,13 +67,13 @@ function Session({ offerId }: { offerId: number }) {
   return <div className="practice-call">
     <header className="call-heading">
       <Link className="call-back" to={`/ofertas/${offerId}`}><ArrowLeft aria-hidden /> Volver a la oferta</Link>
-      <div><span className="call-label">Tu siguiente paso</span><h1>Practica tu entrevista</h1></div>
+      <div><Etiqueta>Tu siguiente paso</Etiqueta><h1>Practica tu entrevista</h1></div>
       <p className="call-offer">{offer.data?.title ?? "Cargando oferta…"}</p>
     </header>
     {API_MODE === "fixtures" && <p className="call-notice" role="status">Demostración: preguntas, transcripción y comentarios de ejemplo. Usa el modo live para practicar con tu voz real.</p>}
     <div className={`call-body ${shownFeedback || finished ? "has-feedback" : ""}`}>
       <section className="call-stage" aria-label="Videollamada simulada con la entrevistadora IA">
-        <div className="stage-decoration" aria-hidden />
+        <Decoracion />
         <span className="interviewer-name">Entrevistadora IA · Simulación</span>
         <InterviewerPortrait />
         <div className="candidate-tile">
