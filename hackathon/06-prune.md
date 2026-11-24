@@ -7,7 +7,7 @@ status: draft
 - [x] 1 Propose
 - [x] 2 Confirm
 - [x] 3 Dry run
-- [ ] 4 Prune
+- [x] 4 Prune
 - [ ] 5 Close
 
 ## Modules
@@ -66,7 +66,7 @@ Note: `05-pitch.md` Not building lists "Voice interview (#4)". That item is the 
 
 ## Check result
 
-`make check`: <green / what was fixed>
+`make check`: green (ruff warn-only). Fixed one leftover outside the Prune plan, approved by the Driver (2026-11-24): with Feature `auth` off the auth routes and schemas leave the generated client, so `web/src/lib/session.tsx` now types its 3 auth calls and `SessionUser`/`UserUpdate` by hand (mirroring `backend/api/resources/auth/models.py`).
 
 ## Changes
 

@@ -2,11 +2,11 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 import { Navigate, Outlet, useLocation } from "react-router"
 import features from "@features"
 import { api, getToken, setToken } from "@/lib/api/client"
-import type { components } from "@/lib/api/schema"
 import { apiErrorMessage } from "@/lib/errors"
 
-export type SessionUser = components["schemas"]["UserPublic"]
-type UserUpdate = components["schemas"]["UserUpdate"]
+// Mirrors backend/api/resources/auth/models.py by hand: the auth schemas leave the generated client when Feature `auth` is off.
+export type SessionUser = { id: number; email: string; name: string; role: "user" | "admin"; preferences?: Record<string, unknown> }
+type UserUpdate = { name?: string | null; preferences?: Record<string, unknown> | null }
 
 export type Session = {
   user: SessionUser | null
@@ -21,6 +21,15 @@ export type Session = {
 }
 
 const USER_KEY = "session_user"
+
+type AuthResult<T> = Promise<{ data?: T; error?: unknown; response: Response }>
+type TokenPair = { access_token: string; user: SessionUser }
+/** Auth routes leave the generated schema when Feature `auth` is off, so these calls are typed by hand. */
+const authApi = api as unknown as {
+  GET(path: "/api/auth/me"): AuthResult<SessionUser>
+  POST(path: "/api/auth/login" | "/api/auth/signup", init: { body: unknown }): AuthResult<TokenPair>
+  PATCH(path: "/api/auth/me", init: { body: UserUpdate }): AuthResult<SessionUser>
+}
 
 function readUser(): SessionUser | null {
   try {
@@ -57,7 +66,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!getToken()) return
     let cancelled = false
-    api
+    authApi
       .GET("/api/auth/me")
       .then(({ data, response }) => {
         if (cancelled) return
@@ -77,7 +86,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
 
   const signIn = useCallback<Session["signIn"]>(
     async (email, password) => {
-      const { data, error } = await api.POST("/api/auth/login", { body: { email, password } })
+      const { data, error } = await authApi.POST("/api/auth/login", { body: { email, password } })
       if (!data) throw new Error(apiErrorMessage(error, "Invalid email or password"))
       store(data.access_token, data.user)
     },
@@ -86,7 +95,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
 
   const signUp = useCallback<Session["signUp"]>(
     async (body) => {
-      const { data, error } = await api.POST("/api/auth/signup", { body })
+      const { data, error } = await authApi.POST("/api/auth/signup", { body })
       if (!data) throw new Error(apiErrorMessage(error, "Could not create the account"))
       store(data.access_token, data.user)
     },
@@ -97,7 +106,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
 
   const update = useCallback<Session["update"]>(
     async (changes) => {
-      const { data, error } = await api.PATCH("/api/auth/me", { body: changes })
+      const { data, error } = await authApi.PATCH("/api/auth/me", { body: changes })
       if (!data) throw new Error(apiErrorMessage(error, "Could not update the profile"))
       store(getToken(), data)
     },

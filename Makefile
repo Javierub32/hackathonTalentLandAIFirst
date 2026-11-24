@@ -126,25 +126,7 @@ rag-ingest: ## embed docs into pgvector — run after adding documents to ingest
 	docker compose exec backend python -m backend.llm.rag ingest
 # <<< module:llm
 
-# >>> module:data
-# --- data ---
-.PHONY: data-run eda
-data-run: ## run a data pipeline: run= — run to produce reports and models
-	docker compose exec backend python -m backend.data run $(run)
-eda: ## explore a dataset with skrub TableReport: CSV= — run before choosing a pipeline
-	@test -n "$(CSV)" || { echo "usage: make eda CSV=<path>"; exit 2; }
-	docker compose exec backend python -m backend.data eda $(CSV)
-# <<< module:data
 
-# >>> module:mobile
-# --- mobile ---
-.PHONY: mobile mobile-tunnel
-mobile: ## start Expo on the LAN — run to test on a phone on the same wifi
-	$(PYTHON) scripts/mobile.py
-
-mobile-tunnel: ## start Expo through a tunnel — run when the phone is on another network
-	$(PYTHON) scripts/mobile.py --tunnel
-# <<< module:mobile
 
 # --- pitch (never pruned) ---
 .PHONY: slides slides-pdf

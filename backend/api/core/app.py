@@ -64,7 +64,6 @@ def health() -> dict[str, str]:
 from backend.api.resources._example.router import router as example_router  # module:api
 from backend.api.resources.auth.router import router as auth_router  # module:api
 from backend.api.resources.chat.router import router as chat_router  # module:llm
-from backend.api.resources.data_reports.router import router as data_reports_router  # module:data
 from backend.api.resources.files.router import router as files_router  # module:api
 from backend.api.resources.items.router import router as items_router  # module:api
 from backend.api.resources.rag.router import router as rag_router  # module:llm
@@ -88,10 +87,6 @@ if FEATURES.get("rag"):
 if FEATURES.get("voice"):
     app.include_router(transcribe_router)
 # <<< module:llm
-# >>> module:data
-if FEATURES.get("reports"):
-    app.include_router(data_reports_router)
-# <<< module:data
 # <<< routers
 
 # Global exception handler: LLMError -> 503 {detail}. Removed with the llm Module.

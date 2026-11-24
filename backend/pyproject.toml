@@ -17,22 +17,6 @@ dependencies = [
 
 [project.optional-dependencies]
 llm = ["openai", "anthropic", "pypdf", "pgvector"]
-data = [
-    "pandas>=3",
-    "scikit-learn",
-    "skrub~=0.11",
-    "statsforecast",
-    "openpyxl",
-    "joblib",
-]
-vision = [
-    "torch",
-    # Explicit so it comes from the same CPU index as torch (the PyPI build mismatches: `torchvision::nms does not exist`).
-    "torchvision",
-    "open_clip_torch",
-    "transformers",
-    "opencv-python-headless",
-]
 
 [dependency-groups]
 dev = ["ruff"]
