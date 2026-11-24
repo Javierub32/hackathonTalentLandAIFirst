@@ -9,7 +9,7 @@ const people = Array.from({ length: props.total }, (_, i) => i)
     <Persona
       v-for="i in people"
       :key="i"
-      :size="24"
+      :size="22"
       :lit="lit && i < highlight"
       :style="{ transitionDelay: lit ? `${i * 12}ms` : '0ms' }"
     />
@@ -17,7 +17,7 @@ const people = Array.from({ length: props.total }, (_, i) => i)
 </template>
 
 <style scoped>
-.grid-people { display: grid; grid-template-columns: repeat(20, 24px); gap: 5px 3px; }
+.grid-people { display: grid; grid-template-columns: repeat(25, 22px); gap: 3px 5px; }
 .grid-people :deep(.persona) { transition-delay: inherit; }
 @media (prefers-reduced-motion: reduce) { .grid-people :deep(.persona) { transition: none; } }
 </style>

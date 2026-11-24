@@ -37,17 +37,15 @@ Pilar tiene 53 años, 20 años de experiencia en administración y comercio, y l
 
 <div class="multitud">
   <div class="multitud-gente">
-    <div v-if="$clicks < 1" class="una"><Persona :size="140" lit /></div>
-    <PersonGrid v-else :highlight="57" :lit="$clicks >= 2" />
+    <PersonGrid :highlight="57" :lit="$clicks >= 1" />
+    <div class="leyenda">Cada figura, 1 de cada 100 personas en paro en Andalucía.</div>
   </div>
   <div class="multitud-cifras">
-    <div v-click="2"><Cifra valor="305.742">personas en paro en Andalucía tienen <strong>más de 45 años</strong>: el 57 %</Cifra></div>
-    <div v-click="3"><Cifra valor="55 %">de los mayores de 50 lleva <strong>más de un año</strong> buscando</Cifra></div>
-    <div v-click="4"><Cifra valor="90 %" tono="alerta">cree que su currículum <strong>ni llega a una persona</strong></Cifra></div>
+    <div v-click="1"><Dato valor="57 %" :pct="57" :lleno="$clicks >= 1">de las personas en paro en Andalucía tienen <strong>más de 45 años</strong>: 305.742</Dato></div>
+    <div v-click="2"><Dato valor="55 %" :pct="55" :lleno="$clicks >= 2">de los mayores de 50 lleva <strong>más de un año</strong> buscando</Dato></div>
+    <div v-click="3"><Dato valor="90 %" :pct="90" :lleno="$clicks >= 3" tono="alerta">cree que su CV <strong>ni llega a una persona</strong></Dato></div>
   </div>
 </div>
-
-<div v-click="1" class="sr-cuenta">Cada figura, 1 de cada 100 personas en paro.</div>
 
 <Fuente>Andalucía Informa / elDiario (jun. 2026, 305.742 de 536.523) · Fundación Adecco, «Tu edad es un tesoro» 2025 (55,4 %) y 2024 (90 %, 600 personas).</Fuente>
 
@@ -61,28 +59,15 @@ No es un caso aislado: en Andalucía, el 57% de las personas en paro tiene más 
 
 # ¿Por qué no la llaman?
 
-<div class="flujo">
-  <div class="paso">
-    <div class="caja">CV de Pilar</div>
-    <small>20 años de experiencia, contados con sus palabras</small>
-  </div>
-  <div class="flecha">→</div>
-  <div class="paso">
-    <div class="caja filtro">Filtro automático<br><small>(ATS)</small></div>
-    <small>Un programa busca las palabras exactas de la oferta</small>
-  </div>
-  <div class="flecha">→</div>
-  <div class="paso">
-    <div class="caja persona-decide" :class="{ tachada: $clicks >= 1 }">Persona que decide</div>
-    <small v-click="1" class="descartado">✗ Descartado antes de que nadie lo lea</small>
-  </div>
+<FiltroCvs :paso="$clicks" />
+
+<div v-click="1" class="nota-grande">
+  Un programa busca las <strong>palabras exactas</strong> de la oferta. Pilar tiene la experiencia, pero no lo dice con esas palabras: <strong class="rojo">descartada</strong>.
 </div>
 
-<div v-click="2" class="nota-grande">
-  El <strong>42 %</strong> de las empresas ya valora filtrar currículums de forma automática. Y cada vez más entrevistas las hace una IA.
-</div>
+<div v-click="2" class="nota-pequena">Y el <strong>42 %</strong> de las empresas ya valora filtrar currículums de forma automática.</div>
 
-<Fuente>ManpowerGroup, Encuesta de Proyección de Empleo T3 2026 (vía Que.es, ago. 2026).</Fuente>
+<Fuente>Ilustración. Dato: ManpowerGroup, Encuesta de Proyección de Empleo T3 2026 (vía Que.es, ago. 2026).</Fuente>
 
 <!--
 ¿Por qué? Muchas empresas usan un filtro automático, llamado ATS, que lee el currículum antes que nadie y descarta el que no encaja con las palabras de la oferta. Y cada vez más entrevistas las hace una IA.
@@ -126,19 +111,19 @@ Y los números lo confirman: casi todos creen que su edad les quita oportunidade
 
 <p class="antetitulo">En qué nos apoyamos · 3. Lo que dice la investigación</p>
 
-# Hay ofertas, hay ayudas y hay quien paga
+# Todo está ahí… menos la preparación
 
 <div class="evidencias">
-  <div v-click><Cifra valor="78 %">de las empresas españolas <strong>no encuentra</strong> a quién contratar</Cifra></div>
-  <div v-click><Cifra valor="18.000 €">de ayuda <strong>Emplea-T</strong> (Junta) por contratar indefinida a una persona de más de 45</Cifra></div>
-  <div v-click><Cifra valor="9,99 M€">del Ayuntamiento de Málaga (IMFE, Aquileo+, 85 % fondos europeos) para personas en paro vulnerables</Cifra></div>
-  <div v-click><Cifra valor="29.000" tono="alerta">ofertas para mayores de 45 en Empléate (SEPE)… pero <strong>nadie prepara</strong> a la persona para cada una</Cifra></div>
+  <div class="evi"><div class="evi-tit">Hay ofertas</div><div class="evi-num">78 %</div><div>de empresas no encuentra a quién contratar</div></div>
+  <div class="evi"><div class="evi-tit">Hay ayudas</div><div class="evi-num">18.000 €</div><div>por contratar a una persona de +45 (Emplea-T)</div></div>
+  <div class="evi"><div class="evi-tit">Hay quien paga</div><div class="evi-num">9,99 M€</div><div>del IMFE para personas en paro vulnerables</div></div>
+  <div v-click class="evi falta"><div class="evi-tit">Lo que falta</div><div class="evi-num">Nadie</div><div>prepara a la persona <strong>para cada oferta</strong></div></div>
 </div>
 
-<Fuente>ManpowerGroup, Desajuste de Talento 2026 · Junta de Andalucía, Emplea-T 2026, Línea 1 (BOJA 2026/60) · El Español, Aquileo+ (abr. 2026) · EPALE, Empléate.</Fuente>
+<Fuente>ManpowerGroup, Desajuste de Talento 2026 · Junta de Andalucía, Emplea-T 2026, Línea 1 (BOJA 2026/60) · El Español, Aquileo+ (abr. 2026) · EPALE (Empléate) · Valencia Plaza (Labora).</Fuente>
 
 <!--
-Y la investigación nos dice tres cosas: las empresas no encuentran a quién contratar, la Junta paga por contratar a mayores de 45, y el Ayuntamiento ya tiene orientadores y fondos europeos para esto. Ofertas hay de sobra; lo que falta es preparar a la persona para cada una.
+La investigación nos dice tres cosas: las empresas no encuentran a quién contratar, la Junta paga por contratar a mayores de 45, y el Ayuntamiento ya tiene orientadores y fondos europeos para esto. Lo que falta es preparar a la persona para cada oferta.
 -->
 
 ---
@@ -165,24 +150,6 @@ class: text-center
 
 <!--
 Por eso hemos creado Al curro: tu experiencia, preparada para cada oferta. La IA prepara; la persona y su orientadora deciden.
--->
-
----
-
-<!-- 02:00 · Puente a la demo (R14.1) -->
-
-# Vamos a verlo
-
-<div class="pasos-demo">
-  <div class="pd"><span class="num">1</span><div>Pilar <strong>elige una oferta</strong> real de Málaga</div></div>
-  <div class="pd"><span class="num">2</span><div>Ve cómo la <strong>lee el filtro</strong>: <span class="mal">5 de 13 · 38 %</span></div></div>
-  <div class="pd"><span class="num">3</span><div>La IA <strong>adapta su CV</strong>, sin inventar: <span class="bien">11 de 13 · 85 %</span></div></div>
-  <div class="pd"><span class="num">4</span><div><strong>Practica la entrevista</strong> de ese puesto</div></div>
-  <div class="pd"><span class="num">5</span><div>Su orientadora revisa y <strong>envía la candidatura</strong></div></div>
-</div>
-
-<!--
-Pasamos a la aplicación. (Cambiar a la web en directo.)
 -->
 
 ---
@@ -280,6 +247,24 @@ class: text-center
 
 <!--
 Buscamos un piloto con el IMFE y vuestro apoyo. Al curro: que su experiencia vuelva a contar.
+-->
+
+---
+
+<!-- 02:00 · Puente a la demo (R14.1) -->
+
+# Vamos a verlo
+
+<div class="pasos-demo">
+  <div class="pd"><span class="num">1</span><div>Pilar <strong>elige una oferta</strong> real de Málaga</div></div>
+  <div class="pd"><span class="num">2</span><div>Ve cómo la <strong>lee el filtro</strong>: <span class="mal">5 de 13 · 38 %</span></div></div>
+  <div class="pd"><span class="num">3</span><div>La IA <strong>adapta su CV</strong>, sin inventar: <span class="bien">11 de 13 · 85 %</span></div></div>
+  <div class="pd"><span class="num">4</span><div><strong>Practica la entrevista</strong> de ese puesto</div></div>
+  <div class="pd"><span class="num">5</span><div>Su orientadora revisa y <strong>envía la candidatura</strong></div></div>
+</div>
+
+<!--
+Pasamos a la aplicación. (Cambiar a la web en directo.)
 -->
 
 ---

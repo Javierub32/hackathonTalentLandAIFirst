@@ -114,3 +114,24 @@
 .cierre { font-family: var(--font-display-family); font-size: 2.6rem; line-height: 1.2; margin: 1.6rem 0 1rem; }
 .peticion { font-size: 1.35rem; margin: 0; }
 .marca-pie { font-family: var(--font-display-family); font-weight: 700; font-size: 1.6rem; color: var(--primary); margin-top: 1.4rem; }
+
+/* v2: multitud, filtro, evidencias */
+.multitud-gente { flex-direction: column; gap: 0.8rem; }
+.leyenda { font-size: 0.85rem; color: var(--muted-foreground); }
+.multitud-cifras { gap: 0.9rem; }
+.nota-grande .rojo { color: var(--destructive); font-size: inherit; }
+.nota-grande { margin-top: 1.6rem; font-size: 1.2rem; }
+.nota-pequena { text-align: center; margin-top: 0.6rem; font-size: 1.05rem; }
+.nota-pequena strong { color: var(--primary); }
+.evidencias { grid-template-columns: repeat(4, 1fr); gap: 1.1rem; margin-top: 1.4rem; }
+.evi { background: var(--card); border: 1px solid var(--border); border-top: 8px solid var(--primary); border-radius: var(--radius); padding: 1rem 1.1rem 1.2rem; font-size: 1.05rem; line-height: 1.35; }
+.evi-tit { font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.85rem; color: var(--primary); }
+.evi-num { font-family: var(--font-display-family); font-weight: 800; font-size: 2.5rem; line-height: 1.1; margin: 0.4rem 0 0.5rem; white-space: nowrap; color: var(--foreground); }
+.evi.falta { border-top-color: var(--chart-4); background: color-mix(in oklch, var(--chart-4) 10%, var(--card)); }
+.evi.falta .evi-tit, .evi.falta .evi-num { color: var(--chart-4); }
+
+.multitud { grid-template-columns: 1fr; gap: 1.2rem; justify-items: center; }
+.multitud-gente { min-height: 0; min-width: 0; }
+.multitud-cifras { flex-direction: row; gap: 1.2rem; width: 100%; }
+.multitud-cifras > div { flex: 1; }
+.slidev-layout .multitud + .slidev-vclick-target, .multitud ~ .fuente { }
