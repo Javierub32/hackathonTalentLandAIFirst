@@ -5,7 +5,7 @@ status: draft
 # Contracts
 
 - [x] 1 Ask
-- [ ] 2 Walk the Beats
+- [x] 2 Walk the Beats
 - [ ] 3 Confirm the Seams
 - [ ] 4 Stub
 - [ ] 5 Close
@@ -24,11 +24,19 @@ Kind: HTTP, Python function, Data/file, Event, New piece.
 
 | Seam | Kind | Producer Lane | Consumer Lane(s) | Interface (path) | Stub | Beats |
 |---|---|---|---|---|---|---|
-| <seam> | <kind> | <lane> | <lane, lane> | <path> | <what the stub returns> | <Beat 00:00> |
+| Ofertas | HTTP | api | web, llm | `backend/api/resources/offers/` (`GET/POST /api/offers`, `GET /api/offers/{id}`) | 11 real IMFE offers (code, title, employer description, place, contract, schedule, salary, `requirements[]`, `functions[]`, `source_url`, `hiring_aid` note on permanent ones); POST stores a company-posted offer | 01:50, 03:35 |
+| Candidata | HTTP | api | web, llm | `backend/api/resources/candidates/` (`GET /api/candidates/{id}`) | Pilar, 53: summary, 4 jobs in retail and admin with real-sounding tasks, ESO, skills, basic English; `cv_text` as she wrote it | 02:05, 02:25, 02:50 |
+| Preparación (filtro + CV) | HTTP | llm | web | `backend/api/resources/prep/` (`POST /api/prep/filter`, `POST /api/prep/adapt-cv`, body `{offer_id, candidate_id}`) | filter: 5 of 13 requirements found (38%), each `{text, found, evidence}`; adapt-cv: rewritten CV, 11 of 13 (85%), each change linked to a real job of Pilar, `not_covered` = high English, perfume knowledge | 02:05, 02:25 |
+| Entrevista | HTTP | llm | web | `backend/api/resources/interview/` (`POST /api/interview/questions` `{offer_id, candidate_id}`, `POST /api/interview/feedback` `{offer_id, question, answer}`) | 2 questions about the perfumería offer; feedback `{good[], improve[], tip}` in kind plain Spanish | 02:50 |
+| Voz | HTTP (existing) | llm | web | `backend/api/resources/transcribe/` (`POST /api/llm/transcribe`, unchanged); TTS in browser | `web/src/mocks/voice.ts` returns a sample answer of Pilar | 02:50 |
+| Candidaturas | HTTP | api | web | `backend/api/resources/applications/` (`GET/POST /api/applications`, `PATCH /api/applications/{id}`) | one draft application of Pilar to 2026/01198 with the adapted CV; status `borrador → revisada → enviada`, counsellor "Lucía Ortega (IMFE)" and a short note | 03:20 |
+
+`prep` and `interview` read offers and the candidate through the `offers` and `candidates` models (database session); the Ofertas and Candidata Contracts are their inputs.
 
 ## No Seam
 
-- <Beat 00:00>: <why it crosses no Lane>
+- 00:00, 00:20, 00:45, 01:05, 01:35: slides, `pitch` Lane only.
+- 03:50, 04:05, 04:30, 04:45: slides, `pitch` Lane only.
 
 ## Contract paths
 
