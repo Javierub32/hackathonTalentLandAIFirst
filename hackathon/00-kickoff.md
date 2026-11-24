@@ -5,7 +5,7 @@ status: draft
 # Kickoff
 
 - [x] 1 Set up the repo
-- [ ] 2 Ask the languages
+- [x] 2 Ask the languages
 - [ ] 3 Build the Team roster
 - [ ] 4 Invite the team
 - [ ] 5 Fill Event logistics
@@ -13,8 +13,8 @@ status: draft
 
 ## Languages
 
-- Event language: <language>
-- Driver chat language: <language>
+- Event language: español
+- Driver chat language: español
 
 ## Team roster
 
@@ -22,7 +22,12 @@ Tier: `strong` (Opus, Fable and equivalents) · `mid` (Sonnet) · `weak` (Haiku,
 
 | Name | GitHub user | Chat language | Agent + plan | Tier | Agent works in repo | Hours | Strengths | OS | GPU (model + VRAM / none) | RAM | Phone (Android / iOS / none) | Role |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| <name> | <user> | <language> | <agent, plan> | <strong / mid / weak> | <yes / no> | <hours> | <frontend, backend, data, design, pitch> | <os> | <gpu> | <ram> | <phone> | driver / teammate |
+| Alfonso Ramos | alraro | español | Claude Code, Claude Pro | mid | yes | ~7 (flexible) | backend, frontend (técnico) | Ubuntu | none (assumed) | 16 GB (approx.) | Android | driver |
+| Paula Fernández | Paaula21 | español | Codex, ChatGPT Pro | strong | yes | ~7 | backend, frontend (técnico) | Windows | unknown | 16 GB | Android (Samsung) | teammate |
+| Andrea | apr2004 | español | Gemini Plus + ChatGPT free | mid | unknown | ~7 | backend, frontend (técnico) | Windows | unknown | 16 GB (approx.) | iOS | teammate |
+| Marina Fernández | mafese3 | español | Codex, ChatGPT (shared with Javier) | mid | yes | ~7 | backend, frontend (técnico) | Windows | unknown | 16 GB | Android | teammate |
+| Javier Urbaneja | Javierub32 | español | Codex, ChatGPT (shared with Marina) | mid | yes | ~7 | backend, frontend (técnico) | Windows | unknown | 16 GB | Android | teammate |
+| Alba Cruz | albaalibaii | español | ChatGPT Pro | strong | unknown | ~7 | unknown | Windows | unknown | unknown | iOS (assumed) | teammate |
 
 ## Event logistics
 
