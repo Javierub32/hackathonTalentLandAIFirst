@@ -5,7 +5,7 @@ status: draft
 # Pitch
 
 - [x] 1 Show the ideas
-- [ ] 2 Devil's advocate
+- [x] 2 Devil's advocate
 - [ ] 3 Vote
 - [ ] 4 Identity and axes
 - [ ] 5 Presenter and demo length
@@ -17,10 +17,10 @@ status: draft
 
 | Idea | Main risk | Votes |
 |---|---|---|
-| #2 Puesto a puesto (top 1, 9.50, recommended: #1's idea with one demoable spine) | pending | |
-| #7 Rayos X del filtro (top 2, 9.20) | pending | |
-| #4 Entrevista por teléfono (top 3, 8.60) | pending | |
-| #1 Acompañante 45+ (5th, 7.20; team favourite) | pending | |
+| #2 Puesto a puesto (top 1, 9.50, recommended: #1's idea with one demoable spine) | Fake offers or a made-up "ATS score" kill credibility. Answer (Driver): seed 3-5 real Málaga offers from Empléate/IMFE by hand, citing source; we have no real ATS, so the score is our own transparent filter simulator (offer requirements covered by the CV + common ATS format rules), pitched as "closer to the filter", never "guaranteed to pass" | |
+| #7 Rayos X del filtro (top 2, 9.20) | A diagnosis alone is a thin product for IMFE to pay for. Driver: will not be picked; at most it is the first step of #2 | |
+| #4 Entrevista por teléfono (top 3, 8.60) | Live voice may fail on stage (public wifi, laptop mic). Driver: not a concern, will not be picked now | |
+| #1 Acompañante 45+ (5th, 7.20; team favourite) | Too wide to validate today: validation (25%) gets spread thin. Answer (Driver): validate only the core pain (filter rejects me, can't prepare interviews) with the 10+ survey; the final idea will be a mix of #1 and #2 | |
 
 Winner: <idea> (<tie-break or Driver's call, if any>). Kill-check: pass | fail.
 
