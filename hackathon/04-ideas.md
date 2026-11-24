@@ -7,7 +7,7 @@ status: draft
 - [x] 1 Collect the team's ideas
 - [x] 2 Widen the list
 - [x] 3 Kill-check
-- [ ] 4 Score
+- [x] 4 Score
 - [ ] 5 Review the ranking
 - [ ] 6 Close
 
@@ -126,10 +126,37 @@ Vetoed, loved, roster strength to show off.
 
 Scores 1 to 5 per Rubric criterion, each with a one-line reason below the table.
 
-| Rank | # | Idea | <criterion> (×weight) | Demo-ability | Total | Feasibility (new pieces) | Flag |
-|---|---|---|---|---|---|---|---|
+Total = weighted Rubric score (1 to 5, weights from `01-brief.md`) + Demo-ability (1 to 5); max 10. Feasibility counts pieces absent from `CATALOG.md`.
+
+| Rank | # | Idea | Validation (×25%) | Idea (×20%) | Marketing & pitch (×15%) | Concrete customer (×10%) | Business model (×10%) | Roadmap (×10%) | Prototype & AI (×10%) | Weighted | Demo-ability | Total | Feasibility (new pieces) | Flag |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | 2 | Puesto a puesto | 4 | 5 | 4 | 5 | 4 | 5 | 5 | 4.50 | 5 | 9.50 | 1-2: PDF/CV text extraction, ATS match scorer (offers seeded as fixtures) | ok |
+| 2 | 7 | Rayos X del filtro | 5 | 4 | 5 | 4 | 3 | 3 | 4 | 4.20 | 5 | 9.20 | 1-2: PDF/CV text extraction, ATS match scorer | ok |
+| 3 | 4 | Entrevista por teléfono | 4 | 3 | 4 | 3 | 3 | 3 | 5 | 3.60 | 5 | 8.60 | 0: voice (STT/TTS) and chat are in the catalog | ok |
+| 4 | 5 | Traductor de experiencia | 3 | 4 | 4 | 4 | 3 | 3 | 4 | 3.55 | 4 | 7.55 | 1-2: ESCO skills import, skills→sector mapping | ok |
+| 5 | 1 | Acompañante 45+ | 4 | 4 | 4 | 5 | 4 | 5 | 4 | 4.20 | 3 | 7.20 | 3+: PDF/CV text extraction, ATS match scorer, offer→candidate recommender | ok |
+| 6 | 8 | El entrevistador de la empresa | 2 | 4 | 4 | 3 | 3 | 3 | 4 | 3.20 | 4 | 7.20 | 1-2: company interview-guide upload, persona agent config | ok |
+| 7 | 6 | Contrata 45+ con ayuda | 3 | 3 | 3 | 3 | 4 | 3 | 3 | 3.10 | 4 | 7.10 | 1-2: aid-rules calculator, candidate matching | ok |
+| 8 | 3 | Copiloto del orientador | 3 | 4 | 3 | 5 | 5 | 4 | 3 | 3.70 | 3 | 6.70 | 1-2: PDF/CV text extraction, case-diagnosis view | ok |
+| 9 | 11 | Plan de 30 días por WhatsApp | 3 | 3 | 3 | 5 | 4 | 4 | 3 | 3.40 | 3 | 6.40 | 1-2: WhatsApp-style channel, daily scheduler | ok |
+| 10 | 12 | Ruta de reconversión | 3 | 3 | 3 | 5 | 4 | 3 | 3 | 3.30 | 3 | 6.30 | 1-2: Aquileo+ course catalogue, shortage-sector data | ok |
+| 11 | 9 | Mentores que ya lo lograron | 3 | 3 | 3 | 3 | 2 | 3 | 2 | 2.80 | 2 | 4.80 | 3+: mentor matching, scheduling, WhatsApp integration | ok |
+| 12 | 10 | Agente que busca por ti | 3 | 2 | 3 | 4 | 3 | 3 | 4 | 3.00 | 3 | 6.00 | 3+: offer-feed scraper, agent tool loop, per-offer CV tailoring | ⚠ |
 
 ### Reasons
+
+- #2: V: same evidence as #1 · I: one sharp loop answers the 'invisible filter' pain directly · M: the 38%→85% number sells itself · C: IMFE named · B: IMFE + featured offers for employers · R: training, mentors and employer aid are the next phases · P: AI rewrites, scores and interviews: core, not decoration · Demo: one linear flow with a visible before/after
+- #7: V: hits the best-sourced pain (90% believe the filter drops them) · I: education + fix, clear difference from generic simulators · M: 'see what the robot sees' is a strong hook · C: Andalucía Orienta/SAE or IMFE · B: diagnostic tool alone is a thin product · R: extends into #2's full loop · P: AI scoring and explanation are the core · Demo: red/green X-ray is instantly readable
+- #4: V: digital gap of 45+ sourced (Fundación Generation) · I: interview simulators exist; voice is the twist · M: very human and memorable on stage · C: payer less obvious (Andalucía Orienta entity, unnamed) · B: single-feature product is harder to sell · R: limited growth path alone · P: live voice AI is the core · Demo: talking to it live is the strongest moment
+- #5: V: hidden-skills pain inferred, not sourced · I: original angle on long careers · M: 'a waiter for 20 years = 14 skills' is quotable · C: IMFE fits · B: hard to sell alone · R: feeds reskilling (#12) · P: AI extraction is the core · Demo: narration → CV transformation is visual
+- #1: V: strong desk evidence (Adecco 90% believe the filter rejects them; Labora pilot) but no primary data yet · I: covers the whole journey; the width blurs the core · M: easy message ('del CV al empleo'), many features to explain · C: IMFE named, with ESF+ budget · B: IMFE pays + employers as second line · R: the add-ons (#4, #5, #6, #7) are a ready roadmap · P: AI does the core task in several places · Demo: six features in 3-5 min, hard to show end to end
+- #8: V: no evidence companies would share their interview guides · I: strong idea for prepared candidates · M: 'practise with Hotel X's interviewer' is striking · C: depends on employers we don't have · B: per-hire fee plausible but unproven · R: needs a company pilot · P: persona agent with voice · Demo: good, but faked company content
+- #6: V: employer pain sourced (78% struggle) but not our employers · I: the aid hook is real but it is the demand side, not the vulnerable group · M: '€18,000' is catchy but aimed at bosses · C: 'Málaga SMEs' is a category · B: SMEs could pay per post · R: needs a candidate pool first · P: RAG over BOJA, moderate AI · Demo: one clear number
+- #3: V: needs a counsellor interview to validate, hard to get today · I: multiplies a scarce resource, solid fit · M: message aimed at administrations, less emotional · C: IMFE T-Acompañamos counsellors are concrete · B: clearest B2G buyer · R: pilot with one IMFE office is natural · P: AI drafts, human decides, but the AI is less visible · Demo: a back-office dashboard is less striking
+- #11: V: digital-gap evidence sourced · I: solid but known (courses by chat) · M: 'in the app you already use' · C: IMFE Aquileo+ fits exactly · B: fits ESF+ training budgets · R: 30-day pilot is easy to plan · P: LLM tutor, moderate · Demo: a time-lapse is needed to show value
+- #12: V: shortage data sourced (hospitality 75%), reskilling need inferred · I: useful, close to existing orientation · M: concrete route is clear · C: IMFE Aquileo+ named · B: fits IMFE budgets · R: depends on course data · P: RAG over courses, moderate · Demo: a route on screen, not much interaction
+- #9: V: self-esteem loss sourced (65%) · I: human value strong, AI role thin · M: emotional story · C: foundation payers not verified · B: weak revenue · R: needs a mentor community first · P: AI only matches and briefs (R2 risk) · Demo: hard to show live
+- #10: V: overwhelm is plausible, not sourced · I: AIApply already does it (⚠) · M: convenient, but 'spam applications' risk · C: IMFE fits · B: B2C competitors are cheap · R: scraping is fragile · P: agentic AI is strong tech · Demo: notifications are hard to show in a pitch
 
 ### Overrides
 
