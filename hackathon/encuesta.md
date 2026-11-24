@@ -42,7 +42,7 @@ Versión para grupos de personas mayores (WhatsApp, asociaciones):
 
 Título: **Buscar trabajo con más de 45 años**
 
-Descripción: Somos un equipo del Hackathon IA First (Talent Land, Málaga). Queremos entender cómo es buscar trabajo con más de 45 años para crear una herramienta gratuita que ayude. Son 3 minutos. Es anónima: no pedimos nombre ni correo (solo al final, si tú quieres).
+Descripción: Somos un equipo del Hackathon IA First (Talent Land, Málaga). Queremos entender cómo es buscar trabajo con más de 45 años para crear una herramienta gratuita que ayude. Son 3 minutos. Es anónima: no pedimos nombre, correo ni ningún dato personal.
 
 **Sección 1 · Antes de empezar**
 
@@ -77,17 +77,13 @@ Texto: Imagina una web **gratuita, ofrecida por tu Ayuntamiento**. Eliges una of
 
 16. ¿La usarías? (obligatoria) → Sí, seguro · Probablemente sí · No lo sé · Probablemente no · No
 17. ¿Qué te sería más útil? (elige hasta 2) → Adaptar mi currículum a cada oferta · Practicar la entrevista de esa oferta · Ver ofertas de empresas que buscan gente de +45 · Formación para el puesto · Que un orientador/a lo revise conmigo
-18. ¿Qué es lo más difícil de buscar trabajo con más de 45 años? (abierta, opcional)
-
-**Sección 6 · Para terminar (opcional)**
-
-19. Si quieres probar la herramienta o hablar 10 minutos con nosotros, deja un correo o teléfono. Solo lo usaremos para eso y lo borraremos al acabar el hackathon. (opcional)
+18. ¿Qué es lo más difícil de buscar trabajo con más de 45 años? (abierta, opcional; ayuda: "Por favor, no escribas tu nombre ni datos que te identifiquen")
 
 **Sección final (menores de 45 o no buscan empleo)**
 
 Texto: ¡Gracias! Esta encuesta es para personas de 45 años o más que buscan trabajo. **¿Conoces a alguien así?** Reenvíale este mismo enlace: nos ayudas muchísimo.
 
-20. ¿Conoces a alguien de 45+ que esté buscando trabajo? → Sí, se la reenvío · Sí, pero no creo que la conteste · No
+19. ¿Conoces a alguien de 45+ que esté buscando trabajo? → Sí, se la reenvío · Sí, pero no creo que la conteste · No
 
 ### Qué valida cada pregunta
 
@@ -100,9 +96,8 @@ Texto: ¡Gracias! Esta encuesta es para personas de 45 años o más que buscan t
 | 9, 10, 12, 13 | No adaptan el CV, no conocen el filtro, no preparan entrevistas | Canvas PROBLEMAS 1-2, Beat 01:05 |
 | 11, 18 | Edadismo y lado emocional, citas reales | Canvas PROBLEMAS 3, citas del pitch |
 | 16, 17 | Interés en la solución y qué parte importa más | Canvas PROPUESTA DE VALOR, prioridad del prototipo |
-| 19 | Contactos para probar el prototipo (más evidencia) | R8 |
 
-Datos personales (R13): sin nombre ni correo obligatorios; la edad va en tramos; el contacto es opcional y se borra al terminar.
+Datos personales (R13): **anónima**. No recoge correo (`setCollectEmail(false)`), nombre, teléfono ni ningún dato identificativo; la edad va en tramos y la zona es amplia. Google no muestra al equipo la IP ni la cuenta de quien responde. Requisito de las comunidades donde se difunde (heard: Driver, 2026-11-24).
 
 ## Parte B · Contacto con organizaciones (último paso)
 
@@ -142,5 +137,5 @@ R15.2 pide **1 conversación real** con una organización del tipo cliente (no l
 
 - **N válido** = respuestas con edad 45+ **y** situación "en paro" o "buscando otro empleo". Contar a parte cuántas son de larga duración (>1 año).
 - Diapositiva del Beat 01:05: "Hemos hablado con **N** personas de más de 45 en paro" + 2 porcentajes (p. ej. % que no adapta el CV [P9] y % que no conocía el filtro [P10]) + % que la usaría [P16] + 2 citas literales [P18] + organización consultada (Parte B).
-- Exportar la hoja de respuestas (sin la columna de contacto) a `hackathon/sources/encuesta-resultados.csv` para el zip (R15.1).
+- Exportar la hoja de respuestas a `hackathon/sources/encuesta-resultados.csv` para el zip (R15.1).
 - Rellenar los `<pendiente encuesta>` de `hackathon/canvas.md`.

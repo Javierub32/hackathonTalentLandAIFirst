@@ -10,7 +10,7 @@ function crearEncuesta() {
     .setDescription(
       'Somos un equipo del Hackathon IA First (Talent Land, Málaga). Queremos entender cómo es ' +
       'buscar trabajo con más de 45 años para crear una herramienta gratuita que ayude. ' +
-      'Son 3 minutos. Es anónima: no pedimos nombre ni correo (solo al final, si tú quieres).'
+      'Son 3 minutos. Es anónima: no pedimos nombre, correo ni ningún dato personal.'
     )
     .setCollectEmail(false)
     .setProgressBar(true)
@@ -99,15 +99,10 @@ function crearEncuesta() {
       'Que un orientador/a lo revise conmigo'])
     .setValidation(FormApp.createCheckboxValidation().requireSelectAtMost(2).build());
   form.addParagraphTextItem()
-    .setTitle('¿Qué es lo más difícil de buscar trabajo con más de 45 años?');
+    .setTitle('¿Qué es lo más difícil de buscar trabajo con más de 45 años?')
+    .setHelpText('Por favor, no escribas tu nombre ni datos que te identifiquen.');
 
-  // Sección 6 · Contacto opcional
-  form.addPageBreakItem().setTitle('Para terminar (opcional)');
-  form.addTextItem()
-    .setTitle('Si quieres probar la herramienta o hablar 10 minutos con nosotros, deja un correo o teléfono.')
-    .setHelpText('Solo lo usaremos para eso y lo borraremos al acabar el hackathon.');
-
-  // Sección final · fuera del público objetivo; quien llega desde Contacto envía directamente
+  // Sección final · fuera del público objetivo; quien llega desde Nuestra idea envía directamente
   const pagFinal = form.addPageBreakItem()
     .setTitle('¡Gracias!')
     .setHelpText('Esta encuesta es para personas de 45 años o más que buscan trabajo. ¿Conoces a alguien así? ' +
