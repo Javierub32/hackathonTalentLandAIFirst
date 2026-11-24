@@ -5,7 +5,7 @@ status: draft
 # Design
 
 - [x] 1 Ask the four questions
-- [ ] 2 Recommend
+- [x] 2 Recommend
 - [ ] 3 Compare live
 - [ ] 4 Pick and tune
 - [ ] 5 Check contrast
