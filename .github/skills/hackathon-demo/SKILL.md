@@ -1,7 +1,6 @@
 ---
 name: hackathon-demo
 description: Rehearse the Demo script, record the backup video, prepare the deck and submission, and tag the `demo` build. Use when the Router reaches Phase 13/13 (Demo) at the Demo checkpoint, or when the team changes a Beat, the presenter or the recording.
-disable-model-invocation: true
 ---
 
 # Hackathon demo
