@@ -1,53 +1,201 @@
 {
   "components": {
     "schemas": {
-      "AskRequest": {
+      "AdaptedCv": {
         "properties": {
-          "question": {
-            "minLength": 1,
-            "title": "Question",
-            "type": "string"
-          }
-        },
-        "required": [
-          "question"
-        ],
-        "title": "AskRequest",
-        "type": "object"
-      },
-      "AskResponse": {
-        "properties": {
-          "answer": {
-            "title": "Answer",
+          "candidate_id": {
+            "title": "Candidate Id",
+            "type": "integer"
+          },
+          "changes": {
+            "items": {
+              "$ref": "#/components/schemas/CvChange"
+            },
+            "title": "Changes",
+            "type": "array"
+          },
+          "cv_text": {
+            "title": "Cv Text",
             "type": "string"
           },
-          "citations": {
+          "not_covered": {
+            "description": "Requirements left out because the candidate does not meet them",
             "items": {
-              "$ref": "#/components/schemas/Citation"
+              "type": "string"
             },
-            "title": "Citations",
+            "title": "Not Covered",
             "type": "array"
+          },
+          "note": {
+            "default": "",
+            "title": "Note",
+            "type": "string"
+          },
+          "offer_id": {
+            "title": "Offer Id",
+            "type": "integer"
+          },
+          "report": {
+            "$ref": "#/components/schemas/FilterReport",
+            "description": "The filter run again on the adapted CV"
           }
         },
         "required": [
-          "answer",
-          "citations"
+          "offer_id",
+          "candidate_id",
+          "cv_text",
+          "changes",
+          "report",
+          "not_covered"
         ],
-        "title": "AskResponse",
+        "title": "AdaptedCv",
         "type": "object"
       },
-      "Body_files_create": {
+      "ApplicationCreate": {
+        "description": "POST body.",
         "properties": {
-          "file": {
-            "contentMediaType": "application/octet-stream",
-            "title": "File",
+          "candidate_id": {
+            "title": "Candidate Id",
+            "type": "integer"
+          },
+          "counsellor_name": {
+            "default": "",
+            "title": "Counsellor Name",
             "type": "string"
+          },
+          "counsellor_note": {
+            "default": "",
+            "title": "Counsellor Note",
+            "type": "string"
+          },
+          "cv_text": {
+            "default": "",
+            "description": "The CV sent with the application (usually the adapted one)",
+            "title": "Cv Text",
+            "type": "string"
+          },
+          "offer_id": {
+            "title": "Offer Id",
+            "type": "integer"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ApplicationStatus",
+            "default": "borrador"
           }
         },
         "required": [
-          "file"
+          "candidate_id",
+          "offer_id"
         ],
-        "title": "Body_files_create",
+        "title": "ApplicationCreate",
+        "type": "object"
+      },
+      "ApplicationRead": {
+        "properties": {
+          "candidate_id": {
+            "title": "Candidate Id",
+            "type": "integer"
+          },
+          "counsellor_name": {
+            "default": "",
+            "title": "Counsellor Name",
+            "type": "string"
+          },
+          "counsellor_note": {
+            "default": "",
+            "title": "Counsellor Note",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "cv_text": {
+            "default": "",
+            "description": "The CV sent with the application (usually the adapted one)",
+            "title": "Cv Text",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "offer_id": {
+            "title": "Offer Id",
+            "type": "integer"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ApplicationStatus",
+            "default": "borrador"
+          }
+        },
+        "required": [
+          "candidate_id",
+          "offer_id",
+          "id",
+          "created_at"
+        ],
+        "title": "ApplicationRead",
+        "type": "object"
+      },
+      "ApplicationStatus": {
+        "enum": [
+          "borrador",
+          "revisada",
+          "enviada"
+        ],
+        "title": "ApplicationStatus",
+        "type": "string"
+      },
+      "ApplicationUpdate": {
+        "description": "PATCH body: the counsellor approves (`revisada`), then the candidate sends (`enviada`).",
+        "properties": {
+          "counsellor_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Counsellor Name"
+          },
+          "counsellor_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Counsellor Note"
+          },
+          "cv_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cv Text"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApplicationStatus"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "title": "ApplicationUpdate",
         "type": "object"
       },
       "Body_transcribe_transcribe": {
@@ -64,56 +212,96 @@
         "title": "Body_transcribe_transcribe",
         "type": "object"
       },
-      "Chart": {
+      "CandidateRead": {
+        "description": "Response shape.",
         "properties": {
-          "data": {
+          "age": {
+            "title": "Age",
+            "type": "integer"
+          },
+          "city": {
+            "default": "",
+            "title": "City",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "cv_text": {
+            "default": "",
+            "description": "The CV as she wrote it",
+            "title": "Cv Text",
+            "type": "string"
+          },
+          "education": {
+            "default": [],
             "items": {
-              "additionalProperties": true,
-              "type": "object"
+              "$ref": "#/components/schemas/Education"
             },
-            "title": "Data",
+            "title": "Education",
+            "type": "array"
+          },
+          "experience": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Job"
+            },
+            "title": "Experience",
             "type": "array"
           },
           "id": {
             "title": "Id",
-            "type": "string"
+            "type": "integer"
           },
-          "kind": {
-            "enum": [
-              "line",
-              "bar",
-              "area",
-              "scatter",
-              "pie"
-            ],
-            "title": "Kind",
-            "type": "string"
-          },
-          "series": {
+          "interests": {
+            "default": [],
+            "description": "What she says she likes or knows; usable as real facts",
             "items": {
-              "$ref": "#/components/schemas/Series"
+              "type": "string"
             },
-            "title": "Series",
+            "title": "Interests",
             "type": "array"
           },
-          "title": {
-            "title": "Title",
+          "languages": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Languages",
+            "type": "array"
+          },
+          "months_unemployed": {
+            "default": 0,
+            "title": "Months Unemployed",
+            "type": "integer"
+          },
+          "name": {
+            "title": "Name",
             "type": "string"
           },
-          "x": {
-            "title": "X",
+          "skills": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Skills",
+            "type": "array"
+          },
+          "summary": {
+            "default": "",
+            "title": "Summary",
             "type": "string"
           }
         },
         "required": [
+          "name",
+          "age",
           "id",
-          "kind",
-          "title",
-          "x",
-          "series",
-          "data"
+          "created_at"
         ],
-        "title": "Chart",
+        "title": "CandidateRead",
         "type": "object"
       },
       "ChatCitation": {
@@ -257,34 +445,30 @@
         "title": "ChatRequest",
         "type": "object"
       },
-      "Citation": {
+      "CvChange": {
         "properties": {
-          "document_id": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Document Id"
-          },
-          "snippet": {
-            "title": "Snippet",
+          "requirement": {
+            "description": "The offer requirement this change covers",
+            "title": "Requirement",
             "type": "string"
           },
-          "title": {
-            "title": "Title",
+          "source": {
+            "description": "The real fact of the candidate it comes from",
+            "title": "Source",
+            "type": "string"
+          },
+          "text": {
+            "description": "What the new CV says",
+            "title": "Text",
             "type": "string"
           }
         },
         "required": [
-          "document_id",
-          "title",
-          "snippet"
+          "requirement",
+          "text",
+          "source"
         ],
-        "title": "Citation",
+        "title": "CvChange",
         "type": "object"
       },
       "Delta": {
@@ -324,6 +508,30 @@
           }
         },
         "title": "Done",
+        "type": "object"
+      },
+      "Education": {
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Year"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "title": "Education",
         "type": "object"
       },
       "ExampleCreate": {
@@ -431,55 +639,71 @@
         "title": "ExampleUpdate",
         "type": "object"
       },
-      "FileRead": {
+      "FeedbackRequest": {
         "properties": {
-          "created_at": {
-            "format": "date-time",
-            "title": "Created At",
+          "answer": {
+            "description": "The transcribed answer",
+            "minLength": 1,
+            "title": "Answer",
             "type": "string"
           },
-          "id": {
-            "title": "Id",
+          "offer_id": {
+            "title": "Offer Id",
             "type": "integer"
           },
-          "mime": {
-            "title": "Mime",
-            "type": "string"
-          },
-          "name": {
-            "title": "Name",
-            "type": "string"
-          },
-          "owner_id": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Owner Id"
-          },
-          "size": {
-            "title": "Size",
-            "type": "integer"
-          },
-          "url": {
-            "title": "Url",
+          "question": {
+            "title": "Question",
             "type": "string"
           }
         },
         "required": [
-          "id",
-          "name",
-          "mime",
-          "size",
-          "owner_id",
-          "created_at",
-          "url"
+          "offer_id",
+          "question",
+          "answer"
         ],
-        "title": "FileRead",
+        "title": "FeedbackRequest",
+        "type": "object"
+      },
+      "FilterReport": {
+        "properties": {
+          "candidate_id": {
+            "title": "Candidate Id",
+            "type": "integer"
+          },
+          "found": {
+            "title": "Found",
+            "type": "integer"
+          },
+          "offer_id": {
+            "title": "Offer Id",
+            "type": "integer"
+          },
+          "percent": {
+            "description": "round(100 * found / total)",
+            "title": "Percent",
+            "type": "integer"
+          },
+          "requirements": {
+            "items": {
+              "$ref": "#/components/schemas/RequirementCheck"
+            },
+            "title": "Requirements",
+            "type": "array"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "offer_id",
+          "candidate_id",
+          "found",
+          "total",
+          "percent",
+          "requirements"
+        ],
+        "title": "FilterReport",
         "type": "object"
       },
       "HTTPValidationError": {
@@ -493,6 +717,96 @@
           }
         },
         "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "InterviewFeedback": {
+        "properties": {
+          "good": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Good",
+            "type": "array"
+          },
+          "improve": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Improve",
+            "type": "array"
+          },
+          "offer_id": {
+            "title": "Offer Id",
+            "type": "integer"
+          },
+          "tip": {
+            "title": "Tip",
+            "type": "string"
+          }
+        },
+        "required": [
+          "offer_id",
+          "good",
+          "improve",
+          "tip"
+        ],
+        "title": "InterviewFeedback",
+        "type": "object"
+      },
+      "InterviewQuestion": {
+        "properties": {
+          "checks": {
+            "description": "Which requirement of the offer the question checks",
+            "title": "Checks",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "checks"
+        ],
+        "title": "InterviewQuestion",
+        "type": "object"
+      },
+      "InterviewQuestions": {
+        "properties": {
+          "candidate_id": {
+            "title": "Candidate Id",
+            "type": "integer"
+          },
+          "intro": {
+            "description": "What the interviewer says first",
+            "title": "Intro",
+            "type": "string"
+          },
+          "offer_id": {
+            "title": "Offer Id",
+            "type": "integer"
+          },
+          "questions": {
+            "items": {
+              "$ref": "#/components/schemas/InterviewQuestion"
+            },
+            "title": "Questions",
+            "type": "array"
+          }
+        },
+        "required": [
+          "offer_id",
+          "candidate_id",
+          "intro",
+          "questions"
+        ],
+        "title": "InterviewQuestions",
         "type": "object"
       },
       "ItemCreate": {
@@ -717,146 +1031,297 @@
         "title": "ItemUpdate",
         "type": "object"
       },
-      "LoginRequest": {
+      "Job": {
         "properties": {
-          "email": {
-            "title": "Email",
+          "end_year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End Year"
+          },
+          "place": {
+            "description": "Employer described, no real company name",
+            "title": "Place",
             "type": "string"
           },
-          "password": {
-            "title": "Password",
+          "role": {
+            "title": "Role",
             "type": "string"
-          }
-        },
-        "required": [
-          "email",
-          "password"
-        ],
-        "title": "LoginRequest",
-        "type": "object"
-      },
-      "PublishRequest": {
-        "description": "Body of `POST /api/ws/publish`, for scripts and other processes.",
-        "properties": {
-          "data": {
-            "title": "Data"
           },
-          "topic": {
-            "title": "Topic",
-            "type": "string"
-          }
-        },
-        "required": [
-          "topic"
-        ],
-        "title": "PublishRequest",
-        "type": "object"
-      },
-      "Report": {
-        "properties": {
-          "charts": {
+          "start_year": {
+            "title": "Start Year",
+            "type": "integer"
+          },
+          "tasks": {
+            "default": [],
             "items": {
-              "$ref": "#/components/schemas/Chart"
+              "type": "string"
             },
-            "title": "Charts",
+            "title": "Tasks",
+            "type": "array"
+          }
+        },
+        "required": [
+          "role",
+          "place",
+          "start_year"
+        ],
+        "title": "Job",
+        "type": "object"
+      },
+      "OfferCreate": {
+        "description": "POST body: the company \"Publicar oferta\" form.",
+        "properties": {
+          "code": {
+            "default": "",
+            "description": "Source offer code, e.g. IMFE 2026/01198; empty for company-posted offers",
+            "title": "Code",
+            "type": "string"
+          },
+          "contract": {
+            "default": "",
+            "title": "Contract",
+            "type": "string"
+          },
+          "employer": {
+            "description": "Employer as the source shows it: a description, no invented name",
+            "title": "Employer",
+            "type": "string"
+          },
+          "functions": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Functions",
             "type": "array"
           },
-          "metrics": {
-            "additionalProperties": {
-              "type": "number"
-            },
-            "title": "Metrics",
-            "type": "object"
-          },
-          "model": {
-            "title": "Model",
-            "type": "string"
-          },
-          "pipeline": {
-            "title": "Pipeline",
-            "type": "string"
-          },
-          "run": {
-            "title": "Run",
-            "type": "string"
-          },
-          "summary": {
+          "hiring_aid": {
             "default": "",
-            "title": "Summary",
+            "description": "Hiring-aid note for the employer (Emplea-T); empty when none applies",
+            "title": "Hiring Aid",
+            "type": "string"
+          },
+          "location": {
+            "default": "",
+            "title": "Location",
+            "type": "string"
+          },
+          "published_on": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published On"
+          },
+          "requirements": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Requirements",
+            "type": "array"
+          },
+          "salary": {
+            "default": "",
+            "title": "Salary",
+            "type": "string"
+          },
+          "schedule": {
+            "default": "",
+            "title": "Schedule",
+            "type": "string"
+          },
+          "source": {
+            "default": "",
+            "description": "Who published it, e.g. 'IMFE \u00b7 Agencia Municipal de Colocaci\u00f3n'",
+            "title": "Source",
+            "type": "string"
+          },
+          "source_url": {
+            "default": "",
+            "title": "Source Url",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
             "type": "string"
           }
         },
         "required": [
-          "run",
-          "pipeline",
-          "model"
+          "title",
+          "employer"
         ],
-        "title": "Report",
+        "title": "OfferCreate",
         "type": "object"
       },
-      "Role": {
-        "enum": [
-          "admin",
-          "user"
-        ],
-        "title": "Role",
-        "type": "string"
-      },
-      "Series": {
+      "OfferRead": {
+        "description": "Response shape.",
         "properties": {
-          "key": {
-            "title": "Key",
+          "code": {
+            "default": "",
+            "description": "Source offer code, e.g. IMFE 2026/01198; empty for company-posted offers",
+            "title": "Code",
             "type": "string"
           },
-          "label": {
-            "title": "Label",
+          "contract": {
+            "default": "",
+            "title": "Contract",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "employer": {
+            "description": "Employer as the source shows it: a description, no invented name",
+            "title": "Employer",
+            "type": "string"
+          },
+          "functions": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Functions",
+            "type": "array"
+          },
+          "hiring_aid": {
+            "default": "",
+            "description": "Hiring-aid note for the employer (Emplea-T); empty when none applies",
+            "title": "Hiring Aid",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "location": {
+            "default": "",
+            "title": "Location",
+            "type": "string"
+          },
+          "published_on": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published On"
+          },
+          "requirements": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Requirements",
+            "type": "array"
+          },
+          "salary": {
+            "default": "",
+            "title": "Salary",
+            "type": "string"
+          },
+          "schedule": {
+            "default": "",
+            "title": "Schedule",
+            "type": "string"
+          },
+          "source": {
+            "default": "",
+            "description": "Who published it, e.g. 'IMFE \u00b7 Agencia Municipal de Colocaci\u00f3n'",
+            "title": "Source",
+            "type": "string"
+          },
+          "source_url": {
+            "default": "",
+            "title": "Source Url",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
             "type": "string"
           }
         },
         "required": [
-          "key",
-          "label"
+          "title",
+          "employer",
+          "id",
+          "created_at"
         ],
-        "title": "Series",
+        "title": "OfferRead",
         "type": "object"
       },
-      "ServerMessage": {
+      "PrepRequest": {
         "properties": {
-          "data": {
-            "title": "Data"
+          "candidate_id": {
+            "title": "Candidate Id",
+            "type": "integer"
           },
-          "topic": {
-            "title": "Topic",
-            "type": "string"
+          "offer_id": {
+            "title": "Offer Id",
+            "type": "integer"
           }
         },
         "required": [
-          "topic"
+          "offer_id",
+          "candidate_id"
         ],
-        "title": "ServerMessage",
+        "title": "PrepRequest",
         "type": "object"
       },
-      "SignupRequest": {
+      "QuestionsRequest": {
         "properties": {
-          "email": {
-            "title": "Email",
+          "candidate_id": {
+            "title": "Candidate Id",
+            "type": "integer"
+          },
+          "offer_id": {
+            "title": "Offer Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "offer_id",
+          "candidate_id"
+        ],
+        "title": "QuestionsRequest",
+        "type": "object"
+      },
+      "RequirementCheck": {
+        "properties": {
+          "evidence": {
+            "default": "",
+            "description": "Words of the CV where the filter finds it; empty if not found",
+            "title": "Evidence",
             "type": "string"
           },
-          "name": {
-            "title": "Name",
-            "type": "string"
+          "found": {
+            "title": "Found",
+            "type": "boolean"
           },
-          "password": {
-            "title": "Password",
+          "text": {
+            "description": "One requirement of the offer, in its own words",
+            "title": "Text",
             "type": "string"
           }
         },
         "required": [
-          "email",
-          "password",
-          "name"
+          "text",
+          "found"
         ],
-        "title": "SignupRequest",
+        "title": "RequirementCheck",
         "type": "object"
       },
       "SpeakRequest": {
@@ -888,28 +1353,6 @@
         "title": "Stop",
         "type": "object"
       },
-      "TokenResponse": {
-        "properties": {
-          "access_token": {
-            "title": "Access Token",
-            "type": "string"
-          },
-          "token_type": {
-            "default": "bearer",
-            "title": "Token Type",
-            "type": "string"
-          },
-          "user": {
-            "$ref": "#/components/schemas/UserPublic"
-          }
-        },
-        "required": [
-          "access_token",
-          "user"
-        ],
-        "title": "TokenResponse",
-        "type": "object"
-      },
       "TranscribeResponse": {
         "properties": {
           "text": {
@@ -921,68 +1364,6 @@
           "text"
         ],
         "title": "TranscribeResponse",
-        "type": "object"
-      },
-      "UserPublic": {
-        "properties": {
-          "email": {
-            "title": "Email",
-            "type": "string"
-          },
-          "id": {
-            "title": "Id",
-            "type": "integer"
-          },
-          "name": {
-            "title": "Name",
-            "type": "string"
-          },
-          "preferences": {
-            "additionalProperties": true,
-            "default": {},
-            "title": "Preferences",
-            "type": "object"
-          },
-          "role": {
-            "$ref": "#/components/schemas/Role"
-          }
-        },
-        "required": [
-          "id",
-          "email",
-          "name",
-          "role"
-        ],
-        "title": "UserPublic",
-        "type": "object"
-      },
-      "UserUpdate": {
-        "properties": {
-          "name": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Name"
-          },
-          "preferences": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Preferences"
-          }
-        },
-        "title": "UserUpdate",
         "type": "object"
       },
       "ValidationError": {
@@ -1228,275 +1609,81 @@
         ]
       }
     },
-    "/api/auth/login": {
-      "post": {
-        "operationId": "auth_login",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TokenResponse"
-                }
-              }
-            },
-            "description": "Successful Response"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            },
-            "description": "Validation Error"
-          }
-        },
-        "summary": "Login",
-        "tags": [
-          "auth"
-        ]
-      }
-    },
-    "/api/auth/me": {
+    "/api/applications": {
       "get": {
-        "operationId": "auth_me",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserPublic"
-                }
-              }
-            },
-            "description": "Successful Response"
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "summary": "Me",
-        "tags": [
-          "auth"
-        ]
-      },
-      "patch": {
-        "operationId": "auth_update_me",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserUpdate"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserPublic"
-                }
-              }
-            },
-            "description": "Successful Response"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            },
-            "description": "Validation Error"
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "summary": "Update Me",
-        "tags": [
-          "auth"
-        ]
-      }
-    },
-    "/api/auth/signup": {
-      "post": {
-        "operationId": "auth_signup",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SignupRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TokenResponse"
-                }
-              }
-            },
-            "description": "Successful Response"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            },
-            "description": "Validation Error"
-          }
-        },
-        "summary": "Signup",
-        "tags": [
-          "auth"
-        ]
-      }
-    },
-    "/api/data/reports": {
-      "get": {
-        "description": "Runs that have a report (outputs/<run>/report.json), for the dashboard's run picker.",
-        "operationId": "data_reports_list",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "type": "string"
-                  },
-                  "title": "Response Data Reports List",
-                  "type": "array"
-                }
-              }
-            },
-            "description": "Successful Response"
-          }
-        },
-        "summary": "List",
-        "tags": [
-          "data_reports"
-        ]
-      }
-    },
-    "/api/data/reports/{run}": {
-      "get": {
-        "description": "Serve the committed report.json of a run (read-only; no live training).",
-        "operationId": "data_reports_get",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "run",
-            "required": true,
-            "schema": {
-              "title": "Run",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Report"
-                }
-              }
-            },
-            "description": "Successful Response"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            },
-            "description": "Validation Error"
-          }
-        },
-        "summary": "Get",
-        "tags": [
-          "data_reports"
-        ]
-      }
-    },
-    "/api/files": {
-      "get": {
-        "operationId": "files_list",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/FileRead"
-                  },
-                  "title": "Response Files List",
-                  "type": "array"
-                }
-              }
-            },
-            "description": "Successful Response"
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "summary": "List",
-        "tags": [
-          "files"
-        ]
-      },
-      "post": {
-        "operationId": "files_create",
+        "operationId": "applications_list",
         "parameters": [
           {
             "in": "query",
-            "name": "ingest",
+            "name": "candidate_id",
             "required": false,
             "schema": {
-              "default": false,
-              "title": "Ingest",
-              "type": "boolean"
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Candidate Id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offer_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Offer Id"
             }
           }
         ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ApplicationRead"
+                  },
+                  "title": "Response Applications List",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List",
+        "tags": [
+          "applications"
+        ]
+      },
+      "post": {
+        "operationId": "applications_create",
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Body_files_create"
+                "$ref": "#/components/schemas/ApplicationCreate"
               }
             }
           },
@@ -1507,7 +1694,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FileRead"
+                  "$ref": "#/components/schemas/ApplicationRead"
                 }
               }
             },
@@ -1524,65 +1711,22 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "Create",
         "tags": [
-          "files"
+          "applications"
         ]
       }
     },
-    "/api/files/{file_id}": {
-      "delete": {
-        "operationId": "files_delete",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "file_id",
-            "required": true,
-            "schema": {
-              "title": "File Id",
-              "type": "integer"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Successful Response"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            },
-            "description": "Validation Error"
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "summary": "Delete",
-        "tags": [
-          "files"
-        ]
-      },
+    "/api/applications/{application_id}": {
       "get": {
-        "operationId": "files_get",
+        "operationId": "applications_get",
         "parameters": [
           {
             "in": "path",
-            "name": "file_id",
+            "name": "application_id",
             "required": true,
             "schema": {
-              "title": "File Id",
+              "title": "Application Id",
               "type": "integer"
             }
           }
@@ -1592,7 +1736,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FileRead"
+                  "$ref": "#/components/schemas/ApplicationRead"
                 }
               }
             },
@@ -1609,33 +1753,43 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "Get",
         "tags": [
-          "files"
+          "applications"
         ]
-      }
-    },
-    "/api/files/{file_id}/raw": {
-      "get": {
-        "operationId": "files_raw",
+      },
+      "patch": {
+        "operationId": "applications_update",
         "parameters": [
           {
             "in": "path",
-            "name": "file_id",
+            "name": "application_id",
             "required": true,
             "schema": {
-              "title": "File Id",
+              "title": "Application Id",
               "type": "integer"
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplicationUpdate"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationRead"
+                }
+              }
+            },
             "description": "Successful Response"
           },
           "422": {
@@ -1649,9 +1803,76 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Raw",
+        "summary": "Update",
         "tags": [
-          "files"
+          "applications"
+        ]
+      }
+    },
+    "/api/candidates": {
+      "get": {
+        "operationId": "candidates_list",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/CandidateRead"
+                  },
+                  "title": "Response Candidates List",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List",
+        "tags": [
+          "candidates"
+        ]
+      }
+    },
+    "/api/candidates/{candidate_id}": {
+      "get": {
+        "operationId": "candidates_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "candidate_id",
+            "required": true,
+            "schema": {
+              "title": "Candidate Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CandidateRead"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get",
+        "tags": [
+          "candidates"
         ]
       }
     },
@@ -1677,6 +1898,88 @@
         "summary": "Health",
         "tags": [
           "health"
+        ]
+      }
+    },
+    "/api/interview/feedback": {
+      "post": {
+        "operationId": "interview_feedback",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeedbackRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InterviewFeedback"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Feedback",
+        "tags": [
+          "interview"
+        ]
+      }
+    },
+    "/api/interview/questions": {
+      "post": {
+        "operationId": "interview_questions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuestionsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InterviewQuestions"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Questions",
+        "tags": [
+          "interview"
         ]
       }
     },
@@ -2089,15 +2392,120 @@
         ]
       }
     },
-    "/api/rag/ask": {
+    "/api/offers": {
+      "get": {
+        "operationId": "offers_list",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/OfferRead"
+                  },
+                  "title": "Response Offers List",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List",
+        "tags": [
+          "offers"
+        ]
+      },
       "post": {
-        "description": "Answer a question from the ingested documents, with citations.",
-        "operationId": "rag_ask",
+        "operationId": "offers_create",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AskRequest"
+                "$ref": "#/components/schemas/OfferCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfferRead"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create",
+        "tags": [
+          "offers"
+        ]
+      }
+    },
+    "/api/offers/{offer_id}": {
+      "get": {
+        "operationId": "offers_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "offer_id",
+            "required": true,
+            "schema": {
+              "title": "Offer Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfferRead"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get",
+        "tags": [
+          "offers"
+        ]
+      }
+    },
+    "/api/prep/adapt-cv": {
+      "post": {
+        "operationId": "prep_adapt_cv",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrepRequest"
               }
             }
           },
@@ -2108,7 +2516,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AskResponse"
+                  "$ref": "#/components/schemas/AdaptedCv"
                 }
               }
             },
@@ -2125,37 +2533,31 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "summary": "Ask",
+        "summary": "Adapt Cv",
         "tags": [
-          "rag"
+          "prep"
         ]
       }
     },
-    "/api/ws/publish": {
+    "/api/prep/filter": {
       "post": {
-        "description": "Publish from outside the process (e.g. `make simulate`). Sync, like any router.",
-        "operationId": "ws_publish_event",
+        "operationId": "prep_filter",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PublishRequest"
+                "$ref": "#/components/schemas/PrepRequest"
               }
             }
           },
           "required": true
         },
         "responses": {
-          "202": {
+          "200": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ServerMessage"
+                  "$ref": "#/components/schemas/FilterReport"
                 }
               }
             },
@@ -2172,14 +2574,9 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "summary": "Publish Event",
+        "summary": "Filter",
         "tags": [
-          "ws"
+          "prep"
         ]
       }
     }

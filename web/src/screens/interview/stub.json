@@ -1,0 +1,34 @@
+{
+  "questions": {
+    "offer_id": 1,
+    "candidate_id": 1,
+    "intro": "Hola, Pilar. Soy la entrevistadora de la perfumería. Te haré dos preguntas sobre el puesto. Tómate tu tiempo.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Una clienta quiere regalar un perfume y no sabe cuál elegir. ¿Cómo la ayudarías?",
+        "checks": "Asesoramiento al cliente en la elección de productos"
+      },
+      {
+        "id": 2,
+        "text": "El puesto pide inglés alto y muchas clientas son turistas. ¿Cómo atenderías a una clienta que solo habla inglés?",
+        "checks": "Inglés nivel alto (requisito que no cubre su CV)"
+      }
+    ]
+  },
+  "feedback": {
+    "offer_id": 1,
+    "question": "Una clienta quiere regalar un perfume y no sabe cuál elegir. ¿Cómo la ayudarías?",
+    "answer": "Le preguntaría para quién es, qué edad tiene y qué le gusta, si algo fresco o más dulce, y le daría a probar dos o tres en tiras. Lo hacía mucho en la tienda de moda con los complementos.",
+    "good": [
+      "Empiezas preguntando: así se asesora bien.",
+      "Ofreces probar antes de decidir.",
+      "Unes la respuesta con tu experiencia real en la tienda de moda."
+    ],
+    "improve": [
+      "Nombra una familia de fragancias (floral, cítrica, amaderada) para mostrar que conoces el producto.",
+      "Termina ofreciendo envolverlo para regalo: cierra la venta."
+    ],
+    "tip": "Has respondido con seguridad. Repite la respuesta en voz alta una vez más añadiendo el cierre de venta."
+  }
+}

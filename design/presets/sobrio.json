@@ -1,0 +1,96 @@
+{
+  "name": "sobrio",
+  "fonts": {
+    "display": {
+      "family": "Noto Serif Variable",
+      "package": "@fontsource-variable/noto-serif"
+    },
+    "body": {
+      "family": "Noto Sans Variable",
+      "package": "@fontsource-variable/noto-sans"
+    },
+    "mono": {
+      "family": "IBM Plex Mono",
+      "package": "@fontsource/ibm-plex-mono"
+    }
+  },
+  "colors": {
+    "light": {
+      "background": "oklch(0.985 0.005 95)",
+      "foreground": "oklch(0.25 0.02 160)",
+      "card": "oklch(1 0 0)",
+      "card-foreground": "oklch(0.25 0.02 160)",
+      "popover": "oklch(1 0 0)",
+      "popover-foreground": "oklch(0.25 0.02 160)",
+      "primary": "oklch(0.45 0.1 155)",
+      "primary-foreground": "oklch(0.99 0.004 95)",
+      "secondary": "oklch(0.93 0.04 150)",
+      "secondary-foreground": "oklch(0.3 0.07 155)",
+      "muted": "oklch(0.955 0.012 120)",
+      "muted-foreground": "oklch(0.44 0.02 160)",
+      "accent": "oklch(0.9 0.05 150)",
+      "accent-foreground": "oklch(0.28 0.07 155)",
+      "destructive": "oklch(0.5 0.19 27)",
+      "destructive-foreground": "oklch(0.99 0.004 95)",
+      "border": "oklch(0.88 0.012 130)",
+      "input": "oklch(0.56 0.02 160)",
+      "ring": "oklch(0.42 0.1 155)",
+      "chart-1": "oklch(0.5 0.1 155)",
+      "chart-2": "oklch(0.6 0.1 230)",
+      "chart-3": "oklch(0.72 0.13 85)",
+      "chart-4": "oklch(0.58 0.14 35)",
+      "chart-5": "oklch(0.5 0.06 300)"
+    }
+  },
+  "radius": "0.75rem",
+  "shadow": {
+    "sm": "0 1px 0 0 oklch(0.25 0.02 160 / 8%)",
+    "md": "0 0 0 1px oklch(0.88 0.012 130)",
+    "lg": "0 0 0 1px oklch(0.88 0.012 130), 0 2px 0 0 oklch(0.45 0.1 155 / 20%)"
+  },
+  "motion": {
+    "duration": {
+      "fast": 120,
+      "base": 200,
+      "slow": 300
+    },
+    "easing": {
+      "standard": [
+        0.2,
+        0,
+        0,
+        1
+      ],
+      "emphasized": [
+        0.3,
+        0,
+        0,
+        1
+      ]
+    },
+    "spring": {
+      "stiffness": 300,
+      "damping": 40,
+      "mass": 1
+    }
+  },
+  "focus": {
+    "width": "3px",
+    "offset": "2px"
+  },
+  "reducedMotion": {
+    "duration": {
+      "fast": 0,
+      "base": 0,
+      "slow": 0
+    },
+    "spring": {
+      "stiffness": 1000,
+      "damping": 100
+    }
+  },
+  "effects": [
+    "DrawnUnderline",
+    "ScrollProgressRule"
+  ]
+}

@@ -1,0 +1,85 @@
+---
+status: done
+---
+
+# Brief
+
+- [x] 1 Collect the Brief
+- [x] 2 Write Verbatim
+- [x] 3 Write Rubric
+- [x] 4 Fill Event logistics (skipped: the Brief fills no `unknown` field of `00-kickoff.md`)
+- [x] 5 Close
+
+## Sources
+
+| File | Origin |
+|---|---|
+| `hackathon/sources/reto-03-social.jpeg` | file: photo of the official challenge sheet "03 SOCIAL" handed out by the organisers |
+| `hackathon/sources/plantilla-canvas.jpeg` | file: photo of the official canvas template "HACKATHON IA FIRST" (paper, filled by hand) |
+| `hackathon/sources/notas-equipo-definicion.md` | path: team notes of what the organisers said aloud during the opening (Driver, 2026-11-24 morning) |
+
+## Verbatim
+
+### Challenge sheet (`reto-03-social.jpeg`)
+
+> 03
+> SOCIAL
+> Una IA que no deje a nadie atrás
+> Talent Land España
+>
+> ¿Cómo podemos utilizar la tecnología para mejorar la vida de las personas?
+>
+> Crear soluciones que ayuden a personas mayores, colectivos vulnerables, personas con discapacidad o jóvenes en riesgo de exclusión. Desde asistentes inteligentes hasta plataformas de acompañamiento, inclusión y participación ciudadana.
+>
+> RETO
+> Crear una IA capaz de resolver un problema social real. La Inteligencia Humana y la Inteligencia Artificial trabajando para dar soluciones a problemas reales.
+
+### Canvas template (`plantilla-canvas.jpeg`)
+
+Header: "HACKATHON IA FIRST" · Talent Land España · IA FIRST. Subtitle under the title: [illegible].
+Fields to fill: "Equipo:" · "Reto:" · "Fecha:".
+
+Boxes, in template order (the helper line printed under each box title is [illegible] in the photo):
+
+| Box | Helper text |
+|---|---|
+| CLIENTES | quien para por la solucion? segmentos de lciente |
+| USUARIOS | quien la usa? (si es distinto de quien paga) |
+| PROBLEMAS | los 2-3 problemas o necesidades principales a resolver |
+| SOLUCIONES | como los resolveis? con la ia como herramienta |
+| PROPUESTA DE VALOR | Mensaje unico y claro: que ofreceis y porque es diferente |
+| VENTAJA COMPETITIVA | Lo que os hace difiles de copiar |
+| ACTIVIDADES CLAVE | Lo que hya que hacer si o si para que funcione |
+| RECURSOS | que necesitas: datos, modelos de ia, equipo, tecnologia |
+| ALIADOS | socios y colaboradores clave |
+| CANALES | Como llegais a clientes y susuarios |
+| FIDELIZACIÓN | como reteneis y haceis crecer la base de usuarios |
+| COSTES | principales cosates (incluida la ia e infraestructura) |
+| INGRESOS | como genera dinero la solucion |
+
+### Organisers' words, as noted by the team (`notas-equipo-definicion.md`)
+
+Heard during the opening, 2026-11-24 morning, noted by the Driver (paraphrased notes, not the organisers' exact words):
+
+- 5 themes: turismo, vivienda, social, la IA como servicio y cultura. The challenge is assigned by a Kahoot, not chosen; each challenge allows at most 5 teams. The team got **03 SOCIAL**.
+- Deliverables, uploaded as one zip to the Drive and evaluated by a jury: **1. canvas · 2. prototipo y uso de la IA · 3. Marketing · 4. Guion del pitch**.
+- Prizes: 1st 1000 €, 2nd 700 €, 3rd 400 €, in Amazon vouchers.
+- Mentors: Jesús Pedrero, Elisabeth Amate, Coral Salguero, Margot Atenza, José Miguel Heredia, Álvaro Alcázar, Azahara Vera, Nacho Martín, Daniel Salobreña.
+- Flow: first fill a lean/business canvas (the template above), then program it, then roadmap and pitch.
+- This hackathon is more business than technology. Strong weight on **real validation of the cases**: they do not want a company built without validation, much less a prototype.
+- **Nothing generic**: transmit confidence by being precise, with a concrete customer (e.g. not "all universities" but "Universidad de Málaga"; not "all young people in Spain" but a profile with age range, studies, interests, etc.).
+- More instructions will be given during the day.
+
+## Rubric
+
+No official criteria or weights were published yet. Rows inferred from the challenge sheet and the organisers' words; re-weight when the jury criteria are announced.
+
+| Criterion | Weight | Note |
+|---|---|---|
+| Real validation of the problem and the customer (evidence, data, contact with real users) | 25% | (inferred) from "mucha más importancia a la validación real de los casos"; confirmed as top criterion (heard: Driver, 2026-11-24) |
+| The idea itself: solid, justified problem-solution fit with real social impact | 20% | (heard: Driver, 2026-11-24) "lo que más les importa: la idea en sí y la validación"; absorbs the former "Real social impact" row |
+| Marketing and pitch (go-to-market, pitch script, clarity, confidence) | 15% | (inferred) from deliverables 3 and 4; weight raised by the team (heard: Driver, 2026-11-24) |
+| Concrete, non-generic customer and segment (named institution, defined profile) | 10% | (inferred) from "nada genérico… un cliente concreto" |
+| Business model viability (canvas coherent: clientes, canales, costes, ingresos, aliados) | 10% | (inferred) from "más de negocio que tecnología" and the canvas deliverable |
+| Planning and roadmap (phases, milestones, how it scales after the hackathon) | 10% | (inferred) from "luego se hará roadmap y pitch"; added by the team (heard: Driver, 2026-11-24) |
+| Prototype and use of AI (Human + Artificial Intelligence working together) | 10% | (heard: Driver, 2026-11-24) "la parte técnica les importa bastante poco porque se hacen prototipos con IA muy rápido": low weight, but R2/R4 still require it |

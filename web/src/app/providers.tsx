@@ -7,7 +7,7 @@ import { SessionProvider } from "@/lib/session"
 export function Providers({ children }: { children: ReactNode }) {
   const [client] = useState(() => new QueryClient({ defaultOptions: { queries: { retry: 1, staleTime: 30_000 } } }))
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
       <QueryClientProvider client={client}>
         <SessionProvider>
           {children}
