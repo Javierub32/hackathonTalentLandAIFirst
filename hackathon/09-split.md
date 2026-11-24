@@ -1,5 +1,5 @@
 ---
-status: draft
+status: done
 ---
 
 # Task split
@@ -11,7 +11,7 @@ status: draft
 - [x] 5 Labels
 - [x] 6 Create the issues
 - [x] 7 Assign
-- [ ] 8 Merge and hand off
+- [x] 8 Merge and hand off
 
 ## Inputs
 
