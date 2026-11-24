@@ -1,5 +1,5 @@
 ---
-status: draft
+status: done
 issue: 5
 lane: llm
 owner: alraro
@@ -11,9 +11,9 @@ owner: alraro
 - [x] 2 Read
 - [x] 3 Implement
 - [x] 4 Check
-- [ ] 5 Review requests
-- [ ] 6 Merge
-- [ ] 7 Handoff
+- [x] 5 Review requests
+- [x] 6 Merge
+- [x] 7 Handoff
 
 ## Acceptance criteria
 
@@ -30,4 +30,4 @@ owner: alraro
 - `web/src/mocks/voice.ts`
 - `hackathon/build-5.md` (this artifact)
 
-Next: review, then merge. Pending: transcribe a real Spanish voice clip at Demo rehearsal.
+Next: merged. Pending: transcribe a real Spanish voice clip at Demo rehearsal.
