@@ -1,11 +1,11 @@
-import { useState, type FormEvent } from "react"
+import { useEffect, useState, type FormEvent } from "react"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { ArrowLeft, ArrowRight, Check, Lightbulb, RotateCcw, Volume2 } from "lucide-react"
 import { Link, useParams } from "react-router"
 import { Button } from "@/components/ui/button"
-import { VoiceButton } from "@/components/common/VoiceButton"
-import { api } from "@/lib/api/client"
-import { speak } from "@/lib/speak"
+import { PracticeRecorder } from "../PracticeRecorder"
+import { say, stopSpeaking } from "../audio"
+import { API_MODE, api } from "@/lib/api/client"
 import type { components } from "@/lib/api/schema"
 
 type InterviewQuestions = components["schemas"]["InterviewQuestions"]
@@ -33,11 +33,14 @@ function InterviewerPortrait() {
 }
 
 function ListenButton({ text, label }: { text: string; label: string }) {
-  return (
-    <Button type="button" variant="outline" className="min-h-12 text-lg" onClick={() => void speak(text)}>
+  const [error, setError] = useState("")
+  return (<>
+    <Button type="button" variant="outline" className="min-h-12 text-lg" onClick={() => say(text, setError)}>
       <Volume2 aria-hidden />
       {label}
     </Button>
+    {error && <p role="alert" className="text-lg text-destructive">{error}</p>}
+    </>
   )
 }
 
@@ -45,6 +48,22 @@ export default function PracticePage() {
   const { id } = useParams()
   const parsedOfferId = Number(id)
   const offerId = Number.isFinite(parsedOfferId) && parsedOfferId > 0 ? parsedOfferId : 1
+  return <PracticeSession key={offerId} offerId={offerId} />
+}
+
+function PracticeSession({ offerId }: { offerId: number }) {
+  const [started, setStarted] = useState(false)
+  const [voiceBusy, setVoiceBusy] = useState(false)
+  const [audioError, setAudioError] = useState("")
+  useEffect(() => () => stopSpeaking(), [])
+  const offer = useQuery({
+    queryKey: ["offers", offerId],
+    queryFn: async ({ signal }) => {
+      const { data, error } = await api.GET("/api/offers/{offer_id}", { params: { path: { offer_id: offerId } }, signal })
+      if (error || !data) throw new Error("No se pudo cargar la oferta.")
+      return data
+    },
+  })
   const [answer, setAnswer] = useState("")
   const [answerError, setAnswerError] = useState("")
   const [questionIndex, setQuestionIndex] = useState(0)
@@ -77,6 +96,7 @@ export default function PracticePage() {
   function submitAnswer(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const cleanAnswer = answer.trim()
+    if (voiceBusy || feedback.isPending) return
     if (!cleanAnswer || !currentQuestion) {
       setAnswerError("Escribe o dicta tu respuesta antes de continuar.")
       return
@@ -88,9 +108,12 @@ export default function PracticePage() {
   function continuePractice() {
     if (!interview) return
     if (questionIndex + 1 >= interview.questions.length) {
+      stopSpeaking()
       setFinished(true)
       return
     }
+    stopSpeaking()
+    say(interview.questions[questionIndex + 1].text, setAudioError)
     setQuestionIndex((index) => index + 1)
     setAnswer("")
     setAnswerError("")
@@ -98,6 +121,8 @@ export default function PracticePage() {
   }
 
   function restartPractice() {
+    stopSpeaking()
+    setStarted(false)
     setQuestionIndex(0)
     setAnswer("")
     setAnswerError("")
@@ -116,7 +141,7 @@ export default function PracticePage() {
 
       <header className="space-y-2">
         <p className="text-lg font-semibold text-primary">Práctica acompañada</p>
-        <h1 className="font-display text-3xl">Entrevista para dependienta de perfumería</h1>
+        <h1 className="font-display text-3xl">Entrevista: {offer.data?.title ?? "tu oferta de trabajo"}</h1>
         <p className="text-lg leading-relaxed text-muted-foreground">
           Practica a tu ritmo. Puedes responder hablando o escribir tu respuesta.
         </p>
@@ -133,6 +158,10 @@ export default function PracticePage() {
         </div>
       </section>
 
+      {API_MODE === "fixtures" && <p role="status" className="rounded-lg border border-border p-4 text-lg">Modo demostración: las preguntas, la transcripción y los comentarios son ejemplos fijos. Para practicar con tu voz real y cada oferta necesitas conectar el servidor en modo live.</p>}
+      {offer.isError && <p role="alert" className="text-lg">No se pudo cargar el nombre de la oferta. <button type="button" className="underline" onClick={() => void offer.refetch()}>Reintentar</button></p>}
+      {audioError && <p role="alert" className="text-lg text-destructive">{audioError}</p>}
+      {questions.isSuccess && interviewQuestions.length > 0 && !started && <Button type="button" className="min-h-12 text-lg" onClick={() => { setStarted(true); say(`${interview?.intro ?? ""} ${interviewQuestions[0].text}`, setAudioError) }}>Empezar entrevista con audio</Button>}
       <p id="privacy-note" className="rounded-lg border border-border bg-secondary p-4 text-lg leading-relaxed">
         No se analiza tu cara, tu tono ni tus emociones. La transcripción sirve para comentar el contenido de tus respuestas.
       </p>
@@ -182,7 +211,7 @@ export default function PracticePage() {
         </section>
       )}
 
-      {questions.isSuccess && currentQuestion && interview && !finished && (
+      {questions.isSuccess && currentQuestion && interview && started && !finished && (
         <section className="space-y-5 rounded-xl border border-border bg-card p-5 sm:p-6">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-lg font-semibold text-primary">
@@ -212,9 +241,9 @@ export default function PracticePage() {
 
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                 <div className="[&_button]:min-h-12 [&_button]:text-lg">
-                  <VoiceButton label="Responder hablando" language="es" onText={setAnswer} />
+                  <PracticeRecorder onBusy={setVoiceBusy} onText={(text) => { setAnswer(text); setAnswerError("") }} />
                 </div>
-                <Button type="submit" className="min-h-12 text-lg" disabled={feedback.isPending}>
+                <Button type="submit" className="min-h-12 text-lg" disabled={feedback.isPending || voiceBusy}>
                   {feedback.isPending ? "Preparando comentario…" : "Ver mi comentario"}
                   {!feedback.isPending && <ArrowRight aria-hidden />}
                 </Button>
@@ -227,6 +256,8 @@ export default function PracticePage() {
           {feedback.data && (
             <div aria-live="polite" className="space-y-4 border-t border-border pt-5">
               <h3 className="font-display text-2xl">Tu comentario</h3>
+              <p className="text-lg leading-relaxed"><strong>Tu respuesta:</strong> {answer}</p>
+              <ListenButton label="Escuchar comentario" text={[...feedback.data.good, ...feedback.data.improve, feedback.data.tip].join(". ")} />
               <div className="space-y-3 rounded-lg bg-secondary p-4">
                 <h4 className="text-lg font-semibold">Lo que hiciste bien</h4>
                 <ul className="list-disc space-y-2 pl-6 text-lg leading-relaxed">
