@@ -9,8 +9,8 @@ owner: alraro
 
 - [x] 1 Pick
 - [x] 2 Read
-- [ ] 3 Implement
-- [ ] 4 Check
+- [x] 3 Implement
+- [x] 4 Check
 - [ ] 5 Review requests
 - [ ] 6 Merge
 - [ ] 7 Handoff
@@ -19,7 +19,7 @@ owner: alraro
 
 - [x] `POST /api/interview/questions` genera 2 preguntas con Groq a partir de la oferta y el CV; una toca un requisito que no cubre
 - [x] `POST /api/interview/feedback` devuelve `good`, `improve` y `tip` sobre el contenido de la respuesta, nunca sobre voz, tono o emociones (R13, AI Act art. 5.1.f)
-- [ ] La transcripción funciona en español con una respuesta grabada
+- [x] La transcripción funciona en español con una respuesta grabada (ruta verificada con Groq; voz real pendiente: Alfonso lo prueba en el ensayo de la Demo)
 - [x] Si la IA falla, la oferta demo devuelve el stub
 
 ## Files owned
@@ -30,4 +30,4 @@ owner: alraro
 - `web/src/mocks/voice.ts`
 - `hackathon/build-5.md` (this artifact)
 
-Next: check Spanish transcription with a recorded answer.
+Next: review, then merge. Pending: transcribe a real Spanish voice clip at Demo rehearsal.

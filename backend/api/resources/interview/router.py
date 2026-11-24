@@ -56,6 +56,8 @@ def questions(body: QuestionsRequest, session: SessionDep) -> InterviewQuestions
 @router.post("/feedback", name="feedback")
 def feedback(body: FeedbackRequest, session: SessionDep) -> InterviewFeedback:
     offer = get_or_404(session, Offer, body.offer_id)
+    if ai.heard_nothing(body.answer):
+        return ai.not_heard(body.offer_id)
     try:
         return ai.feedback(offer, body.question, body.answer)
     except Exception as exc:  # noqa: BLE001 - LLM down, timeout, quota or unsafe feedback

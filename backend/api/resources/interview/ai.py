@@ -40,6 +40,29 @@ _NOT_CONTENT = re.compile(
 )
 
 
+# Whisper invents these on silence or noise (subtitle credits it learned from video).
+_SILENCE = re.compile(
+    r"(gracias por ver|suscr[ií]bete|subt[ií]tulos|amara\.org|thanks for watching|"
+    r"no olvides (dar )?like|nos vemos en el pr[oó]ximo)",
+    re.IGNORECASE,
+)
+MIN_WORDS = 4
+
+
+def heard_nothing(answer: str) -> bool:
+    """True when the transcript is too short or a known Whisper hallucination on silence."""
+    return len(re.findall(r"\w+", answer)) < MIN_WORDS or bool(_SILENCE.search(answer))
+
+
+def not_heard(offer_id: int) -> InterviewFeedback:
+    return InterviewFeedback(
+        offer_id=offer_id,
+        good=["Has dado el primer paso: pulsar grabar."],
+        improve=["No te he oído bien. Acércate al micrófono y responde con calma, en dos o tres frases."],
+        tip="Prueba otra vez: cuenta qué harías y pon un ejemplo de tu experiencia.",
+    )
+
+
 class LlmQuestions(BaseModel):
     intro: str
     q1: str
