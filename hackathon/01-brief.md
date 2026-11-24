@@ -76,10 +76,10 @@ No official criteria or weights were published yet. Rows inferred from the chall
 
 | Criterion | Weight | Note |
 |---|---|---|
-| Real validation of the problem and the customer (evidence, data, contact with real users) | 25% | (inferred) from "mucha más importancia a la validación real de los casos" |
-| Marketing and pitch (go-to-market, pitch script, clarity, confidence) | 20% | (inferred) from deliverables 3 and 4; weight raised by the team (heard: Driver, 2026-11-24) |
-| Business model viability (canvas coherent: clientes, canales, costes, ingresos, aliados) | 15% | (inferred) from "más de negocio que tecnología" and the canvas deliverable |
-| Concrete, non-generic customer and segment (named institution, defined profile) | 15% | (inferred) from "nada genérico… un cliente concreto" |
+| Real validation of the problem and the customer (evidence, data, contact with real users) | 25% | (inferred) from "mucha más importancia a la validación real de los casos"; confirmed as top criterion (heard: Driver, 2026-11-24) |
+| The idea itself: solid, justified problem-solution fit with real social impact | 20% | (heard: Driver, 2026-11-24) "lo que más les importa: la idea en sí y la validación"; absorbs the former "Real social impact" row |
+| Marketing and pitch (go-to-market, pitch script, clarity, confidence) | 15% | (inferred) from deliverables 3 and 4; weight raised by the team (heard: Driver, 2026-11-24) |
+| Concrete, non-generic customer and segment (named institution, defined profile) | 10% | (inferred) from "nada genérico… un cliente concreto" |
+| Business model viability (canvas coherent: clientes, canales, costes, ingresos, aliados) | 10% | (inferred) from "más de negocio que tecnología" and the canvas deliverable |
 | Planning and roadmap (phases, milestones, how it scales after the hackathon) | 10% | (inferred) from "luego se hará roadmap y pitch"; added by the team (heard: Driver, 2026-11-24) |
-| Real social impact on a vulnerable group | 10% | (inferred) from challenge sheet: "resolver un problema social real", "Una IA que no deje a nadie atrás" |
-| Prototype and use of AI (Human + Artificial Intelligence working together) | 5% | (inferred) from deliverable 2; weight lowered by the team (heard: Driver, 2026-11-24) |
+| Prototype and use of AI (Human + Artificial Intelligence working together) | 10% | (heard: Driver, 2026-11-24) "la parte técnica les importa bastante poco porque se hacen prototipos con IA muy rápido": low weight, but R2/R4 still require it |

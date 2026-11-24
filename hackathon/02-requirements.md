@@ -5,7 +5,7 @@ status: draft
 # Requirements
 
 - [x] 1 Announce and extract from the Brief
-- [ ] 2 Add what was heard
+- [x] 2 Add what was heard
 - [ ] 3 Confirm inferred Requirements
 - [ ] 4 Open axes and Open questions
 - [ ] 5 Confirm and hand off
@@ -21,6 +21,7 @@ status: draft
 | R7 | One zip uploaded to the event Drive | yes | heard | active |
 | R8 | Real validation, backed by evidence | yes | heard | active |
 | R9 | One concrete, non-generic customer and user | yes | heard | active |
+| R11 | Every decision has a reason and a source (no idea without basis) | yes | heard | active |
 | R10 | Roadmap after the canvas and prototype | no | heard | active |
 
 ### R1 · Real social problem of a vulnerable group
@@ -121,6 +122,17 @@ status: draft
 - Status: active
 - Acceptance criteria:
   - R10.1 The pitch shows a roadmap with dated phases (pilot with the R9 customer, scale, revenue milestones).
+
+### R11 · Every decision has a reason and a source (no idea without basis)
+
+- Source: heard: Driver, 2026-11-24 ~12:00: what disqualifies is "una idea sin base, ni pies ni cabeza, ni validación ni justificación"; the jury cares most about "la idea en sí y la validación"; the technical part matters little "porque se hacen prototipos con IA muy rápido"
+- Gate: yes
+- Rubric: The idea itself; Real validation of the problem and the customer
+- Status: active
+- Acceptance criteria:
+  - R11.1 Each canvas box carries a one-line "por qué" backed by R8 evidence (kept in `hackathon/canvas.md`; the paper version holds the answer).
+  - R11.2 The chosen idea survives a devil's-advocate round (Grilling) with no unanswered objection on problem, customer or business model.
+  - R11.3 The pitch spends more time on problem, validation and business than on the technical build.
 
 ## Open axes
 
