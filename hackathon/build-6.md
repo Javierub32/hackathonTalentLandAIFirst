@@ -10,7 +10,7 @@ owner: Paaula21
 - [x] 1 Pick
 - [x] 2 Read
 - [x] 3 Implement
-- [ ] 4 Check
+- [x] 4 Check
 - [ ] 5 Review requests
 - [ ] 6 Merge
 - [ ] 7 Handoff
@@ -30,3 +30,4 @@ owner: Paaula21
 
 - Chromium con datos de demostración a 375 px. Se abrió el CV adaptado, se confirmó que el borrador no se podía enviar, se guardó una nota como Lucía y se envió la candidatura desde la vista de Pilar tras ver la nota y el estado de revisión. Sin desbordamiento horizontal.
 - Vista local para revisión: http://localhost:4176/candidaturas.
+- `make check` pasó. Avisos no bloqueantes de Ruff en `backend/llm/render.py` y del generador del cliente web.
