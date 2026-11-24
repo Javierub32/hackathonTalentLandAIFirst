@@ -43,19 +43,19 @@ Boxes, in template order (the helper line printed under each box title is [illeg
 
 | Box | Helper text |
 |---|---|
-| CLIENTES | [illegible] |
-| USUARIOS | [illegible] |
-| PROBLEMAS | [illegible] |
-| SOLUCIONES | [illegible] |
-| PROPUESTA DE VALOR | [illegible] |
-| VENTAJA COMPETITIVA | [illegible] |
-| ACTIVIDADES CLAVE | [illegible] |
-| RECURSOS | [illegible] |
-| ALIADOS | [illegible] |
-| CANALES | [illegible] |
-| FIDELIZACIÓN | [illegible] |
-| COSTES | [illegible] |
-| INGRESOS | [illegible] |
+| CLIENTES | quien para por la solucion? segmentos de lciente |
+| USUARIOS | quien la usa? (si es distinto de quien paga) |
+| PROBLEMAS | los 2-3 problemas o necesidades principales a resolver |
+| SOLUCIONES | como los resolveis? con la ia como herramienta |
+| PROPUESTA DE VALOR | Mensaje unico y claro: que ofreceis y porque es diferente |
+| VENTAJA COMPETITIVA | Lo que os hace difiles de copiar |
+| ACTIVIDADES CLAVE | Lo que hya que hacer si o si para que funcione |
+| RECURSOS | que necesitas: datos, modelos de ia, equipo, tecnologia |
+| ALIADOS | socios y colaboradores clave |
+| CANALES | Como llegais a clientes y susuarios |
+| FIDELIZACIÓN | como reteneis y haceis crecer la base de usuarios |
+| COSTES | principales cosates (incluida la ia e infraestructura) |
+| INGRESOS | como genera dinero la solucion |
 
 ### Organisers' words, as noted by the team (`notas-equipo-definicion.md`)
 
