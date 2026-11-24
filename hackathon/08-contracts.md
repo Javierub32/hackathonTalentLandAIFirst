@@ -6,7 +6,7 @@ status: draft
 
 - [x] 1 Ask
 - [x] 2 Walk the Beats
-- [ ] 3 Confirm the Seams
+- [x] 3 Confirm the Seams
 - [ ] 4 Stub
 - [ ] 5 Close
 
