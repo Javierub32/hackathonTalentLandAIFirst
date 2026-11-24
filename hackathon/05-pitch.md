@@ -8,7 +8,7 @@ status: draft
 - [x] 2 Devil's advocate
 - [x] 3 Vote
 - [x] 4 Identity and axes
-- [ ] 5 Presenter and demo length
+- [x] 5 Presenter and demo length
 - [ ] 6 Wow moment and Demo script
 - [ ] 7 Not building and Coverage
 - [ ] 8 Close
@@ -56,8 +56,8 @@ Kill-check: **pass**. Requirements: covers R1 (45+ long-term unemployed), R2 (AI
 
 ## Demo
 
-- presenter: <GitHub user>
-- Length: <n> min
+- presenter: alraro (placeholder: the team has not decided; heard: Driver, 2026-11-24)
+- Length: 5 min (whole pitch with the live demo inside; length not announced yet, ask the organisers). Built to stay complete in 5 min; trim Beats marked "cut first" if it is shorter.
 
 | t (mm:ss) | Screen | Say | Proves (R<n>.<m>) | Module | Real/Faked |
 |---|---|---|---|---|---|
