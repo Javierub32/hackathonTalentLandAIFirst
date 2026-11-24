@@ -10,7 +10,7 @@ status: draft
 - [x] 4 Scaffold commit
 - [x] 5 Labels
 - [x] 6 Create the issues
-- [ ] 7 Assign
+- [x] 7 Assign
 - [ ] 8 Merge and hand off
 
 ## Inputs
