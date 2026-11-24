@@ -1,5 +1,5 @@
 ---
-status: draft
+status: done
 ---
 
 # Requirements
@@ -8,7 +8,7 @@ status: draft
 - [x] 2 Add what was heard
 - [x] 3 Confirm inferred Requirements
 - [x] 4 Open axes and Open questions
-- [ ] 5 Confirm and hand off
+- [x] 5 Confirm and hand off
 
 | ID | Title | Gate | Source | Status |
 | --- | --- | --- | --- | --- |
