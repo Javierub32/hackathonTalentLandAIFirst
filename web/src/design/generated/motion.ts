@@ -3,7 +3,7 @@
 export const duration = {
   "fast": 0.12,
   "base": 0.2,
-  "slow": 0.32
+  "slow": 0.3
 } as const // seconds (Motion)
 
 export const easing = {
@@ -21,7 +21,7 @@ export const easing = {
   ]
 } as const // cubic-bezier control points
 
-export const spring = { type: "spring", ...{"stiffness":300,"damping":30,"mass":1} } as const
+export const spring = { type: "spring", ...{"stiffness":300,"damping":40,"mass":1} } as const
 
 export const reducedMotion = {
   "duration": {
@@ -35,4 +35,4 @@ export const reducedMotion = {
   }
 } as const
 
-export const effects = [] as const
+export const effects = ["DrawnUnderline","ScrollProgressRule"] as const
