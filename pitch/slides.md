@@ -22,8 +22,10 @@ transition: fade
       </ul>
     </div>
   </div>
-  <p class="ficha-frase" v-click>Envía currículums. Nadie la llama.</p>
+  <div class="ficha-sello"><Sello :visible="$clicks >= 1">Sin respuesta</Sello></div>
 </div>
+
+<div v-click="1" class="ficha-frase-grande">Envía currículums. <span class="rojo">Nadie la llama.</span></div>
 
 <!--
 Pilar tiene 53 años, 20 años de experiencia en administración y comercio, y lleva 18 meses enviando currículums. Nadie la llama.
@@ -61,11 +63,15 @@ No es un caso aislado: en Andalucía, el 57% de las personas en paro tiene más 
 
 <FiltroCvs :paso="$clicks" />
 
-<div v-click="1" class="nota-grande">
-  Un programa busca las <strong>palabras exactas</strong> de la oferta. Pilar tiene la experiencia, pero no lo dice con esas palabras: <strong class="rojo">descartada</strong>.
+<div v-click="1" class="explica">
+  <div class="explica-texto"><strong>Misma experiencia, distintas palabras.</strong> Pilar cumple todos los requisitos, pero como su CV no tiene las <strong>palabras clave</strong> que lee el filtro automático, queda fuera sin que nadie llegue a conocerla.</div>
+  <Sello :visible="$clicks >= 1">Descartada</Sello>
 </div>
 
-<div v-click="2" class="nota-pequena">Y el <strong>42 %</strong> de las empresas ya valora filtrar currículums de forma automática.</div>
+<div v-click="2" class="dato-42">
+  <span class="dato-42-num">42 %</span>
+  <span>de las empresas ya valora <strong>filtrar currículums de forma automática</strong></span>
+</div>
 
 <Fuente>Ilustración. Dato: ManpowerGroup, Encuesta de Proyección de Empleo T3 2026 (vía Que.es, ago. 2026).</Fuente>
 
@@ -250,17 +256,16 @@ Buscamos un piloto con el IMFE y vuestro apoyo. Al curro: que su experiencia vue
 -->
 
 ---
+class: slide-puente
+---
 
 <!-- 02:00 · Puente a la demo (R14.1) -->
 
-# Vamos a verlo
-
-<div class="pasos-demo">
-  <div class="pd"><span class="num">1</span><div>Pilar <strong>elige una oferta</strong> real de Málaga</div></div>
-  <div class="pd"><span class="num">2</span><div>Ve cómo la <strong>lee el filtro</strong>: <span class="mal">5 de 13 · 38 %</span></div></div>
-  <div class="pd"><span class="num">3</span><div>La IA <strong>adapta su CV</strong>, sin inventar: <span class="bien">11 de 13 · 85 %</span></div></div>
-  <div class="pd"><span class="num">4</span><div><strong>Practica la entrevista</strong> de ese puesto</div></div>
-  <div class="pd"><span class="num">5</span><div>Su orientadora revisa y <strong>envía la candidatura</strong></div></div>
+<div class="puente">
+  <p class="puente-ante">Ahora, en directo</p>
+  <h1>Vamos a verlo</h1>
+  <p class="puente-sub">Una oferta real. El CV de Pilar. Del <span class="mal-claro">38 %</span> al <strong>85 %</strong>.</p>
+  <PasosDemo />
 </div>
 
 <!--

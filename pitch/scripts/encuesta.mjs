@@ -9,7 +9,8 @@
 // uso anónimo y agregado). Las preguntas se buscan por texto, no por columna.
 //
 // Las citas elegidas para la diapositiva se mantienen: el script conserva
-// `citasElegidas` del JSON anterior; `citas` trae todas las disponibles.
+// `citasElegidas` y `resaltar` (trozos en negrita) del JSON anterior;
+// `citas` trae todas las disponibles, con edad y situación.
 
 import { readFileSync, writeFileSync, existsSync } from "node:fs"
 import { dirname, join } from "node:path"
@@ -81,12 +82,18 @@ for (const r of p45) {
   }
 }
 
+const situacionCorta = (t) =>
+  /más de 1 año/i.test(t) ? "en paro más de un año" : /paro/i.test(t) ? "en paro" : /buscando/i.test(t) ? "buscando empleo" : ""
 const citas = p45
-  .map((r) => get(r, "dificil").replace(/\s+/g, " ").replace(/\s+\./g, ".").trim())
-  .filter((t) => t.length >= 15)
+  .map((r) => ({
+    texto: get(r, "dificil").replace(/\s+/g, " ").replace(/\s+\./g, ".").trim(),
+    quien: [`${get(r, "edad")} años`, situacionCorta(get(r, "situacion"))].filter(Boolean).join(" · "),
+  }))
+  .filter((c) => c.texto.length >= 15)
+const textos = citas.map((c) => c.texto)
 
 const prev = existsSync(OUT) ? JSON.parse(readFileSync(OUT, "utf8")) : {}
-const citasElegidas = (prev.citasElegidas ?? []).filter((c) => citas.includes(c))
+const citasElegidas = (prev.citasElegidas ?? []).filter((c) => textos.includes(c))
 
 const out = {
   actualizado: new Date().toLocaleString("es-ES", { timeZone: "Europe/Madrid", day: "numeric", month: "numeric", hour: "2-digit", minute: "2-digit" }),
@@ -105,7 +112,8 @@ const out = {
   laUsarian: count(p45, (r) => /^(sí|probablemente sí)/i.test(get(r, "usaria"))),
   sinRespuesta: { ninguna: count(aplicaron, (r) => /ninguna/i.test(get(r, "respondieron"))), n: aplicaron.length },
   masUtil: Object.entries(util).sort((a, b) => b[1] - a[1]).map(([opcion, votos]) => ({ opcion, votos })),
-  citasElegidas: citasElegidas.length ? citasElegidas : citas.slice(0, 4),
+  citasElegidas: citasElegidas.length ? citasElegidas : textos.slice(0, 4),
+  resaltar: prev.resaltar ?? [],
   citas,
 }
 
