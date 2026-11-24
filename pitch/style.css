@@ -169,3 +169,117 @@
 .explica .sello { font-size: 2rem; }
 .dato-42 { margin-top: 0.8rem; padding: 0.45rem 1.3rem; font-size: 1.2rem; }
 .dato-42-num { font-size: 2.4rem; }
+
+/* =====================================================================
+   Rebrand: estilo del cartel (pitch/entregables/marketing/cartel-al-curro.png)
+   Verde bosque, verde medio, menta, fondo casi blanco; sans en negrita;
+   bandas diagonales como las del cartel. Solo afecta a la presentación.
+   ===================================================================== */
+:root {
+  --ac-bosque: #204437;
+  --ac-noche: #183a2e;
+  --ac-medio: #2f604a;
+  --ac-menta: #cce5cc;
+  --ac-menta-suave: #dcecdf;
+  --ac-fondo: #f8faf7;
+  --ac-linea: #cddbd1;
+
+  --background: var(--ac-fondo);
+  --foreground: var(--ac-noche);
+  --card: #ffffff;
+  --card-foreground: var(--ac-noche);
+  --primary: var(--ac-bosque);
+  --primary-foreground: var(--ac-fondo);
+  --secondary: var(--ac-menta-suave);
+  --secondary-foreground: var(--ac-noche);
+  --muted: #e7efe8;
+  --muted-foreground: #4a6659;
+  --border: var(--ac-linea);
+  --chart-3: var(--ac-medio);
+  --radius: 0.4rem;
+  --font-display-family: var(--font-body-family);
+}
+
+.slidev-layout { color: var(--ac-noche); }
+.slidev-layout h1, .slidev-layout h2, .slidev-layout h3 { font-family: var(--font-body-family); font-weight: 800; letter-spacing: -0.01em; color: var(--ac-noche); }
+.slidev-layout h1 { font-size: 2.2rem; }
+.menta { color: var(--ac-menta); }
+
+/* Antetítulo como la etiqueta "01" del cartel */
+.antetitulo { display: inline-block; padding: 0.2rem 1.4rem 0.2rem 0.7rem; background: var(--ac-menta-suave); color: var(--ac-noche); font-weight: 700;
+  clip-path: polygon(0 0, calc(100% - 0.7rem) 0, 100% 50%, calc(100% - 0.7rem) 100%, 0 100%); }
+
+/* --- Formas geométricas en las diapos de contenido: esquina inferior derecha y logo arriba --- */
+.slidev-layout::before, .slidev-layout::after { content: ""; position: absolute; pointer-events: none; z-index: 0; }
+.slidev-layout::before { right: 0; bottom: 0; width: 210px; height: 120px; background: var(--ac-menta); clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+.slidev-layout::after { right: 0; bottom: 0; width: 150px; height: 86px; background: var(--ac-bosque); clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+.slidev-layout > * { position: relative; z-index: 1; }
+.slidev-layout .fuente { right: 13rem; }
+.slidev-page .slidev-layout:not(.slide-portada):not(.slide-oscura):not(.slide-cierre):not(.slide-puente) { background-image: url("/logo-al-curro.png"); background-repeat: no-repeat; background-size: 54px auto; background-position: right 2.2rem top 1.4rem; }
+
+/* --- Portada (Pilar): panel diagonal verde como la cabecera del cartel --- */
+.slide-portada.slidev-layout::before { left: 0; top: 0; right: auto; bottom: auto; width: 100%; height: 100%; background: var(--ac-bosque);
+  clip-path: polygon(62% 0, 100% 0, 100% 100%, 86% 100%); }
+.slide-portada.slidev-layout::after { right: 0; bottom: 0; width: 100%; height: 100%; background: var(--ac-menta);
+  clip-path: polygon(58% 0, 62% 0, 86% 100%, 82% 100%); }
+.slide-portada .ficha { margin-top: 1.4rem; box-shadow: 0 10px 0 -2px var(--ac-menta); border: 0; }
+.ficha-cab { background: var(--ac-bosque); color: var(--ac-fondo); letter-spacing: 0.12em; }
+.ficha-foto { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+.ficha-foto img { width: 150px; height: 150px; object-fit: cover; border-radius: 4px; box-shadow: 8px 8px 0 var(--ac-menta); }
+.ficha-foto figcaption { font-size: 0.6rem; color: var(--muted-foreground); margin-top: 0.4rem; }
+.ficha-cuerpo h1 { font-size: 2.8rem !important; }
+.ficha-datos li::marker { color: var(--ac-medio); }
+.ficha-frase-grande { font-family: var(--font-body-family); font-weight: 800; }
+
+/* --- Solución: fondo verde con bandas, como la cabecera del cartel --- */
+.slide-oscura.slidev-layout { background: var(--ac-bosque); color: var(--ac-fondo); }
+.slide-oscura.slidev-layout::before { left: 0; bottom: 0; right: auto; width: 100%; height: 34%; background: var(--ac-menta); clip-path: polygon(0 40%, 50% 75%, 100% 10%, 100% 22%, 50% 88%, 0 52%); }
+.slide-oscura.slidev-layout::after { left: 0; bottom: 0; width: 100%; height: 34%; background: var(--ac-medio); clip-path: polygon(0 52%, 50% 88%, 100% 22%, 100% 100%, 0 100%); }
+.logo-grande { width: 150px; margin: 0 auto 0.2rem; }
+.slide-oscura .lema { color: var(--ac-fondo) !important; font-family: var(--font-body-family); font-weight: 800; font-size: 2.2rem !important; margin: 0.6rem 0 1.8rem !important; }
+.slide-oscura .lado { background: var(--ac-fondo); color: var(--ac-noche); border: 0; }
+.slide-oscura .lado.humano { background: var(--ac-menta); }
+.lado-tit { font-family: var(--font-body-family); font-weight: 800; }
+
+/* --- Cierre: texto a la izquierda en verde, foto a la derecha cortada en diagonal --- */
+.slide-cierre.slidev-layout { background: var(--ac-bosque); color: var(--ac-fondo); padding: 0; }
+.slide-cierre.slidev-layout::before { left: 0; bottom: 0; right: auto; width: 100%; height: 100%; background: var(--ac-menta); clip-path: polygon(54% 0, 58% 0, 47% 100%, 43% 100%); z-index: 2; }
+.slide-cierre.slidev-layout::after { display: none; }
+.cierre-grid { display: grid; grid-template-columns: 52% 48%; height: 100%; }
+.cierre-texto { display: flex; flex-direction: column; justify-content: center; padding: 0 2rem 0 3.5rem; }
+.cierre-quien { margin: 0; font-weight: 700; color: var(--ac-menta); letter-spacing: 0.04em; }
+.slide-cierre .cierre { font-family: var(--font-body-family); font-weight: 800; font-size: 2.6rem; color: var(--ac-fondo); margin: 0.5rem 0 1.2rem; text-align: left; }
+.slide-cierre .peticion { color: var(--ac-fondo); text-align: left; }
+.logo-cierre { width: 110px; margin-top: 1.8rem; }
+.cierre-foto { position: relative; margin-left: -12%; clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%); }
+.cierre-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 40% 20%; }
+
+/* --- Puente a la demo: bandas del cartel --- */
+.slide-puente.slidev-layout { background: var(--ac-bosque); }
+.slide-puente.slidev-layout::before { left: auto; right: 0; top: 0; bottom: auto; width: 46%; height: 100%; background: var(--ac-medio); clip-path: polygon(40% 0, 100% 0, 100% 100%, 75% 100%); }
+.slide-puente.slidev-layout::after { right: 0; top: 0; bottom: auto; width: 46%; height: 100%; background: var(--ac-menta); clip-path: polygon(34% 0, 40% 0, 75% 100%, 69% 100%); }
+.slide-puente h1 { font-family: var(--font-body-family); font-weight: 800; }
+.puente-ante { color: var(--ac-menta); }
+
+/* --- Piezas sueltas con los tonos del cartel --- */
+.persona { fill: var(--ac-linea); }
+.persona.lit { fill: var(--ac-medio); }
+.caja.filtro, .embudo-caja { border-color: var(--ac-medio) !important; }
+.num, .bola { border-radius: 4px !important; }
+.hito::before { border-radius: 3px !important; }
+.comparativa tr.nuestra { background: var(--ac-menta-suave); }
+.evi { border-top-color: var(--ac-medio); }
+.pagador.principal { border-color: var(--ac-bosque); }
+.dato-42 { background: var(--ac-bosque); box-shadow: 0 6px 0 -1px var(--ac-menta); }
+
+/* Ajustes tras el rebrand */
+.slidev-layout .cita-titulo h1 { font-size: 1.55rem; }
+.slide-portada.slidev-layout::before { clip-path: polygon(68% 0, 100% 0, 100% 62%); }
+.slide-portada.slidev-layout::after { clip-path: polygon(63% 0, 68% 0, 100% 62%, 100% 71%); }
+.ficha-sello { background: transparent !important; }
+.slide-oscura.slidev-layout { justify-content: flex-start; padding-top: 2.2rem; }
+.slide-oscura.slidev-layout::before, .slide-oscura.slidev-layout::after { height: 22%; }
+.logo-grande { width: 120px; }
+.slide-cierre .cierre { line-height: 1.12 !important; }
+.slide-puente.slidev-layout::before { width: 30%; height: 55%; clip-path: polygon(30% 0, 100% 0, 100% 100%); }
+.slide-puente.slidev-layout::after { width: 30%; height: 55%; clip-path: polygon(20% 0, 30% 0, 100% 100%, 100% 118%); }

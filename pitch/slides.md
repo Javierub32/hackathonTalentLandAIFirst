@@ -5,6 +5,7 @@ fonts:
   provider: none
 mdc: true
 transition: fade
+class: slide-portada
 ---
 
 <!-- 00:00 · Persona (R1.1, R9.2). Guion: hackathon/05-pitch.md ## Demo -->
@@ -12,7 +13,10 @@ transition: fade
 <div class="ficha">
   <div class="ficha-cab">Ficha</div>
   <div class="ficha-cuerpo">
-    <Persona :size="96" lit />
+    <figure class="ficha-foto">
+      <img src="/pilar-cara.jpg" alt="Pilar, nuestra persona de ejemplo" />
+      <figcaption>Imagen ilustrativa</figcaption>
+    </figure>
     <div>
       <h1>Pilar, 53 años</h1>
       <ul class="ficha-datos">
@@ -137,14 +141,14 @@ La investigación nos dice tres cosas: las empresas no encuentran a quién contr
 
 ---
 layout: center
-class: text-center
+class: text-center slide-oscura
 ---
 
 <!-- 01:50 · Solución (R2.2) -->
 
-<h1 class="marca">Al curro</h1>
+<img class="logo-grande" src="/logo-al-curro-claro.png" alt="Logotipo de Al curro" />
 
-<p class="lema">Tu experiencia, preparada para cada oferta.</p>
+<p class="lema"><span class="menta">Tu experiencia,</span> preparada para cada oferta.</p>
 
 <div class="reparto">
   <div class="lado ia">
@@ -235,24 +239,20 @@ Piloto con el IMFE en 2027 con 100 personas, después Andalucía Orienta, y form
 -->
 
 ---
-layout: center
-class: text-center
+class: slide-cierre
 ---
 
 <!-- 04:45 · Petición y cierre (R6.2) -->
 
-<div class="ficha ficha-final">
-  <div class="ficha-cuerpo">
-    <Persona :size="72" lit />
-    <div><h2>Pilar, 53 años · Málaga</h2></div>
+<div class="cierre-grid">
+  <div class="cierre-texto">
+    <p class="cierre-quien">Pilar, 53 años · Málaga</p>
+    <p class="cierre"><span class="menta">Que su experiencia</span> vuelva a contar.</p>
+    <p class="peticion">Buscamos <strong>un piloto con el IMFE</strong> y vuestro apoyo.</p>
+    <img class="logo-cierre" src="/logo-al-curro-claro.png" alt="Logotipo de Al curro" />
   </div>
+  <div class="cierre-foto"><img src="/pilar.jpg" alt="Pilar, nuestra persona de ejemplo" /></div>
 </div>
-
-<p class="cierre">Que su experiencia vuelva a contar.</p>
-
-<p class="peticion">Buscamos <strong>un piloto con el IMFE</strong> y vuestro apoyo.</p>
-
-<p class="marca-pie">Al curro</p>
 
 <!--
 Buscamos un piloto con el IMFE y vuestro apoyo. Al curro: que su experiencia vuelva a contar.
