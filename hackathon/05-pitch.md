@@ -7,7 +7,7 @@ status: draft
 - [x] 1 Show the ideas
 - [x] 2 Devil's advocate
 - [x] 3 Vote
-- [ ] 4 Identity and axes
+- [x] 4 Identity and axes
 - [ ] 5 Presenter and demo length
 - [ ] 6 Wow moment and Demo script
 - [ ] 7 Not building and Coverage
@@ -30,18 +30,25 @@ Kill-check: **pass**. Requirements: covers R1 (45+ long-term unemployed), R2 (AI
 
 ## Identity
 
-- Name: <name>
-- Tagline: <tagline>
+- Name: **Empleate** (provisional, heard: Driver, 2026-11-24 "por ahora"). ⚠ Clash: SEPE's portal is called **Empléate** (29,000+ offers for 45+, Research Q4) and is a competitor we must name under R16; same name risks confusion with the jury and looking like an official SEPE product. Revisit before the canvas/marketing are final.
+- Tagline: "Tu experiencia, preparada para cada oferta."
+- Voice and look (heard: Driver, 2026-11-24): made for Spanish people over 45. Simple, familiar, calm, nothing modernist, foreign-looking or extravagant. Plain Spanish without anglicisms (say "filtro automático", explain "ATS" once), short sentences, large text, clear buttons, warm and respectful tone. Input for Design (Phase 8).
 
 ## Problem, User, Solution
 
-- Problem: <problem>
-- User: <user>
-- Solution: <solution>
+- Problem: in Andalucía 57% of the unemployed are 45+ and over half of over-50s search for more than a year; 90% of them believe automatic CV filters reject them for their age, and they get no preparation for each specific offer (Research Q2, Q3).
+- User: a 45-60-year-old long-term unemployed person in Málaga (persona: "Mari Carmen", 52, 18 months unemployed, 20+ years in admin and retail, basic digital skills), served by IMFE's T-Acompañamos counsellors.
+- Solution: a job platform where Málaga companies post offers (and see the Emplea-T aid for hiring 45+) and, for each offer the candidate selects, an AI prepares them: trains them, adapts their CV to that offer's filter using only their real experience, rehearses that offer's interview, and lets them apply; an IMFE counsellor reviews before sending.
 
 ## Fixed axes
 
-- <Open axis>: <value>
+- Domain: long-term unemployment of people over 45
+- Target user: 45-60 long-term unemployed in Málaga, basic digital skills
+- Paying customer: IMFE (Ayuntamiento de Málaga), funded through ESF+ programmes (Aquileo+, T-Acompañamos); employers as a second line (featured offers)
+- Platform: responsive web (mobile first), public URL
+- Product type: job platform + per-offer AI preparation workspace
+- Data: candidate CV and profile (consented, minimal), offers posted by companies, seeded with real public Málaga offers (Empléate/IMFE, source cited)
+- AI provider and model: LLM on a free tier (Gemini or Groq), chosen in Design/Contracts
 
 ## Wow moment
 
