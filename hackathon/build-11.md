@@ -9,7 +9,7 @@ owner: alraro
 
 - [x] 1 Pick
 - [x] 2 Read
-- [ ] 3 Implement
+- [x] 3 Implement
 - [ ] 4 Check
 - [ ] 5 Review requests
 - [ ] 6 Merge
@@ -17,10 +17,10 @@ owner: alraro
 
 ## Acceptance criteria
 
-- [ ] Explica las tres funciones (filtro, CV adaptado, entrevista) y qué decide la persona y qué la IA
-- [ ] Modelo y proveedor (Groq, capa gratuita), coste estimado por persona y límites
-- [ ] Datos: mínimos, con consentimiento, sin análisis de cara ni emociones (AI Act art. 5.1.f), nada inventado en el CV
-- [ ] Fuentes citadas
+- [x] Explica las tres funciones (filtro, CV adaptado, entrevista) y qué decide la persona y qué la IA
+- [x] Modelo y proveedor (Groq, capa gratuita), coste estimado por persona y límites
+- [x] Datos: mínimos, con consentimiento, sin análisis de cara ni emociones (AI Act art. 5.1.f), nada inventado en el CV
+- [x] Fuentes citadas
 
 ## Files owned
 
