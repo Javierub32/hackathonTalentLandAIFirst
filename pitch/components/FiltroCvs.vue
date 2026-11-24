@@ -17,7 +17,7 @@ const cvs = Array.from({ length: TOTAL }, (_, i) => ({ i, pasa: PASAN.includes(i
           v-for="c in cvs"
           :key="c.i"
           :class="['cv', { pasa: c.pasa, pilar: c.pilar }]"
-          :style="{ transitionDelay: `${c.i * 25}ms` }"
+          :style="{ transitionDelay: `${c.i * 12}ms` }"
         >
           <span class="lineas" aria-hidden="true" />
           <span v-if="c.pilar" class="nombre">Pilar</span>
@@ -35,7 +35,7 @@ const cvs = Array.from({ length: TOTAL }, (_, i) => ({ i, pasa: PASAN.includes(i
     <div class="salida">
       <div class="etq">Llegan a una persona</div>
       <div class="pasan">
-        <div v-for="k in PASAN.length" :key="k" class="cv grande" :style="{ transitionDelay: `${800 + k * 150}ms` }">
+        <div v-for="k in PASAN.length" :key="k" class="cv grande" :style="{ transitionDelay: `${300 + k * 120}ms` }">
           <span class="lineas" aria-hidden="true" />
         </div>
       </div>
@@ -47,7 +47,7 @@ const cvs = Array.from({ length: TOTAL }, (_, i) => ({ i, pasa: PASAN.includes(i
 <style scoped>
 .flujo-cv { display: grid; grid-template-columns: 1fr auto 250px; align-items: center; gap: 1.6rem; }
 .etq { font-weight: 700; margin-bottom: 0.6rem; color: var(--muted-foreground); }
-.pila { display: grid; grid-template-columns: repeat(10, 1fr); gap: 1.5rem 8px; }
+.pila { display: grid; grid-template-columns: repeat(10, 1fr); gap: 1.1rem 8px; }
 .cv { position: relative; aspect-ratio: 3 / 4; background: var(--card); border: 2px solid var(--border); border-radius: 4px; transition: opacity 400ms ease, transform 400ms ease, border-color 400ms; }
 .lineas { position: absolute; inset: 22% 18% auto 18%; height: 40%; background: repeating-linear-gradient(to bottom, var(--border) 0 3px, transparent 3px 8px); }
 .cv.pilar { border-color: var(--primary); border-width: 3px; }
@@ -62,10 +62,10 @@ const cvs = Array.from({ length: TOTAL }, (_, i) => ({ i, pasa: PASAN.includes(i
 .embudo-caja { display: flex; flex-direction: column; align-items: center; padding: 1.4rem 1.1rem; border: 3px solid var(--chart-3); border-radius: var(--radius); background: var(--card); font-weight: 700; font-size: 1.15rem; text-align: center; }
 .embudo-caja small { font-weight: 500; }
 .flecha-larga { font-size: 2.4rem; color: var(--muted-foreground); }
-.pasan { display: flex; gap: 12px; min-height: 96px; }
-.cv.grande { width: 72px; opacity: 0; transform: translateX(-30px); border-color: var(--primary); }
+.pasan { display: flex; gap: 12px; min-height: 78px; }
+.cv.grande { width: 58px; opacity: 0; transform: translateX(-30px); border-color: var(--primary); }
 .filtrado .cv.grande { opacity: 1; transform: none; }
-.resumen { margin-top: 0.8rem; font-size: 1.3rem; transition: opacity 400ms ease 1200ms; }
+.resumen { margin-top: 0.8rem; font-size: 1.3rem; transition: opacity 300ms ease 600ms; }
 .resumen strong { font-family: var(--font-display-family); font-size: 2.4rem; color: var(--primary); }
 @media (prefers-reduced-motion: reduce) { .cv, .x { transition: none; } }
 </style>

@@ -63,12 +63,15 @@ No es un caso aislado: en Andalucía, el 57% de las personas en paro tiene más 
 
 <FiltroCvs :paso="$clicks" />
 
-<div v-click="1" class="explica">
-  <div class="explica-texto"><strong>Misma experiencia, distintas palabras.</strong> Pilar cumple todos los requisitos, pero como su CV no tiene las <strong>palabras clave</strong> que lee el filtro automático, queda fuera sin que nadie llegue a conocerla.</div>
-  <Sello :visible="$clicks >= 1">Descartada</Sello>
+<div v-click="2" class="explica">
+  <div class="explica-texto">
+    <div class="explica-tit">Misma experiencia, distintas palabras.</div>
+    Pilar cumple todos los requisitos, pero como su CV no tiene las <span class="clave">palabras clave</span> que lee el filtro automático, queda fuera sin que nadie llegue a conocerla.
+  </div>
+  <Sello :visible="$clicks >= 2">Descartada</Sello>
 </div>
 
-<div v-click="2" class="dato-42">
+<div v-click="3" class="dato-42">
   <span class="dato-42-num">42 %</span>
   <span>de las empresas ya valora <strong>filtrar currículums de forma automática</strong></span>
 </div>

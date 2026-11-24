@@ -161,3 +161,11 @@
 .ficha-sello { top: auto; bottom: -2.4rem; right: -3rem; font-size: 1.5rem; background: var(--background); border-radius: 10px; }
 .ficha-frase-grande { margin-top: 3.4rem !important; }
 .slide-puente p { opacity: 1 !important; color: var(--primary-foreground); }
+.explica-tit { font-family: var(--font-display-family); font-weight: 800; font-size: 2rem; line-height: 1.15; margin-bottom: 0.35rem; color: var(--foreground); }
+.clave { font-weight: 800; color: var(--destructive); background: linear-gradient(transparent 60%, color-mix(in oklch, var(--destructive) 18%, transparent) 60%); }
+.explica { margin-top: 0.9rem; gap: 1.4rem; }
+.explica-tit { font-size: 1.7rem; white-space: nowrap; }
+.explica-texto { font-size: 1.05rem; line-height: 1.4; }
+.explica .sello { font-size: 2rem; }
+.dato-42 { margin-top: 0.8rem; padding: 0.45rem 1.3rem; font-size: 1.2rem; }
+.dato-42-num { font-size: 2.4rem; }
