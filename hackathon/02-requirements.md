@@ -6,8 +6,8 @@ status: draft
 
 - [x] 1 Announce and extract from the Brief
 - [x] 2 Add what was heard
-- [ ] 3 Confirm inferred Requirements
-- [ ] 4 Open axes and Open questions
+- [x] 3 Confirm inferred Requirements
+- [x] 4 Open axes and Open questions
 - [ ] 5 Confirm and hand off
 
 | ID | Title | Gate | Source | Status |
@@ -23,6 +23,11 @@ status: draft
 | R9 | One concrete, non-generic customer and user | yes | heard | active |
 | R11 | Every decision has a reason and a source (no idea without basis) | yes | heard | active |
 | R10 | Roadmap after the canvas and prototype | no | heard | active |
+| R12 | Demo works without the local network | no | inferred | active |
+| R13 | Privacy and ethics with vulnerable people's data | yes | inferred | active |
+| R14 | Accessible for the chosen group | no | inferred | active |
+| R15 | Validation gathered during the event, with a minimum | yes | inferred | active |
+| R16 | Clear difference from what already exists | yes | inferred | active |
 
 ### R1 · Real social problem of a vulnerable group
 
@@ -134,10 +139,71 @@ status: draft
   - R11.2 The chosen idea survives a devil's-advocate round (Grilling) with no unanswered objection on problem, customer or business model.
   - R11.3 The pitch spends more time on problem, validation and business than on the technical build.
 
+### R12 · Demo works without the local network
+
+- Source: inferred: venue wifi is public and devices cannot see each other (00-kickoff.md, Venue network)
+- Gate: no
+- Rubric: Prototype and use of AI; Marketing and pitch
+- Status: active
+- Acceptance criteria:
+  - R12.1 The prototype is reachable from any device through a public URL or tunnel.
+  - R12.2 A recorded video of the main flow exists as a fallback for the live demo.
+
+### R13 · Privacy and ethics with vulnerable people's data
+
+- Source: inferred: the users belong to vulnerable groups; the jury and any partner organisation will ask about GDPR and AI decisions over people
+- Gate: yes
+- Rubric: The idea itself; Business model viability
+- Status: active
+- Acceptance criteria:
+  - R13.1 The AI document (R4.2) states which personal data is collected, why, where it is stored and how GDPR is met (minimisation, consent).
+  - R13.2 No decision with consequences for a person is taken by the AI alone; a human reviews it (links to R2.2).
+
+### R14 · Accessible for the chosen group
+
+- Source: inferred: challenge motto "Una IA que no deje a nadie atrás"
+- Gate: no
+- Rubric: The idea itself; Prototype and use of AI
+- Status: active
+- Acceptance criteria:
+  - R14.1 The prototype's main flow is adapted to the digital level of the R9 user (e.g. lectura fácil, voice, mobile first) and the pitch names the adaptation.
+
+### R15 · Validation gathered during the event, with a minimum
+
+- Source: inferred: makes R8 measurable so the jury can see it
+- Gate: yes
+- Rubric: Real validation of the problem and the customer
+- Status: active
+- Acceptance criteria:
+  - R15.1 Before the pitch, at least 10 people matching the R9 user profile answered a survey or an interview; the results (counts, key quotes) are in the zip and on a pitch slide.
+  - R15.2 At least 1 conversation with a real organisation or customer of the R9 type (beyond the event mentors) is recorded with who, when and what they said.
+
+### R16 · Clear difference from what already exists
+
+- Source: inferred: the team's starting idea (SheReady) was presented at another hackathon; the canvas asks for VENTAJA COMPETITIVA ("lo que os hace difíciles de copiar")
+- Gate: yes
+- Rubric: The idea itself; Business model viability
+- Status: active
+- Acceptance criteria:
+  - R16.1 The pitch and the canvas name at least 2 existing alternatives (products, services, public programmes) and what the solution does that they do not.
+  - R16.2 If the idea builds on a previous project, what is new in this edition is stated explicitly.
+
 ## Open axes
 
-<filled in step 4>
+- Domain (which social problem): Constrained: R1 (one of the groups named in the challenge sheet)
+- Target user: Constrained: R1, R9, R14 (one concrete persona inside those groups)
+- Paying customer: Constrained: R9 (one named entity), R3 (CLIENTES)
+- Platform (web / mobile / chatbot / voice): Free, within R12 and R14
+- Product type (assistant, platform, agent, tool for professionals): Free, within R2
+- Data: Free, within R13
+- AI provider and model: Free (no sponsor tech, no credits provided)
 
 ## Open questions
 
-<filled in step 4>
+- When exactly is the submission deadline, and when is the canvas due today? Working assumption: zip by 2026-11-25 10:00 CET; canvas within the next hours. Affects: R3, R7.
+- How long is the pitch, and is a live demo expected? Working assumption: 3-5 min, live demo. Affects: R6, R12.
+- What are the official jury criteria and weights? Working assumption: the Rubric in 01-brief.md. Affects: R6, R11.
+- May we reuse an idea already presented at another hackathon (SheReady)? Working assumption: yes, if the new contribution is explicit. Affects: R16.
+- Does the validation have to happen inside the event, or does earlier evidence count? Working assumption: both count, primary evidence from the event is valued more. Affects: R8, R15.
+- What format is expected for the Marketing deliverable (plan, assets, video)? Working assumption: a short marketing plan plus one ready asset. Affects: R5.
+- Is the canvas delivered only on paper, or also digitally in the zip? Working assumption: paper today, plus a photo and `canvas.md` in the zip. Affects: R3.
