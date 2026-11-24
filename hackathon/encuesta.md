@@ -12,6 +12,12 @@ Validación R8 + R15. Objetivo: **≥10 respuestas válidas** (45+ y en paro, R1
 
 ## Parte A · Encuesta a personas
 
+### Enlaces (creada 2026-11-24 13:28)
+
+- Responder (para difundir): <https://docs.google.com/forms/d/e/1FAIpQLSd01nXl1iFrlbE8ysh786zmHGrkZRx2HKvqR618h1Hs-JgNZg/viewform>
+- Editar (solo el equipo): <https://docs.google.com/forms/d/1pxGe-lBfnhPQfMkV38lZ4jtRBs-TXTeVdMu7dyT0Zys/edit>
+- Respuestas (hoja): <https://docs.google.com/spreadsheets/d/1fp0MXxttFYGOtmi3vb4a9MWLKNOubKtmOszIARJqyTs/edit>
+
 ### Cómo crearla (2 minutos)
 
 1. Abre <https://script.google.com> → **Nuevo proyecto**.
