@@ -44,7 +44,12 @@ Preset: `sobrio` (new, `design/presets/sobrio.json`). Level: 4, built from the r
 - Three-column icon cards.
 - Generic diffuse shadows.
 - `rounded-2xl` everywhere.
-- <Brief-specific item>
+- Dark mode, neon, gradients or tech look (Brief: familiar, calm, light only).
+- Junta, IMFE or SEPE logos, or their exact green: we must not look like an official site.
+- English UI words or anglicisms ("dashboard", "match", "score"); "ATS" only once, explained as "filtro automático".
+- Body text under 18px; thin or light font weights; all-caps paragraphs.
+- Stock photos of smiling young people in offices.
+- Animations that move content on their own (carousels, autoplay, blobs).
 
 ## Always
 
@@ -55,12 +60,21 @@ Preset: `sobrio` (new, `design/presets/sobrio.json`). Level: 4, built from the r
 - Real buttons.
 - 24px minimum targets.
 - Reduced motion respected.
+- 48px minimum height for main buttons, with a text label (icon alone is not enough).
+- One main action per screen, in `primary`.
 
 ## Effects
 
-Preset effects (2-4): <effect>, <effect>.
-Any other effect only for a Beat (`t`), at most one per screen: <effect: Beat t / none>.
+Preset effects (2-4): DrawnUnderline, ScrollProgressRule.
+Any other effect only for a Beat (`t`), at most one per screen: none..
 
 ## Usage rules
 
-- <where a font, colour or effect is used, and where it is not>
+- Noto Serif (`font-display`): page titles and card titles only, never buttons, labels or body.
+- Noto Sans (`font-sans`): everything else. Body `text-lg` (18px) minimum, line height 1.6, weight 400; buttons and labels weight 600.
+- `primary` green: the one main button per screen, links and the active step. Never as a large background block behind long text.
+- `secondary` / `accent` light green: highlighted cards (the selected offer, tips from the AI), never for buttons.
+- Background ivory, cards white with a 1px `border`.
+- `destructive` only for errors and deleting; state errors in words too.
+- DrawnUnderline: one key phrase in the landing title or the Wow moment result, once per screen.
+- ScrollProgressRule: long pages only (CV review, interview transcript).
