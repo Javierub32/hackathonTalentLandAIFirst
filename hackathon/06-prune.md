@@ -1,5 +1,5 @@
 ---
-status: draft
+status: done
 ---
 
 # Prune
@@ -8,7 +8,7 @@ status: draft
 - [x] 2 Confirm
 - [x] 3 Dry run
 - [x] 4 Prune
-- [ ] 5 Close
+- [x] 5 Close
 
 ## Modules
 
@@ -70,6 +70,8 @@ Note: `05-pitch.md` Not building lists "Voice interview (#4)". That item is the 
 
 ## Changes
 
-- Keep <Module>: remove it from the prune list before the run.
-- Turn on <Feature>: set it to `true` in `features.json`.
-- Restore <Module>: `python3 scripts/prune.py --restore <module> --sha <pre-Prune SHA>`
+- Turn on `landing` (if the R5 marketing piece needs a web landing): set `"landing": true` in `features.json`, then `make sync openapi api-client`.
+- Turn on `auth` (if accounts or roles become needed): set `"auth": true`, then `make openapi api-client`; `session.tsx` keeps working either way.
+- Turn on any other Feature (`upload` for a real CV upload, `rag`, `realtime`...): set it to `true` in `features.json`, then `make sync openapi api-client`.
+- Restore `mobile`: `python3 scripts/prune.py --restore mobile --sha 7672670731fc48f69a5d661e1ede2fd8ea867355`
+- Restore `data`: `python3 scripts/prune.py --restore data --sha 7672670731fc48f69a5d661e1ede2fd8ea867355`
