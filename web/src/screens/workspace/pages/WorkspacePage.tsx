@@ -11,6 +11,7 @@ import type { components } from "@/lib/api/schema"
 import { adaptCv, checkCv, loadCandidate, loadOffer, saveDraft } from "../api"
 import { CvViews } from "../components/CvViews"
 import { RequirementSummary } from "../components/RequirementSummary"
+import { demoAdaptation, demoReport, hasDemoMatch, usesLocalDemo } from "../demoPreparation"
 
 const actionClass = "min-h-12 h-auto whitespace-normal text-lg font-semibold"
 type Offer = components["schemas"]["OfferRead"]
@@ -49,25 +50,44 @@ function OfferDetails({ offer }: { offer: Offer }) {
   )
 }
 
-function Preparation({ offerId, offerTitle, onBack }: { offerId: number; offerTitle: string; onBack: () => void }) {
-  const ids = { offer_id: offerId, candidate_id: 1 }
+function Preparation({ offer, onBack }: { offer: Offer; onBack: () => void }) {
+  const ids = { offer_id: offer.id, candidate_id: 1 }
+  const localDemo = API_MODE === "fixtures" && usesLocalDemo(offer)
   const queryClient = useQueryClient()
   const filter = useQuery({
-    queryKey: ["workspace", offerId, ids.candidate_id, "filter"],
+    queryKey: ["workspace", offer.id, ids.candidate_id, "filter"],
+    enabled: !localDemo,
     queryFn: ({ signal }) => checkCv(ids, signal),
   })
   const candidate = useQuery({
     queryKey: ["workspace", "candidate", ids.candidate_id],
     queryFn: ({ signal }) => loadCandidate(ids.candidate_id, signal),
   })
-  const adaptation = useMutation({ mutationFn: () => adaptCv(ids) })
+  const adaptation = useMutation({
+    mutationFn: async (cv: NonNullable<typeof candidate.data>) => {
+      const result = localDemo ? demoAdaptation(offer, cv) : await adaptCv(ids)
+      if (!result.changes.length && result.cv_text === cv.cv_text &&
+          result.note?.startsWith("La adaptación con IA no está disponible")) {
+        throw new Error("El servicio de adaptación no está disponible.")
+      }
+      return result
+    },
+  })
   const draft = useMutation({
     mutationFn: (cvText: string) => saveDraft(ids, cvText),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["applications"] }),
   })
-  const adapted = adaptation.data
-  const report = adapted?.report ?? filter.data
   const cv = candidate.data
+  const initialReport = localDemo && cv ? demoReport(offer, cv) : filter.data
+  const result = adaptation.data
+  const adapted = result?.changes.length ? result : undefined
+  const noRequirements = initialReport?.total === 0
+  // An ATS miss can be a wording issue. In live mode, wait for the assessment of the full profile.
+  const noMatch = initialReport?.found === 0 && !noRequirements && (
+    localDemo ? !hasDemoMatch(offer) : result?.report.found === 0 && !result.changes.length
+  )
+  const noChanges = result && !adapted && !noMatch
+  const report = adapted?.report ?? initialReport
 
   return (
     <section aria-labelledby="workspace-cv" className="space-y-3">
@@ -75,10 +95,10 @@ function Preparation({ offerId, offerTitle, onBack }: { offerId: number; offerTi
         <Button variant="ghost" onClick={onBack}><ArrowLeft aria-hidden /> Volver a la oferta</Button>
         <div>
           <h1 id="workspace-cv" tabIndex={-1} className="font-display text-2xl font-bold text-primary">Mejorar mi CV</h1>
-          <p className="text-base leading-6 text-muted-foreground">{offerTitle}</p>
+          <p className="text-base leading-6 text-muted-foreground">{offer.title}</p>
         </div>
       </header>
-      {(filter.isPending || candidate.isPending) && <p role="status">Cargando tu CV y los requisitos…</p>}
+      {((!localDemo && filter.isPending) || candidate.isPending) && <p role="status">Cargando tu CV y los requisitos…</p>}
       {filter.isError && (
         <EmptyState title="No se pudo comprobar el currículum" action={
           <Button variant="outline" onClick={() => void filter.refetch()}>Volver a intentar</Button>
@@ -98,8 +118,16 @@ function Preparation({ offerId, offerTitle, onBack }: { offerId: number; offerTi
           adaptation.isPending ? "Mejorando tu currículum…" : ""}
       </div>
       {adaptation.isError && <p role="alert" className="text-destructive">No se pudo mejorar el CV. Vuelve a intentarlo.</p>}
-      {!adapted && cv && filter.data && (
-        <Button className={actionClass} disabled={adaptation.isPending} onClick={() => adaptation.mutate()}>
+      {noRequirements && <p role="status">No podemos adaptar el CV porque la oferta no especifica sus requisitos.</p>}
+      {noMatch && (
+        <div role="status" className="border-l-4 border-primary bg-accent px-4 py-3 text-accent-foreground">
+          <p className="font-bold">No podemos adaptar tu CV a esta oferta</p>
+          <p>No encontramos experiencia, formación ni habilidades en tu perfil que se relacionen con los requisitos del puesto.</p>
+        </div>
+      )}
+      {noChanges && <p role="status">No encontramos cambios respaldados por tu perfil que mejoren el CV para esta oferta.</p>}
+      {!adapted && !noMatch && !noChanges && !noRequirements && cv && initialReport && (
+        <Button className={actionClass} disabled={adaptation.isPending} onClick={() => adaptation.mutate(cv)}>
           <FileText aria-hidden />{adaptation.isPending ? "Mejorando tu CV…" : "Mejorar mi CV"}
         </Button>
       )}
@@ -133,7 +161,6 @@ function Workspace({ offerId }: { offerId: number }) {
     queryKey: ["workspace", offerId],
     queryFn: ({ signal }) => loadOffer(offerId, signal),
   })
-  const canImprove = API_MODE !== "fixtures" || offerId === 1
 
   return (
     <div className="relative mx-auto max-w-6xl text-lg">
@@ -154,26 +181,21 @@ function Workspace({ offerId }: { offerId: number }) {
                   <>
                     <OfferDetails offer={data} />
                     <div className="flex flex-col gap-3 sm:flex-row">
-                      {canImprove && (
-                        <Button ref={focusOfferAction} className={actionClass} onClick={() => {
-                          setView("cv")
-                          requestAnimationFrame(() => document.getElementById("workspace-cv")?.focus({ preventScroll: true }))
-                        }}>
-                          <FileText aria-hidden /> Mejorar mi CV
-                        </Button>
-                      )}
+                      <Button ref={focusOfferAction} className={actionClass} onClick={() => {
+                        setView("cv")
+                        requestAnimationFrame(() => document.getElementById("workspace-cv")?.focus({ preventScroll: true }))
+                      }}>
+                        <FileText aria-hidden /> Mejorar mi CV
+                      </Button>
                       <Button variant="outline" className={actionClass} asChild>
                         <Link to={`/ofertas/${offerId}/entrevista`}><MessageCircle aria-hidden /> Practicar la entrevista</Link>
                       </Button>
                     </div>
-                    {!canImprove && (
-                      <p>Prueba la mejora del CV en la <Link className="font-semibold text-primary underline" to="/ofertas/1">oferta de perfumería</Link>.</p>
-                    )}
                   </>
                 )}
-                {canImprove && view !== "offer" && (
+                {view !== "offer" && (
                   <div hidden={!showCv}>
-                    <Preparation offerId={offerId} offerTitle={data.title} onBack={() => {
+                    <Preparation offer={data} onBack={() => {
                       setView("return")
                       requestAnimationFrame(() => focusOfferAction.current?.focus())
                     }} />
