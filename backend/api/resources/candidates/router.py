@@ -17,4 +17,4 @@ def list_candidates(session: SessionDep) -> list[CandidateRead]:
 
 @router.get("/{candidate_id}", name="get")
 def get_candidate(candidate_id: int, session: SessionDep) -> CandidateRead:
-    return CandidateRead.model_validate(get_or_404(session, Candidate, candidate_id))
+    return CandidateRead.model_validate(get_or_404(session, Candidate, candidate_id, detail="La candidata no existe"))
