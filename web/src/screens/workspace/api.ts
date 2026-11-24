@@ -61,3 +61,13 @@ export async function saveDraft(ids: PrepRequest, cvText: string) {
   if (!created) throw new Error("No se pudo guardar el borrador.")
   return created
 }
+
+/** The candidate with her original `cv_text` (the CV shown as «subido»). */
+export async function loadCandidate(candidateId: number, signal: AbortSignal) {
+  const { data } = await api.GET("/api/candidates/{candidate_id}", {
+    params: { path: { candidate_id: candidateId } },
+    signal,
+  })
+  if (!data) throw new Error("No se pudo cargar tu currículum.")
+  return data
+}
