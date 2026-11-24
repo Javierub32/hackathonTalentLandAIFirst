@@ -11,7 +11,7 @@ const pasos = [
 
 <template>
   <div class="camino">
-    <div v-for="(p, i) in pasos" :key="i" class="paso-d">
+    <div v-for="(p, i) in pasos" :key="i" :class="['paso-d', { wow: p.n }]">
       <div class="bola">{{ i + 1 }}</div>
       <div v-if="p.n" :class="['pct', { mal: p.mal }]">{{ p.n }}</div>
       <div class="txt">{{ p.t }}</div>
@@ -20,11 +20,15 @@ const pasos = [
 </template>
 
 <style scoped>
-.camino { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
-.camino::before { content: ""; position: absolute; left: 10%; right: 10%; top: 1.6rem; height: 4px; background: color-mix(in oklch, var(--primary-foreground) 45%, transparent); }
-.paso-d { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.5rem; }
-.bola { width: 3.2rem; height: 3.2rem; border-radius: 50%; display: grid; place-items: center; background: var(--primary-foreground); color: var(--primary); font-weight: 800; font-size: 1.4rem; }
-.pct { font-family: var(--font-display-family); font-weight: 800; font-size: 2.6rem; line-height: 1; color: var(--primary-foreground); }
-.pct.mal { color: oklch(0.85 0.1 50); }
-.txt { font-size: 1.1rem; line-height: 1.3; color: var(--primary-foreground); }
+.camino { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.9rem; }
+.paso-d { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1rem 1rem 1.1rem; background: var(--ac-medio); border-radius: 6px; min-height: 11rem; }
+.paso-d:not(:last-child)::after { content: "›"; position: absolute; right: -0.85rem; top: 50%; transform: translateY(-50%); font-size: 2rem; font-weight: 800; color: var(--ac-menta); z-index: 2; }
+.bola { width: 2.4rem; height: 2.4rem; display: grid; place-items: center; background: var(--ac-menta); color: var(--ac-noche); font-weight: 900; font-size: 1.1rem;
+  clip-path: polygon(0 0, 75% 0, 100% 50%, 75% 100%, 0 100%); width: 3rem; }
+.pct { font-weight: 900; font-size: 2.7rem; line-height: 1; color: var(--ac-bosque); }
+.pct.mal { color: var(--destructive); }
+.txt { font-size: 1.05rem; line-height: 1.3; color: var(--ac-fondo); font-weight: 600; }
+.paso-d.wow { background: var(--ac-menta); box-shadow: 6px 6px 0 var(--ac-fondo); }
+.paso-d.wow .bola { background: var(--ac-bosque); color: var(--ac-fondo); }
+.paso-d.wow .txt { color: var(--ac-noche); }
 </style>

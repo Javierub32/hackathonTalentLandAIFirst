@@ -283,3 +283,97 @@
 .slide-cierre .cierre { line-height: 1.12 !important; }
 .slide-puente.slidev-layout::before { width: 30%; height: 55%; clip-path: polygon(30% 0, 100% 0, 100% 100%); }
 .slide-puente.slidev-layout::after { width: 30%; height: 55%; clip-path: polygon(20% 0, 30% 0, 100% 100%, 100% 118%); }
+
+/* =================== v5: más contraste y vida =================== */
+.slidev-vclick-target { transition: opacity 350ms ease, transform 400ms ease; }
+
+/* Diapo 1: foto grande a la izquierda cortada en diagonal, datos a la derecha */
+.slide-portada.slidev-layout { padding: 0; }
+.slide-portada.slidev-layout::before { left: auto; top: auto; right: 0; bottom: 0; width: 210px; height: 120px; background: var(--ac-menta); clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+.slide-portada.slidev-layout::after { left: 0; top: 0; right: auto; bottom: auto; width: 100%; height: 100%; background: var(--ac-menta); clip-path: polygon(44% 0, 47.5% 0, 39.5% 100%, 36% 100%); z-index: 2; }
+.portada { position: relative; height: 100%; }
+.portada-foto { position: absolute; left: 0; top: 0; bottom: 0; width: 44%; margin: 0; clip-path: polygon(0 0, 100% 0, 82% 100%, 0 100%); }
+.portada-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 45% 30%; }
+.portada-foto figcaption { position: absolute; left: 1rem; bottom: 0.6rem; font-size: 0.6rem; color: #fff; background: rgb(0 0 0 / 0.45); padding: 0.1rem 0.45rem; border-radius: 3px; }
+.portada-datos { position: absolute; left: 49%; right: 3rem; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; }
+.portada-datos h1 { font-size: 3.2rem !important; margin: 0.6rem 0 1rem !important; line-height: 1; }
+.chips { display: flex; flex-direction: column; gap: 0.5rem; }
+.chip { display: flex; align-items: baseline; gap: 0.7rem; padding: 0.45rem 0.9rem; background: #fff; border-left: 6px solid var(--ac-medio); border-radius: 4px; font-size: 1.05rem; box-shadow: 4px 4px 0 var(--ac-menta-suave); }
+.chip-num { font-weight: 900; font-size: 1.4rem; color: var(--ac-bosque); }
+.portada-frase { margin-top: 1.3rem; font-weight: 900; font-size: 2.2rem; line-height: 1.1; }
+.portada-sello { position: absolute; left: 4%; bottom: 13%; z-index: 3; font-size: 1.9rem; }
+.portada-sello .sello { background: rgb(255 255 255 / 0.88); }
+
+/* Diapo 3, clic 3: franja menta clara que entra desde la izquierda */
+.dato-42 { background: var(--ac-menta); color: var(--ac-noche); box-shadow: 6px 6px 0 var(--ac-medio); border-left: 10px solid var(--ac-bosque); }
+.dato-42 strong { color: var(--ac-bosque); }
+.dato-42-num { color: var(--ac-bosque); font-weight: 900; }
+.dato-42.slidev-vclick-hidden { transform: translateX(-60px); }
+.dato-42.slidev-vclick-target { transition: opacity 300ms ease, transform 500ms cubic-bezier(0.2, 1.2, 0.4, 1); }
+
+/* Diapo 6: tarjetas con cabecera, y "Lo que falta" entra como un golpe */
+.evidencias { gap: 1rem; margin-top: 1.2rem; align-items: stretch; }
+.evi { padding: 0; border: 0; border-radius: 6px; overflow: hidden; background: #fff; box-shadow: 6px 6px 0 var(--ac-menta); transition: opacity 400ms, transform 400ms, filter 400ms; }
+.evi-cab { background: var(--ac-bosque); color: var(--ac-menta); font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.85rem; padding: 0.6rem 1rem; display: flex; gap: 0.5rem; align-items: center; }
+.evi-ok { display: inline-grid; place-items: center; width: 1.4rem; height: 1.4rem; background: var(--ac-menta); color: var(--ac-bosque); border-radius: 3px; font-weight: 900; }
+.evi-cuerpo { padding: 0.9rem 1rem 1.1rem; font-size: 1.05rem; line-height: 1.35; }
+.evi-num { font-weight: 900; font-size: 2.6rem; color: var(--ac-bosque); margin: 0 0 0.4rem; letter-spacing: -0.02em; }
+.evi.apagada { opacity: 0.5; filter: grayscale(0.6); transform: scale(0.97); }
+.evi.falta { background: #fff; border: 3px solid var(--destructive); box-shadow: 8px 8px 0 color-mix(in oklch, var(--destructive) 25%, transparent); }
+.evi.falta .evi-cab { background: var(--destructive); color: #fff; }
+.evi.falta .evi-ok { background: #fff; color: var(--destructive); }
+.evi.falta .evi-num { color: var(--destructive); font-size: 3rem; }
+.evi.falta.slidev-vclick-target { transition: opacity 250ms ease, transform 450ms cubic-bezier(0.3, 1.7, 0.6, 1); }
+.evi.falta.slidev-vclick-hidden { transform: scale(1.35) rotate(4deg); }
+.evi.falta:not(.slidev-vclick-hidden) { transform: scale(1.06) rotate(-1.5deg); }
+
+/* Diapo 7: más contraste entre las dos mitades */
+.slide-oscura .reparto { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; gap: 1rem; max-width: 860px; }
+.reparto-mas { align-self: center; width: 2.6rem; height: 2.6rem; display: grid; place-items: center; background: var(--ac-menta); color: var(--ac-bosque); font-weight: 900; font-size: 1.8rem; border-radius: 4px; }
+.slide-oscura .lado { padding: 0; overflow: hidden; border-radius: 6px; text-align: left; }
+.slide-oscura .lado.ia { background: #fff; }
+.slide-oscura .lado.humano { background: var(--ac-menta); }
+.lado-cab { padding: 0.55rem 1.2rem; font-weight: 900; font-size: 1.3rem; }
+.lado.ia .lado-cab { background: var(--ac-medio); color: #fff; }
+.lado.humano .lado-cab { background: var(--ac-noche); color: var(--ac-menta); }
+.lado ul { margin: 0; padding: 0.8rem 1.2rem 1rem 2.4rem; font-size: 1.1rem; line-height: 1.5; color: var(--ac-noche); }
+.lado li::marker { color: var(--ac-medio); }
+.slide-oscura .lema { font-size: 2.5rem !important; }
+
+/* Diapo 8: tabla con cabecera verde y etiquetas de color */
+.comparativa { border-collapse: separate; border-spacing: 0 6px; font-size: 1rem; }
+.comparativa thead th { background: var(--ac-bosque); color: var(--ac-menta); font-size: 0.85rem; font-weight: 800; padding: 0.6rem 0.5rem; border: 0; }
+.comparativa thead th:first-child { background: transparent; }
+.comparativa tbody th, .comparativa tbody td { background: #fff; border: 0; padding: 0.45rem 0.5rem; }
+.comparativa tbody th { font-weight: 800; border-left: 6px solid var(--ac-linea); }
+.comparativa tbody th small { display: block; font-weight: 600; font-size: 0.75rem; color: var(--muted-foreground); }
+.pill { display: inline-block; padding: 0.15rem 0.7rem; border-radius: 4px; font-weight: 800; font-size: 0.9rem; white-space: nowrap; }
+.pill.si { background: var(--ac-menta); color: var(--ac-bosque); }
+.pill.no { background: #eef1ee; color: #7d8c84; }
+.pill.parte { background: #f6e6d6; color: #8a4b1f; }
+.comparativa tr.nuestra th, .comparativa tr.nuestra td { background: var(--ac-bosque); }
+.comparativa tr.nuestra th { color: #fff; font-size: 1.25rem; border-left-color: var(--ac-menta); display: flex; align-items: center; gap: 0.6rem; }
+.comparativa tr.nuestra .pill.si { background: var(--ac-menta); color: var(--ac-noche); font-size: 1rem; }
+.logo-fila { width: 34px; }
+
+/* Diapo 9: quién paga, poco texto y grande */
+.pagos { display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 1.2rem; margin-top: 0.8rem; }
+.pago { position: relative; background: #fff; border-radius: 6px; padding: 1rem 1.3rem 1.2rem; box-shadow: 6px 6px 0 var(--ac-menta); }
+.pago-etq { display: inline-block; padding: 0.15rem 1.2rem 0.15rem 0.6rem; background: var(--ac-menta); color: var(--ac-noche); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; clip-path: polygon(0 0, calc(100% - 0.6rem) 0, 100% 50%, calc(100% - 0.6rem) 100%, 0 100%); }
+.pago-quien { font-weight: 900; font-size: 2.6rem; line-height: 1.1; margin-top: 0.5rem; color: var(--ac-bosque); }
+.pago-como { font-weight: 800; font-size: 1.35rem; margin-top: 0.2rem; }
+.pago-det { font-size: 1.05rem; color: var(--muted-foreground); margin-top: 0.3rem; }
+.pago.principal { background: var(--ac-bosque); color: var(--ac-fondo); box-shadow: 8px 8px 0 var(--ac-menta); }
+.pago.principal .pago-quien { color: var(--ac-menta); font-size: 3.2rem; }
+.pago.principal .pago-det { color: var(--ac-menta-suave); }
+.pago.gratis .pago-etq { background: var(--ac-linea); }
+.pago.gratis .pago-como { font-size: 2rem; color: var(--ac-medio); font-weight: 900; }
+.pago-pie { display: flex; gap: 1.2rem; margin-top: 1.4rem; font-size: 1.05rem; }
+.pago-pie > div { flex: 1; padding: 0.6rem 1rem; background: var(--ac-menta-suave); border-radius: 6px; }
+.pie-etq { font-weight: 900; color: var(--ac-bosque); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; margin-right: 0.4rem; }
+
+/* Diapo 12: tarjetas de pasos en vez de texto suelto */
+.puente-sub { margin-bottom: 2rem !important; }
+.puente-sub strong { color: var(--ac-menta); }
+.slide-portada .portada { position: relative; height: 552px; width: 980px; }
+.portada-datos .antetitulo { align-self: flex-start; }

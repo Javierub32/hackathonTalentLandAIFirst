@@ -10,26 +10,23 @@ class: slide-portada
 
 <!-- 00:00 · Persona (R1.1, R9.2). Guion: hackathon/05-pitch.md ## Demo -->
 
-<div class="ficha">
-  <div class="ficha-cab">Ficha</div>
-  <div class="ficha-cuerpo">
-    <figure class="ficha-foto">
-      <img src="/pilar-cara.jpg" alt="Pilar, nuestra persona de ejemplo" />
-      <figcaption>Imagen ilustrativa</figcaption>
-    </figure>
-    <div>
-      <h1>Pilar, 53 años</h1>
-      <ul class="ficha-datos">
-        <li><strong>Málaga</strong></li>
-        <li><strong>18 meses</strong> en paro</li>
-        <li><strong>20 años</strong> en administración y comercio</li>
-      </ul>
+<div class="portada">
+  <figure class="portada-foto">
+    <img src="/pilar.jpg" alt="Pilar, nuestra persona de ejemplo" />
+    <figcaption>Imagen ilustrativa</figcaption>
+  </figure>
+  <div class="portada-datos">
+    <p class="antetitulo">Ficha</p>
+    <h1>Pilar, 53 años</h1>
+    <div class="chips">
+      <div class="chip"><span class="chip-num">Málaga</span><span>donde vive</span></div>
+      <div class="chip"><span class="chip-num">18 meses</span><span>en paro</span></div>
+      <div class="chip"><span class="chip-num">20 años</span><span>en administración y comercio</span></div>
     </div>
+    <div v-click="1" class="portada-frase">Envía currículums.<br><span class="rojo">Nadie la llama.</span></div>
   </div>
-  <div class="ficha-sello"><Sello :visible="$clicks >= 1">Sin respuesta</Sello></div>
+  <div class="portada-sello"><Sello :visible="$clicks >= 1">Sin respuesta</Sello></div>
 </div>
-
-<div v-click="1" class="ficha-frase-grande">Envía currículums. <span class="rojo">Nadie la llama.</span></div>
 
 <!--
 Pilar tiene 53 años, 20 años de experiencia en administración y comercio, y lleva 18 meses enviando currículums. Nadie la llama.
@@ -127,10 +124,10 @@ Y los números lo confirman: casi todos creen que su edad les quita oportunidade
 # Todo está ahí… menos la preparación
 
 <div class="evidencias">
-  <div class="evi"><div class="evi-tit">Hay ofertas</div><div class="evi-num">78 %</div><div>de empresas no encuentra a quién contratar</div></div>
-  <div class="evi"><div class="evi-tit">Hay ayudas</div><div class="evi-num">18.000 €</div><div>por contratar a una persona de +45 (Emplea-T)</div></div>
-  <div class="evi"><div class="evi-tit">Hay quien paga</div><div class="evi-num">9,99 M€</div><div>del IMFE para personas en paro vulnerables</div></div>
-  <div v-click class="evi falta"><div class="evi-tit">Lo que falta</div><div class="evi-num">Nadie</div><div>prepara a la persona <strong>para cada oferta</strong></div></div>
+  <div class="evi" :class="{ apagada: $clicks >= 1 }"><div class="evi-cab"><span class="evi-ok">✓</span> Hay ofertas</div><div class="evi-cuerpo"><div class="evi-num">78 %</div><div>de empresas <strong>no encuentra</strong> a quién contratar</div></div></div>
+  <div class="evi" :class="{ apagada: $clicks >= 1 }"><div class="evi-cab"><span class="evi-ok">✓</span> Hay ayudas</div><div class="evi-cuerpo"><div class="evi-num">18.000 €</div><div>por contratar a una persona <strong>de más de 45</strong> (Emplea-T)</div></div></div>
+  <div class="evi" :class="{ apagada: $clicks >= 1 }"><div class="evi-cab"><span class="evi-ok">✓</span> Hay quien paga</div><div class="evi-cuerpo"><div class="evi-num">9,99 M€</div><div>del IMFE para personas <strong>en paro vulnerables</strong></div></div></div>
+  <div v-click class="evi falta"><div class="evi-cab"><span class="evi-ok">✗</span> Lo que falta</div><div class="evi-cuerpo"><div class="evi-num">Nadie</div><div>prepara a la persona <strong>para cada oferta</strong></div></div></div>
 </div>
 
 <Fuente>ManpowerGroup, Desajuste de Talento 2026 · Junta de Andalucía, Emplea-T 2026, Línea 1 (BOJA 2026/60) · El Español, Aquileo+ (abr. 2026) · EPALE (Empléate) · Valencia Plaza (Labora).</Fuente>
@@ -152,12 +149,20 @@ class: text-center slide-oscura
 
 <div class="reparto">
   <div class="lado ia">
-    <div class="lado-tit">La IA prepara</div>
-    <div>lee la oferta · adapta el CV con su experiencia real · ensaya la entrevista</div>
+    <div class="lado-cab">La IA prepara</div>
+    <ul>
+      <li>Lee <strong>la oferta</strong></li>
+      <li>Adapta el CV <strong>con su experiencia real</strong></li>
+      <li>Ensaya <strong>la entrevista</strong></li>
+    </ul>
   </div>
+  <div class="reparto-mas">+</div>
   <div class="lado humano">
-    <div class="lado-tit">Las personas deciden</div>
-    <div>Pilar elige y envía · su orientadora del IMFE revisa</div>
+    <div class="lado-cab">Las personas deciden</div>
+    <ul>
+      <li><strong>Pilar</strong> elige y envía</li>
+      <li>Su <strong>orientadora del IMFE</strong> revisa</li>
+    </ul>
   </div>
 </div>
 
@@ -176,11 +181,11 @@ Por eso hemos creado Al curro: tu experiencia, preparada para cada oferta. La IA
     <tr><th></th><th>Ofertas</th><th>CV adaptado a cada oferta</th><th>Entrevista de esa oferta</th><th>Pensado para 45+</th><th>Con orientador</th></tr>
   </thead>
   <tbody>
-    <tr><th>Empléate (SEPE)</th><td class="si">✓ Sí</td><td class="no">✗ No</td><td class="no">✗ No</td><td class="si">✓ Sí</td><td class="no">✗ No</td></tr>
-    <tr><th>Simuladores con IA<br><small>Toptrabajos, AIApply</small></th><td class="no">✗ No</td><td class="no">✗ No</td><td class="parte">~ Genérica, de pago</td><td class="no">✗ No</td><td class="no">✗ No</td></tr>
-    <tr><th>Labora (Valencia)</th><td class="si">✓ Sí</td><td class="no">✗ No</td><td class="parte">~ Piloto, genérica</td><td class="no">✗ No</td><td class="si">✓ Sí</td></tr>
-    <tr><th>Krisalidas, Senia</th><td class="si">✓ Sí</td><td class="no">✗ No</td><td class="no">✗ No</td><td class="si">✓ Sí</td><td class="no">✗ No</td></tr>
-    <tr class="nuestra"><th>Al curro</th><td class="si">✓ Sí</td><td class="si">✓ Sí</td><td class="si">✓ Sí</td><td class="si">✓ Sí</td><td class="si">✓ Sí</td></tr>
+    <tr><th>Empléate (SEPE)</th><td><span class="pill si">✓ Sí</span></td><td><span class="pill no">✗ No</span></td><td><span class="pill no">✗ No</span></td><td><span class="pill si">✓ Sí</span></td><td><span class="pill no">✗ No</span></td></tr>
+    <tr><th>Simuladores con IA<small>Toptrabajos, AIApply</small></th><td><span class="pill no">✗ No</span></td><td><span class="pill no">✗ No</span></td><td><span class="pill parte">~ Genérica, de pago</span></td><td><span class="pill no">✗ No</span></td><td><span class="pill no">✗ No</span></td></tr>
+    <tr><th>Labora (Valencia)</th><td><span class="pill si">✓ Sí</span></td><td><span class="pill no">✗ No</span></td><td><span class="pill parte">~ Piloto, genérica</span></td><td><span class="pill no">✗ No</span></td><td><span class="pill si">✓ Sí</span></td></tr>
+    <tr><th>Krisalidas, Senia</th><td><span class="pill si">✓ Sí</span></td><td><span class="pill no">✗ No</span></td><td><span class="pill no">✗ No</span></td><td><span class="pill si">✓ Sí</span></td><td><span class="pill no">✗ No</span></td></tr>
+    <tr class="nuestra"><th><img src="/logo-al-curro-claro.png" alt="" class="logo-fila" /> Al curro</th><td><span class="pill si">✓ Sí</span></td><td><span class="pill si">✓ Sí</span></td><td><span class="pill si">✓ Sí</span></td><td><span class="pill si">✓ Sí</span></td><td><span class="pill si">✓ Sí</span></td></tr>
   </tbody>
 </table>
 
@@ -196,23 +201,30 @@ Hay portales de empleo y simuladores de entrevista, pero ninguno prepara a la pe
 
 # Quién paga
 
-<div class="modelo">
-  <div class="pagador principal">
-    <div class="quien">IMFE · Ayuntamiento de Málaga</div>
-    <div>Licencia anual por orientador, con los fondos europeos que ya tiene para este colectivo. Cada orientador de T-Acompañamos prepara a más personas.</div>
+<div class="pagos">
+  <div class="pago principal">
+    <div class="pago-etq">Paga</div>
+    <div class="pago-quien">IMFE</div>
+    <div class="pago-como">Licencia anual</div>
+    <div class="pago-det">con los <strong>fondos europeos</strong> que ya tiene</div>
   </div>
-  <div class="pagador">
-    <div class="quien">Empresas de Málaga</div>
-    <div>Publicar es gratis. Pagan por destacar ofertas. Ven al momento la ayuda Emplea-T.</div>
+  <div class="pago">
+    <div class="pago-etq">Paga</div>
+    <div class="pago-quien">Empresas</div>
+    <div class="pago-como">Destacar ofertas</div>
+    <div class="pago-det">publicar es <strong>gratis</strong></div>
   </div>
-  <div class="pagador">
-    <div class="quien">Después: Andalucía Orienta</div>
-    <div>2,7 M€ asignados a Málaga para orientación laboral.</div>
+  <div class="pago gratis">
+    <div class="pago-etq">No paga</div>
+    <div class="pago-quien">Pilar</div>
+    <div class="pago-como">0 €</div>
+    <div class="pago-det">siempre <strong>gratis</strong></div>
   </div>
-  <div class="pagador gratis">
-    <div class="quien">Pilar no paga nada</div>
-    <div>Coste de la IA: céntimos por persona.</div>
-  </div>
+</div>
+
+<div class="pago-pie">
+  <div><span class="pie-etq">Después</span> Andalucía Orienta: <strong>2,7 M€</strong> en Málaga</div>
+  <div><span class="pie-etq">Coste IA</span> <strong>céntimos</strong> por persona</div>
 </div>
 
 <Fuente>IMFE, T-Acompañamos y Aquileo+ (El Español, abr. 2026) · BOJA 2026/72 (Andalucía Orienta, Málaga: 2.708.196 €).</Fuente>

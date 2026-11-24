@@ -49,20 +49,24 @@ const [principal, ...resto] = citas
 </template>
 
 <style scoped>
-.voces { display: flex; flex-direction: column; gap: 1rem; }
-.resto { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.2rem; }
-.voz { display: flex; flex-direction: column; gap: 0.55rem; }
+.voces { display: flex; flex-direction: column; gap: 0.9rem; }
+.resto { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem; }
+.voz { display: flex; flex-direction: column; gap: 0.6rem; }
 .burbuja {
-  position: relative; padding: 1rem 1.3rem; background: var(--card); color: var(--foreground);
-  border: 2px solid var(--border); border-radius: var(--radius); font-size: 1.05rem; line-height: 1.35;
+  position: relative; padding: 0.8rem 1.1rem; background: #fff; color: var(--ac-noche);
+  border: 0; border-left: 8px solid var(--ac-medio); border-radius: 6px; font-size: 1.05rem; line-height: 1.32;
+  box-shadow: 6px 6px 0 var(--ac-menta);
 }
 .burbuja::after {
-  content: ""; position: absolute; left: 1.6rem; bottom: -11px; width: 18px; height: 18px;
-  background: var(--card); border-right: 2px solid var(--border); border-bottom: 2px solid var(--border); transform: rotate(45deg);
+  content: ""; position: absolute; left: 1.6rem; bottom: -12px; width: 0; height: 0;
+  border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 12px solid #fff;
 }
-.principal .burbuja { font-family: var(--font-display-family); font-size: 1.3rem; line-height: 1.4; padding: 1rem 1.5rem; border-color: var(--primary); border-width: 3px; }
-.principal .burbuja::after { border-color: var(--primary); border-width: 3px; bottom: -12px; }
+.principal .burbuja { background: var(--ac-bosque); color: var(--ac-fondo); border-left-color: var(--ac-menta); font-size: 1.22rem; line-height: 1.38; padding: 0.9rem 1.5rem; box-shadow: 8px 8px 0 var(--ac-menta); }
+.principal .burbuja::after { border-top-color: var(--ac-bosque); }
 .burbuja::before { content: "«"; } .burbuja > span:last-child::after { content: "»"; }
-.resalte { font-weight: 700; color: var(--foreground); background: linear-gradient(transparent 55%, color-mix(in oklch, var(--chart-4) 35%, transparent) 55%); }
-.quien { display: flex; align-items: center; gap: 0.45rem; padding-left: 1.2rem; font-family: var(--font-body-family); font-size: 0.85rem; font-weight: 600; color: var(--foreground); }
+.resalte { font-weight: 800; color: var(--ac-bosque); background: linear-gradient(transparent 50%, var(--ac-menta) 50%); padding: 0 2px; }
+.principal .resalte { color: var(--ac-menta); background: none; text-decoration: underline; text-decoration-color: color-mix(in oklch, var(--ac-menta) 60%, transparent); text-underline-offset: 5px; text-decoration-thickness: 3px; }
+.quien { display: flex; align-items: center; gap: 0.45rem; padding-left: 1.2rem; font-family: var(--font-body-family); font-size: 0.85rem; font-weight: 700; color: var(--ac-medio); }
+.voz.slidev-vclick-target { transition: opacity 350ms ease, transform 350ms ease; }
+.voz.slidev-vclick-hidden { transform: translateY(18px); }
 </style>

@@ -24,6 +24,7 @@ const n = e.n45
     </div>
   </div>
   <div v-click class="remate">
+    <FilaPersonas :n="e.laUsarian" :de="n" />
     <span class="remate-cifra">{{ e.laUsarian }} de {{ n }}</span>
     <span>lo usarían</span>
   </div>
@@ -31,11 +32,15 @@ const n = e.n45
 </template>
 
 <style scoped>
-.datos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin-top: 0.8rem; }
-.dato-enc { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.2rem; font-size: 1.15rem; line-height: 1.35; display: flex; flex-direction: column; gap: 0.5rem; }
-.cifra-enc { font-family: var(--font-display-family); font-weight: 800; font-size: 3rem; line-height: 1; color: var(--primary); }
+.datos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.3rem; margin-top: 0.6rem; }
+.dato-enc { background: #fff; border-top: 10px solid var(--ac-medio); border-radius: 6px; padding: 1rem 1.2rem 1.1rem; font-size: 1.1rem; line-height: 1.35; display: flex; flex-direction: column; gap: 0.45rem; box-shadow: 6px 6px 0 var(--ac-menta); }
+.dato-enc:first-child { border-top-color: var(--chart-4); }
+.cifra-enc { font-weight: 900; font-size: 3.4rem; line-height: 1; color: var(--ac-bosque); letter-spacing: -0.02em; }
 .cifra-enc.alerta { color: var(--chart-4); }
-.remate { margin: 1.6rem auto 0; width: fit-content; display: flex; align-items: baseline; gap: 1rem; padding: 0.9rem 2.2rem; border-radius: var(--radius); background: var(--primary); color: var(--primary-foreground); font-size: 1.8rem; font-family: var(--font-display-family); }
-.remate-cifra { font-weight: 800; font-size: 3rem; }
+.remate { margin: 1.5rem auto 0; width: fit-content; display: flex; align-items: center; gap: 1.1rem; padding: 0.8rem 2rem; border-radius: 6px; background: var(--ac-bosque); color: var(--ac-fondo); font-size: 1.7rem; font-weight: 700; box-shadow: 8px 8px 0 var(--ac-menta); }
+.remate :deep(.persona.lit) { fill: var(--ac-menta); }
+.remate-cifra { font-weight: 900; font-size: 2.8rem; color: var(--ac-menta); }
+.remate.slidev-vclick-target { transition: opacity 400ms ease, transform 450ms cubic-bezier(0.3, 1.5, 0.6, 1); }
+.remate.slidev-vclick-hidden { transform: scale(0.85); }
 .n { position: absolute; left: 3.5rem; bottom: 1.1rem; font-size: 0.7rem; color: var(--muted-foreground); margin: 0; }
 </style>
