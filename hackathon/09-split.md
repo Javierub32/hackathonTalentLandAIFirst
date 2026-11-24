@@ -49,18 +49,21 @@ Frontier order: Spine pass (Wow moment first), then Depth pass.
 | #1 | Espacio de la oferta: filtro y CV adaptado · Spine | lane:web | Paula | Spine | 3 (Wow moment) | 02:05, 02:25 | none |
 | #2 | Preparación: filtro y CV adaptado con IA · Spine | lane:llm | Alfonso | Spine | 3 (Seam with producer logic: scoring + LLM, Wow moment) | 02:05, 02:25 | none |
 | #3 | Lista de ofertas · Spine | lane:web | Marina | Spine | 2 (Real against the Ofertas Contract) | 01:50 | none |
-| #4 | Práctica de entrevista con voz · Spine | lane:web | Javier | Spine | 2 (Real against Entrevista + Voz Contracts) | 02:50 | none |
+| #4 | Práctica de entrevista con voz · Spine (scope: simulated video call, Change 2026-11-24) | lane:web | Javier | Spine | 2 (Real against Entrevista + Voz Contracts) | 02:50 | none |
 | #5 | Entrevista: preguntas y feedback con IA · Spine | lane:llm | Alfonso | Spine | 3 (Seam with producer logic: LLM + STT) | 02:50 | none |
 | #6 | Candidaturas y revisión de la orientadora · Spine | lane:web | Paula | Spine | 2 (Real against the Candidaturas Contract) | 03:20 | none |
-| #7 | Publicar oferta (empresa) · Spine | lane:web | Marina | Spine | 1 (one folder, one form over the stub) | 03:35 | none |
-| #8 | Inicio: elegir vista (candidata, orientadora, empresa) · Spine | lane:web | Andrea | Spine | 1 (one folder, fixtures, no Seam) | 01:50, 03:20, 03:35 | none |
+| ~~#7~~ | Publicar oferta (empresa) · Spine — cancelled (candidate-only demo, Change 2026-11-24) | lane:web | Marina | Spine | 1 (one folder, one form over the stub) | ~~03:35~~ | none |
+| ~~#8~~ | Inicio: elegir vista (candidata, orientadora, empresa) · Spine — cancelled (home is the offers list, folded into #37) | lane:web | Andrea | Spine | 1 (one folder, fixtures, no Seam) | ~~01:50, 03:20, 03:35~~ | none |
 | #9 | Diapositivas del pitch · Spine | lane:pitch | Alfonso | Spine | 2 (2+ files, content from 05-pitch and research) | 00:00-01:35, 03:50-04:45 | none |
 | #10 | API: ofertas, candidata y candidaturas reales · Depth | lane:api | Alfonso | Depth | 2 (Real producer of 3 Contracts) | 01:50, 03:20, 03:35 | none |
 | #11 | Documento de uso de IA · Depth | lane:pitch | Alfonso | Depth | 1 (one file, no Seam) | R4.2, R13.1 | none |
 | #12 | Pieza de marketing · Depth | lane:pitch | Alba | Depth | 2 (asset + copy, 2+ files) | R5.1, R5.2 | none |
 | #34 | CV en PDF: antes y después con cambios resaltados · Depth | lane:web | Alfonso | Depth | 2 (one folder, 3-4 components, no Seam change) | 02:25 | none |
+| #37 | Marco de la app con el estilo del cartel + inicio con ofertas · Depth | lane:web | Marina | Depth | 2 (shell + decoration + one screen, no Seam change) | 01:50 | none (goes first: #38 and #4 reuse its brand pieces) |
+| #38 | Mejorar CV en una sola pantalla: etiquetas y antes/después · Depth | lane:web | Paula | Depth | 3 (Wow moment, whole screen redesign) | 02:05, 02:25 | none (uses #39 `label` when it lands, `text` until then) |
+| #39 | Prep: etiqueta corta por requisito (aditivo) · Depth | lane:llm | Alfonso | Depth | 1 (one additive field, producer of the Contract) | 02:05, 02:25 | none |
 
-Per issue (#1-#12 and #34, same order): Tier · Agent · Files owned.
+Per issue (#1-#12, #34 and #37-#39, same order): Tier · Agent · Files owned.
 
 1. strong · repo · `web/src/screens/workspace/`
 2. strong · repo · `backend/api/resources/prep/`, `backend/llm/prompts/prep_*.md`, `web/src/screens/prep/`
@@ -75,6 +78,9 @@ Per issue (#1-#12 and #34, same order): Tier · Agent · Files owned.
 11. any · repo · `pitch/entregables/uso-ia.md`
 12. mid · repo · `pitch/entregables/marketing/`
 34. mid · repo · `web/src/screens/workspace/`, `hackathon/build-34.md` (added during Build, after #1 closed)
+37. mid · repo · `web/src/app/layouts/`, `web/src/components/brand/`, `web/src/screens/offers/` (except the generated `fixtures.json`) (added during Build: candidate-only demo + poster style)
+38. strong · repo · `web/src/screens/workspace/` (added during Build, after #34 closed)
+39. any · repo · `backend/api/resources/prep/`, `backend/llm/prompts/prep_*.md`, `web/src/screens/prep/`, `hackathon/08-contracts.md` (Change log line)
 
 No blocking edges: the Spine and Depth issues own disjoint paths and every Seam has a stub.
 
