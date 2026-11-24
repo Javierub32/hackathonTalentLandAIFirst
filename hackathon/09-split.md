@@ -58,8 +58,9 @@ Frontier order: Spine pass (Wow moment first), then Depth pass.
 | #10 | API: ofertas, candidata y candidaturas reales · Depth | lane:api | Alfonso | Depth | 2 (Real producer of 3 Contracts) | 01:50, 03:20, 03:35 | none |
 | #11 | Documento de uso de IA · Depth | lane:pitch | Alfonso | Depth | 1 (one file, no Seam) | R4.2, R13.1 | none |
 | #12 | Pieza de marketing · Depth | lane:pitch | Alba | Depth | 2 (asset + copy, 2+ files) | R5.1, R5.2 | none |
+| #34 | CV en PDF: antes y después con cambios resaltados · Depth | lane:web | Alfonso | Depth | 2 (one folder, 3-4 components, no Seam change) | 02:25 | none |
 
-Per issue (#1-#12, same order): Tier · Agent · Files owned.
+Per issue (#1-#12 and #34, same order): Tier · Agent · Files owned.
 
 1. strong · repo · `web/src/screens/workspace/`
 2. strong · repo · `backend/api/resources/prep/`, `backend/llm/prompts/prep_*.md`, `web/src/screens/prep/`
@@ -73,6 +74,7 @@ Per issue (#1-#12, same order): Tier · Agent · Files owned.
 10. mid · repo · `backend/api/resources/offers/`, `backend/api/resources/candidates/`, `backend/api/resources/applications/`
 11. any · repo · `pitch/entregables/uso-ia.md`
 12. mid · repo · `pitch/entregables/marketing/`
+34. mid · repo · `web/src/screens/workspace/`, `hackathon/build-34.md` (added during Build, after #1 closed)
 
 No blocking edges: the Spine and Depth issues own disjoint paths and every Seam has a stub.
 
