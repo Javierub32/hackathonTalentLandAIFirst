@@ -30,7 +30,7 @@ Kill-check: **pass**. Requirements: covers R1 (45+ long-term unemployed), R2 (AI
 
 ## Identity
 
-- Name: **Empleate** (provisional, heard: Driver, 2026-11-24 "por ahora"). ⚠ Clash: SEPE's portal is called **Empléate** (29,000+ offers for 45+, Research Q4) and is a competitor we must name under R16; same name risks confusion with the jury and looking like an official SEPE product. Revisit before the canvas/marketing are final.
+- Name: **Al curro** (final, heard: Driver, 2026-11-24 "la aplicación se llamaba Al curro"). Replaces the provisional "Empleate", which clashed with SEPE's **Empléate** (a competitor named under R16). Do not ask again.
 - Tagline: "Tu experiencia, preparada para cada oferta."
 - Voice and look (heard: Driver, 2026-11-24): made for Spanish people over 45. Simple, familiar, calm, nothing modernist, foreign-looking or extravagant. Plain Spanish without anglicisms (say "filtro automático", explain "ATS" once), short sentences, large text, clear buttons, warm and respectful tone. Input for Design (Phase 8).
 
@@ -67,17 +67,17 @@ What the judges know walking in: the challenge (an AI that leaves nobody behind)
 | 00:20 | Slide: 3 big figures with sources | "No es un caso aislado: en Andalucía, el 57% de las personas en paro tiene más de 45 años. Más de la mitad de los mayores de 50 busca más de un año. Y el 90% cree que su currículum ni siquiera llega a una persona." | R1.2, R8.1 | pitch | Real (Research Q3, Q2 sources) |
 | 00:45 | Slide: "CV → filtro automático → persona" diagram | "¿Por qué? Muchas empresas usan un filtro automático, llamado ATS, que lee el currículum antes que nadie y descarta el que no encaja con las palabras de la oferta. Y cada vez más entrevistas las hace una IA." | R1.2 | pitch | Real (ManpowerGroup 42%, AI Act) |
 | 01:05 | Slide: survey results (N, %, 2 quotes) + logo/name of the organisation consulted | "Hoy hemos hablado con <N> personas mayores de 45 en paro: <X>% no sabe cómo adaptar su CV a cada oferta. <cita>. Y hemos hablado con <organización>." | R8.2, R15.1, R15.2 | pitch | Real (fill with today's survey; placeholder until then) |
-| 01:35 | Slide: name + tagline + one-line solution, Human/AI split | "Por eso hemos creado Empleate: tu experiencia, preparada para cada oferta. La IA prepara; la persona y su orientador deciden." | R2.2 | pitch | Real |
+| 01:35 | Slide: name + tagline + one-line solution, Human/AI split | "Por eso hemos creado Al curro: tu experiencia, preparada para cada oferta. La IA prepara; la persona y su orientador deciden." | R2.2 | pitch | Real |
 | 01:50 | App: offers list, large cards, one with badge "Ayuda Emplea-T: hasta 18.000 €" | "Las empresas de Málaga publican aquí sus ofertas. Pilar elige una: dependienta de perfumería y atención al cliente en Málaga (oferta real del IMFE, 2026/01198)." | R4.1, R14.1 | web | Real (offers seeded from real public listings, source cited) |
 | 02:05 | App: offer workspace, filter view "5 de 13 requisitos · 38%", missing ones in plain words | "Así lee el filtro automático su currículum para esta oferta: solo encuentra 5 de los 13 requisitos. Y ella los cumple casi todos; simplemente no lo dice con esas palabras." | R2.1 | web, llm | Real |
 | 02:25 | App: tap "Adaptar mi CV" → rewritten CV, "11 de 13 · 85%", each change linked to her real experience | "Un toque, y la IA reescribe su CV para esta oferta, solo con experiencia real suya, nada inventado. 85%." (Wow) | R2.1, R4.1, R13.2 | web, llm | Real |
 | 02:50 | App: interview practice for this offer, 2 questions + answer + kind, concrete feedback | "Ahora practica la entrevista de esta oferta: las preguntas salen de este puesto. La IA le dice qué ha hecho bien y qué mejorar." | R2.1, R14.1 | web, llm | Real |
 | 03:20 | App: "Revisado por tu orientadora" + "Enviar candidatura" | "Antes de enviar, su orientadora del IMFE lo revisa. Pilar aplica sin salir de la plataforma." | R2.2, R13.2, R4.1 | web, api | Real (counsellor review: simple approve state) |
 | 03:35 | App: company view "Publicar oferta" with aid shown | "Y la empresa no solo publica gratis: ve al momento cuánto recibe por contratar a una persona de más de 45. Emplea-T, de la Junta, da hasta 18.000 €." (cut first) | R16.1 | web, api | Real (aid amount from BOJA; confirm figure) |
-| 03:50 | Slide: alternatives table (Empléate SEPE, simuladores IA, Labora) vs Empleate | "Hay portales de empleo y simuladores de entrevista, pero ninguno prepara a la persona para cada oferta, ni está hecho para mayores de 45." | R16.1 | pitch | Real (Research Q1, Q4) |
+| 03:50 | Slide: alternatives table (Empléate SEPE, simuladores IA, Labora) vs Al curro | "Hay portales de empleo y simuladores de entrevista, pero ninguno prepara a la persona para cada oferta, ni está hecho para mayores de 45." | R16.1 | pitch | Real (Research Q1, Q4) |
 | 04:05 | Slide: customer + business model | "Quién paga: el IMFE, el Instituto de Empleo del Ayuntamiento de Málaga, que ya tiene orientadores y fondos europeos para este colectivo. Cada orientador atiende a más personas. Las empresas pagan por destacar ofertas. Coste de IA: céntimos por persona." | R9.1, R3.2 | pitch | Real (canvas) |
 | 04:30 | Slide: dated roadmap | "Piloto con el IMFE en 2027 con 100 personas, después Andalucía Orienta, y formación y voz para entrevistas por teléfono." | R10.1 | pitch | Real |
-| 04:45 | Slide: ask + tagline | "Buscamos un piloto con el IMFE y vuestro apoyo. Empleate: que la experiencia vuelva a contar." | R6.2 | pitch | Real |
+| 04:45 | Slide: ask + tagline | "Buscamos un piloto con el IMFE y vuestro apoyo. Al curro: que su experiencia vuelva a contar." | R6.2 | pitch | Real |
 | 05:00 | End | | | | |
 
 Time split (R11.3): problem, validation and business 3:00; app 2:00.

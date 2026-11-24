@@ -1,6 +1,6 @@
-# Uso de la IA en Empleate
+# Uso de la IA en Al curro
 
-Empleate ayuda a una persona de más de 45 años en paro de larga duración (nuestra persona de ejemplo es Pilar, 53 años, Málaga) a preparar cada oferta concreta: ver cómo la lee un filtro automático, adaptar su CV con su experiencia real y ensayar la entrevista. La IA prepara a la persona. No decide nada sobre ella.
+Al curro ayuda a una persona de más de 45 años en paro de larga duración (nuestra persona de ejemplo es Pilar, 53 años, Málaga) a preparar cada oferta concreta: ver cómo la lee un filtro automático, adaptar su CV con su experiencia real y ensayar la entrevista. La IA prepara a la persona. No decide nada sobre ella.
 
 ## 1. Qué hace la IA y qué decide cada uno
 
@@ -58,7 +58,7 @@ Son cálculos aproximados, no medidos. Aunque una persona prepare 20 ofertas, la
 
 ## 4. Datos personales y RGPD
 
-Las personas que usan Empleate son un colectivo vulnerable, así que tratamos sus datos con más cuidado.
+Las personas que usan Al curro son un colectivo vulnerable, así que tratamos sus datos con más cuidado.
 
 | Pregunta | Respuesta |
 | --- | --- |
@@ -80,11 +80,11 @@ Las personas que usan Empleate son un colectivo vulnerable, así que tratamos su
 
 ## 5. Ley Europea de IA
 
-- **Usar IA para seleccionar candidatos es de alto riesgo** ([AI Act, Anexo III, punto 4](https://ai-act-service-desk.ec.europa.eu/es/ai-act/annex-3)). Empleate no selecciona a nadie: ayuda a la persona que busca trabajo. Ninguna empresa la usa para filtrar candidatos.
-- **Está prohibido reconocer emociones en el trabajo** ([AI Act, art. 5.1.f](https://artificialintelligenceact.eu/es/article/5/)). Empleate no analiza caras, gestos, tono de voz ni emociones. La entrevista solo trabaja con el texto de la respuesta.
+- **Usar IA para seleccionar candidatos es de alto riesgo** ([AI Act, Anexo III, punto 4](https://ai-act-service-desk.ec.europa.eu/es/ai-act/annex-3)). Al curro no selecciona a nadie: ayuda a la persona que busca trabajo. Ninguna empresa la usa para filtrar candidatos.
+- **Está prohibido reconocer emociones en el trabajo** ([AI Act, art. 5.1.f](https://artificialintelligenceact.eu/es/article/5/)). Al curro no analiza caras, gestos, tono de voz ni emociones. La entrevista solo trabaja con el texto de la respuesta.
 - **Transparencia**: la persona siempre sabe qué parte hace la IA, y el filtro explica cada resultado con la frase del CV que lo prueba.
 
-Aun así, el problema existe: el 90 % de las personas en paro de más de 50 años cree que su CV no pasa el filtro por su edad ([Fundación Adecco, 2024](https://fundacionadecco.org/wp-content/uploads/2024/06/190624NDP-TUEDADESUNTESORO-.pdf)), y las empresas usan cada vez más estos sistemas ([ManpowerGroup, vía Que.es](https://www.que.es/2026/08/14/como-hacer-cv-para-ia/)). Empleate enseña a la persona cómo la leen estos filtros, para que no la dejen atrás.
+Aun así, el problema existe: el 90 % de las personas en paro de más de 50 años cree que su CV no pasa el filtro por su edad ([Fundación Adecco, 2024](https://fundacionadecco.org/wp-content/uploads/2024/06/190624NDP-TUEDADESUNTESORO-.pdf)), y las empresas usan cada vez más estos sistemas ([ManpowerGroup, vía Que.es](https://www.que.es/2026/08/14/como-hacer-cv-para-ia/)). Al curro enseña a la persona cómo la leen estos filtros, para que no la dejen atrás.
 
 ## Fuentes
 

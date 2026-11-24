@@ -2,7 +2,7 @@
 status: draft
 ---
 
-# Canvas "HACKATHON IA FIRST" · Empleate
+# Canvas "HACKATHON IA FIRST" · Al curro
 
 Copia digital del canvas (R3.3). Cada casilla tiene:
 
@@ -18,7 +18,7 @@ Coherencia (R3.2): CLIENTES (IMFE) paga vía INGRESOS (licencia) · CANALES lleg
 - Equipo: Left Joiners
 - Reto: 03 Social · "Una IA que no deje a nadie atrás"
 - Fecha: 24-25/11/2026
-- Nombre provisional: Empleate (⚠ choca con *Empléate* del SEPE, que es competidor; revisar antes del marketing)
+- Nombre: Al curro (final; sustituye a "Empleate", que chocaba con *Empléate* del SEPE)
 
 ## CLIENTES · ¿quién paga?
 
