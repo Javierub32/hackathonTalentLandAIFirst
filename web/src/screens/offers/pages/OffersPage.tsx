@@ -14,12 +14,6 @@ function OfferCard({ offer }: { offer: Offer }) {
         <p className="text-lg leading-relaxed">{offer.employer || "Empresa sin indicar"}</p>
       </div>
 
-      {offer.hiring_aid && (
-        <p className="rounded-md bg-secondary px-3 py-2 text-lg font-semibold leading-relaxed text-secondary-foreground">
-          {offer.hiring_aid}
-        </p>
-      )}
-
       <dl className="space-y-2 text-lg leading-relaxed">
         <div>
           <dt className="font-semibold">Lugar</dt>
