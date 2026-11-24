@@ -6,7 +6,7 @@ status: draft
 
 - [x] 1 Ask the four questions
 - [x] 2 Recommend
-- [ ] 3 Compare live
+- [x] 3 Compare live
 - [ ] 4 Pick and tune
 - [ ] 5 Check contrast
 - [ ] 6 Freeze
