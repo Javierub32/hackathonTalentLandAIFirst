@@ -1,5 +1,5 @@
 ---
-status: draft
+status: done
 ---
 
 # Contracts
@@ -8,7 +8,7 @@ status: draft
 - [x] 2 Walk the Beats
 - [x] 3 Confirm the Seams
 - [x] 4 Stub
-- [ ] 5 Close
+- [x] 5 Close
 
 ## Answers (step 1)
 
