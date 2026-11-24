@@ -110,7 +110,7 @@ function Preparation({ offer, onBack }: { offer: Offer; onBack: () => void }) {
         } />
       )}
       <div className="grid items-start gap-3 lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-5">
-        <div>{report && <RequirementSummary report={report} />}</div>
+        <div>{report && <RequirementSummary report={report} showFitHint={!adapted} />}</div>
         {cv && <CvViews name={cv.name} original={cv.cv_text} adapted={adapted} />}
       </div>
       <div className="sr-only" role="status" aria-atomic="true">

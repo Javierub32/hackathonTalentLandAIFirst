@@ -9,21 +9,27 @@ type Requirement = FilterReport["requirements"][number] & { label?: string }
 
 function shortLabel({ label, text }: Requirement) {
   if (label?.trim()) return label.trim()
-  const words = text.replace(/^experiencia previa en\s+/i, "Experiencia en ")
+  const words = text.replace(/^se valoran?:?\s+/i, "")
+    .replace(/^experiencia previa en\s+/i, "Experiencia en ")
     .replace(/^(conocimientos e interés por(?: la| el)?|buenas)\s+/i, "")
     .replace(/[,;:].*$/, "").split(/\s+/)
   const short = words.slice(0, 3).join(" ").replace(/\s+(y|e|en|de|por|al|o|la|el)$/i, "")
   return short.charAt(0).toUpperCase() + short.slice(1)
 }
 
-export function RequirementSummary({ report }: { report: FilterReport }) {
+export function RequirementSummary({ report, showFitHint }: { report: FilterReport; showFitHint: boolean }) {
   return (
     <div className="space-y-2">
       <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
         <h2><Etiqueta>Palabras clave</Etiqueta></h2>
         <p className="text-xl font-bold text-primary">{report.found} de {report.total} · {report.percent}%</p>
+        {showFitHint && report.found > 0 && report.found < report.total && (
+          <p className="basis-full leading-snug text-muted-foreground">
+            Tu CV recoge parte de los requisitos.
+          </p>
+        )}
         <Dialog>
-          <DialogTrigger asChild><Button variant="link" className="px-0 text-base">Ver requisitos</Button></DialogTrigger>
+          <DialogTrigger asChild><Button variant="link" className="px-0 text-base">Revisar requisitos</Button></DialogTrigger>
           <DialogContent className="max-h-[85dvh] overflow-auto sm:max-w-2xl" showCloseButton={false}>
             <DialogTitle className="font-display text-2xl">Requisitos de la oferta</DialogTitle>
             <DialogDescription className="text-lg">El filtro automático (ATS) busca los requisitos de la oferta en tu CV.</DialogDescription>
