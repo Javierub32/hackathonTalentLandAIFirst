@@ -30,13 +30,13 @@ Flags in `features.json` are shared by id across Modules.
 | Feature | Module | State | Reason |
 |---|---|---|---|
 | landing | web | off | No Beat shows a public landing; the demo opens on the offers list (Beat 01:50). Open question: R5.1 marketing asset |
-| auth | web | off | Not building: company accounts and login roles; one seeded candidate (Mari Carmen), candidate/company/counsellor views reached by a simple switch (Beats 01:50, 03:20, 03:35) |
+| auth | web | off | Not building: company accounts and login roles; one seeded candidate (Pilar), candidate/company/counsellor views reached by a simple switch (Beats 01:50, 03:20, 03:35) |
 | dashboard | web | off | No Beat shows KPIs or an overview |
 | crud | web | on | Offers list and detail (Beat 01:50), "Publicar oferta" form (Beat 03:35), applications with approve state (Beat 03:20) |
 | settings | web | off | No Beat configures preferences |
 | showcase | web | on | Design Phase (next) uses the gallery; drop before the demo if unused |
 | chat | web | on | Beat 02:50: interview practice is a conversation with the model, driven by voice (`voice` on); text stays as fallback |
-| upload | web | off | Mari Carmen's CV is seeded; no Beat uploads a file |
+| upload | web | off | Pilar's CV is seeded; no Beat uploads a file |
 | realtime | web | off | No Beat shows data changing live |
 | notifications | web | off | No Beat alerts the user |
 | map | web | off | Offers are shown as a list, no Beat uses a map |
