@@ -72,8 +72,6 @@ What the judges know walking in: the challenge (an AI that leaves nobody behind)
 | 02:05 | App: offer workspace, filter view "5 de 13 requisitos · 38%", missing ones in plain words | "Así lee el filtro automático su currículum para esta oferta: solo encuentra 5 de los 13 requisitos. Y ella los cumple casi todos; simplemente no lo dice con esas palabras." | R2.1 | web, llm | Real |
 | 02:25 | App: tap "Adaptar mi CV" → rewritten CV, "11 de 13 · 85%", each change linked to her real experience | "Un toque, y la IA reescribe su CV para esta oferta, solo con experiencia real suya, nada inventado. 85%." (Wow) | R2.1, R4.1, R13.2 | web, llm | Real |
 | 02:50 | App: interview practice for this offer, 2 questions + answer + kind, concrete feedback | "Ahora practica la entrevista de esta oferta: las preguntas salen de este puesto. La IA le dice qué ha hecho bien y qué mejorar." | R2.1, R14.1 | web, llm | Real |
-| 03:20 | App: "Revisado por tu orientadora" + "Enviar candidatura" | "Antes de enviar, su orientadora del IMFE lo revisa. Pilar aplica sin salir de la plataforma." | R2.2, R13.2, R4.1 | web, api | Real (counsellor review: simple approve state) |
-| 03:35 | App: company view "Publicar oferta" with aid shown | "Y la empresa no solo publica gratis: ve al momento cuánto recibe por contratar a una persona de más de 45. Emplea-T, de la Junta, da hasta 18.000 €." (cut first) | R16.1 | web, api | Real (aid amount from BOJA; confirm figure) |
 | 03:50 | Slide: alternatives table (Empléate SEPE, simuladores IA, Labora) vs Al curro | "Hay portales de empleo y simuladores de entrevista, pero ninguno prepara a la persona para cada oferta, ni está hecho para mayores de 45." | R16.1 | pitch | Real (Research Q1, Q4) |
 | 04:05 | Slide: customer + business model | "Quién paga: el IMFE, el Instituto de Empleo del Ayuntamiento de Málaga, que ya tiene orientadores y fondos europeos para este colectivo. Cada orientador atiende a más personas. Las empresas pagan por destacar ofertas. Coste de IA: céntimos por persona." | R9.1, R3.2 | pitch | Real (canvas) |
 | 04:30 | Slide: dated roadmap | "Piloto con el IMFE en 2027 con 100 personas, después Andalucía Orienta, y formación y voz para entrevistas por teléfono." | R10.1 | pitch | Real |
@@ -93,6 +91,8 @@ Time split (R11.3): problem, validation and business 3:00; app 2:00.
 - Real Emplea-T application paperwork for the employer (only the aid amount is shown).
 - Any face, voice-emotion or personality analysis (AI Act Art. 5(1)(f), R13).
 - Full counsellor back office: only an "approve before sending" state.
+- Demo is candidate-only (Change during Build, heard: Driver, 2026-11-24): Beats 03:20 (counsellor review) and 03:35 (company "Publicar oferta") cut; their seconds go to the CV (02:05-02:25) and interview (02:50) Beats. The counsellor and the company stay in the slides (01:35 Human/AI split, 03:50, 04:05). "Publicar oferta" (#7) is not built.
+- Interview practice is shown as a simulated video call with the AI interviewer (no face or emotion analysis, R13).
 
 ## Coverage
 
@@ -104,5 +104,6 @@ Time split (R11.3): problem, validation and business 3:00; app 2:00.
 - R11.1: canvas "por qué" lines live in `hackathon/canvas.md`. R11.2: covered by the devil's-advocate round above (no open objection). R11.3: covered by the time split (3:00 problem/validation/business vs 2:00 app).
 - R12.1, R12.2: public URL and backup video are build/demo tasks; ⚠ the video must be recorded before the pitch.
 - R13.1: GDPR/data statement goes in the AI-use document (R4.2).
+- R2.2, R16.1: after the candidate-only Change, covered by the slide Beats 01:35 and 03:50.
 - R16.2: the idea does not reuse SheReady; nothing to declare. If any code or text from a previous project is reused, state it.
 - ⚠ R8.2, R15.1, R15.2: Beat 01:05 has placeholders; without today's survey (10+ people 45+) and one organisation contact, the Gate fails.
