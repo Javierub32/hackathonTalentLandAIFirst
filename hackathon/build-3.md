@@ -7,7 +7,7 @@ status: draft
 - [x] 1 Pick
 - [x] 2 Read
 - [x] 3 Implement
-- [ ] 4 Check
+- [x] 4 Check
 - [ ] 5 Review requests
 - [ ] 6 Merge
 - [ ] 7 Handoff
@@ -24,3 +24,5 @@ status: draft
 - [x] Se lee bien en móvil con texto grande y botones claros.
 
 Verificación en modo demo, a 360 px: 11 tarjetas, 6 insignias, 11 códigos del IMFE, enlaces a los 11 detalles y controles de 48 px con texto de 18 px. El enlace de la primera tarjeta abrió `/ofertas/1`.
+
+`make check` pasó con un aviso no bloqueante de Ruff. Tras `make seed`, la API local devolvió las 11 ofertas y confirmó el código IMFE 2026/01198 para la primera.
