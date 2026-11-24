@@ -57,7 +57,7 @@ Frontier order: Spine pass (Wow moment first), then Depth pass.
 | #9 | Diapositivas del pitch · Spine | lane:pitch | Andrea | Spine | 2 (2+ files, content from 05-pitch and research) | 00:00-01:35, 03:50-04:45 | none |
 | #10 | API: ofertas, candidata y candidaturas reales · Depth | lane:api | Javier | Depth | 2 (Real producer of 3 Contracts) | 01:50, 03:20, 03:35 | none |
 | #11 | Documento de uso de IA · Depth | lane:pitch | Alfonso | Depth | 1 (one file, no Seam) | R4.2, R13.1 | none |
-| #12 | Pieza de marketing · Depth | lane:pitch | Alfonso | Depth | 2 (asset + copy, 2+ files) | R5.1, R5.2 | none |
+| #12 | Pieza de marketing · Depth | lane:pitch | Alba | Depth | 2 (asset + copy, 2+ files) | R5.1, R5.2 | none |
 
 Per issue (#1-#12, same order): Tier · Agent · Files owned.
 
