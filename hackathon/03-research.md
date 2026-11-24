@@ -5,8 +5,8 @@ status: draft
 # Research
 
 - [x] 1 Gather what the team knows
-- [ ] 2 Propose Research questions
-- [ ] 3 Assign
+- [x] 2 Propose Research questions
+- [x] 3 Assign (skipped: solo research by the Driver's agent)
 - [ ] 4 Research handoff
 - [ ] 5 Synthesise
 - [ ] 6 Done
@@ -25,6 +25,11 @@ Team answer (Driver, 2026-11-24):
 
 | # | Lens | Topic | Assignee | Issue |
 |---|------|-------|----------|-------|
+| Q1 | Landscape | Existing AI job coaches and tools (interview simulators, ATS CV optimisers, public programmes) and their gaps for 45+ and young people without experience | alraro (agent, solo) | n/a |
+| Q2 | Landscape | How ATS and AI-run interviews filter today, adoption in Spain, age and no-experience bias | alraro (agent, solo) | n/a |
+| Q3 | Ingredients | Data to size the problem and persona: long-term unemployment 45+/52+, youth unemployment and NEET in Málaga/Andalucía/Spain, ageism reports | alraro (agent, solo) | n/a |
+| Q4 | Ingredients | Named paying customers (public employment services, city councils, NGOs, universities, foundations), their programmes and budgets; free AI APIs | alraro (agent, solo) | n/a |
+| Q5 | Judges & past winners | Talent Land España / IA First: organiser, jury, mentors' background, past winners of this or similar social hackathons | alraro (agent, solo) | n/a |
 
 ## Landscape
 
