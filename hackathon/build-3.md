@@ -6,7 +6,7 @@ status: draft
 
 - [x] 1 Pick
 - [x] 2 Read
-- [ ] 3 Implement
+- [x] 3 Implement
 - [ ] 4 Check
 - [ ] 5 Review requests
 - [ ] 6 Merge
@@ -14,11 +14,11 @@ status: draft
 
 ## Files owned
 
-- , salvo  (generado).
+- `web/src/screens/offers/`, salvo `fixtures.json` (generado).
 
 ## Acceptance criteria
 
-- [ ] En  se ven las 11 ofertas reales con título, empresa, lugar, jornada y salario.
-- [ ] Las ofertas con  muestran la insignia de la ayuda Emplea-T.
-- [ ] Cada tarjeta enlaza a  y cita la fuente (IMFE, código).
+- [ ] En `/ofertas` se ven las 11 ofertas reales con título, empresa, lugar, jornada y salario.
+- [ ] Las ofertas con `hiring_aid` muestran la insignia de la ayuda Emplea-T.
+- [ ] Cada tarjeta enlaza a `/ofertas/<id>` y cita la fuente (IMFE, código).
 - [ ] Se lee bien en móvil con texto grande y botones claros.
