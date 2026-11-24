@@ -14,7 +14,11 @@ from concurrent.futures import ThreadPoolExecutor
 from pydantic import BaseModel
 
 from backend.api.resources.candidates.models import Candidate
-from backend.api.resources.interview.models import InterviewFeedback, InterviewQuestion, InterviewQuestions
+from backend.api.resources.interview.models import (
+    InterviewFeedback,
+    InterviewQuestion,
+    InterviewQuestions,
+)
 from backend.api.resources.offers.models import Offer
 from backend.api.resources.prep import rules
 from backend.api.resources.prep.adapt import facts_text
