@@ -7,7 +7,8 @@ import { DrawnUnderline } from "@/components/effects/DrawnUnderline"
 import { Button } from "@/components/ui/button"
 import { API_MODE } from "@/lib/api/client"
 import type { components } from "@/lib/api/schema"
-import { adaptCv, checkCv, loadOffer, saveDraft } from "../api"
+import { adaptCv, checkCv, loadCandidate, loadOffer, saveDraft } from "../api"
+import { CvCompare, UploadedCv } from "../components/CvViews"
 
 const actionClass = "min-h-12 h-auto whitespace-normal text-lg font-semibold"
 const panelClass = "space-y-5 rounded-xl border bg-card p-5 sm:p-8"
@@ -66,6 +67,10 @@ function Preparation({ offerId }: { offerId: number }) {
     queryKey: ["workspace", offerId, ids.candidate_id, "filter"],
     queryFn: ({ signal }) => checkCv(ids, signal),
   })
+  const candidate = useQuery({
+    queryKey: ["workspace", "candidate", ids.candidate_id],
+    queryFn: ({ signal }) => loadCandidate(ids.candidate_id, signal),
+  })
   const adaptation = useMutation({ mutationFn: () => adaptCv(ids) })
   const draft = useMutation({
     mutationFn: (cvText: string) => saveDraft(ids, cvText),
@@ -78,6 +83,7 @@ function Preparation({ offerId }: { offerId: number }) {
       <section aria-labelledby="workspace-filter" className={panelClass}>
         <h2 id="workspace-filter" className={headingClass}>Así lee el filtro tu currículum</h2>
         <p>El filtro automático (ATS) busca en tu currículum los requisitos de esta oferta.</p>
+        {candidate.data && <UploadedCv name={candidate.data.name} cvText={candidate.data.cv_text} />}
         {filter.isPending && <p role="status">Comprobando los requisitos…</p>}
         {filter.isError && (
           <EmptyState
@@ -123,21 +129,12 @@ function Preparation({ offerId }: { offerId: number }) {
             <p className="text-3xl font-semibold"><DrawnUnderline><Score report={adapted.report} /></DrawnUnderline></p>
             <p className="mt-2">Requisitos encontrados en el CV adaptado</p>
           </div>
-          <p className="whitespace-pre-wrap break-words rounded-lg border p-4">{adapted.cv_text}</p>
-          {adapted.changes.length > 0 && (
-            <>
-              <h3 className={headingClass}>Qué cambió y de dónde sale</h3>
-              <ul className="space-y-3">
-                {adapted.changes.map((change, index) => (
-                  <li key={index} className="rounded-lg border p-4">
-                    <p className="font-semibold">{change.requirement}</p>
-                    <p>{change.text}</p>
-                    <p className="text-muted-foreground">Experiencia de Pilar: {change.source}</p>
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
+          <CvCompare
+            name={candidate.data?.name ?? "Pilar Romero"}
+            original={candidate.data?.cv_text ?? ""}
+            adapted={adapted.cv_text}
+            changes={adapted.changes}
+          />
           <div className="space-y-2 rounded-lg bg-accent p-4 text-accent-foreground">
             <h3 className="font-semibold">Nada inventado</h3>
             {adapted.not_covered.length > 0 && (
