@@ -1,0 +1,74 @@
+/* Tokens de design/theme.json (preset "sobrio"). Fuentes Noto instaladas en el sistema. */
+:root {
+  --bg: oklch(0.985 0.005 95);
+  --fg: oklch(0.25 0.02 160);
+  --card: oklch(1 0 0);
+  --primary: oklch(0.45 0.1 155);
+  --primary-fg: oklch(0.99 0.004 95);
+  --secondary: oklch(0.93 0.04 150);
+  --secondary-fg: oklch(0.3 0.07 155);
+  --accent: oklch(0.9 0.05 150);
+  --muted-fg: oklch(0.44 0.02 160);
+  --border: oklch(0.88 0.012 130);
+  --radius: 0.75rem;
+  --serif: "Noto Serif", "Noto Serif Variable", Georgia, serif;
+  --sans: "Noto Sans", "Noto Sans Variable", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.45;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.marca {
+  font-family: var(--serif);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  position: relative;
+  display: inline-block;
+}
+
+/* DrawnUnderline: un trazo a mano bajo la frase clave, una sola vez por pieza. */
+.subrayado {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+.subrayado svg {
+  position: absolute;
+  left: -2%;
+  bottom: -0.28em;
+  width: 104%;
+  height: 0.38em;
+  overflow: visible;
+}
+.subrayado path {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+/* Medidor del filtro: el momento clave de la demo (5 de 13 → 11 de 13). */
+.medidor { display: grid; gap: 0.55em; }
+.fila { display: grid; grid-template-columns: 7.2em 1fr 4.6em; align-items: center; gap: 0.6em; }
+.fila .etiqueta { font-weight: 600; }
+.barra {
+  height: 1.1em;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.barra span { display: block; height: 100%; border-radius: 999px; }
+.antes .barra span { background: oklch(0.72 0.03 160); }
+.despues .barra span { background: var(--primary); }
+.fila .cifra { font-weight: 700; text-align: right; }

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Al curro · Post cuadrado</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  html, body { width: 1080px; height: 1080px; overflow: hidden; }
+  body { font-size: 34px; }
+  .lienzo {
+    width: 1080px; height: 1080px; padding: 80px 84px 64px;
+    display: flex; flex-direction: column; gap: 40px;
+  }
+  .pregunta { font-family: var(--serif); font-size: 52px; font-weight: 700; line-height: 1.15; }
+  .marca { font-size: 120px; color: var(--primary); }
+  .lema { font-size: 38px; font-weight: 600; margin-top: 30px; }
+  .ejemplo {
+    background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+    padding: 34px 38px; font-size: 30px;
+    box-shadow: 0 2px 0 0 oklch(0.45 0.1 155 / 20%);
+  }
+  .ejemplo p { color: var(--muted-fg); font-size: 26px; font-weight: 600; margin-bottom: 20px; }
+  .fila { grid-template-columns: 210px 1fr 150px; }
+  .llamada {
+    margin-top: auto;
+    background: var(--primary); color: var(--primary-fg);
+    border-radius: 20px; padding: 34px 40px;
+    font-size: 36px; font-weight: 700; line-height: 1.25;
+  }
+  .llamada small { display: block; font-size: 26px; font-weight: 400; margin-top: 8px; }
+</style>
+</head>
+<body>
+<main class="lienzo">
+  <p class="pregunta">¿Tienes más de 45 años y buscas trabajo en Málaga?</p>
+  <header>
+    <h1 class="marca">Al <span class="subrayado">curro<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 13 C 50 5, 110 4, 197 9"/></svg></span></h1>
+    <p class="lema">Tu experiencia, preparada para cada oferta.</p>
+  </header>
+  <section class="ejemplo" aria-label="Ejemplo">
+    <p>Requisitos de la oferta que el filtro automático encuentra en tu currículum</p>
+    <div class="medidor">
+      <div class="fila antes"><span class="etiqueta">Antes</span><div class="barra"><span style="width:38%"></span></div><span class="cifra">5 de 13</span></div>
+      <div class="fila despues"><span class="etiqueta">Con Al curro</span><div class="barra"><span style="width:85%"></span></div><span class="cifra">11 de 13</span></div>
+    </div>
+  </section>
+  <div class="llamada">Pregunta por Al curro a tu orientador del IMFE.<small>Gratis. Sin inventar nada: solo tu experiencia real.</small></div>
+</main>
+</body>
+</html>

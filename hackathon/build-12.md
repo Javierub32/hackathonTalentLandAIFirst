@@ -9,7 +9,7 @@ owner: alraro
 
 - [x] 1 Pick
 - [x] 2 Read
-- [ ] 3 Implement
+- [x] 3 Implement
 - [ ] 4 Check
 - [ ] 5 Review requests
 - [ ] 6 Merge
@@ -22,9 +22,9 @@ owner: alraro
 
 ## Acceptance criteria
 
-- [ ] Una pieza visual exportada (PNG o PDF) con nombre, lema, a quién va y una llamada a la acción
-- [ ] Texto en español llano, sin anglicismos, colores del diseño
-- [ ] Un README con el canal pensado (IMFE, redes, cartel en oficinas) y por qué
+- [x] Una pieza visual exportada (PNG o PDF) con nombre, lema, a quién va y una llamada a la acción
+- [x] Texto en español llano, sin anglicismos, colores del diseño
+- [x] Un README con el canal pensado (IMFE, redes, cartel en oficinas) y por qué
 
 ## Files owned
 
