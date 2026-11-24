@@ -50,7 +50,7 @@ RULES: list[Rule] = [
     Rule(
         "experiencia en perfumería",
         [r"experiencia", r"perfum|fragancia|cosmetic"],
-        [r"(dependient[ao]|vendedor[ae]?|trabaj\w*|experiencia|anos)\b[^.]{0,40}\b(perfumeria|cosmetica)"],
+        [r"\b(dependient\w*|vendedor\w*|trabaj\w*|experiencia|anos)\b[^.\n]{0,40}\b(perfumeria|cosmetica)"],
         hard=True,
     ),
     Rule("interés por la perfumería", [r"perfum|fragancia"], [r"perfum", r"fragancia"]),

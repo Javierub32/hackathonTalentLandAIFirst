@@ -55,7 +55,7 @@ def adapt_cv(body: PrepRequest, session: SessionDep) -> AdaptedCv:
     candidate = get_or_404(session, Candidate, body.candidate_id)
     try:
         result = adapt.adapt(offer, candidate)
-    except Exception as exc:  # LLM down, timeout, quota or a rejected rewrite: never break the demo
+    except Exception as exc:  # noqa: BLE001 - LLM down, timeout, quota or a rejected rewrite: never break the demo
         log.warning("prep adapt-cv fallback for offer %s: %r", offer.id, exc)
         return _fallback(offer, candidate, body)
     # The demo offer must keep its Wow moment: a weaker rewrite falls back to the stub.
