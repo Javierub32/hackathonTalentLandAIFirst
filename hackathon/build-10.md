@@ -1,5 +1,5 @@
 ---
-status: draft
+status: done
 ---
 
 # Build #10 · API: ofertas, candidata y candidaturas reales · Depth
@@ -8,9 +8,9 @@ status: draft
 - [x] 2 Read
 - [x] 3 Implement
 - [x] 4 Check
-- [ ] 5 Review requests
-- [ ] 6 Merge
-- [ ] 7 Handoff
+- [x] 5 Review requests
+- [x] 6 Merge
+- [x] 7 Handoff
 
 ## Acceptance criteria
 
