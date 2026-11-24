@@ -8,7 +8,7 @@ owner: apr2004
 # Build #39 · Etiqueta corta por requisito
 
 - [x] 1 Pick
-- [ ] 2 Read
+- [x] 2 Read
 - [ ] 3 Implement
 - [ ] 4 Check
 - [ ] 5 Review requests
@@ -30,4 +30,4 @@ owner: apr2004
 
 ## Next
 
-Read the Contract seam and the owned prep files, then implement the additive `label` field.
+Implement the additive `label` field in the requirement model/rule output, keep both JSON stubs aligned, update the adaptation prompt, then regenerate the Contract client.
