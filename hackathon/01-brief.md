@@ -1,14 +1,14 @@
 ---
-status: draft
+status: done
 ---
 
 # Brief
 
 - [x] 1 Collect the Brief
 - [x] 2 Write Verbatim
-- [ ] 3 Write Rubric
+- [x] 3 Write Rubric
 - [x] 4 Fill Event logistics (skipped: the Brief fills no `unknown` field of `00-kickoff.md`)
-- [ ] 5 Close
+- [x] 5 Close
 
 ## Sources
 
