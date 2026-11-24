@@ -1,0 +1,50 @@
+{
+  "actualizado": "24/11, 16:02",
+  "respuestas": 11,
+  "n45": 7,
+  "n45EnBusqueda": 5,
+  "edadQuita": {
+    "media": 4,
+    "deAcuerdo": 6,
+    "n": 7
+  },
+  "noConocianFiltro": 5,
+  "noAdaptaCv": 6,
+  "noSabeAdaptarCv": 4,
+  "noPreparaEntrevista": 4,
+  "laUsarian": 7,
+  "sinRespuesta": {
+    "ninguna": 2,
+    "n": 4
+  },
+  "masUtil": [
+    {
+      "opcion": "Practicar la entrevista de esa oferta",
+      "votos": 4
+    },
+    {
+      "opcion": "Adaptar mi currículum a cada oferta",
+      "votos": 3
+    },
+    {
+      "opcion": "Ver ofertas de empresas que buscan gente de +45",
+      "votos": 3
+    },
+    {
+      "opcion": "Formación para el puesto",
+      "votos": 2
+    }
+  ],
+  "citasElegidas": [
+    "Que prefieren gente más joven porque piensan que tú esfuerzo no va a ser el mismo que una persona joven y que ya tienes una forma de trabajar y eres menos amoldable. Además consideran que no te adaptas a las nuevas tecnologías.",
+    "Que a una edad no contratan personas mayores y no tenemos las herramientas de IA etc...",
+    "Encontrar ofertas que acepten mi edad",
+    "Que no hay ofertas y no tengo la formacion"
+  ],
+  "citas": [
+    "Encontrar ofertas que acepten mi edad",
+    "Que a una edad no contratan personas mayores y no tenemos las herramientas de IA etc...",
+    "Que no hay ofertas y no tengo la formacion",
+    "Que prefieren gente más joven porque piensan que tú esfuerzo no va a ser el mismo que una persona joven y que ya tienes una forma de trabajar y eres menos amoldable. Además consideran que no te adaptas a las nuevas tecnologías."
+  ]
+}
