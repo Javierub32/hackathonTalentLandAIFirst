@@ -4,7 +4,7 @@ status: draft
 
 # Design
 
-- [ ] 1 Ask the four questions
+- [x] 1 Ask the four questions
 - [ ] 2 Recommend
 - [ ] 3 Compare live
 - [ ] 4 Pick and tune
@@ -14,10 +14,10 @@ status: draft
 
 ## Brief
 
-- Brand: <logo, colours, URL / none>
-- References: <list / none>
-- Feeling: <adjective>, <adjective>, <adjective>
-- Mode: light / dark / both
+- Brand: none (heard: Driver, 2026-11-24 "hacemos lo nuestro").
+- References: none named; sites aimed at Spanish 45+ users in general.
+- Feeling: cercana, tranquila, familiar (made for Spanish people over 45; nothing foreign-looking or international).
+- Mode: light only.
 
 ## Base
 
