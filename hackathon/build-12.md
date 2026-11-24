@@ -10,7 +10,7 @@ owner: alraro
 - [x] 1 Pick
 - [x] 2 Read
 - [x] 3 Implement
-- [ ] 4 Check
+- [x] 4 Check
 - [ ] 5 Review requests
 - [ ] 6 Merge
 - [ ] 7 Handoff
