@@ -45,10 +45,16 @@ def questions(body: QuestionsRequest, session: SessionDep) -> InterviewQuestions
     req = offer.requirements[0] if offer.requirements else "la experiencia"
     return InterviewQuestions(
         offer_id=body.offer_id, candidate_id=body.candidate_id,
-        intro=f"Hola, {first}. Te haré dos preguntas sobre el puesto de {offer.title.lower()}.",
+        intro=f"Hola, {first}. Te haré ocho preguntas sobre el puesto de {offer.title.lower()}.",
         questions=[
             InterviewQuestion(id=1, text=f"Cuéntame una vez en la que te tocó {task}. ¿Qué hiciste?", checks=req),
-            InterviewQuestion(id=2, text="¿Por qué te interesa este puesto?", checks="Motivación"),
+            InterviewQuestion(id=2, text=f"¿Cómo organizarías tu jornada en el puesto de {offer.title.lower()}?", checks="Organización"),
+            InterviewQuestion(id=3, text="Cuéntame un problema que resolviste en un trabajo anterior. ¿Qué hiciste?", checks="Resolución de problemas"),
+            InterviewQuestion(id=4, text="¿Cómo te coordinas con tus compañeros cuando hay mucho trabajo?", checks="Trabajo en equipo"),
+            InterviewQuestion(id=5, text=f"¿Qué experiencia tuya te ayudaría a cumplir este requisito: {req.lower()}?", checks=req),
+            InterviewQuestion(id=6, text="Si te piden una tarea nueva, ¿cómo aprenderías a hacerla?", checks="Aprendizaje"),
+            InterviewQuestion(id=7, text="¿Qué harías si coinciden dos tareas urgentes?", checks="Priorización"),
+            InterviewQuestion(id=8, text=f"¿Por qué te interesa trabajar como {offer.title.lower()}?", checks="Motivación"),
         ],
     )
 

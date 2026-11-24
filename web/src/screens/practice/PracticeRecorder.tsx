@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { api } from "@/lib/api/client"
 import { stopSpeaking } from "./audio"
 
-export function PracticeRecorder({ onText, onBusy }: { onText: (text: string) => void; onBusy: (busy: boolean) => void }) {
+export function PracticeRecorder({ onText, onBusy, disabled = false }: { disabled?: boolean; onText: (text: string) => void; onBusy: (busy: boolean) => void }) {
   const [state, setState] = useState<"idle" | "opening" | "recording" | "transcribing">("idle")
   const [error, setError] = useState("")
   const recorder = useRef<MediaRecorder | null>(null)
@@ -76,9 +76,9 @@ export function PracticeRecorder({ onText, onBusy }: { onText: (text: string) =>
     }
   }
   return <div className="space-y-2">
-    <Button type="button" variant="outline" className="min-h-12 text-lg" disabled={state === "opening" || state === "transcribing"} aria-pressed={state === "recording"} onClick={() => state === "recording" ? recorder.current?.stop() : void start()}>
+    <Button type="button" variant="outline" className="min-h-12 text-lg" disabled={disabled || state === "opening" || state === "transcribing"} aria-pressed={state === "recording"} onClick={() => state === "recording" ? recorder.current?.stop() : void start()}>
       {state === "recording" ? <Square aria-hidden /> : <Mic aria-hidden />}
-      {state === "recording" ? "Terminar grabación" : state === "transcribing" ? "Transcribiendo…" : state === "opening" ? "Abriendo micrófono…" : "Responder hablando"}
+      {state === "recording" ? "Terminar grabación" : state === "transcribing" ? "Transcribiendo…" : state === "opening" ? "Abriendo micrófono…" : "Responder"}
     </Button>
     <p role="status" className="text-lg">{state === "recording" ? "Te estoy grabando. Pulsa Terminar grabación cuando acabes." : state === "transcribing" ? "Espera mientras pasamos tu voz a texto." : "Después de grabar podrás revisar y corregir la transcripción."}</p>
     {error && <p role="alert" className="text-lg text-destructive">{error}</p>}

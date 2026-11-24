@@ -1,290 +1,112 @@
-import { useEffect, useState, type FormEvent } from "react"
+import { useEffect, useState } from "react"
 import { useMutation, useQuery } from "@tanstack/react-query"
-import { ArrowLeft, ArrowRight, Check, Lightbulb, RotateCcw, Volume2 } from "lucide-react"
 import { Link, useParams } from "react-router"
+import { ArrowLeft, Volume2, RotateCcw, Camera, CameraOff, UserRound } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { PracticeRecorder } from "../PracticeRecorder"
-import { say, stopSpeaking } from "../audio"
 import { API_MODE, api } from "@/lib/api/client"
 import type { components } from "@/lib/api/schema"
+import { PracticeRecorder } from "../PracticeRecorder"
+import { InterviewerPortrait } from "../InterviewerPortrait"
+import { CandidatePreview } from "../CandidatePreview"
+import { say, stopSpeaking } from "../audio"
+import "../practice.css"
 
-type InterviewQuestions = components["schemas"]["InterviewQuestions"]
-type FeedbackRequest = components["schemas"]["FeedbackRequest"]
-
-const CANDIDATE_ID = 1
-
-function InterviewerPortrait() {
-  return (
-    <svg
-      viewBox="0 0 112 112"
-      role="img"
-      aria-label="Ilustración fija de la entrevistadora"
-      className="h-24 w-24 shrink-0 rounded-full border border-border"
-    >
-      <circle cx="56" cy="56" r="56" className="fill-secondary" />
-      <path d="M17 101c4-17 18-26 39-26s35 9 39 26v11H17z" className="fill-primary" />
-      <path d="M32 47c0-24 10-36 25-36s25 12 25 36v12H32z" className="fill-foreground" />
-      <ellipse cx="57" cy="49" rx="19" ry="23" className="fill-card" />
-      <path d="M38 45c4-15 12-21 23-21 8 0 15 4 20 12-5-2-10-5-15-9-6 8-16 13-28 14z" className="fill-foreground" />
-      <path d="M48 51h1m15 0h1" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="text-foreground" />
-      <path d="M51 61c4 3 8 3 12 0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-foreground" />
-    </svg>
-  )
-}
-
-function ListenButton({ text, label }: { text: string; label: string }) {
-  const [error, setError] = useState("")
-  return (<>
-    <Button type="button" variant="outline" className="min-h-12 text-lg" onClick={() => say(text, setError)}>
-      <Volume2 aria-hidden />
-      {label}
-    </Button>
-    {error && <p role="alert" className="text-lg text-destructive">{error}</p>}
-    </>
-  )
-}
+type Feedback = components["schemas"]["InterviewFeedback"]
+type Result = { question: string; answer: string; feedback: Feedback }
 
 export default function PracticePage() {
   const { id } = useParams()
-  const parsedOfferId = Number(id)
-  const offerId = Number.isFinite(parsedOfferId) && parsedOfferId > 0 ? parsedOfferId : 1
-  return <PracticeSession key={offerId} offerId={offerId} />
+  const offerId = Number(id)
+  if (!id || !/^\d+$/.test(id) || !Number.isSafeInteger(offerId) || offerId < 1) return <p>Oferta no válida. <Link to="/ofertas">Volver a ofertas</Link></p>
+  return <Session key={offerId} offerId={offerId} />
 }
 
-function PracticeSession({ offerId }: { offerId: number }) {
+function Session({ offerId }: { offerId: number }) {
   const [started, setStarted] = useState(false)
-  const [voiceBusy, setVoiceBusy] = useState(false)
-  const [audioError, setAudioError] = useState("")
-  useEffect(() => () => stopSpeaking(), [])
-  const offer = useQuery({
-    queryKey: ["offers", offerId],
-    queryFn: async ({ signal }) => {
-      const { data, error } = await api.GET("/api/offers/{offer_id}", { params: { path: { offer_id: offerId } }, signal })
-      if (error || !data) throw new Error("No se pudo cargar la oferta.")
-      return data
-    },
-  })
+  const [index, setIndex] = useState(0)
   const [answer, setAnswer] = useState("")
-  const [answerError, setAnswerError] = useState("")
-  const [questionIndex, setQuestionIndex] = useState(0)
+  const [busy, setBusy] = useState(false)
+  const [audioError, setAudioError] = useState("")
+  const [results, setResults] = useState<Result[]>([])
   const [finished, setFinished] = useState(false)
-
-  const questions = useQuery<InterviewQuestions>({
-    queryKey: ["interview", "questions", offerId, CANDIDATE_ID],
-    queryFn: async ({ signal }) => {
-      const { data, error } = await api.POST("/api/interview/questions", {
-        body: { offer_id: offerId, candidate_id: CANDIDATE_ID },
-        signal,
-      })
-      if (error || !data) throw new Error("No se pudieron cargar las preguntas. Vuelve a intentarlo.")
-      return data
-    },
-  })
-
-  const feedback = useMutation({
-    mutationFn: async (body: FeedbackRequest) => {
-      const { data, error } = await api.POST("/api/interview/feedback", { body })
-      if (error || !data) throw new Error("No se pudo preparar el comentario. Vuelve a intentarlo.")
-      return data
-    },
-  })
-
-  const interview = questions.data
-  const interviewQuestions = interview?.questions ?? []
-  const currentQuestion = interviewQuestions[questionIndex]
-
-  function submitAnswer(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const cleanAnswer = answer.trim()
-    if (voiceBusy || feedback.isPending) return
-    if (!cleanAnswer || !currentQuestion) {
-      setAnswerError("Escribe o dicta tu respuesta antes de continuar.")
-      return
-    }
-    setAnswerError("")
-    feedback.mutate({ offer_id: offerId, question: currentQuestion.text, answer: cleanAnswer })
-  }
-
-  function continuePractice() {
-    if (!interview) return
-    if (questionIndex + 1 >= interview.questions.length) {
-      stopSpeaking()
-      setFinished(true)
-      return
-    }
+  const [camera, setCamera] = useState(false)
+  const [cameraError, setCameraError] = useState("")
+  useEffect(() => () => stopSpeaking(), [])
+  const offer = useQuery({ queryKey: ["offers", offerId], queryFn: async ({ signal }) => {
+    const { data } = await api.GET("/api/offers/{offer_id}", { params: { path: { offer_id: offerId } }, signal })
+    if (!data) throw new Error("No se pudo cargar la oferta.")
+    return data
+  } })
+  const questions = useQuery({ queryKey: ["interview", "questions", offerId, 1], staleTime: Infinity, refetchOnWindowFocus: false, queryFn: async ({ signal }) => {
+    const { data } = await api.POST("/api/interview/questions", { body: { offer_id: offerId, candidate_id: 1 }, signal })
+    if (!data) throw new Error("No se pudieron preparar las preguntas.")
+    return data
+  } })
+  const current = questions.data?.questions[index]
+  const total = questions.data?.questions.length ?? 0
+  const feedback = useMutation({ mutationFn: async (submitted: string) => {
+    if (!current) throw new Error("Pregunta no disponible")
+    const { data } = await api.POST("/api/interview/feedback", { body: { offer_id: offerId, question: current.text, answer: submitted } })
+    if (!data) throw new Error("No se pudo preparar el comentario. Vuelve a intentarlo.")
+    return { question: current.text, answer: submitted, feedback: data }
+  }, onSuccess: (result) => setResults((previous) => [...previous, result]) })
+  function read(text: string) { setAudioError(""); say(text, setAudioError) }
+  function next() {
     stopSpeaking()
-    say(interview.questions[questionIndex + 1].text, setAudioError)
-    setQuestionIndex((index) => index + 1)
-    setAnswer("")
-    setAnswerError("")
-    feedback.reset()
+    if (index + 1 === total) { setFinished(true); return }
+    setIndex(index + 1); setAnswer(""); feedback.reset()
+    read(questions.data!.questions[index + 1].text)
   }
-
-  function restartPractice() {
-    stopSpeaking()
-    setStarted(false)
-    setQuestionIndex(0)
-    setAnswer("")
-    setAnswerError("")
-    setFinished(false)
-    feedback.reset()
+  function restart() {
+    stopSpeaking(); setStarted(false); setIndex(0); setAnswer(""); feedback.reset(); setResults([]); setFinished(false); setAudioError("")
   }
-
-  return (
-    <main className="mx-auto w-full max-w-3xl space-y-6 px-4 py-8 text-foreground sm:px-6">
-      <Button asChild variant="ghost" className="min-h-12 text-lg">
-        <Link to={`/ofertas/${offerId}`}>
-          <ArrowLeft aria-hidden />
-          Volver a la oferta
-        </Link>
-      </Button>
-
-      <header className="space-y-2">
-        <p className="text-lg font-semibold text-primary">Práctica acompañada</p>
-        <h1 className="font-display text-3xl">Entrevista: {offer.data?.title ?? "tu oferta de trabajo"}</h1>
-        <p className="text-lg leading-relaxed text-muted-foreground">
-          Practica a tu ritmo. Puedes responder hablando o escribir tu respuesta.
-        </p>
-      </header>
-
-      <section className="flex flex-col gap-4 rounded-xl border border-border bg-card p-5 sm:flex-row sm:items-center sm:p-6">
+  const subtitle = finished ? "Has terminado. Tu experiencia cuenta." : !started ? questions.data?.intro ?? "Preparando tu entrevista…" : current?.text
+  const shownFeedback = feedback.data?.feedback
+  return <div className="practice-call">
+    <header className="call-heading">
+      <Link className="call-back" to={`/ofertas/${offerId}`}><ArrowLeft aria-hidden /> Volver a la oferta</Link>
+      <div><span className="call-label">Tu siguiente paso</span><h1>Practica tu entrevista</h1></div>
+      <p className="call-offer">{offer.data?.title ?? "Cargando oferta…"}</p>
+    </header>
+    {API_MODE === "fixtures" && <p className="call-notice" role="status">Demostración: preguntas, transcripción y comentarios de ejemplo. Usa el modo live para practicar con tu voz real.</p>}
+    <div className={`call-body ${shownFeedback || finished ? "has-feedback" : ""}`}>
+      <section className="call-stage" aria-label="Videollamada simulada con la entrevistadora IA">
+        <div className="stage-decoration" aria-hidden />
+        <span className="interviewer-name">Entrevistadora IA · Simulación</span>
         <InterviewerPortrait />
-        <div className="min-w-0 flex-1 space-y-3">
-          <h2 className="font-display text-2xl">Tu entrevistadora</h2>
-          <p className="text-lg leading-relaxed">
-            {interview?.intro ?? "Hola, Pilar. Vamos a practicar para esta oferta. Tómate tu tiempo."}
-          </p>
-          {interview?.intro && <ListenButton text={interview.intro} label="Escuchar saludo" />}
+        <div className="candidate-tile">
+          {camera ? <CandidatePreview onError={(message) => { setCameraError(message); setCamera(false) }} /> : <UserRound aria-hidden className="candidate-avatar" />}
+          <span>Pilar · Tú</span>
+        </div>
+        <div className="call-subtitles" aria-live="polite">
+          <span>{started && !finished ? `Pregunta ${index + 1} de ${total}` : finished ? "Práctica completada" : "A tu ritmo"}</span>
+          <p>{subtitle}</p>
         </div>
       </section>
-
-      {API_MODE === "fixtures" && <p role="status" className="rounded-lg border border-border p-4 text-lg">Modo demostración: las preguntas, la transcripción y los comentarios son ejemplos fijos. Para practicar con tu voz real y cada oferta necesitas conectar el servidor en modo live.</p>}
-      {offer.isError && <p role="alert" className="text-lg">No se pudo cargar el nombre de la oferta. <button type="button" className="underline" onClick={() => void offer.refetch()}>Reintentar</button></p>}
-      {audioError && <p role="alert" className="text-lg text-destructive">{audioError}</p>}
-      {questions.isSuccess && interviewQuestions.length > 0 && !started && <Button type="button" className="min-h-12 text-lg" onClick={() => { setStarted(true); say(`${interview?.intro ?? ""} ${interviewQuestions[0].text}`, setAudioError) }}>Empezar entrevista con audio</Button>}
-      <p id="privacy-note" className="rounded-lg border border-border bg-secondary p-4 text-lg leading-relaxed">
-        No se analiza tu cara, tu tono ni tus emociones. La transcripción sirve para comentar el contenido de tus respuestas.
-      </p>
-
-      {questions.isPending && (
-        <p role="status" className="rounded-lg border border-border bg-card p-5 text-lg">
-          Preparando las preguntas de la entrevista…
-        </p>
-      )}
-
-      {questions.isError && (
-        <section role="alert" className="space-y-4 rounded-lg border border-border bg-card p-5">
-          <p className="text-lg">{questions.error.message}</p>
-          <Button type="button" variant="outline" className="min-h-12 text-lg" onClick={() => void questions.refetch()}>
-            Volver a intentarlo
-          </Button>
-        </section>
-      )}
-
-      {questions.isSuccess && interviewQuestions.length === 0 && (
-        <section role="status" className="space-y-4 rounded-lg border border-border bg-card p-5">
-          <p className="text-lg">Todavía no hay preguntas para esta entrevista.</p>
-          <Button type="button" variant="outline" className="min-h-12 text-lg" onClick={() => void questions.refetch()}>
-            Cargar preguntas
-          </Button>
-        </section>
-      )}
-
-      {questions.isSuccess && interviewQuestions.length > 0 && finished && (
-        <section aria-live="polite" className="space-y-5 rounded-xl border border-border bg-card p-6">
-          <div className="flex items-start gap-3">
-            <Check aria-hidden className="mt-1 h-6 w-6 shrink-0 text-primary" />
-            <div className="space-y-2">
-              <h2 className="font-display text-2xl">Has terminado la práctica</h2>
-              <p className="text-lg leading-relaxed">Has practicado las {interviewQuestions.length} preguntas. Puedes repetirlas cuando quieras.</p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Button type="button" className="min-h-12 text-lg" onClick={restartPractice}>
-              <RotateCcw aria-hidden />
-              Practicar otra vez
-            </Button>
-            <Button asChild type="button" variant="outline" className="min-h-12 text-lg">
-              <Link to={`/ofertas/${offerId}`}>Volver a la oferta</Link>
-            </Button>
-          </div>
-        </section>
-      )}
-
-      {questions.isSuccess && currentQuestion && interview && started && !finished && (
-        <section className="space-y-5 rounded-xl border border-border bg-card p-5 sm:p-6">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-lg font-semibold text-primary">
-              Pregunta {questionIndex + 1} de {interviewQuestions.length}
-            </p>
-            <ListenButton text={currentQuestion.text} label="Escuchar pregunta" />
-          </div>
-
-          <h2 className="font-display text-2xl leading-snug">{currentQuestion.text}</h2>
-
-          {!feedback.data && (
-            <form className="space-y-4" onSubmit={submitAnswer}>
-              <div className="space-y-2">
-                <label htmlFor="practice-answer" className="block text-lg font-semibold">Tu respuesta</label>
-                <textarea
-                  id="practice-answer"
-                  value={answer}
-                  onChange={(event) => {
-                    setAnswer(event.target.value)
-                    if (answerError) setAnswerError("")
-                  }}
-                  aria-describedby="privacy-note"
-                  placeholder="Escribe aquí lo que dirías en la entrevista"
-                  className="min-h-32 w-full rounded-md border border-border bg-background px-3 py-2 text-lg leading-relaxed placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                />
-              </div>
-
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                <div className="[&_button]:min-h-12 [&_button]:text-lg">
-                  <PracticeRecorder onBusy={setVoiceBusy} onText={(text) => { setAnswer(text); setAnswerError("") }} />
-                </div>
-                <Button type="submit" className="min-h-12 text-lg" disabled={feedback.isPending || voiceBusy}>
-                  {feedback.isPending ? "Preparando comentario…" : "Ver mi comentario"}
-                  {!feedback.isPending && <ArrowRight aria-hidden />}
-                </Button>
-              </div>
-              {answerError && <p role="alert" className="text-lg text-destructive">{answerError}</p>}
-              {feedback.isError && <p role="alert" className="text-lg text-destructive">{feedback.error.message}</p>}
-            </form>
-          )}
-
-          {feedback.data && (
-            <div aria-live="polite" className="space-y-4 border-t border-border pt-5">
-              <h3 className="font-display text-2xl">Tu comentario</h3>
-              <p className="text-lg leading-relaxed"><strong>Tu respuesta:</strong> {answer}</p>
-              <ListenButton label="Escuchar comentario" text={[...feedback.data.good, ...feedback.data.improve, feedback.data.tip].join(". ")} />
-              <div className="space-y-3 rounded-lg bg-secondary p-4">
-                <h4 className="text-lg font-semibold">Lo que hiciste bien</h4>
-                <ul className="list-disc space-y-2 pl-6 text-lg leading-relaxed">
-                  {feedback.data.good.map((item) => <li key={item}>{item}</li>)}
-                </ul>
-              </div>
-              <div className="space-y-3 rounded-lg border border-border p-4">
-                <h4 className="text-lg font-semibold">Una idea para mejorar</h4>
-                <ul className="list-disc space-y-2 pl-6 text-lg leading-relaxed">
-                  {feedback.data.improve.map((item) => <li key={item}>{item}</li>)}
-                </ul>
-              </div>
-              <div className="flex gap-3 rounded-lg border border-border p-4">
-                <Lightbulb aria-hidden className="mt-1 h-6 w-6 shrink-0 text-primary" />
-                <div className="space-y-2">
-                  <h4 className="text-lg font-semibold">Consejo</h4>
-                  <p className="text-lg leading-relaxed">{feedback.data.tip}</p>
-                </div>
-              </div>
-              <Button type="button" className="min-h-12 text-lg" onClick={continuePractice}>
-                {questionIndex + 1 < interviewQuestions.length ? "Siguiente pregunta" : "Terminar práctica"}
-                <ArrowRight aria-hidden />
-              </Button>
-            </div>
-          )}
-        </section>
-      )}
-    </main>
-  )
+      {(shownFeedback || finished) && <aside className="call-feedback" aria-label="Comentarios de tu entrevista" aria-live="polite">
+        <h2>{finished ? "Tu práctica" : "Tu comentario"}</h2>
+        {finished ? <><p>Has respondido {results.length} preguntas.</p>{results.map((result, i) => <details key={i}><summary>Pregunta {i + 1}</summary><p>{result.question}</p><p><strong>Tu respuesta:</strong> {result.answer}</p><p>{result.feedback.tip}</p></details>)}<Button className="call-button" onClick={restart}><RotateCcw aria-hidden /> Practicar otra vez</Button></> : shownFeedback && <>
+          <h3>Lo que hiciste bien</h3><ul>{shownFeedback.good.map((text, i) => <li key={i}>{text}</li>)}</ul>
+          <h3>Qué puedes mejorar</h3><ul>{shownFeedback.improve.map((text, i) => <li key={i}>{text}</li>)}</ul>
+          <h3>Consejo</h3><p>{shownFeedback.tip}</p>
+          <Button variant="outline" className="call-button" onClick={() => read([...shownFeedback.good, ...shownFeedback.improve, shownFeedback.tip].join(". "))}><Volume2 aria-hidden /> Escuchar comentario</Button>
+        </>}
+      </aside>}
+    </div>
+    <div className="call-controls">
+      {!started && current && <Button className="call-button" onClick={() => { setStarted(true); read(`${questions.data!.intro} ${current.text}`) }}>Empezar entrevista con audio</Button>}
+      {questions.isPending && <p role="status">Preparando las preguntas…</p>}
+      {(questions.isError || (questions.isSuccess && !total)) && <Button className="call-button" onClick={() => void questions.refetch()}>Reintentar cargar preguntas</Button>}
+      {started && !finished && !shownFeedback && <>
+        <PracticeRecorder disabled={feedback.isPending} onBusy={setBusy} onText={setAnswer} />
+        <div className="answer-composer"><label htmlFor="practice-answer">Tu respuesta (puedes escribir o corregir el dictado)</label><textarea id="practice-answer" rows={2} value={answer} disabled={busy || feedback.isPending} onChange={(event) => setAnswer(event.target.value)} /></div>
+        <Button className="call-button" disabled={busy || feedback.isPending || !answer.trim()} onClick={() => feedback.mutate(answer.trim())}>{feedback.isPending ? "Preparando comentario…" : "Ver mi comentario"}</Button>
+      </>}
+      {shownFeedback && !finished && <Button className="call-button" onClick={next}>{index + 1 < total ? "Siguiente pregunta" : "Terminar entrevista"}</Button>}
+      {started && !finished && <Button variant="outline" className="call-button" disabled={busy} onClick={() => read(current?.text ?? "")}><Volume2 aria-hidden /> Repetir pregunta</Button>}
+      <Button variant="outline" className="call-button" onClick={() => { setCameraError(""); setCamera(!camera) }}>{camera ? <CameraOff aria-hidden /> : <Camera aria-hidden />}{camera ? "Apagar cámara" : "Activar cámara"}</Button>
+    </div>
+    <div className="call-status" role="status">{audioError || cameraError || (feedback.isError ? feedback.error.message : "")}</div>
+    <p className="call-privacy">La cámara solo se muestra en tu navegador. No grabamos vídeo ni analizamos cara, tono o emociones; solo el contenido de tu respuesta.</p>
+  </div>
 }

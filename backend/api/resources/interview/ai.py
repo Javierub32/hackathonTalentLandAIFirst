@@ -11,7 +11,7 @@ from __future__ import annotations
 import re
 from concurrent.futures import ThreadPoolExecutor
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from backend.api.resources.candidates.models import Candidate
 from backend.api.resources.interview.models import (
@@ -65,8 +65,7 @@ def not_heard(offer_id: int) -> InterviewFeedback:
 
 class LlmQuestions(BaseModel):
     intro: str
-    q1: str
-    q2: str
+    questions: list[str] = Field(min_length=8, max_length=8)
 
 
 class LlmFeedback(BaseModel):
@@ -127,8 +126,8 @@ def questions(offer: Offer, candidate: Candidate) -> InterviewQuestions:
     return InterviewQuestions(
         offer_id=offer.id or 0, candidate_id=candidate.id or 0, intro=llm.intro.strip(),
         questions=[
-            InterviewQuestion(id=1, text=llm.q1.strip(), checks=covered),
-            InterviewQuestion(id=2, text=llm.q2.strip(), checks=f"{gap} (requisito que no cubre su CV)"),
+            InterviewQuestion(id=i + 1, text=text.strip(), checks=gap if i == 7 else covered)
+            for i, text in enumerate(llm.questions)
         ],
     )
 
