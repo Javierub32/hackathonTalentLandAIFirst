@@ -1,0 +1,27 @@
+"""Template pipeline: copy this file, keep the five function signatures."""
+
+from backend.data.config import RunConfig
+from backend.data.report import Report
+
+# short name -> whatever fit() needs to build it
+MODELS = {"example": None}
+
+
+def load(cfg: RunConfig):
+    raise NotImplementedError("TODO(#61): read cfg.source / cfg.sql into a DataFrame")
+
+
+def prepare(df, cfg: RunConfig):
+    raise NotImplementedError("TODO(#61): split, encode")
+
+
+def fit(X, cfg: RunConfig):
+    raise NotImplementedError("TODO(#61): train cfg.model")
+
+
+def evaluate(model, X, cfg: RunConfig) -> dict[str, float]:
+    raise NotImplementedError("TODO(#61): metrics")
+
+
+def report(cfg: RunConfig, model, X, metrics: dict[str, float]) -> Report:
+    raise NotImplementedError("TODO(#61): build Report with charts")

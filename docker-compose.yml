@@ -1,0 +1,155 @@
+# Dev stack. Profiles: one per Module (web, api) plus extras (ollama, speech).
+# COMPOSE_PROFILES in .env picks what `docker compose up` starts.
+# Prune markers: `# >>> module:<x>` ... `# <<< module:<x>` around each Module's services/volumes.
+# Every image below is multi-arch (amd64 + arm64).
+
+services:
+  # >>> module:api
+  db:
+    image: pgvector/pgvector:pg17
+    profiles: [api]
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: app
+    ports:
+      - "127.0.0.1:${DB_PORT:-5433}:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d app"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: backend
+      args:
+        VISION: ${VISION:-false}
+    profiles: [api]
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://app:app@db:5432/app}
+      WATCHFILES_FORCE_POLLING: ${DEV_POLLING:-false}
+    ports:
+      - "${API_PORT:-8000}:8000"
+    volumes:
+      - ./backend:/app/backend
+      - ./features.json:/app/features.json:ro
+      - backend_venv:/app/backend/.venv
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://localhost:8000/api/health')"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      # First start installs the Python deps into the venv volume (several minutes).
+      start_period: 15m
+  # <<< module:api
+
+  # >>> module:web
+  web:
+    build:
+      context: web
+    profiles: [web]
+    command: npm run dev -- --host 0.0.0.0 --port 5173
+    environment:
+      DEV_POLLING: ${DEV_POLLING:-false}
+      VITE_API_MODE: ${VITE_API_MODE:-fixtures}
+    ports:
+      - "${WEB_PORT:-5173}:5173"
+    volumes:
+      - ./web:/app
+      - ./features.json:/app/features.json:ro
+      - ./design:/design:ro
+      - web_node_modules:/app/node_modules
+
+  # Presenting mode (`make demo` / `make share`): built web via `vite preview`, no HMR overlay.
+  preview:
+    build:
+      context: web
+    profiles: [preview, share, share-ngrok]
+    command: sh -c "npm run build && npm run preview -- --host 0.0.0.0 --port 4173"
+    environment:
+      VITE_API_MODE: ${VITE_API_MODE:-live}
+    volumes:
+      - ./web:/app
+      - ./features.json:/app/features.json:ro
+      - ./design:/design:ro
+      - web_node_modules:/app/node_modules
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:4173/').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+      start_period: 10s
+
+  # Single entry point in front of preview: /api/* goes to the backend (HTTP and WebSocket).
+  edge:
+    image: caddy:2-alpine
+    profiles: [preview, share, share-ngrok]
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        printf ':80 {\n\thandle /api/* {\n\t\treverse_proxy backend:8000\n\t}\n\thandle {\n\t\treverse_proxy preview:4173 {\n\t\t\theader_up Host localhost\n\t\t}\n\t}\n}\n' > /tmp/Caddyfile
+        exec caddy run --config /tmp/Caddyfile --adapter caddyfile
+    ports:
+      - "${WEB_PORT:-5173}:80"
+    depends_on:
+      preview:
+        condition: service_healthy
+
+  # Public tunnels, `make share` only. Both reach only `edge`.
+  cloudflared:
+    image: cloudflare/cloudflared:2025.11.1
+    profiles: [share]
+    command: tunnel --no-autoupdate --url http://edge:80
+    depends_on:
+      - edge
+
+  ngrok:
+    image: ngrok/ngrok:3
+    profiles: [share-ngrok]
+    command: http edge:80 --log stdout
+    environment:
+      NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN:-}
+    depends_on:
+      - edge
+  # <<< module:web
+
+  # >>> module:llm
+  ollama:
+    image: ollama/ollama:0.12.9
+    profiles: [ollama]
+    # Compose network only: no host port.
+    volumes:
+      - ollama_data:/root/.ollama
+    entrypoint: ["/bin/sh", "-c", "ollama serve & sleep 3 && ollama pull embeddinggemma && wait"]
+
+  speech:
+    # Latest stable CPU release (multi-arch). The bare `latest` tag is not published; 0.9.0 is still rc.
+    image: ghcr.io/speaches-ai/speaches:0.8.3-cpu
+    profiles: [speech]
+    # Compose network only: no host port.
+    volumes:
+      - speech_cache:/home/ubuntu/.cache/huggingface/hub
+  # <<< module:llm
+
+volumes:
+  # >>> module:api
+  db_data:
+  backend_venv:
+  # <<< module:api
+  # >>> module:web
+  web_node_modules:
+  # <<< module:web
+  # >>> module:llm
+  ollama_data:
+  speech_cache:
+  # <<< module:llm

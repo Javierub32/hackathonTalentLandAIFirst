@@ -1,0 +1,78 @@
+import { Link, NavLink, Outlet } from "react-router"
+import features from "@features"
+import { CommandPalette } from "@/components/common/CommandPalette"
+import { NotificationBell } from "@/components/common/NotificationBell"
+import identity from "@design/identity.json"
+import { cn } from "@/lib/utils"
+import { useSession } from "@/lib/session"
+import { LogOut } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { navItems } from "../routes"
+
+/** Identity name, from design/identity.json (also the PWA name and the page title). */
+export const APP_NAME: string = identity.name
+
+export function AppLayout() {
+  const { user, signOut } = useSession()
+  return (
+    <div className="flex min-h-svh">
+      <aside data-no-print className="hidden w-56 shrink-0 flex-col gap-1 border-r p-3 md:flex">
+        <Link to="/" className="mb-3 px-2 font-semibold">{APP_NAME}</Link>
+        {navItems.map(({ id, to, label, icon: Icon }) => (
+          <NavLink
+            key={id}
+            to={to}
+            end
+            className={({ isActive }) =>
+              cn(
+                "flex items-center gap-2 rounded-md px-2 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+                isActive && "bg-accent font-medium text-accent-foreground",
+              )
+            }
+          >
+            <Icon className="size-4" aria-hidden />
+            {label}
+          </NavLink>
+        ))}
+      </aside>
+      <div className="flex min-w-0 flex-1 flex-col">
+        <header data-no-print className="flex h-14 items-center gap-2 border-b px-4">
+          <Link to="/" className="truncate font-semibold md:hidden">{APP_NAME}</Link>
+          <div className="ml-auto flex items-center gap-1">
+            {features.notifications && (!features.auth || user) && <NotificationBell />}
+            {features.auth && user && (
+              <>
+                <span className="hidden px-2 text-sm text-muted-foreground sm:inline">{user.name || user.email}</span>
+                <Button variant="ghost" size="sm" onClick={signOut} aria-label="Log out">
+                  <LogOut aria-hidden /> <span className="hidden sm:inline">Log out</span>
+                </Button>
+              </>
+            )}
+          </div>
+        </header>
+        <main className="flex-1 p-4 pb-20 md:p-6 md:pb-6">
+          <Outlet />
+        </main>
+      </div>
+      <nav data-no-print className="fixed inset-x-0 bottom-0 z-10 flex overflow-x-auto border-t bg-background md:hidden" aria-label="Primary">
+        {navItems.map(({ id, to, label, icon: Icon }) => (
+          <NavLink
+            key={id}
+            to={to}
+            end
+            className={({ isActive }) =>
+              cn(
+                "flex min-w-16 flex-1 flex-col items-center gap-1 px-2 py-2 text-xs text-muted-foreground",
+                isActive && "text-foreground",
+              )
+            }
+          >
+            <Icon className="size-5" aria-hidden />
+            {label}
+          </NavLink>
+        ))}
+      </nav>
+      <CommandPalette />
+    </div>
+  )
+}

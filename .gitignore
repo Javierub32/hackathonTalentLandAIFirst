@@ -1,0 +1,25 @@
+.env
+node_modules
+.venv
+backend/llm/.cache/
+backend/uploads/
+backend/data/outputs/*/model.joblib
+backend/data/outputs/*/predictions.csv
+backend/data/outputs/eda_*/
+.claude/worktrees/
+.expo/
+mobile/.expo/
+backend/.cache/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Docker bind-mount placeholders for the root features.json
+web/features.json
+mobile/features.json
+backend/features.json
+web/dist/
+
+# make slides-pdf output
+pitch/slides-export.pdf
