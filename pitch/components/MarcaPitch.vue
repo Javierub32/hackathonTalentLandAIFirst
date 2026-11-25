@@ -4,7 +4,10 @@ import identity from '../../design/identity.json'
 
 <template>
   <div class="marca-pitch">
-    <img src="/logo-al-curro-claro.png" :alt="identity.name" />
+    <div class="marca-pitch-logo">
+      <img src="/simbolo-al-curro-claro.svg" alt="" />
+      <span>{{ identity.name }}</span>
+    </div>
     <p>{{ identity.tagline }}</p>
   </div>
 </template>
