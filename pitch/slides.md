@@ -181,21 +181,10 @@ class: slide-cierre
 <!-- 04:45 · Petición y cierre (R6.2) -->
 
 <div class="cierre-grid">
-  <div class="cierre-texto">
-    <p class="cierre-quien">Pilar, 53 años · Málaga</p>
-    <p class="cierre"><span class="menta">Que su experiencia</span> vuelva a contar.</p>
-    <p class="peticion">Buscamos <strong>un piloto con el IMFE</strong> y vuestro apoyo.</p>
-    <img class="logo-cierre" src="/logo-al-curro-claro.png" alt="Logotipo de Al curro" />
-  </div>
+  <MarcaPitch cierre />
   <div class="cierre-foto"><img src="/pilar.jpg" alt="Pilar, nuestra persona de ejemplo" /></div>
 </div>
 
 <!--
 Buscamos un piloto con el IMFE y vuestro apoyo. Al curro: que su experiencia vuelva a contar.
 -->
-
----
-class: slide-marca
----
-
-<MarcaPitch />
