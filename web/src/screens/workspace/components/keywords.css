@@ -1,0 +1,13 @@
+/* Newly covered keywords flip from "missing" to green, one after another, in step with the CV highlights. */
+.keyword-new { animation: keyword-flip 520ms cubic-bezier(0.2, 0, 0, 1.4) both; animation-delay: calc(450ms + var(--k, 0) * 140ms); }
+@keyframes keyword-flip {
+  0% { background: var(--color-card); color: var(--color-muted-foreground); border-color: color-mix(in oklch, var(--color-muted-foreground) 50%, transparent); border-style: dashed; transform: scale(1); }
+  45% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) { .keyword-new { animation: none; } }
+
+/* "+N" next to a group pops in when the improved CV covers more of it. */
+.keyword-gain { animation: keyword-gain 600ms cubic-bezier(0.2, 0, 0, 1.6) 500ms both; }
+@keyframes keyword-gain { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .keyword-gain { animation: none; } }

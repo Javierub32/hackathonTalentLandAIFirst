@@ -8,20 +8,19 @@
 .call-back svg { width: 20px; }
 .call-body { display: grid; grid-template-columns: minmax(0,1fr); min-height: 240px; flex: 1; gap: 24px; }
 .call-body.has-feedback { grid-template-columns: minmax(0,1fr) minmax(300px,32%); }
-.call-stage { position: relative; min-height: 0; overflow: hidden; background: var(--color-secondary); border-radius: 16px; display: flex; flex-direction: column; isolation: isolate; border: 1px solid var(--color-border); }
-.call-stage > svg:first-child { opacity: .5; }
-.interviewer-name { position: absolute; top: 20px; left: 24px; display: flex; gap: 10px; align-items: flex-start; font-weight: 600; z-index: 1; }
+.call-stage { position: relative; min-height: 0; overflow: hidden; background: var(--color-secondary); border-radius: 10px; display: flex; flex-direction: column; isolation: isolate; border: 6px solid var(--color-primary); box-shadow: 10px 10px 0 0 var(--color-accent); margin: 0 10px 10px 0; }
+.interviewer-name { position: absolute; top: 16px; left: 18px; background: var(--color-card); padding: 6px 14px 8px 12px; border-radius: 8px; box-shadow: 0 1px 0 0 var(--color-border); display: flex; gap: 10px; align-items: flex-start; font-weight: 600; z-index: 1; }
 .interviewer-name small { display: block; font-size: 18px; color: var(--color-muted-foreground); font-weight: 400; }
 .call-presence { width: 9px; height: 9px; margin-top: 8px; background: var(--color-primary); border-radius: 50%; }
 .interviewer-portrait { display: block; position: relative; flex: 1; min-height: 0; width: 100%; margin-top: 38px; }
-.candidate-tile { position: absolute; top: 18px; right: 20px; width: 112px; height: 102px; border: 1px solid var(--color-border); background: var(--color-card); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; z-index: 1; }
+.candidate-tile { position: absolute; top: 16px; right: 18px; width: 120px; height: 106px; border: 3px solid var(--color-card); box-shadow: 0 0 0 1px var(--color-border); background: var(--color-card); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; z-index: 1; }
 .candidate-avatar { width: 34px; height: 34px; margin: 8px; color: var(--color-muted-foreground); }
 .candidate-tile video { width: 100%; height: 72px; object-fit: cover; transform: scaleX(-1); }
 .candidate-tile span { background: var(--color-card); width: 100%; text-align: center; padding-bottom: 5px; }
-.call-subtitles { position: relative; flex-shrink: 0; background: var(--color-card); padding: 16px 24px 18px; border-top: 1px solid var(--color-border); }
+.call-subtitles { position: relative; flex-shrink: 0; background: var(--color-card); padding: 14px 24px 16px; border-top: 4px solid var(--color-accent); }
 .call-subtitles span { color: var(--color-primary); font-weight: 700; font-size: 18px; }
 .call-subtitles p { margin-top: 6px; font-size: 20px; line-height: 1.4; max-width: 1000px; }
-.call-feedback { overflow: auto; min-height: 0; padding: 8px 16px 8px 0; scrollbar-gutter: stable; }
+.call-feedback { overflow: auto; min-height: 0; padding: 16px 20px; scrollbar-gutter: stable; background: var(--color-card); border: 1px solid var(--color-border); border-top: 6px solid var(--color-primary); border-radius: 10px; margin-bottom: 10px; }
 .call-feedback h2 { font-family: var(--font-display); font-size: 26px; font-weight: 700; letter-spacing: -.02em; }
 .call-feedback h3 { font-weight: 700; color: var(--color-primary); margin-top: 18px; }
 .call-feedback ul { list-style: disc; padding-left: 22px; }
@@ -30,27 +29,16 @@
 .call-feedback summary { cursor: pointer; font-weight: 600; }
 .call-controls { display: flex; flex-direction: column; gap: 12px; }
 .call-toolbar { display: flex; align-items: center; gap: 12px; }
-.call-toolbar .camera-control { margin-left: auto; }
 .call-button { min-height: 48px; font-size: 18px; white-space: normal; height: auto; padding-inline: 18px; border-radius: 8px; }
-.practice-recorder { display: flex; align-items: center; gap: 14px; min-width: 0; flex: 1; }
-.practice-recorder > button { min-width: 160px; background: var(--color-primary); color: var(--color-primary-foreground); border-color: var(--color-primary); border-radius: 8px; }
-.practice-recorder > button:hover { opacity: .9; }
-.practice-recorder > p { font-size: 18px; color: var(--color-muted-foreground); max-width: 320px; }
-.answer-row { display: flex; align-items: flex-end; gap: 16px; }
-.answer-composer { flex: 1; min-width: 0; }
-.answer-composer label { display: block; font-weight: 600; margin-bottom: 6px; }
-.answer-composer label span { color: var(--color-muted-foreground); font-weight: 400; margin-left: 8px; }
-.answer-composer textarea { display: block; resize: none; width: 100%; min-height: 64px; border: 1px solid var(--color-input); border-radius: 8px; padding: 9px 12px; background: var(--color-card); font: inherit; }
-.answer-composer textarea::placeholder { color: var(--color-muted-foreground); }
-.submit-answer { min-height: 64px; min-width: 190px; }
+.submit-answer { min-width: 190px; }
+.answer-panel textarea::placeholder { color: var(--color-muted-foreground); }
 .call-status:empty { display: none; }
 .call-status { color: var(--color-destructive); }
 .call-privacy { font-size: 18px; color: var(--color-muted-foreground); text-align: center; }
 .call-notice { font-size: 18px; border-left: 3px solid var(--color-primary); padding-left: 8px; }
 @media (max-width: 1100px) {
  .call-heading > span { display: none; }
- .practice-recorder > p { display: none; }
- .answer-composer label span { display: none; }
+ .answer-label span { display: none; }
  .call-back { font-size: 18px; }
  .call-heading { gap: 16px; }
 }
@@ -70,11 +58,32 @@
  .call-subtitles p { font-size: 18px; }
  .call-feedback { max-height: none; overflow: visible; }
  .call-toolbar { flex-wrap: wrap; gap: 8px; }
- .practice-recorder { flex-basis: 100%; }
- .practice-recorder > button { width: 100%; }
- .call-toolbar .camera-control { margin-left: 0; }
  .call-toolbar > button { flex: 1; padding-inline: 10px; }
- .answer-row { flex-direction: column; align-items: stretch; gap: 10px; }
- .submit-answer { min-height: 48px; }
  .call-privacy { text-align: left; }
+}
+/* Secondary buttons on white so they never melt into the beige page (the recorder keeps its own colours). */
+.call-secondary [data-variant="outline"], .call-feedback [data-variant="outline"] { background: var(--color-card); }
+.call-secondary [data-variant="outline"]:hover, .call-feedback [data-variant="outline"]:hover { background: var(--color-accent); }
+.call-secondary { margin-left: auto; display: flex; gap: 12px; }
+
+/* Answer panel: one white surface with mic, text and send in a single row. */
+.answer-panel { background: var(--color-card); border: 1px solid var(--color-border); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+.answer-label { font-weight: 700; }
+.answer-label span { color: var(--color-muted-foreground); font-weight: 400; margin-left: 8px; }
+.answer-panel .answer-row { display: flex; align-items: stretch; gap: 12px; }
+.answer-panel textarea { flex: 1; min-width: 0; resize: none; min-height: 56px; border: 1px solid var(--color-input); border-radius: 8px; padding: 9px 12px; background: var(--color-background); font: inherit; }
+.answer-panel textarea:focus-visible { outline: 3px solid var(--color-ring); outline-offset: 1px; }
+.answer-panel .submit-answer { min-height: 56px; }
+.practice-recorder { display: flex; flex-direction: column; justify-content: center; gap: 4px; flex: none; }
+.recorder-button { min-width: 150px; min-height: 56px; background: var(--color-primary); color: var(--color-primary-foreground); border-radius: 8px; }
+.recorder-button.is-recording { background: var(--color-destructive); color: var(--color-destructive-foreground); }
+.recorder-button.is-recording svg { animation: rec-pulse 1s ease-in-out infinite; }
+@keyframes rec-pulse { 50% { opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { .recorder-button.is-recording svg { animation: none; } }
+.recorder-status { font-size: 16px; color: var(--color-muted-foreground); max-width: 160px; line-height: 1.25; }
+@media (max-width: 767px) {
+ .answer-panel .answer-row { flex-direction: column; }
+ .recorder-button { width: 100%; }
+ .call-secondary { margin-left: 0; flex-wrap: wrap; width: 100%; }
+ .call-secondary > button { flex: 1; }
 }

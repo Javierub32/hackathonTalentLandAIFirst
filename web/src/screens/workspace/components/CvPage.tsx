@@ -1,4 +1,4 @@
-import { Fragment } from "react"
+import { type CSSProperties, Fragment } from "react"
 import { cn } from "@/lib/utils"
 import type { CvDoc, CvSpan } from "./cvDocument"
 
@@ -14,11 +14,11 @@ type Comparison = "added" | "removed"
 
 const addedClass = "rounded-sm bg-accent text-accent-foreground underline decoration-primary"
 
-function Span({ span, comparison }: { span: CvSpan; comparison?: Comparison }) {
+function Span({ span, comparison, order }: { span: CvSpan; comparison?: Comparison; order: { n: number } }) {
   if (!span.isNew || !comparison) return <>{span.text}</>
   if (comparison === "removed") return <del className="text-muted-foreground">{span.text}</del>
   return (
-    <ins className={addedClass}>
+    <ins className={addedClass} style={{ "--i": order.n++ } as CSSProperties}>
       {span.text}
       {span.changes.length > 0 && (
         <sup className="ml-0.5 font-bold">[{span.changes.map((index) => index + 1).join(", ")}]</sup>
@@ -27,11 +27,11 @@ function Span({ span, comparison }: { span: CvSpan; comparison?: Comparison }) {
   )
 }
 
-function Spans({ spans, comparison }: { spans: CvSpan[]; comparison?: Comparison }) {
+function Spans({ spans, comparison, order }: { spans: CvSpan[]; comparison?: Comparison; order: { n: number } }) {
   return spans.map((span, i) => (
     <Fragment key={i}>
       {i > 0 && " "}
-      <Span span={span} comparison={comparison} />
+      <Span span={span} comparison={comparison} order={order} />
     </Fragment>
   ))
 }
@@ -41,12 +41,14 @@ function Spans({ spans, comparison }: { spans: CvSpan[]; comparison?: Comparison
  * numbered changes correspond to the sources shown in the comparison.
  */
 export function CvPage({ doc, comparison, className }: { doc: CvDoc; comparison?: Comparison; className?: string }) {
+  // Running index of added sentences, so the reveal animation can stagger them in reading order.
+  const order = { n: 0 }
   return (
     <article className={cn("cv-page aspect-[210/297] w-full space-y-5 rounded-sm border bg-card p-6 text-card-foreground shadow-sm sm:p-8", className)}>
       {doc.name && (
         <header className="space-y-1 border-b-2 border-primary pb-3">
           <p className="cv-name font-display text-3xl font-semibold">{titleCase(doc.name)}</p>
-          {doc.headline.map((spans, i) => <p key={i} className="cv-body"><Spans spans={spans} comparison={comparison} /></p>)}
+          {doc.headline.map((spans, i) => <p key={i} className="cv-body"><Spans spans={spans} comparison={comparison} order={order} /></p>)}
         </header>
       )}
       {doc.sections.map((section, s) => (
@@ -54,11 +56,11 @@ export function CvPage({ doc, comparison, className }: { doc: CvDoc; comparison?
           {section.title && <p className="cv-section font-display text-xl font-semibold text-primary">{sectionTitle(section.title)}</p>}
           {section.lines.map((line, l) =>
             line.kind === "bullet" ? (
-              <p key={l} className="cv-body relative pl-5 before:absolute before:left-1 before:content-['•']"><Spans spans={line.spans} comparison={comparison} /></p>
+              <p key={l} className="cv-body relative pl-5 before:absolute before:left-1 before:content-['•']"><Spans spans={line.spans} comparison={comparison} order={order} /></p>
             ) : line.kind === "entry" ? (
-              <p key={l} className="cv-body"><span className="font-semibold">{line.date}</span> · <Spans spans={line.spans} comparison={comparison} /></p>
+              <p key={l} className="cv-body"><span className="font-semibold">{line.date}</span> · <Spans spans={line.spans} comparison={comparison} order={order} /></p>
             ) : (
-              <p key={l} className="cv-body"><Spans spans={line.spans} comparison={comparison} /></p>
+              <p key={l} className="cv-body"><Spans spans={line.spans} comparison={comparison} order={order} /></p>
             ),
           )}
         </section>
