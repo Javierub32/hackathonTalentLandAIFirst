@@ -124,15 +124,14 @@
 .demo-cv .demo-cv-fija { display: none; }
 html.print .demo-cv .demo-cv-fija { display: block; }
 html.print .demo-cv .demo-cv-animada { display: none; }
-.demo-entrevista {
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-  align-items: center;
-  gap: 1.5rem;
+.demo-entrevista img { object-position: center; }
+.demo-entrevista figcaption {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  font-size: 1.1rem;
 }
-.demo-entrevista figcaption { margin: 0; font-size: 1.5rem; }
 .demo-entrevista figcaption p { margin: 0; line-height: 1.35; }
-.demo-entrevista figcaption p + p { margin-top: 1.4rem; }
 
 /* Cierre */
 .cierre { font-family: var(--font-display-family); font-size: 2.6rem; line-height: 1.2; margin: 1.6rem 0 1rem; }

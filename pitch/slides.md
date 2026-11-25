@@ -151,7 +151,7 @@ Con el CV abierto, Pilar pulsa «Mejorar mi CV». La versión adaptada hace visi
 # Pilar practica la entrevista
 
 <figure class="demo-captura demo-entrevista">
-  <img src="/demo-entrevista.png" alt="Al curro muestra una pregunta sobre cómo ayudar a elegir un perfume y el comentario de la IA." />
+  <img src="/demo-entrevista.png" alt="Pantalla inicial de la entrevista de Pilar para una oferta de perfumería, con la entrevistadora virtual y la opción de empezar con audio." />
   <figcaption>
     <p><strong>Lo que hizo bien</strong><br>Preguntó qué buscaba la clienta.</p>
     <p><strong>Qué puede mejorar</strong><br>Sugerir una familia de fragancias.</p>
