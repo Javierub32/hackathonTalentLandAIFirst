@@ -68,3 +68,8 @@ owner: alraro
 - Fuera todas las menciones a la ayuda Emplea-T en la interfaz (insignias y nota).
 - «Practicar la entrevista» en menta (el color de su hover); «Ver todas» blanco con borde verde; botones secundarios sobre blanco.
 - Palabras clave agrupadas y plegables: Experiencia, Formación y conocimientos, Competencias, Tareas del puesto, con «N de M» y un «+N» animado tras mejorar el CV.
+
+## Ronda de revisión 5 (Alfonso)
+
+- «Más ofertas para ti»: panel blanco con cabecera y banda menta, icono por tipo de puesto, lugar y jornada con iconos, «Ver las N ofertas» integrado al pie.
+- «Practicar la entrevista»: botón secundario blanco con borde verde bosque; el menta queda solo para el hover.

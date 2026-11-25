@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router"
-import { ArrowRight, BadgeEuro, ChevronRight, Clock, MapPin } from "lucide-react"
+import { ArrowRight, BadgeEuro, Briefcase, ChefHat, ChevronDown, ChevronRight, Clock, Cpu, Dumbbell, HeartPulse, type LucideIcon, MapPin, ShoppingBag, Sparkles, Users, Wrench } from "lucide-react"
 import { Etiqueta } from "@/components/brand"
 import { EmptyState } from "@/components/common/EmptyState"
 import { QueryState } from "@/components/common/QueryState"
@@ -44,20 +44,38 @@ function OfertaDestacada({ offer }: { offer: Offer }) {
   )
 }
 
-/** Every other offer as a row of one list: title, place · schedule, aid badge. */
+/** A recognisable icon per kind of job, from the title; Briefcase when nothing matches. Add a pair to grow it. */
+const ICONOS: [RegExp, LucideIcon][] = [
+  [/dependient|vend|comercio|perfum|tienda/i, ShoppingBag],
+  [/cocin|camarer|hosteler/i, ChefHat],
+  [/deport|monitor/i, Dumbbell],
+  [/limpieza/i, Sparkles],
+  [/fisio|enfermer|cuidad|sanitari/i, HeartPulse],
+  [/electr[oó]nic|montaje|manipulador/i, Cpu],
+  [/t[eé]cnic|servicio t|mantenimiento/i, Wrench],
+  [/orienta|laboral|social/i, Users],
+]
+const iconoDe = (title: string) => ICONOS.find(([re]) => re.test(title))?.[1] ?? Briefcase
+
+/** Every other offer as a row of one list: job icon, title, place and schedule. */
 function FilaOferta({ offer }: { offer: Offer }) {
+  const Icono = iconoDe(offer.title)
   return (
     <Link
       to={`/ofertas/${offer.id}`}
-      className="group flex min-h-[72px] items-center gap-4 px-5 py-3 hover:bg-secondary focus-visible:relative focus-visible:z-10 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring"
+      className="group flex min-h-[72px] items-center gap-4 px-5 py-3 transition-colors hover:bg-secondary/60 focus-visible:relative focus-visible:z-10 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring"
     >
+      <span aria-hidden className="grid size-11 shrink-0 place-items-center rounded-md bg-secondary text-chart-3 transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+        <Icono className="size-5" />
+      </span>
       <span className="min-w-0 flex-1">
         <span className="block truncate text-lg font-semibold leading-snug group-hover:underline">{offer.title}</span>
-        <span className="block truncate text-lg leading-snug text-muted-foreground">
-          {offer.location || "Lugar sin indicar"} · {jornadaCorta(offer.schedule)}
+        <span className="flex min-w-0 items-center gap-3 text-lg leading-snug text-muted-foreground">
+          <span className="flex min-w-0 items-center gap-1"><MapPin className="size-4 shrink-0" aria-hidden /><span className="truncate">{offer.location || "Lugar sin indicar"}</span></span>
+          <span className="flex shrink-0 items-center gap-1"><Clock className="size-4" aria-hidden />{jornadaCorta(offer.schedule)}</span>
         </span>
       </span>
-      <ChevronRight className="size-5 shrink-0 text-muted-foreground group-hover:text-primary" aria-hidden />
+      <ChevronRight className="size-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden />
     </Link>
   )
 }
@@ -75,20 +93,26 @@ function Ofertas({ rows }: { rows: Offer[] }) {
       </div>
 
       {resto.length > 0 && (
-        <section aria-labelledby="mas-ofertas" className="space-y-3 lg:pt-2">
-          <div className="flex items-baseline justify-between gap-4">
-            <h2 id="mas-ofertas"><Etiqueta>Más ofertas para ti</Etiqueta></h2>
-            <p className="text-lg text-muted-foreground">{rows.length} ofertas</p>
-          </div>
-          <ul className="divide-y overflow-hidden rounded-md border bg-card shadow-sm">
+        <section aria-labelledby="mas-ofertas" className="self-start overflow-hidden rounded-md border bg-card shadow-sm lg:mt-2">
+          <header className="flex items-center justify-between gap-4 border-b-4 border-accent px-5 pb-3 pt-4">
+            <h2 id="mas-ofertas" className="font-display text-xl font-extrabold">Más ofertas para ti</h2>
+            <span className="rounded-full bg-secondary px-3 py-0.5 text-base font-semibold text-secondary-foreground">{rows.length} en Málaga</span>
+          </header>
+          <ul className="divide-y">
             {visibles.map((offer) => (
               <li key={offer.id}><FilaOferta offer={offer} /></li>
             ))}
           </ul>
           {resto.length > VISIBLES && (
-            <Button variant="outline" className="min-h-12 border-primary bg-card text-lg font-semibold text-primary hover:bg-accent" aria-expanded={todas} onClick={() => setTodas((v) => !v)}>
-              {todas ? "Ver menos" : `Ver todas (${resto.length})`}
-            </Button>
+            <button
+              type="button"
+              aria-expanded={todas}
+              onClick={() => setTodas((v) => !v)}
+              className="flex min-h-12 w-full items-center justify-center gap-2 border-t bg-card text-lg font-semibold text-primary hover:bg-secondary/60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring"
+            >
+              {todas ? "Ver menos" : `Ver las ${resto.length} ofertas`}
+              <ChevronDown className={`size-5 transition-transform ${todas ? "rotate-180" : ""}`} aria-hidden />
+            </button>
           )}
         </section>
       )}

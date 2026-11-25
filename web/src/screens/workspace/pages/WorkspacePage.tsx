@@ -202,7 +202,7 @@ function Workspace({ offerId }: { offerId: number }) {
                           <FileText aria-hidden /> Mejorar mi CV <ArrowRight className="ml-auto" aria-hidden />
                         </Button>
                         <p className="leading-snug text-muted-foreground">Adaptamos tu CV a lo que pide la oferta, con tu experiencia real.</p>
-                        <Button variant="outline" className={`${actionClass} w-full justify-start border-primary/30 bg-accent px-5 text-accent-foreground hover:bg-secondary`} asChild>
+                        <Button variant="outline" className={`${actionClass} w-full justify-start border-2 border-primary bg-card px-5 text-primary hover:bg-accent hover:text-accent-foreground`} asChild>
                           <Link to={`/ofertas/${offerId}/entrevista`}><MessageCircle aria-hidden /> Practicar la entrevista <ArrowRight className="ml-auto" aria-hidden /></Link>
                         </Button>
                         <p className="leading-snug text-muted-foreground">Ensaya con preguntas de este puesto y recibe consejos.</p>
