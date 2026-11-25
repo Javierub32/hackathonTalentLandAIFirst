@@ -6,10 +6,14 @@ fonts:
 mdc: true
 transition: fade
 layout: default
-class: slide-cierre
+class: slide-portada slide-apertura
 ---
 
-<MarcaPitch />
+<PortadaPilar>
+  <div class="portada-datos portada-marca">
+    <MarcaPitch />
+  </div>
+</PortadaPilar>
 
 ---
 class: slide-portada
@@ -17,11 +21,7 @@ class: slide-portada
 
 <!-- 00:00 · Persona (R1.1, R9.2). Guion: hackathon/05-pitch.md ## Demo -->
 
-<div class="portada">
-  <figure class="portada-foto">
-    <img src="/pilar.jpg" alt="Pilar, nuestra persona de ejemplo" />
-    <figcaption>Imagen ilustrativa</figcaption>
-  </figure>
+<PortadaPilar>
   <div class="portada-datos">
     <p class="antetitulo">Ficha</p>
     <h1>Pilar, 53 años</h1>
@@ -33,7 +33,7 @@ class: slide-portada
     <div v-click="1" class="portada-frase">Envía currículums.<br><span class="rojo">Nadie la llama.</span></div>
   </div>
   <div class="portada-sello"><Sello :visible="$clicks >= 1">Sin respuesta</Sello></div>
-</div>
+</PortadaPilar>
 
 <!--
 Pilar tiene 53 años, 20 años de experiencia en administración y comercio, y lleva 18 meses enviando currículums. Nadie la llama.
@@ -181,7 +181,10 @@ class: slide-cierre
 
 <!-- 04:45 · Petición y cierre (R6.2) -->
 
-<MarcaPitch />
+<div class="cierre-grid">
+  <MarcaPitch />
+  <div class="cierre-foto"><img src="/pilar.jpg" alt="Pilar, nuestra persona de ejemplo" /></div>
+</div>
 
 <!--
 Buscamos un piloto con el IMFE y vuestro apoyo. Al curro: que su experiencia vuelva a contar.

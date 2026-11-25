@@ -436,3 +436,7 @@ html.print .demo-cv .demo-cv-animada { display: none; }
   letter-spacing: -0.025em;
   text-wrap: balance;
 }
+
+.slide-apertura.slidev-layout { background-color: var(--ac-bosque); }
+.portada-marca { align-items: center; }
+.portada-marca .marca-pitch { padding: 0; }
