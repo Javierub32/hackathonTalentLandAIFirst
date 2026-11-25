@@ -1,8 +1,7 @@
 """Contract: interview routes. Operation ids `interview_questions`, `interview_feedback`.
 
-Both call the LLM through `ai.py`. If the call fails or takes longer than 15 s, the demo offer
-(IMFE 2026/01198) answers from `stub.json` and any other offer gets generic questions or
-feedback built from the offer.
+Both call the LLM through `ai.py`. If it fails or times out, questions use the demo
+stub or generic questions. Feedback reports the temporary unavailability.
 """
 import json
 import logging
@@ -68,12 +67,9 @@ def feedback(body: FeedbackRequest, session: SessionDep) -> InterviewFeedback:
         return ai.feedback(offer, body.question, body.answer)
     except Exception as exc:  # noqa: BLE001 - LLM down, timeout, quota or unsafe feedback
         log.warning("interview feedback fallback for offer %s: %r", offer.id, exc)
-    data = STUB["feedback"]
-    if offer.code == DEMO_CODE:
-        return InterviewFeedback(offer_id=body.offer_id, good=data["good"], improve=data["improve"], tip=data["tip"])
     return InterviewFeedback(
         offer_id=body.offer_id,
-        good=["Has respondido a la pregunta con un ejemplo."],
-        improve=["Añade un resultado concreto: qué conseguiste."],
-        tip="El feedback con IA no está disponible ahora mismo: prueba otra vez en un momento.",
+        good=[],
+        improve=[],
+        tip="Ahora mismo no podemos evaluar tu respuesta. Vuelve a pulsar «Ver mi comentario» para intentarlo de nuevo.",
     )
