@@ -101,6 +101,7 @@
 .quien { font-family: var(--font-display-family); font-weight: 700; font-size: 1.25rem; margin-bottom: 0.3rem; }
 .pagador.principal .quien { font-size: 1.5rem; color: var(--primary); }
 
+.slide-grafico-financiero.slidev-layout { background-color: #fff; }
 .grafico-financiero { max-width: 52rem; margin: 4.5rem auto 0; }
 .grafico-financiero img { display: block; width: 100%; height: auto; }
 
