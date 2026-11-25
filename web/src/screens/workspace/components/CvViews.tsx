@@ -1,5 +1,5 @@
 import { Download, Maximize2 } from "lucide-react"
-import { useMemo } from "react"
+import { type ReactNode, useMemo } from "react"
 import { createPortal } from "react-dom"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
@@ -36,7 +36,8 @@ function ZoomCv({ doc, title, comparison }: { doc: CvDoc; title: string; compari
   )
 }
 
-export function CvViews({ name, original, adapted }: { name: string; original: string; adapted?: Adaptation }) {
+/** `placeholder` fills the second column until the adapted CV exists (e.g. the call to action). */
+export function CvViews({ name, original, adapted, placeholder }: { name: string; original: string; adapted?: Adaptation; placeholder?: ReactNode }) {
   const before = useMemo(() => parseCv(original, adapted?.cv_text), [original, adapted])
   const after = useMemo(() => adapted && parseCv(adapted.cv_text, original, adapted.changes.map((change) => ({
     ...change,
@@ -46,7 +47,7 @@ export function CvViews({ name, original, adapted }: { name: string; original: s
 
   return (
     <div className="min-w-0 space-y-1">
-      <div className={adapted ? "grid gap-3 md:grid-cols-2" : "max-w-xl"}>
+      <div className={adapted || placeholder ? "grid gap-4 md:grid-cols-2" : "max-w-xl"}>
         <section aria-labelledby="cv-before" className="min-w-0">
           <div className="flex flex-wrap items-center justify-between gap-x-2">
             <h2 id="cv-before" className="font-display text-xl font-bold">CV actual</h2>
@@ -54,6 +55,7 @@ export function CvViews({ name, original, adapted }: { name: string; original: s
           </div>
           <CvPage doc={before} comparison={after ? "removed" : undefined} className="cv-preview" />
         </section>
+        {!adapted && placeholder}
         {adapted && after && (
           <section aria-labelledby="cv-after" className="min-w-0">
             <div className="flex flex-wrap items-center justify-between gap-x-2">
@@ -69,11 +71,11 @@ export function CvViews({ name, original, adapted }: { name: string; original: s
       </div>
       {adapted && (
         <div className="flex flex-wrap items-center gap-x-4">
-          <p className="text-base"><s>Quitado</s> · <mark className="bg-accent text-accent-foreground underline">Añadido</mark></p>
+          <p className="text-lg"><s>Quitado</s> · <mark className="bg-accent text-accent-foreground underline">Añadido</mark></p>
           {adapted.changes.length > 0 && (
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="link" className="px-0 text-base">Ver cambios y sus fuentes</Button>
+                <Button variant="link" className="h-auto px-0 text-lg">Ver cambios y sus fuentes</Button>
               </DialogTrigger>
               <DialogContent className="max-h-[85dvh] overflow-auto sm:max-w-2xl" showCloseButton={false}>
                 <DialogTitle className="font-display text-2xl">Cambios y sus fuentes</DialogTitle>

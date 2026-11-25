@@ -38,3 +38,12 @@ owner: alraro
 - Chrome sin cabecera a 1366×768 (modo live con la API): inicio, oferta 1 y entrevista caben sin scroll; a 390 px no hay desbordamiento horizontal.
 - Decoración: `FondoMarca` en el marco (todas las pantallas); `Decoracion` es solo un triángulo de esquina pequeño dentro de las secciones, para no duplicar las bandas.
 - `make check` pasa (los avisos de ruff son de antes y no bloquean).
+
+## Ronda de revisión 1 (Alfonso)
+
+- Fondo de la app en `muted` (salvia) para que las superficies blancas destaquen; tarjeta destacada con cabecera verde y sombra menta del cartel.
+- Oferta: cabecera verde con bandas, condiciones con iconos en una superficie y panel «Prepárate para esta oferta» con pasos 01/02.
+- CV: requisitos como chips (verde con ✓ = encontrado, borde discontinuo con + = falta), cifra grande, CTA en el hueco del CV mejorado; quitado «No lo inventamos».
+- Entrevista: marco de videollamada verde con sombra menta; comentarios en panel blanco.
+- Files owned ampliados a `web/src/screens/workspace/` y `web/src/screens/practice/` (issues de origen cerradas; comentado en #37).
+- 1366×768 sin scroll en inicio, oferta, CV antes y después y entrevista.

@@ -31,28 +31,32 @@ function AyudaEmpleaT({ offer, className }: { offer: Offer; className?: string }
   )
 }
 
-/** The demo offer, large: one white surface, no nested boxes. */
+/** The demo offer, large: a forest header like the poster, then the conditions on white. */
 function OfertaDestacada({ offer }: { offer: Offer }) {
   return (
-    <article className="relative flex flex-col gap-4 rounded-md border bg-card p-6 shadow-lg">
-      <div className="flex flex-wrap items-center gap-2">
-        <Etiqueta tono="bosque" className="text-base">Nueva en Málaga</Etiqueta>
-        <AyudaEmpleaT offer={offer} />
-      </div>
-      <div className="space-y-1">
-        <h2 className="font-display text-2xl font-extrabold leading-tight">{offer.title}</h2>
+    <article className="overflow-hidden rounded-md border border-primary/20 bg-card shadow-[10px_10px_0_0_var(--color-accent)]">
+      <header className="relative space-y-3 bg-primary px-6 pb-6 pt-5 text-primary-foreground">
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-40 bg-chart-3 [clip-path:polygon(70%_0,100%_0,100%_100%,30%_100%)]" />
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-40 bg-accent [clip-path:polygon(62%_0,70%_0,30%_100%,22%_100%)]" />
+        <div className="relative flex flex-wrap items-center gap-2">
+          <Etiqueta className="text-base">Nueva en Málaga</Etiqueta>
+          <AyudaEmpleaT offer={offer} />
+        </div>
+        <h2 className="relative max-w-[22ch] font-display text-2xl font-extrabold leading-tight">{offer.title}</h2>
+      </header>
+      <div className="space-y-4 px-6 pb-6 pt-4">
         <p className="line-clamp-1 text-lg text-muted-foreground">{offer.employer || "Empresa sin indicar"}</p>
+        <ul className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-lg">
+          <li className="flex items-center gap-2"><MapPin className="size-5 shrink-0 text-chart-3" aria-hidden /><span className="sr-only">Lugar: </span>{offer.location || "Sin indicar"}</li>
+          <li className="flex items-center gap-2"><Clock className="size-5 shrink-0 text-chart-3" aria-hidden /><span className="sr-only">Jornada: </span>{jornadaCorta(offer.schedule)}</li>
+          <li className="col-span-2 flex items-center gap-2"><BadgeEuro className="size-5 shrink-0 text-chart-3" aria-hidden /><span className="sr-only">Salario: </span>{offer.salary || "Sin indicar"}</li>
+        </ul>
+        <Button asChild size="lg" className="h-auto min-h-12 px-6 text-lg font-semibold">
+          <Link to={`/ofertas/${offer.id}`} aria-label={`Ver oferta: ${offer.title}`}>
+            Ver oferta <ArrowRight aria-hidden />
+          </Link>
+        </Button>
       </div>
-      <ul className="space-y-1.5 text-lg">
-        <li className="flex items-center gap-2"><MapPin className="size-5 shrink-0 text-chart-3" aria-hidden /><span className="sr-only">Lugar: </span>{offer.location || "Sin indicar"}</li>
-        <li className="flex items-center gap-2"><Clock className="size-5 shrink-0 text-chart-3" aria-hidden /><span className="sr-only">Jornada: </span>{jornadaCorta(offer.schedule)}</li>
-        <li className="flex items-center gap-2"><BadgeEuro className="size-5 shrink-0 text-chart-3" aria-hidden /><span className="sr-only">Salario: </span>{offer.salary || "Sin indicar"}</li>
-      </ul>
-      <Button asChild size="lg" className="h-auto min-h-12 self-start px-6 text-lg font-semibold">
-        <Link to={`/ofertas/${offer.id}`} aria-label={`Ver oferta: ${offer.title}`}>
-          Ver oferta <ArrowRight aria-hidden />
-        </Link>
-      </Button>
     </article>
   )
 }
@@ -94,7 +98,7 @@ function Ofertas({ rows }: { rows: Offer[] }) {
             <h2 id="mas-ofertas"><Etiqueta>Más ofertas para ti</Etiqueta></h2>
             <p className="text-lg text-muted-foreground">{rows.length} ofertas</p>
           </div>
-          <ul className="divide-y overflow-hidden rounded-md border bg-card">
+          <ul className="divide-y overflow-hidden rounded-md border bg-card shadow-sm">
             {visibles.map((offer) => (
               <li key={offer.id}><FilaOferta offer={offer} /></li>
             ))}

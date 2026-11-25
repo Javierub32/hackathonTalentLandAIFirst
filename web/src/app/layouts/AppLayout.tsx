@@ -23,7 +23,7 @@ export function AppLayout() {
   const { pathname } = useLocation()
 
   return (
-    <div className="relative flex min-h-svh flex-col">
+    <div className="relative flex min-h-svh flex-col bg-muted">
       <FondoMarca />
       <a
         href="#contenido"

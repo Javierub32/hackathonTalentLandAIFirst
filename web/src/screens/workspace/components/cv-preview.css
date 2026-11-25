@@ -16,7 +16,7 @@
 @media (min-width: 64rem) {
   .cv-page.cv-preview {
     min-height: 18rem;
-    max-height: 30rem;
+    max-height: 28rem;
     overflow: auto;
     font-size: 0.625rem;
     line-height: 1.15;
