@@ -73,3 +73,9 @@ owner: alraro
 
 - «Más ofertas para ti»: panel blanco con cabecera y banda menta, icono por tipo de puesto, lugar y jornada con iconos, «Ver las N ofertas» integrado al pie.
 - «Practicar la entrevista»: botón secundario blanco con borde verde bosque; el menta queda solo para el hover.
+
+## Ronda de revisión 6 (Alfonso)
+
+- Entrevista: botón «Hablar» legible (verde; rojo con micro parpadeando al grabar); respuesta en un panel blanco con micro, texto y «Ver mi comentario» en una fila; «Repetir pregunta» y «Activar cámara» agrupados a la derecha.
+- Mejorar mi CV: columnas alineadas con títulos del mismo estilo; categorías de palabras clave como tarjetas flotantes; una sola fila de acciones bajo el CV.
+- Botón «Volver» (antes «Volver a la oferta») en CV y entrevista.

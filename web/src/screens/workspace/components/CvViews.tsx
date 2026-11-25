@@ -65,7 +65,7 @@ export function CvViews({ name, original, adapted, pending, action, afterActions
   return (
     <div className="min-w-0 space-y-2">
       <section aria-labelledby="cv-title" className="min-w-0 space-y-2">
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+        <div className="flex min-h-11 flex-wrap items-center gap-x-3 gap-y-2">
           <h2 id="cv-title" className={`font-display text-2xl font-extrabold ${showAfter ? "text-primary" : ""}`}>{title}</h2>
           {after && (
             <div role="group" aria-label="Comparar versiones" className="inline-flex rounded-md border bg-card p-0.5">
@@ -103,7 +103,6 @@ export function CvViews({ name, original, adapted, pending, action, afterActions
       </section>
       {adapted && (
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-          <p className="text-lg">{showAfter ? <mark className="bg-accent text-accent-foreground underline">Añadido</mark> : <s>Quitado</s>}</p>
           {adapted.changes.length > 0 && (
             <Dialog>
               <DialogTrigger asChild>

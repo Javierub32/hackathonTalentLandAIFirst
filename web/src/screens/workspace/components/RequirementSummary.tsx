@@ -1,7 +1,6 @@
 import { Check, ChevronRight, Plus } from "lucide-react"
 import { type CSSProperties, useEffect, useState } from "react"
 import "./keywords.css"
-import { Etiqueta } from "@/components/brand/Etiqueta"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import type { components } from "@/lib/api/schema"
@@ -59,9 +58,9 @@ export function RequirementSummary({ report, previous }: { report: FilterReport;
   const percent = report.total ? Math.round((found / report.total) * 100) : 0
   let flipped = 0
   return (
-    <div className="space-y-2.5 rounded-md border bg-card p-4 shadow-sm">
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-        <h2><Etiqueta>Palabras clave</Etiqueta></h2>
+    <section aria-labelledby="kw-title" className="space-y-3">
+      <div className="flex min-h-11 flex-wrap items-center gap-x-4 gap-y-2">
+        <h2 id="kw-title" className="font-display text-2xl font-extrabold">Palabras clave</h2>
         <Dialog>
           <DialogTrigger asChild><Button variant="link" className="ml-auto h-auto px-0 text-base">Revisar requisitos</Button></DialogTrigger>
           <DialogContent className="max-h-[85dvh] overflow-auto sm:max-w-2xl" showCloseButton={false}>
@@ -90,7 +89,7 @@ export function RequirementSummary({ report, previous }: { report: FilterReport;
         </div>
       </div>
       {report.requirements.length === 0 ? <p>La oferta no indica requisitos.</p> : (
-        <ul aria-label="Palabras clave del CV por grupos" className="divide-y rounded-md border">
+        <ul aria-label="Palabras clave del CV por grupos" className="space-y-2">
           {GRUPOS.map(({ name }) => {
             const items = report.requirements
               .map((requirement, index) => ({ requirement, index }))
@@ -99,7 +98,7 @@ export function RequirementSummary({ report, previous }: { report: FilterReport;
             const ok = items.filter(({ requirement }) => requirement.found).length
             const gained = previous ? items.filter(({ requirement, index }) => requirement.found && !previous.requirements[index]?.found).length : 0
             return (
-              <li key={name}>
+              <li key={name} className="rounded-md border bg-card shadow-sm transition-shadow hover:shadow-md">
                 <details className="group/kw">
                   <summary className="flex min-h-12 cursor-pointer list-none items-center gap-2 px-3 py-2 text-lg font-semibold hover:bg-secondary focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring [&::-webkit-details-marker]:hidden">
                     <ChevronRight className="size-5 shrink-0 text-muted-foreground transition-transform group-open/kw:rotate-90" aria-hidden />
@@ -136,6 +135,6 @@ export function RequirementSummary({ report, previous }: { report: FilterReport;
           })}
         </ul>
       )}
-    </div>
+    </section>
   )
 }

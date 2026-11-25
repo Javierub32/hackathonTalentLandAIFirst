@@ -109,7 +109,7 @@ function Preparation({ offer, onBack }: { offer: Offer; onBack: () => void }) {
   return (
     <section aria-labelledby="workspace-cv" className="space-y-3">
       <header className="flex flex-wrap items-center gap-x-4 gap-y-1 pb-1">
-        <Button variant="ghost" className="text-lg" onClick={onBack}><ArrowLeft aria-hidden /> Volver a la oferta</Button>
+        <Button variant="ghost" className="-ml-3 text-lg" onClick={onBack}><ArrowLeft aria-hidden /> Volver</Button>
         <div>
           <h1 id="workspace-cv" tabIndex={-1} className="font-display text-2xl font-bold text-primary">Mejorar mi CV</h1>
           <p className="text-base leading-6 text-muted-foreground">{offer.title}</p>
