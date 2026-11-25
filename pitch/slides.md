@@ -146,8 +146,8 @@ Pilar elige la oferta de dependienta de perfumería. Compara los dos CV y compru
 <figure class="demo-captura demo-entrevista">
   <img src="/demo-entrevista.png" alt="Al curro muestra una pregunta sobre cómo ayudar a elegir un perfume y el comentario de la IA." />
   <figcaption>
-    <p><strong>Respuesta de Pilar</strong><br>«En la tienda de moda escuchaba lo que buscaba cada clienta, le hacía preguntas y le proponía dos opciones según su presupuesto».</p>
-    <p><strong>Sugerencia de la IA</strong><br>Nombrar una familia de fragancias y ofrecer envolver el perfume para regalo.</p>
+    <p><strong>Lo que hizo bien</strong><br>Preguntó qué buscaba la clienta.</p>
+    <p><strong>Qué puede mejorar</strong><br>Sugerir una familia de fragancias.</p>
   </figcaption>
 </figure>
 
