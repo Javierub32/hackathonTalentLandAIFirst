@@ -76,11 +76,11 @@ export function PracticeRecorder({ onText, onBusy, disabled = false }: { disable
     }
   }
   return <div className="practice-recorder">
-    <Button type="button" variant="outline" className="min-h-12 text-lg" disabled={disabled || state === "opening" || state === "transcribing"} aria-pressed={state === "recording"} onClick={() => state === "recording" ? recorder.current?.stop() : void start()}>
+    <Button type="button" className={`recorder-button min-h-12 text-lg font-semibold ${state === "recording" ? "is-recording" : ""}`} disabled={disabled || state === "opening" || state === "transcribing"} aria-pressed={state === "recording"} onClick={() => state === "recording" ? recorder.current?.stop() : void start()}>
       {state === "recording" ? <Square aria-hidden /> : <Mic aria-hidden />}
-      {state === "recording" ? "Terminar grabación" : state === "transcribing" ? "Transcribiendo…" : state === "opening" ? "Abriendo micrófono…" : "Responder"}
+      {state === "recording" ? "Terminar" : state === "transcribing" ? "Transcribiendo…" : state === "opening" ? "Abriendo…" : "Hablar"}
     </Button>
-    <p role="status" className="text-lg">{state === "recording" ? "Te estoy grabando. Pulsa Terminar grabación cuando acabes." : state === "transcribing" ? "Espera mientras pasamos tu voz a texto." : "Pulsa para hablar y vuelve a pulsar para terminar."}</p>
+    <p role="status" className={state === "idle" ? "sr-only" : "recorder-status"}>{state === "recording" ? "Te estoy grabando. Pulsa Terminar cuando acabes." : state === "transcribing" ? "Espera mientras pasamos tu voz a texto." : "Pulsa para hablar y vuelve a pulsar para terminar."}</p>
     {error && <p role="alert" className="text-lg text-destructive">{error}</p>}
   </div>
 }

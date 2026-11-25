@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { ArrowLeft, ClipboardList, FileText, MessageCircle } from "lucide-react"
+import { ArrowLeft, ArrowRight, BadgeEuro, ClipboardList, Clock, ExternalLink, FileText, MapPin, MessageCircle, ScrollText } from "lucide-react"
 import { useRef, useState } from "react"
 import { Link, useParams } from "react-router"
-import { Decoracion } from "@/components/brand/Decoracion"
+import { Etiqueta } from "@/components/brand"
 import { EmptyState } from "@/components/common/EmptyState"
 import { QueryState } from "@/components/common/QueryState"
 import { Button } from "@/components/ui/button"
@@ -16,37 +16,53 @@ import { demoAdaptation, demoReport, hasDemoMatch, usesLocalDemo } from "../demo
 const actionClass = "min-h-12 h-auto whitespace-normal text-lg font-semibold"
 type Offer = components["schemas"]["OfferRead"]
 
+/** Offer header like the poster: forest band with the title, diagonal mint and medium-green bands on the right. */
 function OfferDetails({ offer }: { offer: Offer }) {
+  return (
+    <header className="relative overflow-hidden rounded-md bg-primary px-6 py-6 text-primary-foreground md:px-8">
+      <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 hidden w-[34%] sm:block bg-chart-3 [clip-path:polygon(42%_0,100%_0,100%_100%,12%_100%)]" />
+      <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 hidden w-[34%] sm:block bg-accent [clip-path:polygon(34%_0,42%_0,12%_100%,4%_100%)]" />
+      <div className="relative space-y-3 sm:max-w-[70%]">
+        <Etiqueta className="text-base">Oferta{offer.code && ` ${offer.code}`}</Etiqueta>
+        <h1 className="font-display text-2xl font-extrabold leading-tight sm:text-4xl">{offer.title}</h1>
+        <p className="text-lg text-primary-foreground/85">{offer.employer}</p>
+      </div>
+    </header>
+  )
+}
+
+/** The offer conditions on one white surface, each with its icon and label. */
+function OfferConditions({ offer }: { offer: Offer }) {
   const conditions = [
-    ["Lugar", offer.location],
-    ["Contrato", offer.contract],
-    ["Jornada", offer.schedule],
-    ["Salario", offer.salary],
+    { label: "Lugar", value: offer.location, Icon: MapPin },
+    { label: "Jornada", value: offer.schedule, Icon: Clock },
+    { label: "Salario", value: offer.salary, Icon: BadgeEuro },
+    { label: "Contrato", value: offer.contract, Icon: ScrollText },
   ]
   return (
-    <header className="space-y-4 border-b pb-5">
-      <h1 className="font-display text-3xl font-bold text-primary sm:text-4xl">{offer.title}</h1>
-      <p>{offer.employer}</p>
-      <dl className="flex flex-wrap gap-x-6 gap-y-2">
-        {conditions.map(([label, value]) => (
-          <div key={label} className="flex flex-wrap gap-x-2">
-            <dt className="font-semibold">{label}</dt>
-            <dd>{value || "Sin especificar"}</dd>
+    <section aria-label="Condiciones de la oferta" className="space-y-4 rounded-md border bg-card p-6 shadow-sm">
+      <dl className="grid gap-x-8 gap-y-4 sm:grid-cols-2">
+        {conditions.map(({ label, value, Icon }) => (
+          <div key={label} className="flex gap-3">
+            <Icon className="mt-1 size-6 shrink-0 text-chart-3" aria-hidden />
+            <div>
+              <dt className="font-bold">{label}</dt>
+              <dd className="leading-snug">{value || "Sin especificar"}</dd>
+            </div>
           </div>
         ))}
       </dl>
-      {offer.hiring_aid && <p>{offer.hiring_aid}</p>}
       {offer.source && (
-        <p>
-          Fuente{" "}
+        <p className="text-muted-foreground">
+          Fuente:{" "}
           {offer.source_url ? (
-            <a href={offer.source_url} className="font-semibold text-primary underline underline-offset-4">
-              {offer.source}{offer.code && ` · ${offer.code}`}
+            <a href={offer.source_url} className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-4">
+              {offer.source}{offer.code && ` · ${offer.code}`} <ExternalLink className="size-4" aria-hidden />
             </a>
           ) : offer.source}
         </p>
       )}
-    </header>
+    </section>
   )
 }
 
@@ -88,11 +104,12 @@ function Preparation({ offer, onBack }: { offer: Offer; onBack: () => void }) {
   )
   const noChanges = result && !adapted && !noMatch
   const report = adapted?.report ?? initialReport
+  const canAdapt = !adapted && !noMatch && !noChanges && !noRequirements && !!cv && !!initialReport
 
   return (
     <section aria-labelledby="workspace-cv" className="space-y-3">
-      <header className="flex flex-wrap items-center gap-x-4 gap-y-1 border-b pb-2">
-        <Button variant="ghost" onClick={onBack}><ArrowLeft aria-hidden /> Volver a la oferta</Button>
+      <header className="flex flex-wrap items-center gap-x-4 gap-y-1 pb-1">
+        <Button variant="ghost" className="-ml-3 text-lg" onClick={onBack}><ArrowLeft aria-hidden /> Volver</Button>
         <div>
           <h1 id="workspace-cv" tabIndex={-1} className="font-display text-2xl font-bold text-primary">Mejorar mi CV</h1>
           <p className="text-base leading-6 text-muted-foreground">{offer.title}</p>
@@ -109,14 +126,32 @@ function Preparation({ offer, onBack }: { offer: Offer; onBack: () => void }) {
           <Button variant="outline" onClick={() => void candidate.refetch()}>Volver a intentar</Button>
         } />
       )}
-      <div className="grid items-start gap-3 lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-5">
-        <div>{report && <RequirementSummary report={report} showFitHint={!adapted} />}</div>
-        {cv && <CvViews name={cv.name} original={cv.cv_text} adapted={adapted} />}
+      <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-6">
+        <div>{report && <RequirementSummary report={report} previous={adapted ? initialReport : undefined} />}</div>
+        {cv && <CvViews name={cv.name} original={cv.cv_text} adapted={adapted} pending={adaptation.isPending} afterActions={adapted && (
+          draft.data ? (
+            <>
+              <p role="status">{draft.data.status === "borrador" ? "Tu borrador está guardado." : `Tu candidatura ya está ${draft.data.status}.`}</p>
+              <Button variant="outline" asChild><Link to="/candidaturas">Ver mi candidatura</Link></Button>
+            </>
+          ) : (
+            <Button variant="outline" className="min-h-12 bg-card text-lg font-semibold" disabled={draft.isPending} onClick={() => draft.mutate(adapted.cv_text)}>
+              <ClipboardList aria-hidden />{draft.isPending ? "Guardando…" : "Preparar candidatura"}
+            </Button>
+          )
+        )} action={canAdapt && (
+          <>
+            <Button className={`${actionClass} px-8 shadow-[6px_6px_0_0_var(--color-accent)]`} disabled={adaptation.isPending} onClick={() => adaptation.mutate(cv)}>
+              <FileText aria-hidden />{adaptation.isPending ? "Mejorando tu CV…" : "Mejorar mi CV"}
+            </Button>
+          </>
+        )} />}
       </div>
       <div className="sr-only" role="status" aria-atomic="true">
         {adapted ? `CV mejorado. ${adapted.report.found} de ${adapted.report.total} requisitos · ${adapted.report.percent}%` :
           adaptation.isPending ? "Mejorando tu currículum…" : ""}
       </div>
+      {draft.isError && <p role="alert" className="text-destructive">No se pudo guardar el borrador. Vuelve a intentarlo.</p>}
       {adaptation.isError && <p role="alert" className="text-destructive">No se pudo mejorar el CV. Vuelve a intentarlo.</p>}
       {noRequirements && <p role="status">No podemos adaptar el CV porque la oferta no especifica sus requisitos.</p>}
       {noMatch && (
@@ -126,29 +161,6 @@ function Preparation({ offer, onBack }: { offer: Offer; onBack: () => void }) {
         </div>
       )}
       {noChanges && <p role="status">No encontramos cambios respaldados por tu perfil que mejoren el CV para esta oferta.</p>}
-      {!adapted && !noMatch && !noChanges && !noRequirements && cv && initialReport && (
-        <Button className={actionClass} disabled={adaptation.isPending} onClick={() => adaptation.mutate(cv)}>
-          <FileText aria-hidden />{adaptation.isPending ? "Mejorando tu CV…" : "Mejorar mi CV"}
-        </Button>
-      )}
-      {adapted && (
-        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-          {adapted.not_covered.length > 0 && (
-            <p><strong>No lo inventamos:</strong> {adapted.not_covered.join(" · ")} quedan sin cubrir.</p>
-          )}
-          {draft.data ? (
-            <>
-              <p role="status">{draft.data.status === "borrador" ? "Tu borrador está guardado." : `Tu candidatura ya está ${draft.data.status}.`}</p>
-              <Button variant="outline" asChild><Link to="/candidaturas">Ver mi candidatura</Link></Button>
-            </>
-          ) : (
-            <Button variant="outline" disabled={draft.isPending} onClick={() => draft.mutate(adapted.cv_text)}>
-              <ClipboardList aria-hidden />{draft.isPending ? "Guardando…" : "Preparar candidatura"}
-            </Button>
-          )}
-          {draft.isError && <p role="alert" className="text-destructive">No se pudo guardar el borrador. Vuelve a intentarlo.</p>}
-        </div>
-      )}
     </section>
   )
 }
@@ -164,10 +176,9 @@ function Workspace({ offerId }: { offerId: number }) {
 
   return (
     <div className="relative mx-auto max-w-6xl text-lg">
-      <Decoracion className="opacity-50" />
       <div className="relative space-y-3">
         {!showCv && (
-          <Button variant="ghost" asChild><Link to="/ofertas"><ArrowLeft aria-hidden /> Volver a las ofertas</Link></Button>
+          <Button variant="ghost" className="-ml-3 text-lg" asChild><Link to="/ofertas"><ArrowLeft aria-hidden /> Volver a las ofertas</Link></Button>
         )}
         {offer.isError ? (
           <EmptyState title="No se pudo cargar la oferta" action={
@@ -180,16 +191,22 @@ function Workspace({ offerId }: { offerId: number }) {
                 {!showCv && (
                   <>
                     <OfferDetails offer={data} />
-                    <div className="flex flex-col gap-3 sm:flex-row">
-                      <Button ref={focusOfferAction} className={actionClass} onClick={() => {
-                        setView("cv")
-                        requestAnimationFrame(() => document.getElementById("workspace-cv")?.focus({ preventScroll: true }))
-                      }}>
-                        <FileText aria-hidden /> Mejorar mi CV
-                      </Button>
-                      <Button variant="outline" className={actionClass} asChild>
-                        <Link to={`/ofertas/${offerId}/entrevista`}><MessageCircle aria-hidden /> Practicar la entrevista</Link>
-                      </Button>
+                    <div className="grid gap-5 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+                      <OfferConditions offer={data} />
+                      <section aria-labelledby="prepara" className="space-y-3 rounded-md border bg-card p-6 shadow-[10px_10px_0_0_var(--color-accent)]">
+                        <h2 id="prepara" className="font-display text-2xl font-extrabold leading-tight">Prepárate para esta oferta</h2>
+                        <Button ref={focusOfferAction} className={`${actionClass} w-full justify-start px-5`} onClick={() => {
+                          setView("cv")
+                          requestAnimationFrame(() => document.getElementById("workspace-cv")?.focus({ preventScroll: true }))
+                        }}>
+                          <FileText aria-hidden /> Mejorar mi CV <ArrowRight className="ml-auto" aria-hidden />
+                        </Button>
+                        <p className="leading-snug text-muted-foreground">Adaptamos tu CV a lo que pide la oferta, con tu experiencia real.</p>
+                        <Button variant="outline" className={`${actionClass} w-full justify-start border-2 border-primary bg-card px-5 text-primary hover:bg-accent hover:text-accent-foreground`} asChild>
+                          <Link to={`/ofertas/${offerId}/entrevista`}><MessageCircle aria-hidden /> Practicar la entrevista <ArrowRight className="ml-auto" aria-hidden /></Link>
+                        </Button>
+                        <p className="leading-snug text-muted-foreground">Ensaya con preguntas de este puesto y recibe consejos.</p>
+                      </section>
                     </div>
                   </>
                 )}

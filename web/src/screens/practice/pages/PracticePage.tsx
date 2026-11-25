@@ -66,7 +66,7 @@ function Session({ offerId }: { offerId: number }) {
   const shownFeedback = feedback.data?.feedback
   return <div className="practice-call">
     <header className="call-heading">
-      <Link className="call-back" to={`/ofertas/${offerId}`}><ArrowLeft aria-hidden /> Volver a la oferta</Link>
+      <Link className="call-back" to={`/ofertas/${offerId}`}><ArrowLeft aria-hidden /> Volver</Link>
       <div className="call-title"><h1>Practica tu entrevista</h1><p className="call-offer">{offer.data?.title ?? "Cargando oferta…"}</p></div>
       <Etiqueta>Sin prisa, a tu ritmo</Etiqueta>
     </header>
@@ -96,22 +96,24 @@ function Session({ offerId }: { offerId: number }) {
       </aside>}
     </div>
     <div className="call-controls">
+      {started && !finished && !shownFeedback && <div className="answer-panel">
+        <label htmlFor="practice-answer" className="answer-label">Tu respuesta <span>Pulsa Hablar o escribe; podrás corregirla antes de continuar.</span></label>
+        <div className="answer-row">
+          <PracticeRecorder disabled={feedback.isPending} onBusy={setBusy} onText={setAnswer} />
+          <textarea id="practice-answer" rows={2} placeholder="Tu respuesta aparecerá aquí…" value={answer} disabled={busy || feedback.isPending} onChange={(event) => setAnswer(event.target.value)} />
+          <Button className="call-button submit-answer" disabled={busy || feedback.isPending || !answer.trim()} onClick={() => feedback.mutate(answer.trim())}>{feedback.isPending ? "Preparando comentario…" : "Ver mi comentario"}</Button>
+        </div>
+      </div>}
       <div className="call-toolbar">
       {!started && current && <Button className="call-button" onClick={() => { setStarted(true); read(`${questions.data!.intro} ${current.text}`) }}>Empezar entrevista con audio</Button>}
       {questions.isPending && <p role="status">Preparando las preguntas…</p>}
       {(questions.isError || (questions.isSuccess && !total)) && <Button className="call-button" onClick={() => void questions.refetch()}>Reintentar cargar preguntas</Button>}
-      {started && !finished && !shownFeedback && <>
-        <PracticeRecorder disabled={feedback.isPending} onBusy={setBusy} onText={setAnswer} />
-
-      </>}
       {shownFeedback && !finished && <Button className="call-button" onClick={next}>{index + 1 < total ? "Siguiente pregunta" : "Terminar entrevista"}</Button>}
-      {started && !finished && <Button variant="outline" className="call-button" disabled={busy} onClick={() => read(current?.text ?? "")}><Volume2 aria-hidden /> Repetir pregunta</Button>}
-      <Button variant="outline" className="call-button camera-control" onClick={() => { setCameraError(""); setCamera(!camera) }}>{camera ? <CameraOff aria-hidden /> : <Camera aria-hidden />}{camera ? "Apagar cámara" : "Activar cámara"}</Button>
+      <div className="call-secondary">
+        {started && !finished && <Button variant="outline" className="call-button" disabled={busy} onClick={() => read(current?.text ?? "")}><Volume2 aria-hidden /> Repetir pregunta</Button>}
+        <Button variant="outline" className="call-button camera-control" onClick={() => { setCameraError(""); setCamera(!camera) }}>{camera ? <CameraOff aria-hidden /> : <Camera aria-hidden />}{camera ? "Apagar cámara" : "Activar cámara"}</Button>
       </div>
-      {started && !finished && !shownFeedback && <div className="answer-row">
-        <div className="answer-composer"><label htmlFor="practice-answer">Tu respuesta <span>Habla o escribe; podrás corregirla antes de continuar.</span></label><textarea id="practice-answer" rows={2} placeholder="Tu respuesta aparecerá aquí…" value={answer} disabled={busy || feedback.isPending} onChange={(event) => setAnswer(event.target.value)} /></div>
-        <Button className="call-button submit-answer" disabled={busy || feedback.isPending || !answer.trim()} onClick={() => feedback.mutate(answer.trim())}>{feedback.isPending ? "Preparando comentario…" : "Ver mi comentario"}</Button>
-      </div>}
+      </div>
     </div>
     <div className="call-status" role="status">{audioError || cameraError || (feedback.isError ? feedback.error.message : "")}</div>
     <p className="call-privacy">Tu cámara es privada. Solo comentamos tus respuestas; nunca tu cara, tono o emociones.</p>
