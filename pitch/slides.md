@@ -123,38 +123,6 @@ La investigación nos dice tres cosas: las empresas no encuentran a quién contr
 -->
 
 ---
-class: slide-puente
----
-
-<!-- 02:00 · Puente a la demo (R14.1) -->
-
-<div class="puente">
-  <p class="puente-ante">Ahora, en directo</p>
-  <h1>Vamos a verlo</h1>
-  <p class="puente-sub">Una oferta real. El CV de Pilar. Del <span class="mal-claro">38 %</span> al <strong>85 %</strong>.</p>
-  <PasosDemo />
-</div>
-
-<!--
-Pasamos a la aplicación. (Cambiar a la web en directo.)
--->
-
----
-layout: center
-class: text-center
----
-
-<!-- Reserva: solo si falla la demo en directo -->
-
-# Reserva
-
-Si la demo en directo falla, pasamos al vídeo de respaldo.
-
-<!--
-Capturas de la aplicación: añadirlas en pitch/public/ cuando la app esté integrada (Polish) y enlazarlas aquí.
--->
-
----
 
 <!-- Demo · Mejora del CV (R2.1, R2.2, R14.1) -->
 
