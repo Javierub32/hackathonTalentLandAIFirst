@@ -5,7 +5,8 @@ fonts:
   provider: none
 mdc: true
 transition: fade
-class: slide-marca
+layout: default
+class: slide-cierre
 ---
 
 <MarcaPitch />
@@ -180,10 +181,7 @@ class: slide-cierre
 
 <!-- 04:45 · Petición y cierre (R6.2) -->
 
-<div class="cierre-grid">
-  <MarcaPitch cierre />
-  <div class="cierre-foto"><img src="/pilar.jpg" alt="Pilar, nuestra persona de ejemplo" /></div>
-</div>
+<MarcaPitch />
 
 <!--
 Buscamos un piloto con el IMFE y vuestro apoyo. Al curro: que su experiencia vuelva a contar.
