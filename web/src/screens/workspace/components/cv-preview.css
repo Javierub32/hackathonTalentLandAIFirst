@@ -19,13 +19,16 @@
     max-height: max(18rem, calc(100dvh - 352px));
     overflow: auto;
     font-size: 0.9375rem;
-    line-height: 1.35;
+    line-height: 1.6;
+    padding: 1.25rem 1.75rem;
   }
 
   .cv-preview .cv-name { font-size: 1.625rem; line-height: 1.15; }
   .cv-preview .cv-section { font-size: 1.125rem; line-height: 1.2; }
-  .cv-preview section > :not(:last-child) { margin-block-end: 0; }
-  .cv-preview > :not(:last-child) { margin-block-end: 0.25rem; }
+  .cv-preview section > :not(:last-child) { margin-block-end: 0.3rem; }
+  .cv-preview > :not(:last-child) { margin-block-end: 0.9rem; }
+  .cv-preview header { padding-block-end: 0.6rem; }
+  .cv-preview .cv-section { margin-block-end: 0.35rem; }
 }
 
 /* --- Wow moment: the single CV turns into the improved one --- */

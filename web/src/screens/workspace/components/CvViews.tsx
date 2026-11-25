@@ -126,7 +126,7 @@ export function CvViews({ name, original, adapted, pending, action, afterActions
             </Dialog>
           )}
           <div className="ml-auto flex flex-wrap items-center gap-2">
-            <Button variant="outline" className="min-h-12 text-lg font-semibold" onClick={() => download(name)}><Download aria-hidden /> Descargar PDF</Button>
+            <Button variant="outline" className="min-h-12 bg-card text-lg font-semibold" onClick={() => download(name)}><Download aria-hidden /> Descargar PDF</Button>
             {afterActions}
           </div>
         </div>

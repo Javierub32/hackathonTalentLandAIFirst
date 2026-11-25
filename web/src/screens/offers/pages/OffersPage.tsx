@@ -5,7 +5,6 @@ import { Etiqueta } from "@/components/brand"
 import { EmptyState } from "@/components/common/EmptyState"
 import { QueryState } from "@/components/common/QueryState"
 import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
 import { type Offer, useOffers } from "../api"
 
 /** Demo candidate; the greeting is the first thing the jury sees (Beat 01:50). */
@@ -18,19 +17,6 @@ const PASOS = ["Elige una oferta", "Adapta tu currículum", "Practica la entrevi
 /** "Parcial: lunes a viernes…" → "Parcial"; keeps rows on one line. */
 const jornadaCorta = (schedule: string) => schedule.split(/[:,(]/)[0].trim() || "Jornada sin indicar"
 
-function AyudaEmpleaT({ offer, className }: { offer: Offer; className?: string }) {
-  if (!offer.hiring_aid) return null
-  return (
-    <span
-      title={offer.hiring_aid}
-      className={cn("inline-flex shrink-0 items-center gap-1 rounded-sm bg-accent px-2 py-0.5 text-base font-semibold text-accent-foreground", className)}
-    >
-      <BadgeEuro className="size-4" aria-hidden />
-      Ayuda Emplea-T
-    </span>
-  )
-}
-
 /** The demo offer, large: a forest header like the poster, then the conditions on white. */
 function OfertaDestacada({ offer }: { offer: Offer }) {
   return (
@@ -38,10 +24,7 @@ function OfertaDestacada({ offer }: { offer: Offer }) {
       <header className="relative space-y-3 bg-primary px-6 pb-6 pt-5 text-primary-foreground">
         <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-40 bg-chart-3 [clip-path:polygon(70%_0,100%_0,100%_100%,30%_100%)]" />
         <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-40 bg-accent [clip-path:polygon(62%_0,70%_0,30%_100%,22%_100%)]" />
-        <div className="relative flex flex-wrap items-center gap-2">
-          <Etiqueta className="text-base">Nueva en Málaga</Etiqueta>
-          <AyudaEmpleaT offer={offer} />
-        </div>
+        <Etiqueta className="relative text-base">Nueva en Málaga</Etiqueta>
         <h2 className="relative max-w-[22ch] font-display text-2xl font-extrabold leading-tight">{offer.title}</h2>
       </header>
       <div className="space-y-4 px-6 pb-6 pt-4">
@@ -74,7 +57,6 @@ function FilaOferta({ offer }: { offer: Offer }) {
           {offer.location || "Lugar sin indicar"} · {jornadaCorta(offer.schedule)}
         </span>
       </span>
-      <AyudaEmpleaT offer={offer} className="hidden sm:inline-flex" />
       <ChevronRight className="size-5 shrink-0 text-muted-foreground group-hover:text-primary" aria-hidden />
     </Link>
   )
@@ -104,7 +86,7 @@ function Ofertas({ rows }: { rows: Offer[] }) {
             ))}
           </ul>
           {resto.length > VISIBLES && (
-            <Button variant="outline" className="min-h-12 text-lg font-semibold" aria-expanded={todas} onClick={() => setTodas((v) => !v)}>
+            <Button variant="outline" className="min-h-12 border-primary bg-card text-lg font-semibold text-primary hover:bg-accent" aria-expanded={todas} onClick={() => setTodas((v) => !v)}>
               {todas ? "Ver menos" : `Ver todas (${resto.length})`}
             </Button>
           )}

@@ -60,3 +60,11 @@ owner: alraro
 
 - CV como protagonista: columna del CV más ancha (1,3:0,7), letra del CV más grande y sombra menta; panel de palabras clave más compacto.
 - Quitada la frase «Destacamos tu experiencia real…»; el botón «Mejorar mi CV» queda solo, bajo el CV.
+
+## Ronda de revisión 4 (Alfonso)
+
+- Beige más claro `#F7F3EA` (Design Change #50).
+- CV con más interlineado (1,6) y márgenes entre secciones.
+- Fuera todas las menciones a la ayuda Emplea-T en la interfaz (insignias y nota).
+- «Practicar la entrevista» en menta (el color de su hover); «Ver todas» blanco con borde verde; botones secundarios sobre blanco.
+- Palabras clave agrupadas y plegables: Experiencia, Formación y conocimientos, Competencias, Tareas del puesto, con «N de M» y un «+N» animado tras mejorar el CV.

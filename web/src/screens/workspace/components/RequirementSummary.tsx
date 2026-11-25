@@ -1,4 +1,4 @@
-import { Check, Plus } from "lucide-react"
+import { Check, ChevronRight, Plus } from "lucide-react"
 import { type CSSProperties, useEffect, useState } from "react"
 import "./keywords.css"
 import { Etiqueta } from "@/components/brand/Etiqueta"
@@ -8,6 +8,21 @@ import type { components } from "@/lib/api/schema"
 
 type FilterReport = components["schemas"]["FilterReport"]
 type Requirement = FilterReport["requirements"][number] & { label?: string }
+
+/**
+ * Groups the offer's requirements so many keywords never flood the panel. The Contract has no category,
+ * so it is inferred from the wording; anything unmatched is a task of the job. Add a rule here to grow it.
+ */
+const GRUPOS: { name: string; test: (text: string) => boolean }[] = [
+  { name: "Experiencia", test: (t) => /^experiencia|\bexperiencia (previa|en|de)\b/i.test(t) },
+  { name: "Formación y conocimientos", test: (t) => /\b(eso|graduado|bachiller\w*|t[ií]tulo|titulaci[oó]n|formaci[oó]n|grado|fp|ciclo|carn[eé]t?|ingl[eé]s|franc[eé]s|alem[aá]n|idiomas?|certificad\w*|curso|conocimientos?)\b/i.test(t) },
+  { name: "Competencias", test: (t) => /(comunicat|orientaci[oó]n|actitud|proactiv|responsab|equipo|iniciativa|empat|organiza|puntual|flexib|inter[eé]s|motiva|habilidad)/i.test(t) },
+  { name: "Tareas del puesto", test: () => true },
+]
+
+function grupoDe(text: string) {
+  return GRUPOS.find((g) => g.test(text))!.name
+}
 
 function shortLabel({ label, text }: Requirement) {
   if (label?.trim()) return label.trim()
@@ -39,7 +54,7 @@ function useCountUp(to: number, from?: number) {
  * Keywords the automatic filter looks for. With `previous` (the report before the adaptation),
  * the count climbs and the newly covered keywords flip to green one after another.
  */
-export function RequirementSummary({ report, previous, showFitHint }: { report: FilterReport; previous?: FilterReport; showFitHint: boolean }) {
+export function RequirementSummary({ report, previous }: { report: FilterReport; previous?: FilterReport }) {
   const found = useCountUp(report.found, previous?.found)
   const percent = report.total ? Math.round((found / report.total) * 100) : 0
   let flipped = 0
@@ -73,28 +88,49 @@ export function RequirementSummary({ report, previous, showFitHint }: { report: 
             <div className="h-full rounded-full bg-primary transition-[width] duration-300" style={{ width: `${percent}%` }} />
           </div>
         </div>
-        {showFitHint && report.found > 0 && report.found < report.total && (
-          <p className="basis-full leading-snug text-muted-foreground">
-            Tu CV recoge parte de lo que pide la oferta.
-          </p>
-        )}
       </div>
       {report.requirements.length === 0 ? <p>La oferta no indica requisitos.</p> : (
-        <ul aria-label="Palabras clave del CV" className="flex flex-wrap gap-1.5">
-          {report.requirements.map((requirement, index) => {
-            const isNew = !!previous && requirement.found && !previous.requirements[index]?.found
+        <ul aria-label="Palabras clave del CV por grupos" className="divide-y rounded-md border">
+          {GRUPOS.map(({ name }) => {
+            const items = report.requirements
+              .map((requirement, index) => ({ requirement, index }))
+              .filter(({ requirement }) => grupoDe(requirement.text) === name)
+            if (!items.length) return null
+            const ok = items.filter(({ requirement }) => requirement.found).length
+            const gained = previous ? items.filter(({ requirement, index }) => requirement.found && !previous.requirements[index]?.found).length : 0
             return (
-              <li
-                key={index}
-                title={requirement.text}
-                style={isNew ? ({ "--k": flipped++ } as CSSProperties) : undefined}
-                className={`${requirement.found
-                  ? "border-2 border-primary bg-primary text-primary-foreground"
-                  : "border-2 border-dashed border-muted-foreground/50 bg-card text-muted-foreground"} inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-base font-semibold leading-6 ${isNew ? "keyword-new" : ""}`}
-              >
-                <span className="sr-only">{requirement.found ? "Encontrado: " : "Falta: "}</span>
-                {requirement.found ? <Check size={16} strokeWidth={3} aria-hidden /> : <Plus size={16} aria-hidden />}
-                {shortLabel(requirement)}
+              <li key={name}>
+                <details className="group/kw">
+                  <summary className="flex min-h-12 cursor-pointer list-none items-center gap-2 px-3 py-2 text-lg font-semibold hover:bg-secondary focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring [&::-webkit-details-marker]:hidden">
+                    <ChevronRight className="size-5 shrink-0 text-muted-foreground transition-transform group-open/kw:rotate-90" aria-hidden />
+                    <span className="flex-1">{name}</span>
+                    {gained > 0 && (
+                      <span className="keyword-gain rounded-full bg-accent px-2 text-base font-bold text-accent-foreground">+{gained}</span>
+                    )}
+                    <span className={`rounded-full px-2.5 text-base font-bold tabular-nums ${ok === items.length ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}>
+                      <span className="sr-only">Encontradas </span>{ok} de {items.length}
+                    </span>
+                  </summary>
+                  <ul className="flex flex-wrap gap-1.5 px-3 pb-3 pt-1">
+                    {items.map(({ requirement, index }) => {
+                      const isNew = !!previous && requirement.found && !previous.requirements[index]?.found
+                      return (
+                        <li
+                          key={index}
+                          title={requirement.text}
+                          style={isNew ? ({ "--k": flipped++ } as CSSProperties) : undefined}
+                          className={`${requirement.found
+                            ? "border-2 border-primary bg-primary text-primary-foreground"
+                            : "border-2 border-dashed border-muted-foreground/50 bg-card text-muted-foreground"} inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-base font-semibold leading-6 ${isNew ? "keyword-new" : ""}`}
+                        >
+                          <span className="sr-only">{requirement.found ? "Encontrado: " : "Falta: "}</span>
+                          {requirement.found ? <Check size={16} strokeWidth={3} aria-hidden /> : <Plus size={16} aria-hidden />}
+                          {shortLabel(requirement)}
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </details>
               </li>
             )
           })}

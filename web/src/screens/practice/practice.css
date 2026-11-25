@@ -77,3 +77,6 @@
  .submit-answer { min-height: 48px; }
  .call-privacy { text-align: left; }
 }
+/* Secondary buttons on white so they never melt into the beige page. */
+.practice-call [data-variant="outline"] { background: var(--color-card); }
+.practice-call [data-variant="outline"]:hover { background: var(--color-accent); }
