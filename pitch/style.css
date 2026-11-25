@@ -101,14 +101,8 @@
 .quien { font-family: var(--font-display-family); font-weight: 700; font-size: 1.25rem; margin-bottom: 0.3rem; }
 .pagador.principal .quien { font-size: 1.5rem; color: var(--primary); }
 
-/* Hoja de ruta */
-.ruta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 5rem; position: relative; }
-.ruta::before { content: ""; position: absolute; left: 0; right: 0; top: 0.65rem; height: 3px; background: var(--border); }
-.hito { position: relative; padding: 2rem 1rem 0 0; }
-.hito::before { content: ""; position: absolute; top: 0; left: 0; width: 1.3rem; height: 1.3rem; border-radius: 50%; background: var(--card); border: 3px solid var(--primary); }
-.hito.hecho::before { background: var(--primary); }
-.cuando { font-weight: 700; color: var(--primary); margin-bottom: 0.3rem; }
-.que { line-height: 1.4; }
+.grafico-financiero { max-width: 52rem; margin: 4.5rem auto 0; }
+.grafico-financiero img { display: block; width: 100%; height: auto; }
 
 .demo-captura { margin: 1.1rem 0 0; }
 .demo-captura img {
@@ -289,7 +283,6 @@ html.print .demo-cv .demo-cv-animada { display: none; }
 .persona.lit { fill: var(--ac-medio); }
 .caja.filtro, .embudo-caja { border-color: var(--ac-medio) !important; }
 .num, .bola { border-radius: 4px !important; }
-.hito::before { border-radius: 3px !important; }
 .comparativa tr.nuestra { background: var(--ac-menta-suave); }
 .evi { border-top-color: var(--ac-medio); }
 .pagador.principal { border-color: var(--ac-bosque); }
