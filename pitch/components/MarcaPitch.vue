@@ -3,16 +3,11 @@ import identity from '../../design/identity.json'
 </script>
 
 <template>
-  <div class="cierre-grid">
-    <div class="marca-pitch">
-      <div class="marca-pitch-logo">
-        <img src="/simbolo-al-curro-claro.svg" alt="" />
-        <span>{{ identity.name }}</span>
-      </div>
-      <p>Tu experiencia no caduca</p>
+  <div class="marca-pitch">
+    <div class="marca-pitch-logo">
+      <img src="/simbolo-al-curro-claro.svg" alt="" />
+      <span>{{ identity.name }}</span>
     </div>
-    <div class="cierre-foto">
-      <img src="/pilar.jpg" alt="Pilar, nuestra persona de ejemplo" />
-    </div>
+    <p>Tu experiencia no caduca</p>
   </div>
 </template>
