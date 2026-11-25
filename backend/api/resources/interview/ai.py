@@ -4,7 +4,7 @@ Questions: the rule filter of `prep` picks which requirement each question check
 second question always touches a requirement her CV does not cover; the model only words them.
 Feedback: one cached structured call on the transcribed text, then a guard that drops any line
 about voice, tone or emotions (R13, AI Act Art. 5(1)(f)): we only judge what she says.
-Both raise on failure or timeout; the router falls back to the stub.
+Both raise on failure or timeout; the router handles an unavailable model.
 """
 from __future__ import annotations
 
@@ -147,9 +147,9 @@ def feedback(offer: Offer, question: str, answer: str) -> InterviewFeedback:
     )
     llm = _run("interview_feedback", prompt, LlmFeedback)
     good, improve = content_only(llm.good), content_only(llm.improve)
-    if not good or not improve:
-        raise UnsafeFeedback(f"feedback left without content lines: {llm!r}")
+    if not improve:
+        raise UnsafeFeedback("feedback left without a content-based improvement")
     tip = llm.tip.strip()
     if not tip or _NOT_CONTENT.search(tip):
-        tip = "Repite la respuesta en voz alta una vez más añadiendo lo que te proponemos mejorar."
+        tip = improve[0]
     return InterviewFeedback(offer_id=offer.id or 0, good=good, improve=improve, tip=tip)
