@@ -87,22 +87,30 @@ RULES: list[Rule] = [
 
 STOPWORDS = {"experiencia", "conocimientos", "buenas", "nivel", "equivalente", "previa", "otros"}
 
-LABELS = {
-    "experiencia en perfumería": "Experiencia en perfumería",
-    "interés por la perfumería": "Interés en perfumería",
-    "atención al público y ventas": "Atención al público",
-    "comunicación": "Comunicación",
-    "orientación al cliente": "Orientación al cliente",
-    "proactividad": "Actitud proactiva",
-    "responsabilidad": "Responsabilidad",
-    "trabajo en equipo": "Trabajo en equipo",
-    "inglés alto": "Inglés alto",
-    "asesoramiento": "Asesoramiento",
-    "reposición y stock": "Reposición y stock",
-    "caja y cobros": "Caja y cobros",
+REQUIREMENT_LABELS = {
+    "experiencia en atencion al publico y ventas (12 meses)": "Atención al público",
+    "experiencia previa en perfumeria": "Experiencia en perfumería",
+    "conocimientos e interes por la perfumeria y las fragancias": "Interés en perfumería",
+    "buenas habilidades comunicativas": "Comunicación",
+    "ingles nivel alto": "Inglés alto",
+    "graduado en eso o equivalente": "Graduado en ESO",
+    "asesoramiento al cliente en la eleccion de productos": "Asesoramiento",
+    "reposicion, control de stock y recepcion de mercancia": "Reposición y stock",
+    "ventas, cobros y operaciones de caja": "Caja y cobros",
+    "experiencia como dependiente (6 meses)": "Dependiente (6 meses)",
+    "disponibilidad para trabajar por la tarde": "Turno de tarde",
+    "se valora: segundo idioma (aleman)": "Alemán",
+    "discapacidad igual o superior al 33%": "Discapacidad ≥ 33%",
+    "3 anos de experiencia en puestos similares (asesoria laboral, ett)": "Asesoría laboral/ETT",
+    "ciclo de grado medio en electricidad y electronica, informatica y comunicaciones o sistemas microinformaticos y redes": "Ciclo Grado Medio",
+    "18 meses de experiencia como fisioterapeuta": "Fisioterapeuta (18 meses)",
 }
 
-LABEL_STOPWORDS = STOPWORDS | {"al", "en", "la", "el", "de", "y", "o", "por", "para", "con"}
+LABEL_PREFIX = re.compile(
+    r"^(?:se valoran?\s*:?\s+|(?:experiencia(?: previa)?|conocimientos|manejo) (?:en|de|como) (?:el |la )?)+",
+    flags=re.IGNORECASE,
+)
+LABEL_CONNECTORS = {"al", "con", "de", "del", "e", "el", "en", "la", "las", "los", "o", "para", "por", "y"}
 
 
 def rule_for(requirement: str) -> Rule | None:
@@ -111,19 +119,17 @@ def rule_for(requirement: str) -> Rule | None:
 
 
 def label_for(requirement: str) -> str:
-    """Return a stable, readable label for the CV requirement chips."""
-    normalized = norm(requirement)
-    if re.search(r"\beso\b", normalized):
-        return "Graduado en ESO"
-    if re.search(r"\bbachiller", normalized):
-        return "Bachiller"
-    rule = rule_for(requirement)
-    if rule and rule.name in LABELS:
-        return LABELS[rule.name]
+    """Shorten the offer's own wording without using the ATS evidence rules."""
+    requirement = " ".join(requirement.split())
+    if label := REQUIREMENT_LABELS.get(norm(requirement)):
+        return label
 
-    words = re.findall(r"[\wÀ-ÿ]+", requirement)
-    meaningful = [word for word in words if norm(word) not in LABEL_STOPWORDS]
-    short = " ".join((meaningful or words)[:3]).strip()
+    phrase = LABEL_PREFIX.sub("", requirement)
+    phrase = re.sub(r"\bnivel\s+(?=\S)", "", phrase, flags=re.IGNORECASE)
+    words = phrase.split()[:3]
+    while words and norm(words[-1].strip(",;:")) in LABEL_CONNECTORS:
+        words.pop()
+    short = " ".join(words).rstrip(",;:")
     return short[:1].upper() + short[1:] if short else "Requisito"
 
 
