@@ -401,11 +401,38 @@ html.print .demo-cv .demo-cv-animada { display: none; }
 .slide-portada .portada { position: relative; height: 552px; width: 980px; }
 .portada-datos .antetitulo { align-self: flex-start; }
 
+@font-face {
+  font-family: "Noto Sans Pitch";
+  src: url("@fontsource-variable/noto-sans/files/noto-sans-latin-wght-normal.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 .slide-marca.slidev-layout {
+  position: relative;
   display: grid;
   align-items: center;
   padding: 0;
-  background: #f7f3ea;
+  background-color: #f7f3ea;
+}
+
+/* The cover layout wraps its content in a positioned grid item. Anchor the ornament to the slide. */
+.slide-marca.cover > :has(> .marca-pitch-esquina) { position: static; }
+
+.slide-marca .marca-pitch-esquina {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 210px;
+  height: 120px;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to bottom right, transparent 50%, var(--ac-bosque) 50%),
+    linear-gradient(to bottom right, transparent 50%, var(--ac-menta) 50%);
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  background-size: 150px 86px, 210px 120px;
 }
 
 .slide-marca.slidev-layout::before,
@@ -455,10 +482,11 @@ html.print .demo-cv .demo-cv-animada { display: none; }
   max-width: 9em;
   margin: 0;
   color: var(--ac-noche);
+  font-family: "Noto Sans Pitch", var(--font-body-family);
   font-size: 4rem;
   text-align: center;
-  font-weight: 760;
+  font-weight: 800;
   line-height: 1.08;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
