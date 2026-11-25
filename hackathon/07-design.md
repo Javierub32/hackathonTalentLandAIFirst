@@ -30,7 +30,7 @@ Preset: `sobrio` (new, `design/presets/sobrio.json`). Level: 4, built from the r
 - fonts: Noto Sans Variable for titles (weight 800) and body, because the poster and the deck use a bold sans and the app must look like them (changed during Build, from Noto Serif titles).
 - radius: 0.4rem, because the poster and deck use tight corners and diagonal cuts (changed during Build, from 0.75rem).
 - shadow: 1px lines and a solid mint offset under highlighted pieces (like the deck's persona card), no diffuse blur.
-- colours: the poster palette (forest `#204437`, night `#183a2e`, mid `#2f604a`, mint `#cce5cc`, background `#f8faf7`), because app, deck and poster must read as one brand (changed during Build).
+- colours: the poster palette (forest `#204437`, night `#183a2e`, mid `#2f604a`, mint `#cce5cc`), because app, deck and poster must read as one brand (changed during Build). App background warm beige `#F0E8D9` and `secondary` light green `#D4E8D8`, so white surfaces stand out from the page (changed during Build, 2026-11-25, Alfonso).
 - motion: 120/200/300 ms, no overshoot, soft spring, because calm and nothing that distracts.
 - focus: 3px ring, 2px offset, because high visibility for older users.
 - effects: DrawnUnderline, ScrollProgressRule only, because the rest read as modern or playful.
