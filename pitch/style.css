@@ -428,10 +428,8 @@ html.print .demo-cv .demo-cv-animada { display: none; }
 
 .marca-pitch {
   display: grid;
-  grid-template-columns: 34% 1fr;
+  grid-template-columns: 34% 8% 58%;
   align-items: center;
-  column-gap: 12%;
-  padding-right: 3.25rem;
   font-family: var(--font-display-family);
 }
 
@@ -453,10 +451,13 @@ html.print .demo-cv .demo-cv-animada { display: none; }
 }
 
 .marca-pitch p {
-  max-width: 12em;
+  grid-column: 3;
+  justify-self: center;
+  max-width: 9em;
   margin: 0;
   color: var(--ac-noche);
-  font-size: 3.55rem;
+  font-size: 4rem;
+  text-align: center;
   font-weight: 760;
   line-height: 1.08;
   letter-spacing: -0.05em;
