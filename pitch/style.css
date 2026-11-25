@@ -110,6 +110,30 @@
 .cuando { font-weight: 700; color: var(--primary); margin-bottom: 0.3rem; }
 .que { line-height: 1.4; }
 
+.demo-captura { margin: 1.1rem 0 0; }
+.demo-captura img {
+  display: block;
+  width: 100%;
+  height: 350px;
+  object-fit: contain;
+  object-position: left center;
+}
+.demo-captura figcaption { margin-top: 0.65rem; font-size: 1rem; }
+.demo-cv { text-align: center; }
+.demo-cv img { object-position: center; }
+.demo-cv .demo-cv-fija { display: none; }
+html.print .demo-cv .demo-cv-fija { display: block; }
+html.print .demo-cv .demo-cv-animada { display: none; }
+.demo-entrevista {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  align-items: center;
+  gap: 1.5rem;
+}
+.demo-entrevista figcaption { margin: 0; font-size: 1.5rem; }
+.demo-entrevista figcaption p { margin: 0; line-height: 1.35; }
+.demo-entrevista figcaption p + p { margin-top: 1.4rem; }
+
 /* Cierre */
 .cierre { font-family: var(--font-display-family); font-size: 2.6rem; line-height: 1.2; margin: 1.6rem 0 1rem; }
 .peticion { font-size: 1.35rem; margin: 0; }

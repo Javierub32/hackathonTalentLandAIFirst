@@ -103,20 +103,6 @@ Hoy hemos preguntado a personas de más de 45 años qué es lo más difícil. Es
 
 ---
 
-<!-- 01:20 · Validación: cifras de la encuesta (R8.2, R15.1) -->
-
-<p class="antetitulo">En qué nos apoyamos · 2. Lo que dicen sus respuestas</p>
-
-# Les pasa lo mismo que a Pilar
-
-<DatosEncuesta />
-
-<!--
-Y los números lo confirman: casi todos creen que su edad les quita oportunidades, la mayoría no sabía que un programa lee su CV antes que nadie, y casi ninguno lo adapta a cada oferta. Todos dicen que lo usarían.
--->
-
----
-
 <!-- 01:35 · Validación: investigación (R8.1, R9.1, R16.1) -->
 
 <p class="antetitulo">En qué nos apoyamos · 3. Lo que dice la investigación</p>
@@ -137,100 +123,37 @@ La investigación nos dice tres cosas: las empresas no encuentran a quién contr
 -->
 
 ---
-layout: center
-class: text-center slide-oscura
----
 
-<!-- 01:50 · Solución (R2.2) -->
+<!-- Demo · Mejora del CV (R2.1, R2.2, R14.1) -->
 
-<img class="logo-grande" src="/logo-al-curro-claro.png" alt="Logotipo de Al curro" />
+# Pilar adapta su CV a la oferta
 
-<p class="lema"><span class="menta">Tu experiencia,</span> preparada para cada oferta.</p>
-
-<div class="reparto">
-  <div class="lado ia">
-    <div class="lado-cab">La IA prepara</div>
-    <ul>
-      <li>Lee <strong>la oferta</strong></li>
-      <li>Adapta el CV <strong>con su experiencia real</strong></li>
-      <li>Ensaya <strong>la entrevista</strong></li>
-    </ul>
-  </div>
-  <div class="reparto-mas">+</div>
-  <div class="lado humano">
-    <div class="lado-cab">Las personas deciden</div>
-    <ul>
-      <li><strong>Pilar</strong> elige y envía</li>
-      <li>Su <strong>orientadora del IMFE</strong> revisa</li>
-    </ul>
-  </div>
-</div>
+<figure class="demo-captura demo-cv">
+  <img class="demo-cv-fija" src="/demo-cv.png" alt="CV mejorado de Pilar para una oferta de dependienta de perfumería, con 11 de los 13 requisitos detectados." />
+  <img class="demo-cv-animada" src="/demo-cv.gif" alt="Con su CV ya abierto, Pilar pulsa Mejorar mi CV y ve cómo pasa del 38 % al 85 % de requisitos detectados." />
+  <figcaption>La IA propone cambios a partir de la experiencia de Pilar. Ella revisa el antes y el después y decide qué usar.</figcaption>
+</figure>
 
 <!--
-Por eso hemos creado Al curro: tu experiencia, preparada para cada oferta. La IA prepara; la persona y su orientadora deciden.
+Con el CV abierto, Pilar pulsa «Mejorar mi CV». La versión adaptada hace visible su experiencia en atención al cliente para la oferta de perfumería.
 -->
 
 ---
 
-<!-- 03:50 · Alternativas (R16.1) -->
+<!-- Demo · Entrevista (R2.1, R14.1) -->
 
-# Lo que ya existe
+# Pilar practica la entrevista
 
-<table class="comparativa">
-  <thead>
-    <tr><th></th><th>Ofertas</th><th>CV adaptado a cada oferta</th><th>Entrevista de esa oferta</th><th>Pensado para 45+</th><th>Con orientador</th></tr>
-  </thead>
-  <tbody>
-    <tr><th>Empléate (SEPE)</th><td><span class="pill si">✓ Sí</span></td><td><span class="pill no">✗ No</span></td><td><span class="pill no">✗ No</span></td><td><span class="pill si">✓ Sí</span></td><td><span class="pill no">✗ No</span></td></tr>
-    <tr><th>Simuladores con IA<small>Toptrabajos, AIApply</small></th><td><span class="pill no">✗ No</span></td><td><span class="pill no">✗ No</span></td><td><span class="pill parte">~ Genérica, de pago</span></td><td><span class="pill no">✗ No</span></td><td><span class="pill no">✗ No</span></td></tr>
-    <tr><th>Labora (Valencia)</th><td><span class="pill si">✓ Sí</span></td><td><span class="pill no">✗ No</span></td><td><span class="pill parte">~ Piloto, genérica</span></td><td><span class="pill no">✗ No</span></td><td><span class="pill si">✓ Sí</span></td></tr>
-    <tr><th>Krisalidas, Senia</th><td><span class="pill si">✓ Sí</span></td><td><span class="pill no">✗ No</span></td><td><span class="pill no">✗ No</span></td><td><span class="pill si">✓ Sí</span></td><td><span class="pill no">✗ No</span></td></tr>
-    <tr class="nuestra"><th><img src="/logo-al-curro-claro.png" alt="" class="logo-fila" /> Al curro</th><td><span class="pill si">✓ Sí</span></td><td><span class="pill si">✓ Sí</span></td><td><span class="pill si">✓ Sí</span></td><td><span class="pill si">✓ Sí</span></td><td><span class="pill si">✓ Sí</span></td></tr>
-  </tbody>
-</table>
-
-<Fuente>EPALE (Empléate) · Toptrabajos y AIApply (webs) · Valencia Plaza (piloto de Labora) · The Objective (Krisalidas) · Ecosistema Startup (Senia).</Fuente>
+<figure class="demo-captura demo-entrevista">
+  <img src="/demo-entrevista.png" alt="Al curro muestra una pregunta sobre cómo ayudar a elegir un perfume y el comentario de la IA." />
+  <figcaption>
+    <p><strong>Lo que hizo bien</strong><br>Preguntó qué buscaba la clienta.</p>
+    <p><strong>Qué puede mejorar</strong><br>Sugerir una familia de fragancias.</p>
+  </figcaption>
+</figure>
 
 <!--
-Hay portales de empleo y simuladores de entrevista, pero ninguno prepara a la persona para cada oferta, ni está hecho para mayores de 45.
--->
-
----
-
-<!-- 04:05 · Cliente y modelo (R9.1, R3.2) -->
-
-# Quién paga
-
-<div class="pagos">
-  <div class="pago principal">
-    <div class="pago-etq">Paga</div>
-    <div class="pago-quien">IMFE</div>
-    <div class="pago-como">Licencia anual</div>
-    <div class="pago-det">con los <strong>fondos europeos</strong> que ya tiene</div>
-  </div>
-  <div class="pago">
-    <div class="pago-etq">Paga</div>
-    <div class="pago-quien">Empresas</div>
-    <div class="pago-como">Destacar ofertas</div>
-    <div class="pago-det">publicar es <strong>gratis</strong></div>
-  </div>
-  <div class="pago gratis">
-    <div class="pago-etq">No paga</div>
-    <div class="pago-quien">Pilar</div>
-    <div class="pago-como">0 €</div>
-    <div class="pago-det">siempre <strong>gratis</strong></div>
-  </div>
-</div>
-
-<div class="pago-pie">
-  <div><span class="pie-etq">Después</span> Andalucía Orienta: <strong>2,7 M€</strong> en Málaga</div>
-  <div><span class="pie-etq">Coste IA</span> <strong>céntimos</strong> por persona</div>
-</div>
-
-<Fuente>IMFE, T-Acompañamos y Aquileo+ (El Español, abr. 2026) · BOJA 2026/72 (Andalucía Orienta, Málaga: 2.708.196 €).</Fuente>
-
-<!--
-Quién paga: el IMFE, el Instituto de Empleo del Ayuntamiento de Málaga, que ya tiene orientadores y fondos europeos para este colectivo. Cada orientador atiende a más personas. Las empresas pagan por destacar ofertas. Coste de IA: céntimos por persona.
+Para esa misma oferta, Pilar ensaya una pregunta sobre atención al cliente. Puede responder hablando o por escrito. Tras responder, recibe una sugerencia concreta que puede aplicar en la entrevista.
 -->
 
 ---
@@ -240,14 +163,14 @@ Quién paga: el IMFE, el Instituto de Empleo del Ayuntamiento de Málaga, que ya
 # Hoja de ruta
 
 <div class="ruta">
-  <div class="hito hecho"><div class="cuando">Nov. 2026</div><div class="que">Prototipo funcionando con ofertas reales de Málaga</div></div>
-  <div class="hito"><div class="cuando">1.er semestre 2027</div><div class="que">Piloto con el IMFE: 100 personas y sus orientadores</div></div>
-  <div class="hito"><div class="cuando">2.º semestre 2027</div><div class="que">Entidades de Andalucía Orienta en Málaga</div></div>
-  <div class="hito"><div class="cuando">2028</div><div class="que">Formación para cada oferta (cursos Aquileo+) y entrevistas por teléfono, con voz</div></div>
+  <div class="hito"><div class="cuando">1.er semestre 2027</div><div class="que">Piloto en Málaga con el IMFE: 100 personas y sus orientadores</div></div>
+  <div class="hito"><div class="cuando">2.º semestre 2027</div><div class="que">Si el piloto funciona, ofrecer licencias a entidades de Andalucía Orienta en Málaga</div></div>
+  <div class="hito"><div class="cuando">2028</div><div class="que">Probar el modelo en otras ciudades andaluzas con sus servicios de empleo</div></div>
+  <div class="hito"><div class="cuando">Desde 2029</div><div class="que">Explorar acuerdos en otras comunidades autónomas y adaptar las ofertas y ayudas a cada territorio</div></div>
 </div>
 
 <!--
-Piloto con el IMFE en 2027 con 100 personas, después Andalucía Orienta, y formación y voz para entrevistas por teléfono.
+Empezamos con un piloto en Málaga. Mediremos cuántas personas completan la preparación y cuántas consiguen entrevistas. Si el piloto funciona, ofreceremos licencias a entidades de Andalucía Orienta y probaremos el modelo en otras ciudades andaluzas. A partir de 2029 exploraremos acuerdos con servicios de empleo de otras comunidades autónomas.
 -->
 
 ---
@@ -268,36 +191,4 @@ class: slide-cierre
 
 <!--
 Buscamos un piloto con el IMFE y vuestro apoyo. Al curro: que su experiencia vuelva a contar.
--->
-
----
-class: slide-puente
----
-
-<!-- 02:00 · Puente a la demo (R14.1) -->
-
-<div class="puente">
-  <p class="puente-ante">Ahora, en directo</p>
-  <h1>Vamos a verlo</h1>
-  <p class="puente-sub">Una oferta real. El CV de Pilar. Del <span class="mal-claro">38 %</span> al <strong>85 %</strong>.</p>
-  <PasosDemo />
-</div>
-
-<!--
-Pasamos a la aplicación. (Cambiar a la web en directo.)
--->
-
----
-layout: center
-class: text-center
----
-
-<!-- Reserva: solo si falla la demo en directo -->
-
-# Reserva
-
-Si la demo en directo falla, pasamos al vídeo de respaldo.
-
-<!--
-Capturas de la aplicación: añadirlas en pitch/public/ cuando la app esté integrada (Polish) y enlazarlas aquí.
 -->
