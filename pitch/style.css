@@ -404,31 +404,61 @@ html.print .demo-cv .demo-cv-animada { display: none; }
 
 .slide-marca.slidev-layout {
   display: grid;
-  place-items: center;
-  background: var(--ac-bosque);
-  color: #f7f3ea;
+  align-items: center;
+  padding: 0;
+  background: #f7f3ea;
 }
 
 .slide-marca.slidev-layout::before,
 .slide-marca.slidev-layout::after {
-  display: none;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.slide-marca.slidev-layout::before {
+  background: var(--ac-menta);
+  clip-path: polygon(0 0, 43% 0, 35% 100%, 0 100%);
+}
+
+.slide-marca.slidev-layout::after {
+  background: var(--ac-bosque);
+  clip-path: polygon(0 0, 39% 0, 31% 100%, 0 100%);
 }
 
 .marca-pitch {
   display: grid;
-  justify-items: center;
-  gap: 2rem;
-  text-align: center;
+  grid-template-columns: 34% 1fr;
+  align-items: center;
+  column-gap: 12%;
+  padding-right: 3.25rem;
+  font-family: var(--font-display-family);
 }
 
-.marca-pitch img {
-  width: 15rem;
+.marca-pitch-logo {
+  display: grid;
+  justify-items: center;
+  gap: 0.85rem;
+  color: var(--ac-menta);
+  font-size: 1.45rem;
+  font-weight: 550;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.marca-pitch-logo img {
+  width: 8rem;
   height: auto;
 }
 
 .marca-pitch p {
+  max-width: 12em;
   margin: 0;
-  font-size: 1.75rem;
-  font-weight: 500;
-  line-height: 1.25;
+  color: var(--ac-noche);
+  font-size: 3.55rem;
+  font-weight: 760;
+  line-height: 1.08;
+  letter-spacing: -0.05em;
+  text-wrap: balance;
 }
