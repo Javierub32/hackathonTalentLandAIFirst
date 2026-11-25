@@ -164,20 +164,13 @@ Para esa misma oferta, Pilar ensaya una pregunta sobre atención al cliente. Pue
 
 ---
 
-<!-- 04:30 · Hoja de ruta (R10.1) -->
+<!-- 04:30 · Ingresos y gastos -->
 
-# Hoja de ruta
+# Ingresos y gastos
 
-<div class="ruta">
-  <div class="hito"><div class="cuando">1.er semestre 2027</div><div class="que">Piloto en Málaga con el IMFE: 100 personas y sus orientadores</div></div>
-  <div class="hito"><div class="cuando">2.º semestre 2027</div><div class="que">Si el piloto funciona, ofrecer licencias a entidades de Andalucía Orienta en Málaga</div></div>
-  <div class="hito"><div class="cuando">2028</div><div class="que">Probar el modelo en otras ciudades andaluzas con sus servicios de empleo</div></div>
-  <div class="hito"><div class="cuando">Desde 2029</div><div class="que">Explorar acuerdos en otras comunidades autónomas y adaptar las ofertas y ayudas a cada territorio</div></div>
-</div>
-
-<!--
-Empezamos con un piloto en Málaga. Mediremos cuántas personas completan la preparación y cuántas consiguen entrevistas. Si el piloto funciona, ofreceremos licencias a entidades de Andalucía Orienta y probaremos el modelo en otras ciudades andaluzas. A partir de 2029 exploraremos acuerdos con servicios de empleo de otras comunidades autónomas.
--->
+<figure class="grafico-financiero">
+  <img src="/ingresos-gastos.jpg" alt="Ingresos y gastos en euros durante tres años. Los gastos superan a los ingresos en el primer año, ambas cifras se acercan en el segundo y los ingresos superan a los gastos en el tercero." />
+</figure>
 
 ---
 class: slide-cierre
