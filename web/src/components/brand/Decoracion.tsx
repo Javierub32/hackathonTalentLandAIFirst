@@ -1,24 +1,16 @@
 import { cn } from "@/lib/utils"
 
 /**
- * Poster geometry inside a section (absolute, fills its positioned parent):
- * a diagonal band pair on the top right and a corner triangle on the bottom right.
- * Decorative only: never intercepts controls or enters the reading order.
+ * Poster geometry inside a section (absolute, top-right corner of its positioned parent):
+ * a small mint-over-forest corner triangle. The large bands and corners live in `FondoMarca`,
+ * once per page, so sections stay light. Decorative only: never intercepts controls or enters the reading order.
  */
 export function Decoracion({ className }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 1000 600"
-      preserveAspectRatio="xMaxYMax slice"
-      aria-hidden="true"
-      focusable="false"
-      className={cn("pointer-events-none absolute inset-0 h-full w-full", className)}
-    >
-      <path d="M760 0H812L1000 210V268Z" className="fill-accent" />
-      <path d="M812 0H1000V210Z" className="fill-primary" opacity=".08" />
-      <path d="M1000 430V600H700Z" className="fill-accent" />
-      <path d="M1000 490V600H805Z" className="fill-primary" />
-    </svg>
+    <div aria-hidden="true" className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}>
+      <div className="absolute right-0 top-0 h-[72px] w-[124px] bg-accent [clip-path:polygon(0_0,100%_0,100%_100%)]" />
+      <div className="absolute right-0 top-0 h-[40px] w-[70px] bg-primary/80 [clip-path:polygon(0_0,100%_0,100%_100%)]" />
+    </div>
   )
 }
 

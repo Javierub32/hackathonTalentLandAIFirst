@@ -70,7 +70,7 @@ function FilaOferta({ offer }: { offer: Offer }) {
           {offer.location || "Lugar sin indicar"} · {jornadaCorta(offer.schedule)}
         </span>
       </span>
-      <AyudaEmpleaT offer={offer} />
+      <AyudaEmpleaT offer={offer} className="hidden sm:inline-flex" />
       <ChevronRight className="size-5 shrink-0 text-muted-foreground group-hover:text-primary" aria-hidden />
     </Link>
   )
@@ -82,7 +82,7 @@ function Ofertas({ rows }: { rows: Offer[] }) {
   const visibles = todas ? resto : resto.slice(0, VISIBLES)
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-10">
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,11fr)_minmax(0,13fr)] lg:gap-10">
       <div className="space-y-5">
         <Saludo />
         <OfertaDestacada offer={destacada} />
