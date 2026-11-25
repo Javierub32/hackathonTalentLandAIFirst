@@ -59,7 +59,7 @@ Frontier order: Spine pass (Wow moment first), then Depth pass.
 | #11 | Documento de uso de IA · Depth | lane:pitch | Alfonso | Depth | 1 (one file, no Seam) | R4.2, R13.1 | none |
 | #12 | Pieza de marketing · Depth | lane:pitch | Alba | Depth | 2 (asset + copy, 2+ files) | R5.1, R5.2 | none |
 | #34 | CV en PDF: antes y después con cambios resaltados · Depth | lane:web | Alfonso | Depth | 2 (one folder, 3-4 components, no Seam change) | 02:25 | none |
-| #37 | Marco de la app con el estilo del cartel + inicio con ofertas · Depth | lane:web | Marina | Depth | 2 (shell + decoration + one screen, no Seam change) | 01:50 | none (goes first: #38 and #4 reuse its brand pieces) |
+| #37 | Marco de la app con el estilo del cartel + inicio con ofertas · Depth | lane:web | Alfonso | Depth | 2 (shell + decoration + one screen, no Seam change) | 01:50 | none (goes first: #38 and #4 reuse its brand pieces) |
 | #38 | Mejorar CV en una sola pantalla: etiquetas y antes/después · Depth | lane:web | Paula | Depth | 3 (Wow moment, whole screen redesign) | 02:05, 02:25 | none (uses #39 `label` when it lands, `text` until then) |
 | #39 | Prep: etiqueta corta por requisito (aditivo) · Depth | lane:llm | Andrea | Depth | 1 (one additive field, producer of the Contract) | 02:05, 02:25 | none |
 
