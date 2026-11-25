@@ -163,6 +163,8 @@ Para esa misma oferta, Pilar ensaya una pregunta sobre atención al cliente. Pue
 -->
 
 ---
+class: slide-grafico-financiero
+---
 
 <!-- 04:30 · Ingresos y gastos -->
 
