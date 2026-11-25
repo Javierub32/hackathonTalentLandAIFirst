@@ -239,7 +239,7 @@ html.print .demo-cv .demo-cv-animada { display: none; }
 .slidev-layout::after { right: 0; bottom: 0; width: 150px; height: 86px; background: var(--ac-bosque); clip-path: polygon(100% 0, 100% 100%, 0 100%); }
 .slidev-layout > * { position: relative; z-index: 1; }
 .slidev-layout .fuente { right: 13rem; }
-.slidev-page .slidev-layout:not(.slide-portada):not(.slide-oscura):not(.slide-cierre):not(.slide-puente) { background-image: url("/logo-al-curro.png"); background-repeat: no-repeat; background-size: 54px auto; background-position: right 2.2rem top 1.4rem; }
+.slidev-page .slidev-layout:not(.slide-portada):not(.slide-oscura):not(.slide-cierre):not(.slide-puente):not(.slide-marca) { background-image: url("/logo-al-curro.png"); background-repeat: no-repeat; background-size: 54px auto; background-position: right 2.2rem top 1.4rem; }
 
 /* --- Portada (Pilar): panel diagonal verde como la cabecera del cartel --- */
 .slide-portada.slidev-layout::before { left: 0; top: 0; right: auto; bottom: auto; width: 100%; height: 100%; background: var(--ac-bosque);
@@ -401,3 +401,34 @@ html.print .demo-cv .demo-cv-animada { display: none; }
 .puente-sub strong { color: var(--ac-menta); }
 .slide-portada .portada { position: relative; height: 552px; width: 980px; }
 .portada-datos .antetitulo { align-self: flex-start; }
+
+.slide-marca.slidev-layout {
+  display: grid;
+  place-items: center;
+  background: var(--ac-bosque);
+  color: #f7f3ea;
+}
+
+.slide-marca.slidev-layout::before,
+.slide-marca.slidev-layout::after {
+  display: none;
+}
+
+.marca-pitch {
+  display: grid;
+  justify-items: center;
+  gap: 2rem;
+  text-align: center;
+}
+
+.marca-pitch img {
+  width: 15rem;
+  height: auto;
+}
+
+.marca-pitch p {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
