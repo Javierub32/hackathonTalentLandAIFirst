@@ -83,7 +83,7 @@ export function RequirementSummary({ report, previous }: { report: FilterReport;
             <span className="text-lg font-bold text-muted-foreground">de {report.total}</span>
             <span className="ml-auto text-xl font-extrabold tabular-nums text-primary">{percent}%</span>
           </p>
-          <div className="h-2 overflow-hidden rounded-full bg-muted" aria-hidden>
+          <div className="h-2.5 overflow-hidden rounded-full border bg-card" aria-hidden>
             <div className="h-full rounded-full bg-primary transition-[width] duration-300" style={{ width: `${percent}%` }} />
           </div>
         </div>

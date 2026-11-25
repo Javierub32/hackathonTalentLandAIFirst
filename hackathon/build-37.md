@@ -79,3 +79,8 @@ owner: alraro
 - Entrevista: botón «Hablar» legible (verde; rojo con micro parpadeando al grabar); respuesta en un panel blanco con micro, texto y «Ver mi comentario» en una fila; «Repetir pregunta» y «Activar cámara» agrupados a la derecha.
 - Mejorar mi CV: columnas alineadas con títulos del mismo estilo; categorías de palabras clave como tarjetas flotantes; una sola fila de acciones bajo el CV.
 - Botón «Volver» (antes «Volver a la oferta») en CV y entrevista.
+
+## Ronda de revisión 7 (Alfonso)
+
+- Más espacio entre el CV y sus botones; botones separados entre sí.
+- Barra de palabras clave con la parte vacía en blanco.

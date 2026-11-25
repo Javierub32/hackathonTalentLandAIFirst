@@ -98,11 +98,11 @@ export function CvViews({ name, original, adapted, pending, action, afterActions
           )}
         </div>
         {!after && action && (
-          <div className="flex justify-end pt-1">{action}</div>
+          <div className="flex justify-end pt-5">{action}</div>
         )}
       </section>
       {adapted && (
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-3">
           {adapted.changes.length > 0 && (
             <Dialog>
               <DialogTrigger asChild>
@@ -124,7 +124,7 @@ export function CvViews({ name, original, adapted, pending, action, afterActions
               </DialogContent>
             </Dialog>
           )}
-          <div className="ml-auto flex flex-wrap items-center gap-2">
+          <div className="ml-auto flex flex-wrap items-center gap-3">
             <Button variant="outline" className="min-h-12 bg-card text-lg font-semibold" onClick={() => download(name)}><Download aria-hidden /> Descargar PDF</Button>
             {afterActions}
           </div>
