@@ -43,7 +43,7 @@ export default defineConfig({
         display: "standalone",
         start_url: "/",
       },
-      workbox: { globPatterns: ["**/*.{js,css,html,svg,png,ico,woff2}"], navigateFallback: "/index.html", globIgnores: ["mockServiceWorker.js"], navigateFallbackDenylist: [/^\/api/] },
+      workbox: { globPatterns: ["**/*.{js,css,html,svg,png,ico,woff2}"], navigateFallback: "/index.html", globIgnores: ["mockServiceWorker.js"], navigateFallbackDenylist: [/^\/api/, /^\/presentacion(?:\/|$)/] },
     }),
   ],
   resolve: {

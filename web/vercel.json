@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build && PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm ci --prefix ../pitch --no-audit --no-fund && npm --prefix ../pitch run build -- --base /presentacion/ --out ../web/dist/presentacion --without-notes",
+  "rewrites": [
+    { "source": "/presentacion", "destination": "/presentacion/index.html" },
+    { "source": "/presentacion/:slide(\\d+|overview|print|presenter)", "destination": "/presentacion/index.html" },
+    { "source": "/presentacion/presenter/:slide(\\d+|print)", "destination": "/presentacion/index.html" }
+  ]
+}
