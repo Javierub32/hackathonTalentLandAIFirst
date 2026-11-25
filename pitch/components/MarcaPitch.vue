@@ -10,4 +10,5 @@ import identity from '../../design/identity.json'
     </div>
     <p>Tu experiencia no caduca</p>
   </div>
+  <span class="marca-pitch-esquina" aria-hidden="true" />
 </template>
