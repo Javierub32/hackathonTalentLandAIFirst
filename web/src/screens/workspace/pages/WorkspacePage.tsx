@@ -134,7 +134,7 @@ function Preparation({ offer, onBack }: { offer: Offer; onBack: () => void }) {
           <Button variant="outline" onClick={() => void candidate.refetch()}>Volver a intentar</Button>
         } />
       )}
-      <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-6">
+      <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-6">
         <div>{report && <RequirementSummary report={report} previous={adapted ? initialReport : undefined} showFitHint={!adapted} />}</div>
         {cv && <CvViews name={cv.name} original={cv.cv_text} adapted={adapted} pending={adaptation.isPending} afterActions={adapted && (
           draft.data ? (
@@ -149,7 +149,6 @@ function Preparation({ offer, onBack }: { offer: Offer; onBack: () => void }) {
           )
         )} action={canAdapt && (
           <>
-            <p className="max-w-[30ch] leading-snug text-muted-foreground">Destacamos tu experiencia real para que el filtro automático encuentre lo que pide la oferta.</p>
             <Button className={`${actionClass} px-8 shadow-[6px_6px_0_0_var(--color-accent)]`} disabled={adaptation.isPending} onClick={() => adaptation.mutate(cv)}>
               <FileText aria-hidden />{adaptation.isPending ? "Mejorando tu CV…" : "Mejorar mi CV"}
             </Button>

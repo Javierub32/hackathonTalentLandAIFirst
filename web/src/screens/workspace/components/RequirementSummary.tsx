@@ -44,11 +44,11 @@ export function RequirementSummary({ report, previous, showFitHint }: { report: 
   const percent = report.total ? Math.round((found / report.total) * 100) : 0
   let flipped = 0
   return (
-    <div className="space-y-3 rounded-md border bg-card p-5 shadow-sm">
+    <div className="space-y-2.5 rounded-md border bg-card p-4 shadow-sm">
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
         <h2><Etiqueta>Palabras clave</Etiqueta></h2>
         <Dialog>
-          <DialogTrigger asChild><Button variant="link" className="ml-auto h-auto px-0 text-lg">Revisar requisitos</Button></DialogTrigger>
+          <DialogTrigger asChild><Button variant="link" className="ml-auto h-auto px-0 text-base">Revisar requisitos</Button></DialogTrigger>
           <DialogContent className="max-h-[85dvh] overflow-auto sm:max-w-2xl" showCloseButton={false}>
             <DialogTitle className="font-display text-2xl">Requisitos de la oferta</DialogTitle>
             <DialogDescription className="text-lg">El filtro automático (ATS) busca los requisitos de la oferta en tu CV.</DialogDescription>
@@ -65,11 +65,11 @@ export function RequirementSummary({ report, previous, showFitHint }: { report: 
         </Dialog>
         <div className="basis-full space-y-2">
           <p className="flex items-baseline gap-2 leading-none" aria-label={`${report.found} de ${report.total} palabras clave, ${report.percent}%`}>
-            <span className="font-display text-5xl font-extrabold tabular-nums text-primary">{found}</span>
-            <span className="text-xl font-bold text-muted-foreground">de {report.total}</span>
-            <span className="ml-auto text-2xl font-extrabold tabular-nums text-primary">{percent}%</span>
+            <span className="font-display text-4xl font-extrabold tabular-nums text-primary">{found}</span>
+            <span className="text-lg font-bold text-muted-foreground">de {report.total}</span>
+            <span className="ml-auto text-xl font-extrabold tabular-nums text-primary">{percent}%</span>
           </p>
-          <div className="h-3 overflow-hidden rounded-full bg-muted" aria-hidden>
+          <div className="h-2 overflow-hidden rounded-full bg-muted" aria-hidden>
             <div className="h-full rounded-full bg-primary transition-[width] duration-300" style={{ width: `${percent}%` }} />
           </div>
         </div>
@@ -80,7 +80,7 @@ export function RequirementSummary({ report, previous, showFitHint }: { report: 
         )}
       </div>
       {report.requirements.length === 0 ? <p>La oferta no indica requisitos.</p> : (
-        <ul aria-label="Palabras clave del CV" className="flex flex-wrap gap-2">
+        <ul aria-label="Palabras clave del CV" className="flex flex-wrap gap-1.5">
           {report.requirements.map((requirement, index) => {
             const isNew = !!previous && requirement.found && !previous.requirements[index]?.found
             return (
@@ -90,10 +90,10 @@ export function RequirementSummary({ report, previous, showFitHint }: { report: 
                 style={isNew ? ({ "--k": flipped++ } as CSSProperties) : undefined}
                 className={`${requirement.found
                   ? "border-2 border-primary bg-primary text-primary-foreground"
-                  : "border-2 border-dashed border-muted-foreground/50 bg-card text-muted-foreground"} inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-lg font-semibold leading-6 ${isNew ? "keyword-new" : ""}`}
+                  : "border-2 border-dashed border-muted-foreground/50 bg-card text-muted-foreground"} inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-base font-semibold leading-6 ${isNew ? "keyword-new" : ""}`}
               >
                 <span className="sr-only">{requirement.found ? "Encontrado: " : "Falta: "}</span>
-                {requirement.found ? <Check size={18} strokeWidth={3} aria-hidden /> : <Plus size={18} aria-hidden />}
+                {requirement.found ? <Check size={16} strokeWidth={3} aria-hidden /> : <Plus size={16} aria-hidden />}
                 {shortLabel(requirement)}
               </li>
             )

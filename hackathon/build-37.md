@@ -55,3 +55,8 @@ owner: alraro
 - CV único: «Tu CV actual» → al pulsar «Mejorar mi CV» una banda menta lo escanea y la página gira al CV mejorado; las frases añadidas se resaltan en orden como con rotulador. Conmutador «Antes / Después».
 - Palabras clave: cifra que sube (5 → 11), barra de progreso, chips grandes; los nuevos pasan a verde uno tras otro. Todo respeta `prefers-reduced-motion`.
 - 1366×768 sin scroll en CV antes y después.
+
+## Ronda de revisión 3 (Alfonso)
+
+- CV como protagonista: columna del CV más ancha (1,3:0,7), letra del CV más grande y sombra menta; panel de palabras clave más compacto.
+- Quitada la frase «Destacamos tu experiencia real…»; el botón «Mejorar mi CV» queda solo, bajo el CV.

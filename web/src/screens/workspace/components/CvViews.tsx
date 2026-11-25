@@ -98,7 +98,7 @@ export function CvViews({ name, original, adapted, pending, action, afterActions
           )}
         </div>
         {!after && action && (
-          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 pt-1">{action}</div>
+          <div className="flex justify-end pt-1">{action}</div>
         )}
       </section>
       {adapted && (
