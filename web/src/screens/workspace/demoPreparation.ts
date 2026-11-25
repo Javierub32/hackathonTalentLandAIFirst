@@ -50,13 +50,23 @@ export function usesLocalDemo(offer: Offer) {
   return offer.code !== DEMO_OFFER
 }
 
+function demoRequirementLabel(text: string) {
+  const label = text.trim()
+    .replace(/^(?:se valoran?\s*:?\s+|(?:experiencia(?: previa)?|conocimientos|manejo) (?:en|de|como) (?:el |la )?)+/i, "")
+    .replace(/\bnivel\s+(?=\S)/gi, "")
+    .split(/\s+/).slice(0, 3).join(" ")
+    .replace(/[,;:]+$/, "")
+    .replace(/(?:\s+(?:al|con|de|del|e|el|en|la|las|los|o|para|por|y))+$/i, "")
+  return label ? label.charAt(0).toUpperCase() + label.slice(1) : "Requisito"
+}
+
 export function demoReport(offer: Offer, candidate: Candidate, changes: AdaptedCv["changes"] = []): Report {
   const evidence = examples[offer.code ?? ""]?.evidence
   const requirements = (offer.requirements ?? []).map((text) => {
     const original = evidence?.[text]
     const quote = changes.find((change) => change.requirement === text)?.text
       ?? (original && candidate.cv_text.includes(original) ? original : "")
-    return { text, found: Boolean(quote), evidence: quote }
+    return { text, label: demoRequirementLabel(text), found: Boolean(quote), evidence: quote }
   })
   const found = requirements.filter((requirement) => requirement.found).length
   return {

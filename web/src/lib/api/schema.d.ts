@@ -984,6 +984,11 @@ export interface components {
             /** Found */
             found: boolean;
             /**
+             * Label
+             * @description Short 1-3 word label for the requirement
+             */
+            label: string;
+            /**
              * Text
              * @description One requirement of the offer, in its own words
              */

@@ -9,67 +9,80 @@
       {
         "text": "Experiencia en atención al público y ventas (12 meses)",
         "found": true,
-        "evidence": "Dependienta en tienda de moda. Atendía a las clientas"
+        "evidence": "Dependienta en tienda de moda. Atendía a las clientas",
+        "label": "Atención al público"
       },
       {
         "text": "Experiencia previa en perfumería",
         "found": false,
-        "evidence": ""
+        "evidence": "",
+        "label": "Experiencia en perfumería"
       },
       {
         "text": "Conocimientos e interés por la perfumería y las fragancias",
         "found": false,
-        "evidence": ""
+        "evidence": "",
+        "label": "Interés en perfumería"
       },
       {
         "text": "Buenas habilidades comunicativas",
         "found": false,
-        "evidence": ""
+        "evidence": "",
+        "label": "Comunicación"
       },
       {
         "text": "Orientación al cliente",
         "found": false,
-        "evidence": ""
+        "evidence": "",
+        "label": "Orientación al cliente"
       },
       {
         "text": "Actitud proactiva",
         "found": false,
-        "evidence": ""
+        "evidence": "",
+        "label": "Actitud proactiva"
       },
       {
         "text": "Responsabilidad",
         "found": true,
-        "evidence": "Soy responsable y trabajadora."
+        "evidence": "Soy responsable y trabajadora.",
+        "label": "Responsabilidad"
       },
       {
         "text": "Trabajo en equipo",
         "found": false,
-        "evidence": ""
+        "evidence": "",
+        "label": "Trabajo en equipo"
       },
       {
         "text": "Inglés nivel alto",
         "found": false,
-        "evidence": ""
+        "evidence": "",
+        "label": "Inglés alto"
       },
       {
         "text": "Graduado en ESO o equivalente",
         "found": true,
-        "evidence": "Graduado Escolar."
+        "evidence": "Graduado Escolar.",
+        "label": "Graduado en ESO"
       },
       {
         "text": "Asesoramiento al cliente en la elección de productos",
         "found": false,
-        "evidence": ""
+        "evidence": "",
+        "label": "Asesoramiento"
       },
       {
         "text": "Reposición, control de stock y recepción de mercancía",
         "found": true,
-        "evidence": "Caja y reponer."
+        "evidence": "Caja y reponer.",
+        "label": "Reposición y stock"
       },
       {
         "text": "Ventas, cobros y operaciones de caja",
         "found": true,
-        "evidence": "cobraba en caja"
+        "evidence": "cobraba en caja",
+        "label": "Caja y cobros"
       }
     ]
   },
@@ -129,67 +142,80 @@
         {
           "text": "Experiencia en atención al público y ventas (12 meses)",
           "found": true,
-          "evidence": "Atención al público y ventas: asesoramiento a las clientas"
+          "evidence": "Atención al público y ventas: asesoramiento a las clientas",
+          "label": "Atención al público"
         },
         {
           "text": "Experiencia previa en perfumería",
           "found": false,
-          "evidence": ""
+          "evidence": "",
+          "label": "Experiencia en perfumería"
         },
         {
           "text": "Conocimientos e interés por la perfumería y las fragancias",
           "found": true,
-          "evidence": "Me interesan mucho la perfumería y las fragancias"
+          "evidence": "Me interesan mucho la perfumería y las fragancias",
+          "label": "Interés en perfumería"
         },
         {
           "text": "Buenas habilidades comunicativas",
           "found": true,
-          "evidence": "resuelvo cambios y devoluciones con buena comunicación"
+          "evidence": "resuelvo cambios y devoluciones con buena comunicación",
+          "label": "Comunicación"
         },
         {
           "text": "Orientación al cliente",
           "found": true,
-          "evidence": "Orientada al cliente"
+          "evidence": "Orientada al cliente",
+          "label": "Orientación al cliente"
         },
         {
           "text": "Actitud proactiva",
           "found": true,
-          "evidence": "Responsable, proactiva"
+          "evidence": "Responsable, proactiva",
+          "label": "Actitud proactiva"
         },
         {
           "text": "Responsabilidad",
           "found": true,
-          "evidence": "Responsable"
+          "evidence": "Responsable",
+          "label": "Responsabilidad"
         },
         {
           "text": "Trabajo en equipo",
           "found": true,
-          "evidence": "Trabajo en equipo: enseñaba el trabajo a las dependientas nuevas"
+          "evidence": "Trabajo en equipo: enseñaba el trabajo a las dependientas nuevas",
+          "label": "Trabajo en equipo"
         },
         {
           "text": "Inglés nivel alto",
           "found": false,
-          "evidence": ""
+          "evidence": "",
+          "label": "Inglés alto"
         },
         {
           "text": "Graduado en ESO o equivalente",
           "found": true,
-          "evidence": "Graduado Escolar (equivalente a la ESO)"
+          "evidence": "Graduado Escolar (equivalente a la ESO)",
+          "label": "Graduado en ESO"
         },
         {
           "text": "Asesoramiento al cliente en la elección de productos",
           "found": true,
-          "evidence": "asesoro en la elección de productos"
+          "evidence": "asesoro en la elección de productos",
+          "label": "Asesoramiento"
         },
         {
           "text": "Reposición, control de stock y recepción de mercancía",
           "found": true,
-          "evidence": "Reposición, control de stock y recuento de inventario; recepción y revisión de la mercancía"
+          "evidence": "Reposición, control de stock y recuento de inventario; recepción y revisión de la mercancía",
+          "label": "Reposición y stock"
         },
         {
           "text": "Ventas, cobros y operaciones de caja",
           "found": true,
-          "evidence": "Ventas, cobros y operaciones de caja"
+          "evidence": "Ventas, cobros y operaciones de caja",
+          "label": "Caja y cobros"
         }
       ]
     },

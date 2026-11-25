@@ -1311,6 +1311,11 @@
             "title": "Found",
             "type": "boolean"
           },
+          "label": {
+            "description": "Short 1-3 word label for the requirement",
+            "title": "Label",
+            "type": "string"
+          },
           "text": {
             "description": "One requirement of the offer, in its own words",
             "title": "Text",
@@ -1319,6 +1324,7 @@
         },
         "required": [
           "text",
+          "label",
           "found"
         ],
         "title": "RequirementCheck",

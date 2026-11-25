@@ -15,6 +15,7 @@ class PrepRequest(BaseModel):
 
 class RequirementCheck(BaseModel):
     text: str = Field(description="One requirement of the offer, in its own words")
+    label: str = Field(description="Short 1-3 word label for the requirement")
     found: bool
     evidence: str = Field(default="", description="Words of the CV where the filter finds it; empty if not found")
 
