@@ -130,12 +130,12 @@ La investigación nos dice tres cosas: las empresas no encuentran a quién contr
 
 <figure class="demo-captura demo-cv">
   <img class="demo-cv-fija" src="/demo-cv.png" alt="CV mejorado de Pilar para una oferta de dependienta de perfumería, con 11 de los 13 requisitos detectados." />
-  <img class="demo-cv-animada" src="/demo-cv.gif" alt="Pilar abre una oferta de perfumería, pulsa Mejorar mi CV y ve cómo pasa del 38 % al 85 % de requisitos detectados." />
+  <img class="demo-cv-animada" src="/demo-cv.gif" alt="Con su CV ya abierto, Pilar pulsa Mejorar mi CV y ve cómo pasa del 38 % al 85 % de requisitos detectados." />
   <figcaption>La IA propone cambios a partir de la experiencia de Pilar. Ella revisa el antes y el después y decide qué usar.</figcaption>
 </figure>
 
 <!--
-Pilar elige la oferta de dependienta de perfumería. Compara los dos CV y comprueba cómo la versión adaptada hace visible su experiencia en atención al cliente.
+Con el CV abierto, Pilar pulsa «Mejorar mi CV». La versión adaptada hace visible su experiencia en atención al cliente para la oferta de perfumería.
 -->
 
 ---
