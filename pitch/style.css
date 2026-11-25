@@ -102,8 +102,6 @@
 .pagador.principal .quien { font-size: 1.5rem; color: var(--primary); }
 
 .slide-grafico-financiero.slidev-layout { background-color: #fff; }
-.grafico-financiero { max-width: 52rem; margin: 4.5rem auto 0; }
-.grafico-financiero img { display: block; width: 100%; height: auto; }
 
 .demo-captura { margin: 1.1rem 0 0; }
 .demo-captura img {
