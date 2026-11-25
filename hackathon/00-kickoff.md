@@ -36,8 +36,8 @@ Every field holds a value, `unknown` or `n/a`, never blank.
 ### Constraints
 
 - Event start: 2026-11-24 ~09:30 CET (approx., not confirmed)
-- Submission deadline: 2026-11-25 10:00 CET (ASSUMED working deadline; organisers have not given it: final is tomorrow, confirm)
-- Hours left: ~22.5 h (computed at 2026-11-24 11:30 CET, against the assumed deadline)
+- Submission deadline: unknown (2026-11-25; the assumed 10:00 CET is not the real one, per Alfonso at 09:26 CET; checkpoints paused until it is known)
+- Hours left: unknown (deadline unknown)
 - Demo time: 2026-11-25 (pitch tomorrow; exact time unknown)
 - Demo length: unknown (assumed short, 3-5 min)
 - Demo mode: live (assumed; prototype demo expected)
