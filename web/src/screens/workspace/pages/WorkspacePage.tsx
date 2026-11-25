@@ -134,22 +134,33 @@ function Preparation({ offer, onBack }: { offer: Offer; onBack: () => void }) {
           <Button variant="outline" onClick={() => void candidate.refetch()}>Volver a intentar</Button>
         } />
       )}
-      <div className="grid items-start gap-4 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-6">
-        <div>{report && <RequirementSummary report={report} showFitHint={!adapted} />}</div>
-        {cv && <CvViews name={cv.name} original={cv.cv_text} adapted={adapted} placeholder={canAdapt && (
-          <section aria-label="CV mejorado" className="flex min-h-[18rem] flex-col items-center justify-center gap-4 rounded-md border-2 border-dashed border-primary/40 bg-card/70 p-6 text-center md:mt-9">
-            <p className="font-display text-2xl font-extrabold leading-tight">Tu CV mejorado aparecerá aquí</p>
-            <p className="max-w-[34ch] leading-snug text-muted-foreground">Destacamos tu experiencia para que el filtro automático encuentre lo que pide la oferta.</p>
-            <Button className={`${actionClass} px-6`} disabled={adaptation.isPending} onClick={() => adaptation.mutate(cv)}>
+      <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-6">
+        <div>{report && <RequirementSummary report={report} previous={adapted ? initialReport : undefined} showFitHint={!adapted} />}</div>
+        {cv && <CvViews name={cv.name} original={cv.cv_text} adapted={adapted} pending={adaptation.isPending} afterActions={adapted && (
+          draft.data ? (
+            <>
+              <p role="status">{draft.data.status === "borrador" ? "Tu borrador está guardado." : `Tu candidatura ya está ${draft.data.status}.`}</p>
+              <Button variant="outline" asChild><Link to="/candidaturas">Ver mi candidatura</Link></Button>
+            </>
+          ) : (
+            <Button variant="outline" className="min-h-12 text-lg font-semibold" disabled={draft.isPending} onClick={() => draft.mutate(adapted.cv_text)}>
+              <ClipboardList aria-hidden />{draft.isPending ? "Guardando…" : "Preparar candidatura"}
+            </Button>
+          )
+        )} action={canAdapt && (
+          <>
+            <p className="max-w-[30ch] leading-snug text-muted-foreground">Destacamos tu experiencia real para que el filtro automático encuentre lo que pide la oferta.</p>
+            <Button className={`${actionClass} px-8 shadow-[6px_6px_0_0_var(--color-accent)]`} disabled={adaptation.isPending} onClick={() => adaptation.mutate(cv)}>
               <FileText aria-hidden />{adaptation.isPending ? "Mejorando tu CV…" : "Mejorar mi CV"}
             </Button>
-          </section>
+          </>
         )} />}
       </div>
       <div className="sr-only" role="status" aria-atomic="true">
         {adapted ? `CV mejorado. ${adapted.report.found} de ${adapted.report.total} requisitos · ${adapted.report.percent}%` :
           adaptation.isPending ? "Mejorando tu currículum…" : ""}
       </div>
+      {draft.isError && <p role="alert" className="text-destructive">No se pudo guardar el borrador. Vuelve a intentarlo.</p>}
       {adaptation.isError && <p role="alert" className="text-destructive">No se pudo mejorar el CV. Vuelve a intentarlo.</p>}
       {noRequirements && <p role="status">No podemos adaptar el CV porque la oferta no especifica sus requisitos.</p>}
       {noMatch && (
@@ -159,21 +170,6 @@ function Preparation({ offer, onBack }: { offer: Offer; onBack: () => void }) {
         </div>
       )}
       {noChanges && <p role="status">No encontramos cambios respaldados por tu perfil que mejoren el CV para esta oferta.</p>}
-      {adapted && (
-        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-          {draft.data ? (
-            <>
-              <p role="status">{draft.data.status === "borrador" ? "Tu borrador está guardado." : `Tu candidatura ya está ${draft.data.status}.`}</p>
-              <Button variant="outline" asChild><Link to="/candidaturas">Ver mi candidatura</Link></Button>
-            </>
-          ) : (
-            <Button variant="outline" className="ml-auto min-h-12 text-lg font-semibold" disabled={draft.isPending} onClick={() => draft.mutate(adapted.cv_text)}>
-              <ClipboardList aria-hidden />{draft.isPending ? "Guardando…" : "Preparar candidatura"}
-            </Button>
-          )}
-          {draft.isError && <p role="alert" className="text-destructive">No se pudo guardar el borrador. Vuelve a intentarlo.</p>}
-        </div>
-      )}
     </section>
   )
 }
@@ -212,11 +208,11 @@ function Workspace({ offerId }: { offerId: number }) {
                           setView("cv")
                           requestAnimationFrame(() => document.getElementById("workspace-cv")?.focus({ preventScroll: true }))
                         }}>
-                          <span className="font-bold opacity-80">01</span><FileText aria-hidden /> Mejorar mi CV <ArrowRight className="ml-auto" aria-hidden />
+                          <FileText aria-hidden /> Mejorar mi CV <ArrowRight className="ml-auto" aria-hidden />
                         </Button>
                         <p className="leading-snug text-muted-foreground">Adaptamos tu CV a lo que pide la oferta, con tu experiencia real.</p>
                         <Button variant="outline" className={`${actionClass} w-full justify-start border-primary/40 px-5`} asChild>
-                          <Link to={`/ofertas/${offerId}/entrevista`}><span className="font-bold text-chart-3">02</span><MessageCircle aria-hidden /> Practicar la entrevista <ArrowRight className="ml-auto" aria-hidden /></Link>
+                          <Link to={`/ofertas/${offerId}/entrevista`}><MessageCircle aria-hidden /> Practicar la entrevista <ArrowRight className="ml-auto" aria-hidden /></Link>
                         </Button>
                         <p className="leading-snug text-muted-foreground">Ensaya con preguntas de este puesto y recibe consejos.</p>
                       </section>

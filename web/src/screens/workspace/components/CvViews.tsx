@@ -1,5 +1,5 @@
 import { Download, Maximize2 } from "lucide-react"
-import { type ReactNode, useMemo } from "react"
+import { type ReactNode, useEffect, useMemo, useState } from "react"
 import { createPortal } from "react-dom"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
@@ -36,42 +36,74 @@ function ZoomCv({ doc, title, comparison }: { doc: CvDoc; title: string; compari
   )
 }
 
-/** `placeholder` fills the second column until the adapted CV exists (e.g. the call to action). */
-export function CvViews({ name, original, adapted, placeholder }: { name: string; original: string; adapted?: Adaptation; placeholder?: ReactNode }) {
+/**
+ * One CV on screen. Before the adaptation it shows the current CV with the call to action (`action`)
+ * over its bottom edge; while `pending` a scan line sweeps it; once `adapted` arrives the same page turns
+ * into the improved CV and the added sentences are highlighted one after another. "Antes / Después" compares.
+ */
+export function CvViews({ name, original, adapted, pending, action, afterActions }: {
+  name: string
+  original: string
+  adapted?: Adaptation
+  pending?: boolean
+  action?: ReactNode
+  /** Shown next to the download button once the CV is improved (e.g. "Preparar candidatura"). */
+  afterActions?: ReactNode
+}) {
   const before = useMemo(() => parseCv(original, adapted?.cv_text), [original, adapted])
   const after = useMemo(() => adapted && parseCv(adapted.cv_text, original, adapted.changes.map((change) => ({
     ...change,
     evidence: adapted.report.requirements.find((requirement) => requirement.found && requirement.text === change.requirement)?.evidence,
   }))), [adapted, original])
   const printDoc = useMemo(() => adapted && parseCv(adapted.cv_text), [adapted])
+  const [view, setView] = useState<"antes" | "despues">("despues")
+  useEffect(() => setView("despues"), [adapted])
+  const showAfter = !!after && view === "despues"
+  const doc = showAfter ? after : before
+  const title = showAfter ? "CV mejorado" : after ? "CV anterior" : "Tu CV actual"
 
   return (
-    <div className="min-w-0 space-y-1">
-      <div className={adapted || placeholder ? "grid gap-4 md:grid-cols-2" : "max-w-xl"}>
-        <section aria-labelledby="cv-before" className="min-w-0">
-          <div className="flex flex-wrap items-center justify-between gap-x-2">
-            <h2 id="cv-before" className="font-display text-xl font-bold">CV actual</h2>
-            <ZoomCv doc={before} title="CV actual" comparison={after ? "removed" : undefined} />
-          </div>
-          <CvPage doc={before} comparison={after ? "removed" : undefined} className="cv-preview" />
-        </section>
-        {!adapted && placeholder}
-        {adapted && after && (
-          <section aria-labelledby="cv-after" className="min-w-0">
-            <div className="flex flex-wrap items-center justify-between gap-x-2">
-              <h2 id="cv-after" className="font-display text-xl font-bold text-primary">CV mejorado</h2>
-              <div className="flex flex-wrap items-center gap-x-1">
-                <ZoomCv doc={after} title="CV mejorado" comparison="added" />
-                <Button variant="outline" onClick={() => download(name)}><Download aria-hidden /> Descargar PDF</Button>
-              </div>
+    <div className="min-w-0 space-y-2">
+      <section aria-labelledby="cv-title" className="min-w-0 space-y-2">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          <h2 id="cv-title" className={`font-display text-2xl font-extrabold ${showAfter ? "text-primary" : ""}`}>{title}</h2>
+          {after && (
+            <div role="group" aria-label="Comparar versiones" className="inline-flex rounded-md border bg-card p-0.5">
+              {(["antes", "despues"] as const).map((v) => (
+                <button
+                  key={v}
+                  type="button"
+                  aria-pressed={view === v}
+                  onClick={() => setView(v)}
+                  className={`min-h-10 rounded-sm px-4 text-lg font-semibold focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring ${view === v ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                >
+                  {v === "antes" ? "Antes" : "Después"}
+                </button>
+              ))}
             </div>
-            <CvPage doc={after} comparison="added" className="cv-preview" />
-          </section>
+          )}
+          <div className="ml-auto flex flex-wrap items-center gap-x-1">
+            <ZoomCv doc={doc} title={title} comparison={after ? (showAfter ? "added" : "removed") : undefined} />
+          </div>
+        </div>
+        <div className={`cv-stage relative ${pending ? "is-scanning" : ""}`}>
+          <CvPage
+            key={showAfter ? "after" : after ? "before-compare" : "before"}
+            doc={doc}
+            comparison={after ? (showAfter ? "added" : "removed") : undefined}
+            className={`cv-preview ${showAfter ? "cv-reveal" : ""}`}
+          />
+          {pending && (
+            <div className="cv-scan" aria-hidden="true"><span /></div>
+          )}
+        </div>
+        {!after && action && (
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 pt-1">{action}</div>
         )}
-      </div>
+      </section>
       {adapted && (
-        <div className="flex flex-wrap items-center gap-x-4">
-          <p className="text-lg"><s>Quitado</s> · <mark className="bg-accent text-accent-foreground underline">Añadido</mark></p>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <p className="text-lg">{showAfter ? <mark className="bg-accent text-accent-foreground underline">Añadido</mark> : <s>Quitado</s>}</p>
           {adapted.changes.length > 0 && (
             <Dialog>
               <DialogTrigger asChild>
@@ -93,6 +125,10 @@ export function CvViews({ name, original, adapted, placeholder }: { name: string
               </DialogContent>
             </Dialog>
           )}
+          <div className="ml-auto flex flex-wrap items-center gap-2">
+            <Button variant="outline" className="min-h-12 text-lg font-semibold" onClick={() => download(name)}><Download aria-hidden /> Descargar PDF</Button>
+            {afterActions}
+          </div>
         </div>
       )}
       {printDoc && createPortal(<div className="cv-print-root"><CvPage doc={printDoc} /></div>, document.body)}

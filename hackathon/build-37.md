@@ -47,3 +47,11 @@ owner: alraro
 - Entrevista: marco de videollamada verde con sombra menta; comentarios en panel blanco.
 - Files owned ampliados a `web/src/screens/workspace/` y `web/src/screens/practice/` (issues de origen cerradas; comentado en #37).
 - 1366×768 sin scroll en inicio, oferta, CV antes y después y entrevista.
+
+## Ronda de revisión 2 (Alfonso)
+
+- Paleta: fondo beige `#F0E8D9` y `secondary` `#D4E8D8` (Design Change #47).
+- «Prepárate para esta oferta» sin numeración.
+- CV único: «Tu CV actual» → al pulsar «Mejorar mi CV» una banda menta lo escanea y la página gira al CV mejorado; las frases añadidas se resaltan en orden como con rotulador. Conmutador «Antes / Después».
+- Palabras clave: cifra que sube (5 → 11), barra de progreso, chips grandes; los nuevos pasan a verde uno tras otro. Todo respeta `prefers-reduced-motion`.
+- 1366×768 sin scroll en CV antes y después.
