@@ -171,9 +171,7 @@ class: slide-grafico-financiero
 
 # Ingresos y gastos
 
-<figure class="grafico-financiero">
-  <img src="/ingresos-gastos.jpg" alt="Ingresos y gastos en euros durante tres años. Los gastos superan a los ingresos en el primer año, ambas cifras se acercan en el segundo y los ingresos superan a los gastos en el tercero." />
-</figure>
+<GraficoFinanciero />
 
 ---
 class: slide-cierre
