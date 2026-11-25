@@ -8,6 +8,6 @@ import identity from '../../design/identity.json'
       <img src="/simbolo-al-curro-claro.svg" alt="" />
       <span>{{ identity.name }}</span>
     </div>
-    <p>{{ identity.tagline }}</p>
+    <p>Tu experiencia no caduca</p>
   </div>
 </template>

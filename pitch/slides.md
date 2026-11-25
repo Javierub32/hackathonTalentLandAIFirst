@@ -1,6 +1,6 @@
 ---
 theme: default
-title: "Al curro · Tu experiencia, preparada para cada oferta"
+title: "Al curro · Tu experiencia no caduca"
 fonts:
   provider: none
 mdc: true
