@@ -16,7 +16,7 @@
   },
   "colors": {
     "light": {
-      "background": "oklch(0.983 0.004 135)",
+      "background": "oklch(0.933 0.022 83)",
       "foreground": "oklch(0.319 0.046 168)",
       "card": "oklch(1 0 0)",
       "card-foreground": "oklch(0.319 0.046 168)",
@@ -24,7 +24,7 @@
       "popover-foreground": "oklch(0.319 0.046 168)",
       "primary": "oklch(0.355 0.048 168)",
       "primary-foreground": "oklch(0.983 0.004 135)",
-      "secondary": "oklch(0.928 0.024 151)",
+      "secondary": "oklch(0.912 0.030 151)",
       "secondary-foreground": "oklch(0.319 0.046 168)",
       "muted": "oklch(0.944 0.013 149)",
       "muted-foreground": "oklch(0.484 0.039 165)",
