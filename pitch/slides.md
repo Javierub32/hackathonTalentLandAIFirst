@@ -164,6 +164,44 @@ Para esa misma oferta, Pilar ensaya una pregunta sobre atención al cliente. Pue
 -->
 
 ---
+
+<!-- 04:05 · Cliente y modelo (R9.1, R3.2) -->
+
+# ¿Y quién paga?
+
+<div class="pagos">
+  <div class="pago principal">
+    <div class="pago-etq">Paga</div>
+    <div class="pago-quien">IMFE</div>
+    <div class="pago-como">Licencia anual</div>
+    <div class="pago-det">con los <strong>fondos europeos</strong> que ya tiene</div>
+  </div>
+  <div class="pago">
+    <div class="pago-etq">Paga</div>
+    <div class="pago-quien">Empresas</div>
+    <div class="pago-como">Destacar ofertas</div>
+    <div class="pago-det">publicar es <strong>gratis</strong></div>
+  </div>
+  <div class="pago gratis">
+    <div class="pago-etq">No paga</div>
+    <div class="pago-quien">Pilar</div>
+    <div class="pago-como">0 €</div>
+    <div class="pago-det">siempre <strong>gratis</strong></div>
+  </div>
+</div>
+
+<div class="pago-pie">
+  <div><span class="pie-etq">Después</span> Andalucía Orienta: <strong>2,7 M€</strong> en Málaga</div>
+  <div><span class="pie-etq">Coste IA</span> <strong>céntimos</strong> por persona</div>
+</div>
+
+<Fuente>IMFE, T-Acompañamos y Aquileo+ (El Español, abr. 2026) · BOJA 2026/72 (Andalucía Orienta, Málaga: 2.708.196 €).</Fuente>
+
+<!--
+Quién paga: el IMFE, el Instituto de Empleo del Ayuntamiento de Málaga, que ya tiene orientadores y fondos europeos para este colectivo. Cada orientador atiende a más personas. Las empresas pagan por destacar ofertas. Coste de IA: céntimos por persona.
+-->
+
+---
 class: slide-grafico-financiero
 ---
 
