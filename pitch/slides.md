@@ -129,8 +129,8 @@ La investigación nos dice tres cosas: las empresas no encuentran a quién contr
 # Pilar adapta su CV a la oferta
 
 <figure class="demo-captura demo-cv">
-  <img v-if="$slidev.nav.isPrintMode" src="/demo-cv.png" alt="CV mejorado de Pilar para una oferta de dependienta de perfumería, con 11 de los 13 requisitos detectados." />
-  <img v-else src="/demo-cv.gif" alt="Pilar abre una oferta de perfumería, pulsa Mejorar mi CV y ve cómo pasa del 38 % al 85 % de requisitos detectados." />
+  <img class="demo-cv-fija" src="/demo-cv.png" alt="CV mejorado de Pilar para una oferta de dependienta de perfumería, con 11 de los 13 requisitos detectados." />
+  <img class="demo-cv-animada" src="/demo-cv.gif" alt="Pilar abre una oferta de perfumería, pulsa Mejorar mi CV y ve cómo pasa del 38 % al 85 % de requisitos detectados." />
   <figcaption>La IA propone cambios a partir de la experiencia de Pilar. Ella revisa el antes y el después y decide qué usar.</figcaption>
 </figure>
 
