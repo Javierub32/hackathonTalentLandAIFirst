@@ -5,6 +5,12 @@ fonts:
   provider: none
 mdc: true
 transition: fade
+class: slide-marca
+---
+
+<MarcaPitch />
+
+---
 class: slide-portada
 ---
 
@@ -192,3 +198,9 @@ class: slide-cierre
 <!--
 Buscamos un piloto con el IMFE y vuestro apoyo. Al curro: que su experiencia vuelva a contar.
 -->
+
+---
+class: slide-marca
+---
+
+<MarcaPitch />
