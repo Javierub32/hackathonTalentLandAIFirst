@@ -1,5 +1,5 @@
 ---
-status: draft
+status: done
 issue: 37
 lane: web
 owner: alraro
@@ -11,8 +11,8 @@ owner: alraro
 - [x] 2 Read
 - [x] 3 Implement
 - [x] 4 Check
-- [ ] 5 Review requests
-- [ ] 6 Merge
+- [x] 5 Review requests
+- [x] 6 Merge
 - [ ] 7 Handoff
 
 ## Files owned
