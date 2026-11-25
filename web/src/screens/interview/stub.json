@@ -2,7 +2,7 @@
   "questions": {
     "offer_id": 1,
     "candidate_id": 1,
-    "intro": "Hola, Pilar. Soy la entrevistadora de la perfumería. Te haré dos preguntas sobre el puesto. Tómate tu tiempo.",
+    "intro": "Hola, Pilar. Vamos a practicar ocho preguntas para el puesto de perfumería. Tómate tu tiempo.",
     "questions": [
       {
         "id": 1,
@@ -11,6 +11,36 @@
       },
       {
         "id": 2,
+        "text": "¿Qué aprendiste atendiendo a clientas en tus trabajos anteriores?",
+        "checks": "Atención al cliente"
+      },
+      {
+        "id": 3,
+        "text": "¿Cómo organizarías la reposición mientras hay personas esperando en caja?",
+        "checks": "Organización"
+      },
+      {
+        "id": 4,
+        "text": "Cuéntame una vez que resolviste una queja de una clienta.",
+        "checks": "Resolución de problemas"
+      },
+      {
+        "id": 5,
+        "text": "¿Cómo ayudarías a una compañera cuando hay mucho trabajo?",
+        "checks": "Trabajo en equipo"
+      },
+      {
+        "id": 6,
+        "text": "¿Qué harías si no conoces un perfume que te pide una clienta?",
+        "checks": "Aprendizaje"
+      },
+      {
+        "id": 7,
+        "text": "¿Por qué te interesa este puesto en una perfumería?",
+        "checks": "Motivación"
+      },
+      {
+        "id": 8,
         "text": "El puesto pide inglés alto y muchas clientas son turistas. ¿Cómo atenderías a una clienta que solo habla inglés?",
         "checks": "Inglés nivel alto (requisito que no cubre su CV)"
       }

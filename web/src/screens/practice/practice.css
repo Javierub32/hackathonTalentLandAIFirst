@@ -1,0 +1,80 @@
+.practice-call { height: calc(100dvh - 108px); min-height: 570px; display: flex; flex-direction: column; gap: 12px; font-size: 18px; line-height: 1.4; max-width: 1440px; margin-inline: auto; }
+.call-heading { display: flex; align-items: center; gap: 20px; padding-bottom: 4px; }
+.call-title { flex: 1; min-width: 0; }
+.call-heading h1 { font-family: var(--font-display); font-size: clamp(24px,2.2vw,32px); letter-spacing: -.025em; font-weight: 700; line-height: 1.15; }
+.call-offer { color: var(--color-muted-foreground); margin-top: 5px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.call-back { display: flex; align-items: center; gap: 8px; min-height: 48px; text-decoration: none; color: var(--color-muted-foreground); flex-shrink: 0; }
+.call-back:hover { color: var(--color-primary); text-decoration: underline; }
+.call-back svg { width: 20px; }
+.call-body { display: grid; grid-template-columns: minmax(0,1fr); min-height: 240px; flex: 1; gap: 24px; }
+.call-body.has-feedback { grid-template-columns: minmax(0,1fr) minmax(300px,32%); }
+.call-stage { position: relative; min-height: 0; overflow: hidden; background: var(--color-secondary); border-radius: 16px; display: flex; flex-direction: column; isolation: isolate; border: 1px solid var(--color-border); }
+.call-stage > svg:first-child { opacity: .5; }
+.interviewer-name { position: absolute; top: 20px; left: 24px; display: flex; gap: 10px; align-items: flex-start; font-weight: 600; z-index: 1; }
+.interviewer-name small { display: block; font-size: 18px; color: var(--color-muted-foreground); font-weight: 400; }
+.call-presence { width: 9px; height: 9px; margin-top: 8px; background: var(--color-primary); border-radius: 50%; }
+.interviewer-portrait { display: block; position: relative; flex: 1; min-height: 0; width: 100%; margin-top: 38px; }
+.candidate-tile { position: absolute; top: 18px; right: 20px; width: 112px; height: 102px; border: 1px solid var(--color-border); background: var(--color-card); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; z-index: 1; }
+.candidate-avatar { width: 34px; height: 34px; margin: 8px; color: var(--color-muted-foreground); }
+.candidate-tile video { width: 100%; height: 72px; object-fit: cover; transform: scaleX(-1); }
+.candidate-tile span { background: var(--color-card); width: 100%; text-align: center; padding-bottom: 5px; }
+.call-subtitles { position: relative; flex-shrink: 0; background: var(--color-card); padding: 16px 24px 18px; border-top: 1px solid var(--color-border); }
+.call-subtitles span { color: var(--color-primary); font-weight: 700; font-size: 18px; }
+.call-subtitles p { margin-top: 6px; font-size: 20px; line-height: 1.4; max-width: 1000px; }
+.call-feedback { overflow: auto; min-height: 0; padding: 8px 16px 8px 0; scrollbar-gutter: stable; }
+.call-feedback h2 { font-family: var(--font-display); font-size: 26px; font-weight: 700; letter-spacing: -.02em; }
+.call-feedback h3 { font-weight: 700; color: var(--color-primary); margin-top: 18px; }
+.call-feedback ul { list-style: disc; padding-left: 22px; }
+.call-feedback li, .call-feedback p { margin-top: 8px; }
+.call-feedback details { padding: 12px 0; border-bottom: 1px solid var(--color-border); }
+.call-feedback summary { cursor: pointer; font-weight: 600; }
+.call-controls { display: flex; flex-direction: column; gap: 12px; }
+.call-toolbar { display: flex; align-items: center; gap: 12px; }
+.call-toolbar .camera-control { margin-left: auto; }
+.call-button { min-height: 48px; font-size: 18px; white-space: normal; height: auto; padding-inline: 18px; border-radius: 8px; }
+.practice-recorder { display: flex; align-items: center; gap: 14px; min-width: 0; flex: 1; }
+.practice-recorder > button { min-width: 160px; background: var(--color-primary); color: var(--color-primary-foreground); border-color: var(--color-primary); border-radius: 8px; }
+.practice-recorder > button:hover { opacity: .9; }
+.practice-recorder > p { font-size: 18px; color: var(--color-muted-foreground); max-width: 320px; }
+.answer-row { display: flex; align-items: flex-end; gap: 16px; }
+.answer-composer { flex: 1; min-width: 0; }
+.answer-composer label { display: block; font-weight: 600; margin-bottom: 6px; }
+.answer-composer label span { color: var(--color-muted-foreground); font-weight: 400; margin-left: 8px; }
+.answer-composer textarea { display: block; resize: none; width: 100%; min-height: 64px; border: 1px solid var(--color-input); border-radius: 8px; padding: 9px 12px; background: var(--color-card); font: inherit; }
+.answer-composer textarea::placeholder { color: var(--color-muted-foreground); }
+.submit-answer { min-height: 64px; min-width: 190px; }
+.call-status:empty { display: none; }
+.call-status { color: var(--color-destructive); }
+.call-privacy { font-size: 18px; color: var(--color-muted-foreground); text-align: center; }
+.call-notice { font-size: 18px; border-left: 3px solid var(--color-primary); padding-left: 8px; }
+@media (max-width: 1100px) {
+ .call-heading > span { display: none; }
+ .practice-recorder > p { display: none; }
+ .answer-composer label span { display: none; }
+ .call-back { font-size: 18px; }
+ .call-heading { gap: 16px; }
+}
+@media (max-width: 767px) {
+ .practice-call { height: auto; min-height: 0; gap: 16px; }
+ .call-heading { flex-wrap: wrap; }
+ .call-back { flex-basis: 100%; min-height: 32px; }
+ .call-heading h1 { font-size: 26px; }
+ .call-offer { white-space: normal; }
+ .call-body, .call-body.has-feedback { grid-template-columns: 1fr; }
+ .call-stage { height: 410px; }
+ .interviewer-name { top: 16px; left: 14px; }
+ .interviewer-name small { display: none; }
+ .candidate-tile { width: 80px; height: 86px; top: 12px; right: 12px; }
+ .candidate-tile video { height: 56px; }
+ .call-subtitles { padding: 14px 16px; }
+ .call-subtitles p { font-size: 18px; }
+ .call-feedback { max-height: none; overflow: visible; }
+ .call-toolbar { flex-wrap: wrap; gap: 8px; }
+ .practice-recorder { flex-basis: 100%; }
+ .practice-recorder > button { width: 100%; }
+ .call-toolbar .camera-control { margin-left: 0; }
+ .call-toolbar > button { flex: 1; padding-inline: 10px; }
+ .answer-row { flex-direction: column; align-items: stretch; gap: 10px; }
+ .submit-answer { min-height: 48px; }
+ .call-privacy { text-align: left; }
+}

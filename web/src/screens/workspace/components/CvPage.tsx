@@ -2,12 +2,6 @@ import { Fragment } from "react"
 import { cn } from "@/lib/utils"
 import type { CvDoc, CvSpan } from "./cvDocument"
 
-type Marks = {
-  /** Indexes of the changes being explained. */
-  active: number[]
-  onSelect: (changes: number[]) => void
-}
-
 function titleCase(text: string) {
   return text === text.toUpperCase() ? text.toLowerCase().replace(/(^|\s)\p{L}/gu, (c) => c.toUpperCase()) : text
 }
@@ -16,53 +10,43 @@ function sectionTitle(text: string) {
   return text.charAt(0) + text.slice(1).toLowerCase()
 }
 
-function Span({ span, marks }: { span: CvSpan; marks?: Marks }) {
-  if (marks && span.changes.length > 0) {
-    const numbers = span.changes.map((c) => c + 1)
-    const active = span.changes.some((c) => marks.active.includes(c))
-    return (
-      <button
-        type="button"
-        onClick={() => marks.onSelect(span.changes)}
-        aria-label={`${span.text} (cambio ${numbers.join(" y ")}: toca para ver de dónde sale)`}
-        className={cn(
-          "inline rounded-sm bg-accent px-0.5 text-left text-accent-foreground underline decoration-primary decoration-2 underline-offset-4",
-          active && "outline-2 outline-primary",
-        )}
-      >
-        {span.text}
-        <span aria-hidden className="ml-1 rounded-sm bg-primary px-1 align-super text-xs font-semibold text-primary-foreground no-underline">
-          {numbers.join("·")}
-        </span>
-      </button>
-    )
-  }
-  if (marks && span.isNew) {
-    return <span className="underline decoration-muted-foreground decoration-dotted decoration-2 underline-offset-4">{span.text}</span>
-  }
-  return <>{span.text}</>
+type Comparison = "added" | "removed"
+
+const addedClass = "rounded-sm bg-accent text-accent-foreground underline decoration-primary"
+
+function Span({ span, comparison }: { span: CvSpan; comparison?: Comparison }) {
+  if (!span.isNew || !comparison) return <>{span.text}</>
+  if (comparison === "removed") return <del className="text-muted-foreground">{span.text}</del>
+  return (
+    <ins className={addedClass}>
+      {span.text}
+      {span.changes.length > 0 && (
+        <sup className="ml-0.5 font-bold">[{span.changes.map((index) => index + 1).join(", ")}]</sup>
+      )}
+    </ins>
+  )
 }
 
-function Spans({ spans, marks }: { spans: CvSpan[]; marks?: Marks }) {
+function Spans({ spans, comparison }: { spans: CvSpan[]; comparison?: Comparison }) {
   return spans.map((span, i) => (
     <Fragment key={i}>
       {i > 0 && " "}
-      <Span span={span} marks={marks} />
+      <Span span={span} comparison={comparison} />
     </Fragment>
   ))
 }
 
 /**
- * One CV as an A4 sheet. With `marks`, new sentences are underlined and the ones a change explains
- * become buttons with their change number (never colour alone). Without `marks` it is the clean copy.
+ * Comparison previews mark changed sentences on each side. In the improved version,
+ * numbered changes correspond to the sources shown in the comparison.
  */
-export function CvPage({ doc, marks, className }: { doc: CvDoc; marks?: Marks; className?: string }) {
+export function CvPage({ doc, comparison, className }: { doc: CvDoc; comparison?: Comparison; className?: string }) {
   return (
     <article className={cn("cv-page aspect-[210/297] w-full space-y-5 rounded-sm border bg-card p-6 text-card-foreground shadow-sm sm:p-8", className)}>
       {doc.name && (
         <header className="space-y-1 border-b-2 border-primary pb-3">
           <p className="cv-name font-display text-3xl font-semibold">{titleCase(doc.name)}</p>
-          {doc.headline.map((spans, i) => <p key={i} className="cv-body"><Spans spans={spans} marks={marks} /></p>)}
+          {doc.headline.map((spans, i) => <p key={i} className="cv-body"><Spans spans={spans} comparison={comparison} /></p>)}
         </header>
       )}
       {doc.sections.map((section, s) => (
@@ -70,11 +54,11 @@ export function CvPage({ doc, marks, className }: { doc: CvDoc; marks?: Marks; c
           {section.title && <p className="cv-section font-display text-xl font-semibold text-primary">{sectionTitle(section.title)}</p>}
           {section.lines.map((line, l) =>
             line.kind === "bullet" ? (
-              <p key={l} className="cv-body relative pl-5 before:absolute before:left-1 before:content-['•']"><Spans spans={line.spans} marks={marks} /></p>
+              <p key={l} className="cv-body relative pl-5 before:absolute before:left-1 before:content-['•']"><Spans spans={line.spans} comparison={comparison} /></p>
             ) : line.kind === "entry" ? (
-              <p key={l} className="cv-body"><span className="font-semibold">{line.date}</span> · <Spans spans={line.spans} marks={marks} /></p>
+              <p key={l} className="cv-body"><span className="font-semibold">{line.date}</span> · <Spans spans={line.spans} comparison={comparison} /></p>
             ) : (
-              <p key={l} className="cv-body"><Spans spans={line.spans} marks={marks} /></p>
+              <p key={l} className="cv-body"><Spans spans={line.spans} comparison={comparison} /></p>
             ),
           )}
         </section>

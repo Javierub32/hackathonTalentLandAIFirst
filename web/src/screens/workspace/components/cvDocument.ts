@@ -64,13 +64,18 @@ function toLine(raw: string, marker: Marker): CvLine {
   return { kind: "text", spans: toSpans(raw, marker) }
 }
 
+function cvPhrases(doc: CvDoc) {
+  const blocks = [...doc.headline, ...doc.sections.flatMap((section) => section.lines.map((line) => line.spans))]
+  return new Set(blocks.flat().map((span) => normalize(span.text)))
+}
+
 /**
  * Parses `text` into a CV document. Pass `original` (and `changes`) to mark what is new in `text`.
  * When no known section title is found, `structured` is false and every line is plain text.
  */
 export function parseCv(text: string, original?: string, changes: CvChange[] = []): CvDoc {
   const marker: Marker = original === undefined ? null : {
-    original: new Set(original.split("\n").flatMap((l) => sentences(l.replace(/^- /, ""))).map(normalize)),
+    original: cvPhrases(parseCv(original)),
     keys: changes.map(changeKeys),
   }
   const lines = text.split("\n").map((l) => l.trim()).filter(Boolean)

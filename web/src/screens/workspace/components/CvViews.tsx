@@ -1,144 +1,99 @@
-import { Download, FileText } from "lucide-react"
-import { useMemo, useState } from "react"
+import { Download, Maximize2 } from "lucide-react"
+import { useMemo } from "react"
 import { createPortal } from "react-dom"
 import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import type { components } from "@/lib/api/schema"
 import { CvPage } from "./CvPage"
-import { parseCv, type CvChange } from "./cvDocument"
+import { parseCv, type CvDoc } from "./cvDocument"
 import "./cv-print.css"
+import "./cv-preview.css"
 
-const actionClass = "min-h-12 h-auto whitespace-normal text-lg font-semibold"
-
-/** Simulated upload for the demo: the seeded CV shown as if it were her PDF. A real `upload` replaces this later. */
-export function cvFileName(name: string) {
-  return `CV_${name.trim().split(/\s+/).join("_")}.pdf`
-}
-
-/** Card «CV_….pdf · Subido» with a thumbnail of the first page and a button to open it full size. */
-export function UploadedCv({ name, cvText }: { name: string; cvText: string }) {
-  const [open, setOpen] = useState(false)
-  const doc = useMemo(() => parseCv(cvText), [cvText])
-
-  return (
-    <div className="space-y-4">
-      <div className="flex flex-wrap items-center gap-4 rounded-lg border bg-background p-4">
-        <div aria-hidden className="h-[113px] w-[80px] shrink-0 overflow-hidden rounded-sm border bg-card">
-          <div inert className="pointer-events-none w-[800px] origin-top-left scale-[0.1]">
-            <CvPage doc={doc} className="rounded-none border-0 shadow-none" />
-          </div>
-        </div>
-        <div className="min-w-0 flex-1 space-y-1">
-          <p className="flex items-center gap-2 break-all font-semibold"><FileText aria-hidden className="size-5 shrink-0" />{cvFileName(name)}</p>
-          <p className="text-muted-foreground">Subido · tu currículum de siempre</p>
-        </div>
-        <Button variant="outline" className={actionClass} aria-expanded={open} onClick={() => setOpen((o) => !o)}>
-          {open ? "Cerrar el CV" : "Ver mi CV"}
-        </Button>
-      </div>
-      {open && <CvPage doc={parseCv(cvText)} />}
-    </div>
-  )
-}
-
-/** The clean adapted CV, rendered outside the app root so the print stylesheet keeps only this page. */
-function PrintCopy({ cvText }: { cvText: string }) {
-  return createPortal(
-    <div className="cv-print-root"><CvPage doc={parseCv(cvText)} /></div>,
-    document.body,
-  )
-}
+type Adaptation = components["schemas"]["AdaptedCv"]
 
 function download(name: string) {
   const title = document.title
-  document.title = cvFileName(`${name} adaptado`).replace(/\.pdf$/, "")
+  document.title = ["CV", name.trim(), "adaptado"].join(" ").replace(/\s+/g, "_")
   window.addEventListener("afterprint", () => { document.title = title }, { once: true })
   window.print()
 }
 
-type CompareProps = { name: string; original: string; adapted: string; changes: CvChange[] }
+function ZoomCv({ doc, title, comparison }: { doc: CvDoc; title: string; comparison?: "added" | "removed" }) {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="ghost" aria-label={`Ampliar ${title.toLowerCase()}`}><Maximize2 aria-hidden /> Ampliar</Button>
+      </DialogTrigger>
+      <DialogContent className="max-h-[90dvh] overflow-auto sm:max-w-3xl" showCloseButton={false}>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <DialogTitle className="font-display text-2xl">{title}</DialogTitle>
+          <DialogClose asChild><Button variant="outline">Cerrar</Button></DialogClose>
+        </div>
+        <DialogDescription className="sr-only">Currículum a tamaño de lectura.</DialogDescription>
+        <CvPage doc={doc} comparison={comparison} className="aspect-auto rounded-none border-0 p-0 text-lg shadow-none sm:p-0" />
+      </DialogContent>
+    </Dialog>
+  )
+}
 
-/** Before / after of the same A4 sheet: side by side on wide screens, a switch on phones. */
-export function CvCompare({ name, original, adapted, changes }: CompareProps) {
-  const [side, setSide] = useState<"antes" | "despues">("despues")
-  const [active, setActive] = useState<number[]>([])
-  const before = useMemo(() => parseCv(original), [original])
-  const after = useMemo(() => parseCv(adapted, original, changes), [adapted, original, changes])
-  const select = (indexes: number[]) => {
-    setActive(indexes)
-    requestAnimationFrame(() => document.getElementById("cv-explained")?.scrollIntoView({ behavior: "smooth", block: "nearest" }))
-  }
+export function CvViews({ name, original, adapted }: { name: string; original: string; adapted?: Adaptation }) {
+  const before = useMemo(() => parseCv(original, adapted?.cv_text), [original, adapted])
+  const after = useMemo(() => adapted && parseCv(adapted.cv_text, original, adapted.changes.map((change) => ({
+    ...change,
+    evidence: adapted.report.requirements.find((requirement) => requirement.found && requirement.text === change.requirement)?.evidence,
+  }))), [adapted, original])
+  const printDoc = useMemo(() => adapted && parseCv(adapted.cv_text), [adapted])
 
   return (
-    <div className="space-y-5">
-      <div role="group" aria-label="Qué currículum ver" className="grid grid-cols-2 gap-2 lg:hidden">
-        {(["antes", "despues"] as const).map((value) => (
-          <Button
-            key={value}
-            variant={side === value ? "secondary" : "outline"}
-            aria-pressed={side === value}
-            className={cn(actionClass, side === value && "border-2 border-primary")}
-            onClick={() => setSide(value)}
-          >
-            {value === "antes" ? "Antes" : "Después"}
-          </Button>
-        ))}
-      </div>
-
-      <div className="grid gap-5 lg:grid-cols-2">
-        <div className={cn("space-y-2", side !== "antes" && "hidden lg:block")}>
-          <h3 className="font-semibold">Antes · {cvFileName(name)}</h3>
-          <CvPage doc={before} />
-        </div>
-        <div className={cn("space-y-2", side !== "despues" && "hidden lg:block")}>
-          <h3 className="font-semibold">Después · adaptado a esta oferta</h3>
-          <CvPage doc={after} marks={{ active, onSelect: select }} />
-        </div>
-      </div>
-
-      <div className="space-y-2 rounded-lg border p-4">
-        <p className="font-semibold">Cómo leer los cambios</p>
-        <p>
-          <span className="rounded-sm bg-accent px-1 text-accent-foreground underline decoration-primary decoration-2 underline-offset-4">Subrayado con número</span>:
-          cubre un requisito de la oferta. Tócalo para ver de dónde sale.
-        </p>
-        <p><span className="underline decoration-muted-foreground decoration-dotted decoration-2 underline-offset-4">Subrayado de puntos</span>: tu experiencia, dicha con otras palabras.</p>
-      </div>
-
-      <div id="cv-explained" aria-live="polite" className={cn(active.length > 0 && "space-y-3 rounded-lg border-2 border-primary bg-accent p-4 text-accent-foreground")}>
-        {active.map((index) => (
-          <div key={index}>
-            <p className="font-semibold">Cambio {index + 1} · Cubre: {changes[index].requirement}</p>
-            <p>Sale de: {changes[index].source}</p>
+    <div className="min-w-0 space-y-1">
+      <div className={adapted ? "grid gap-3 md:grid-cols-2" : "max-w-xl"}>
+        <section aria-labelledby="cv-before" className="min-w-0">
+          <div className="flex flex-wrap items-center justify-between gap-x-2">
+            <h2 id="cv-before" className="font-display text-xl font-bold">CV actual</h2>
+            <ZoomCv doc={before} title="CV actual" comparison={after ? "removed" : undefined} />
           </div>
-        ))}
+          <CvPage doc={before} comparison={after ? "removed" : undefined} className="cv-preview" />
+        </section>
+        {adapted && after && (
+          <section aria-labelledby="cv-after" className="min-w-0">
+            <div className="flex flex-wrap items-center justify-between gap-x-2">
+              <h2 id="cv-after" className="font-display text-xl font-bold text-primary">CV mejorado</h2>
+              <div className="flex flex-wrap items-center gap-x-1">
+                <ZoomCv doc={after} title="CV mejorado" comparison="added" />
+                <Button variant="outline" onClick={() => download(name)}><Download aria-hidden /> Descargar PDF</Button>
+              </div>
+            </div>
+            <CvPage doc={after} comparison="added" className="cv-preview" />
+          </section>
+        )}
       </div>
-
-      {changes.length > 0 && (
-        <>
-          <h3 className="font-display text-2xl font-semibold">Qué cambió y de dónde sale</h3>
-          <ol className="space-y-3">
-            {changes.map((change, index) => (
-              <li
-                key={index}
-                id={`cv-change-${index}`}
-                className={cn("flex gap-3 rounded-lg border p-4", active.includes(index) && "border-2 border-primary")}
-              >
-                <span aria-hidden className="h-fit rounded-sm bg-primary px-2 font-semibold text-primary-foreground">{index + 1}</span>
-                <div>
-                  <p className="font-semibold"><span className="sr-only">Cambio {index + 1}. </span>Cubre: {change.requirement}</p>
-                  <p>{change.text}</p>
-                  <p className="text-muted-foreground">Sale de: {change.source}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </>
+      {adapted && (
+        <div className="flex flex-wrap items-center gap-x-4">
+          <p className="text-base"><s>Quitado</s> · <mark className="bg-accent text-accent-foreground underline">Añadido</mark></p>
+          {adapted.changes.length > 0 && (
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="link" className="px-0 text-base">Ver cambios y sus fuentes</Button>
+              </DialogTrigger>
+              <DialogContent className="max-h-[85dvh] overflow-auto sm:max-w-2xl" showCloseButton={false}>
+                <DialogTitle className="font-display text-2xl">Cambios y sus fuentes</DialogTitle>
+                <DialogDescription className="text-lg">Cada cambio se apoya en experiencia real de tu perfil.</DialogDescription>
+                <ol className="list-decimal divide-y pl-6 text-lg">
+                  {adapted.changes.map((change, index) => (
+                    <li key={index} className="space-y-1 py-2">
+                      <p className="font-semibold">{change.requirement}</p>
+                      <p>{change.text}</p>
+                      <p className="text-muted-foreground">Sale de {change.source}</p>
+                    </li>
+                  ))}
+                </ol>
+                <DialogClose asChild><Button variant="outline" className="justify-self-start">Cerrar</Button></DialogClose>
+              </DialogContent>
+            </Dialog>
+          )}
+        </div>
       )}
-
-      <Button variant="outline" className={actionClass} onClick={() => download(name)}>
-        <Download aria-hidden /> Descargar PDF
-      </Button>
-      <PrintCopy cvText={adapted} />
+      {printDoc && createPortal(<div className="cv-print-root"><CvPage doc={printDoc} /></div>, document.body)}
     </div>
   )
 }
