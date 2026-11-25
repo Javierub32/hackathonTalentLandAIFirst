@@ -1,77 +1,87 @@
-import { Link, NavLink, Outlet } from "react-router"
+import { Link, NavLink, Outlet, useLocation } from "react-router"
 import features from "@features"
 import { CommandPalette } from "@/components/common/CommandPalette"
 import { NotificationBell } from "@/components/common/NotificationBell"
+import { FondoMarca, Logo } from "@/components/brand"
 import identity from "@design/identity.json"
 import { cn } from "@/lib/utils"
 import { useSession } from "@/lib/session"
 import { LogOut } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { navItems } from "../routes"
 
 /** Identity name, from design/identity.json (also the PWA name and the page title). */
 export const APP_NAME: string = identity.name
 
+/** Demo candidate shown in the header (the demo is candidate-only: Pilar). */
+const CANDIDATA = "Pilar"
+
+/** One flow only (offers → CV → interview), so the menu has a single entry. Add entries here to grow it. */
+const menu = [{ to: "/", label: "Ofertas", activeOn: ["/", "/ofertas"] }]
+
 export function AppLayout() {
   const { user, signOut } = useSession()
+  const { pathname } = useLocation()
+
   return (
-    <div className="flex min-h-svh">
-      <aside data-no-print className="hidden w-56 shrink-0 flex-col gap-1 border-r p-3 md:flex">
-        <Link to="/" className="mb-3 px-2 font-semibold">{APP_NAME}</Link>
-        {navItems.map(({ id, to, label, icon: Icon }) => (
-          <NavLink
-            key={id}
-            to={to}
-            end
-            className={({ isActive }) =>
-              cn(
-                "flex items-center gap-2 rounded-md px-2 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground",
-                isActive && "bg-accent font-medium text-accent-foreground",
+    <div className="relative flex min-h-svh flex-col">
+      <FondoMarca />
+      <a
+        href="#contenido"
+        className="sr-only z-50 rounded-md bg-primary px-4 py-2 text-lg font-semibold text-primary-foreground focus:not-sr-only focus:absolute focus:left-4 focus:top-3"
+      >
+        Saltar al contenido
+      </a>
+
+      <header data-no-print className="relative z-20 bg-card/95 backdrop-blur-sm">
+        <div className="mx-auto flex h-14 w-full max-w-7xl items-center gap-6 px-4 md:px-8">
+          <Link to="/" aria-label={`${APP_NAME}: inicio`} className="rounded-md focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring">
+            <Logo />
+          </Link>
+          <nav aria-label="Principal" className="flex items-center gap-1">
+            {menu.map(({ to, label, activeOn }) => {
+              const active = activeOn.some((p) => (p === "/" ? pathname === "/" : pathname.startsWith(p)))
+              return (
+                <NavLink
+                  key={to}
+                  to={to}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "relative px-3 py-2 text-lg font-semibold text-muted-foreground hover:text-foreground focus-visible:rounded-md focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring",
+                    active && "text-foreground after:absolute after:inset-x-3 after:-bottom-[3px] after:h-[3px] after:bg-primary",
+                  )}
+                >
+                  {label}
+                </NavLink>
               )
-            }
-          >
-            <Icon className="size-4" aria-hidden />
-            {label}
-          </NavLink>
-        ))}
-      </aside>
-      <div className="flex min-w-0 flex-1 flex-col">
-        <header data-no-print className="flex h-14 items-center gap-2 border-b px-4">
-          <Link to="/" className="truncate font-semibold md:hidden">{APP_NAME}</Link>
-          <div className="ml-auto flex items-center gap-1">
+            })}
+          </nav>
+          <div className="ml-auto flex items-center gap-2">
             {features.notifications && (!features.auth || user) && <NotificationBell />}
-            {features.auth && user && (
+            {features.auth && user ? (
               <>
-                <span className="hidden px-2 text-sm text-muted-foreground sm:inline">{user.name || user.email}</span>
-                <Button variant="ghost" size="sm" onClick={signOut} aria-label="Log out">
-                  <LogOut aria-hidden /> <span className="hidden sm:inline">Log out</span>
+                <span className="hidden px-2 text-lg text-muted-foreground sm:inline">{user.name || user.email}</span>
+                <Button variant="ghost" size="sm" onClick={signOut}>
+                  <LogOut aria-hidden /> <span className="hidden sm:inline">Salir</span>
                 </Button>
               </>
+            ) : (
+              <span className="flex items-center gap-2 text-lg font-semibold">
+                <span aria-hidden className="grid size-9 place-items-center rounded-full bg-accent font-bold text-accent-foreground">
+                  {CANDIDATA[0]}
+                </span>
+                {CANDIDATA}
+              </span>
             )}
           </div>
-        </header>
-        <main className="flex-1 p-4 pb-20 md:p-6 md:pb-6">
-          <Outlet />
-        </main>
-      </div>
-      <nav data-no-print className="fixed inset-x-0 bottom-0 z-10 flex overflow-x-auto border-t bg-background md:hidden" aria-label="Primary">
-        {navItems.map(({ id, to, label, icon: Icon }) => (
-          <NavLink
-            key={id}
-            to={to}
-            end
-            className={({ isActive }) =>
-              cn(
-                "flex min-w-16 flex-1 flex-col items-center gap-1 px-2 py-2 text-xs text-muted-foreground",
-                isActive && "text-foreground",
-              )
-            }
-          >
-            <Icon className="size-5" aria-hidden />
-            {label}
-          </NavLink>
-        ))}
-      </nav>
+        </div>
+        {/* Poster bands under the header: forest, then mint. */}
+        <div aria-hidden className="h-[3px] bg-primary" />
+        <div aria-hidden className="h-[3px] bg-accent" />
+      </header>
+
+      <main id="contenido" tabIndex={-1} className="relative z-10 mx-auto w-full max-w-7xl flex-1 px-4 py-5 outline-none md:px-8">
+        <Outlet />
+      </main>
       <CommandPalette />
     </div>
   )
